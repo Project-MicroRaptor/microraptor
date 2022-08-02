@@ -1,36 +1,24 @@
-
 import styles from './Navbar.module.scss'
-import { Flex, Link, Box, Center, Text, Spacer } from '@chakra-ui/react';
-
+import { Flex, Link, Box, Spacer } from '@chakra-ui/react';
 
 export default function Navbar() {
     return (
         <div className={styles.navcontainer}>
-
-            {/* Left side */}
             <div className={styles.nav}>
-
                 <Flex minWidth='max-content' alignItems='center' justifyContent='start'>
                     <Box p='4' className={styles.left}>
-                        <Link href='#createproject' style={{ textDecoration: 'none' }}>Create Project</Link>
+                        <a href='#'>Create Project</a>
                     </Box>
                     <Spacer />
                     <Box className={styles.center} justifyContent='center' >
-                        <Link href='/' style={{ textDecoration: 'none' }}>MICRORAPTOR</Link>
+                        <a href='#'>MICRORAPTOR</a>
                     </Box>
                     <Spacer />
                     <Box className={styles.right} justifyContent='end'>
-                        <Link href='#register' style={{ textDecoration: 'none' }}>Sign in / Sign up</Link>
+                        <a href='#'>Sign in / Sign up</a>
                     </Box>
                 </Flex>
-
-                {/* Horizontal Line */}
-                <div className={styles.hr}>
-                    <hr />
-                </div>
-
             </div>
-
         </div >
     );
 }

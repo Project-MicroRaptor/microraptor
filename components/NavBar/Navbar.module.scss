@@ -1,56 +1,26 @@
+.navcontainer {
+    width: 100%;
+    color: #414141;
+    border-bottom: 1px solid grey;
+}
+
 .left {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     padding: 2vh;
+    font-family: "Inter", sans-serif;
 }
 
 .center {
     font-size: 25px;
     font-weight: 200;
     text-align: center;
+    letter-spacing: 50px;
+    position: relative;
+    left: 2%;
 }
 
 .right {
     padding: 2vh;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
-}
-
-
-@media only screen and (min-width: 576px) {
-    .left {
-        position: relative;
-        left: 1%;
-    }
-
-    .center {
-        position: relative;
-        bottom: 20%;
-    }
-}
-
-@media only screen and (min-width: 640px) and (max-width: 991px) {
-
-    .center {
-        position: relative;
-        left: 2%;
-        letter-spacing: 35px;
-    }
-}
-
-
-@media only screen and (min-width: 992px) {
-    .left {
-        position: relative;
-        left: 1%;
-    }
-
-    .center {
-        letter-spacing: 40px;
-    }
-
-    .right {
-        position: relative;
-        right: 1%;
-    }
 }
