@@ -1,5 +1,5 @@
 import styles from './Navbar.module.scss'
-import { Flex, Link, Box, Spacer } from '@chakra-ui/react';
+import { Flex, Box, Spacer } from '@chakra-ui/react';
 
 export default function Navbar() {
     return (
