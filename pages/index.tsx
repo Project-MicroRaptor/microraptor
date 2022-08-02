@@ -1,7 +1,10 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import LogInOutButton from "../components/LogInOutButton/LogInOutButton";
+
+import styles from "../styles/Home.module.scss";
+
+import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
@@ -51,6 +54,7 @@ const Home: NextPage = () => {
             </p>
           </a>
         </div>
+        <LogInOutButton />
       </main>
 
       <footer className={styles.footer}>
@@ -66,7 +70,7 @@ const Home: NextPage = () => {
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
