@@ -1,27 +1,56 @@
 .navcontainer {
-    width: 100%;
-    color: #414141;
-    border-bottom: 1px solid grey;
-    min-width: 1200px;
+  width: 100%;
+  color: #414141;
+  border-bottom: 1px solid grey;
+  font-family: "Inter", sans-serif;
+  text-overflow: ellipsis;
 }
 
 .left {
-    font-size: 16px;
-    font-weight: 600;
-    padding: 2vh;
-    font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 2vh;
+}
+
+.leftsmall {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 2vh;
 }
 
 .center {
-    font-size: 25px;
-    font-weight: 200;
-    text-align: center;
-    letter-spacing: 50px;
-    position: relative;
-    left: 2%;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: min(25px, 3vw);
+  margin-right: calc(min(25px, 3vw) * -1);
 }
 
 .right {
-    padding: 2vh;
-    font-weight: 600;
+  padding: 2vh;
+  font-weight: 600;
+}
+
+.rightsmall {
+  padding: 2vh;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 672px) {
+  .left {
+    display: none;
+  }
+
+  .right {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 673px) {
+  .leftsmall {
+    display: none;
+  }
+
+  .rightsmall {
+    display: none;
+  }
 }
