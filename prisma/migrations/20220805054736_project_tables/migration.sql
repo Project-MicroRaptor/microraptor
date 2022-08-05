@@ -1,20 +1,18 @@
--- CreateEnum
-CREATE TYPE "Categories" AS ENUM ('ARTS', 'FILM', 'FOOD', 'RETAIL', 'NIGHTLIFE', 'TECHNOLOGY', 'GAMES', 'MUSIC', 'OTHER');
-
 -- CreateTable
 CREATE TABLE "Project" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "ownerId" TEXT NOT NULL,
+    "active" BOOLEAN NOT NULL DEFAULT true,
     "targetFunding" DOUBLE PRECISION NOT NULL,
-    "currentFunding" DOUBLE PRECISION NOT NULL,
-    "area" TEXT NOT NULL,
+    "currentFunding" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "postcode" INTEGER NOT NULL,
+    "shortDescription" TEXT NOT NULL,
     "aboutBusiness" TEXT,
     "aboutOwner" TEXT,
     "businessPlan" TEXT,
-    "categories" "Categories"[],
+    "categories" TEXT[],
     "images" TEXT[],
     "attachments" TEXT[],
 
@@ -25,7 +23,7 @@ CREATE TABLE "Project" (
 CREATE TABLE "ProjectReward" (
     "id" TEXT NOT NULL,
     "projectID" TEXT NOT NULL,
-    "level" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "cost" DOUBLE PRECISION NOT NULL,
 
