@@ -3,6 +3,7 @@ CREATE TABLE "Project" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "completedAt" TIMESTAMP(3) NOT NULL DEFAULT NOW() + interval '1 year',
     "ownerId" TEXT NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT true,
     "targetFunding" DOUBLE PRECISION NOT NULL,
