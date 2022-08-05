@@ -45,6 +45,47 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  projects      Project[]
+}
+
+model Project {
+  id              String    @id @default(cuid())
+  name            String
+  createdAt       DateTime  @default(now())
+  owner           User      @relation(fields: [ownerId], references: [id])
+  ownerId         String
+  targetFunding   Float
+  currentFunding  Float
+  area            String
+  postcode        Int
+  aboutBusiness   String?
+  aboutOwner      String?
+  businessPlan    String?
+  categories      Categories[]
+  images          String[]
+  attachments     String[]
+  rewards         ProjectReward[]
+}
+
+model ProjectReward {
+  id            String    @id @default(cuid())
+  project       Project   @relation(fields: [projectID], references: [id])
+  projectID     String
+  level         Int
+  description   String
+  cost          Float
+}
+
+enum Categories {
+  ARTS
+  FILM
+  FOOD
+  RETAIL
+  NIGHTLIFE
+  TECHNOLOGY
+  GAMES
+  MUSIC
+  OTHER
 }
 
 model VerificationToken {
