@@ -17,7 +17,7 @@ export default function NavBar() {
         <div className={styles.navcontainer}>
             <div className={styles.nav}>
                 <Flex minWidth="max-content" alignItems="center" justifyContent="start">
-                    <Box p="4" className={styles.left}>
+                    <Box p="4" className={styles.side}>
                         <a href="#">{createText}</a>
                     </Box>
                     <Spacer />
@@ -25,7 +25,7 @@ export default function NavBar() {
                         <a href="#">MICRORAPTOR</a>
                     </Box>
                     <Spacer />
-                    <Box className={styles.right} justifyContent="end">
+                    <Box className={styles.side} justifyContent="end">
                         <a href="#">{signInText}</a>
                     </Box>
                 </Flex>
