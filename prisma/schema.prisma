@@ -52,7 +52,7 @@ model Project {
   id                String    @id @default(cuid())
   name              String
   createdAt         DateTime  @default(now())
-  completedAt       DateTime  @default(dbgenerated("NOW() + interval '1 year'"))
+  completedAt       DateTime  @default(dbgenerated("(now() + '1 year'::interval)"))
   owner             User      @relation(fields: [ownerId], references: [id])
   ownerId           String
   active            Boolean   @default(true)
