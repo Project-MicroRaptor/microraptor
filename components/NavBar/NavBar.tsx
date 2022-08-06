@@ -1,6 +1,6 @@
 import styles from "./NavBar.module.scss";
 import { Flex, Box, Spacer } from "@chakra-ui/react";
-import useWindowResize from './../../pages/hooks/useWindowResize';
+import useWindowResize from './../../hooks/useWindowResize';
 
 export default function NavBar() {
     const { width } = useWindowResize();

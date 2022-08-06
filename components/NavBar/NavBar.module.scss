@@ -9,10 +9,10 @@
     font-size: 16px;
     font-weight: 600;
     padding: 2vh;
-}
 
-.side:hover {
-    color: green;
+    &:hover {
+        color: var(--chakra-colors-brand-primary);
+    }
 }
 
 .center {
