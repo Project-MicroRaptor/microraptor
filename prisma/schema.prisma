@@ -45,6 +45,37 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  projects      Project[]
+}
+
+model Project {
+  id                String    @id @default(cuid())
+  name              String
+  createdAt         DateTime  @default(now())
+  completedAt       DateTime  @default(dbgenerated("(now() + '1 year'::interval)"))
+  owner             User      @relation(fields: [ownerId], references: [id])
+  ownerId           String
+  active            Boolean   @default(true)
+  targetFunding     Float
+  currentFunding    Float     @default(0)
+  postcode          Int
+  shortDescription  String
+  aboutBusiness     String?
+  aboutOwner        String?
+  businessPlan      String?
+  categories        String[]
+  images            String[]
+  attachments       String[]
+  rewards           ProjectReward[]
+}
+
+model ProjectReward {
+  id            String    @id @default(cuid())
+  project       Project   @relation(fields: [projectID], references: [id])
+  projectID     String
+  name          String
+  description   String
+  cost          Float
 }
 
 model VerificationToken {
