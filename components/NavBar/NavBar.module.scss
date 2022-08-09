@@ -23,6 +23,16 @@
     margin-right: calc(min(25px, 3vw) * -1);
 }
 
+// After Login
+
+.inbox {
+    margin: 10px;
+}
+
+.profile {
+    margin: 15px;
+}
+
 @media only screen and (max-width: 478px) {
     .center {
         letter-spacing: min(22px, 0vw);
