@@ -1,6 +1,7 @@
 import styles from "./NavBar.module.scss";
 import { Flex, Box, Spacer } from "@chakra-ui/react";
-import useWindowResize from './../../hooks/useWindowResize';
+import useWindowResize from "./../../hooks/useWindowResize";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { BsFillInboxFill } from "react-icons/bs";
 import { Avatar } from '@chakra-ui/react'
@@ -23,11 +24,15 @@ export default function NavBar() {
                 <div className={styles.nav}>
                     <Flex minWidth="max-content" alignItems="center" justifyContent="start">
                         <Box p="4" className={styles.side}>
-                            <a href="#">{createText}</a>
+                            <Link href="/create-project">
+                                <a>{createText}</a>
+                            </Link>
                         </Box>
                         <Spacer />
                         <Box className={styles.center} justifyContent="center">
-                            <a href="#">MICRORAPTOR</a>
+                            <Link href="/">
+                                <a>MICRORAPTOR</a>
+                            </Link>
                         </Box>
                         <Spacer />
                         <Box className={styles.inbox} justifyContent="end">
@@ -47,11 +52,15 @@ export default function NavBar() {
             <div className={styles.nav}>
                 <Flex minWidth="max-content" alignItems="center" justifyContent="start">
                     <Box p="4" className={styles.side}>
-                        <a href="#">{createText}</a>
+                        <Link href="/create-project">
+                            <a>{createText}</a>
+                        </Link>
                     </Box>
                     <Spacer />
                     <Box className={styles.center} justifyContent="center">
-                        <a href="#">MICRORAPTOR</a>
+                        <Link href="/">
+                            <a>MICRORAPTOR</a>
+                        </Link>
                     </Box>
                     <Spacer />
                     <Box className={styles.side} justifyContent="end">

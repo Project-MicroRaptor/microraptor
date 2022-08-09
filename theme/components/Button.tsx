@@ -5,6 +5,9 @@ const ButtonStyles = {
       color: "white",
       _hover: {
         bg: "brand.hover",
+        _disabled: {
+          bg: "brand.primary",
+        },
       },
     },
   },
