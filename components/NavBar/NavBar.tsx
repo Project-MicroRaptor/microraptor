@@ -63,7 +63,7 @@ export default function NavBar() {
                     </div>
                     <div className={styles.projectDropdown}>
                       <span className={styles.projectIcon}><AiOutlineProject /></span>
-                      <a href="#" className={styles.project}>Your Project</a>
+                      <a href="#" className={styles.project}>Your Projects</a>
                     </div>
                     <div className={styles.signoutDropdown}>
                       <span className={styles.projectIcon}><AiOutlineLogout /></span>
