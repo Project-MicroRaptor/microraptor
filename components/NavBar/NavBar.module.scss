@@ -40,6 +40,119 @@
     cursor: pointer;
 }
 
+.menuList {
+    color: black !important;
+    margin-top: -5px;
+    padding: 35px;
+    border: 2px solid rgb(175, 175, 175) !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+.sessionName {
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 13px;
+}
+
+.sessionImage {
+    margin-top: 10px;
+    border: 2px solid grey !important;
+}
+
+.viewProfile {
+    display: block;
+    text-align: center;
+    margin-left: 20px;
+    position: relative;
+    bottom: 20px;
+
+    &:hover {
+        color: var(--chakra-colors-brand-primary);
+    }
+}
+
+.divider {
+    border-top: 1px solid rgb(216, 216, 216);
+    position: relative;
+    bottom: 10px;
+}
+
+.settings {
+    font-size: 20px;
+    margin-top: 2px;
+    font-weight: 500;
+    margin-left: 20px;
+
+    &:hover {
+        color: var(--chakra-colors-brand-primary);
+        background-color: white !important;
+    }
+}
+
+.project {
+    font-size: 20px;
+    margin-top: 3px;
+    font-weight: 500;
+    margin-left: 20px;
+
+    &:hover {
+        color: var(--chakra-colors-brand-primary);
+        background-color: white !important;
+    }
+}
+
+.signout {
+    font-size: 20px;
+    margin-top: 2px;
+    margin-left: 20px;
+    font-weight: 500;
+
+    &:hover {
+        color: var(--chakra-colors-brand-primary);
+        background-color: white !important;
+    }
+}
+
+.settingDropdown {
+    display: flex;
+    margin-top: 10px;
+}
+
+.settingIcon {
+    font-size: 30px;
+    padding: 3px;
+    border-radius: 25px;
+    background-color: rgb(216, 216, 216);
+}
+
+.projectDropdown {
+    display: flex;
+    margin-top: 20px;
+}
+
+.projectIcon {
+    font-size: 30px;
+    padding: 4px;
+    border-radius: 25px;
+    background-color: rgb(216, 216, 216);
+}
+
+.signoutDropdown {
+    display: flex;
+    margin-top: 20px;
+}
+
+.signoutIcon {
+    font-size: 30px;
+    padding: 3px;
+    border-radius: 25px;
+    background-color: rgb(216, 216, 216);
+}
+
 @media only screen and (max-width: 478px) {
     .center {
         letter-spacing: min(22px, 0vw);
