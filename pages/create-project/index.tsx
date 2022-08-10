@@ -1,5 +1,4 @@
 import Head from "next/head";
-import LogInOutButton from "../../components/LogInOutButton/LogInOutButton";
 import NavBar from "../../components/NavBar/NavBar";
 import ProjectForm from "../../components/ProjectCreation/ProjectForm/ProjectForm";
 
@@ -19,7 +18,6 @@ const CreateProject: AuthNextPage = (props) => {
       <div className={styles.container}>
         <NavBar />
         <ProjectForm />
-        <LogInOutButton />
       </div>
     </>
   );
