@@ -53,7 +53,7 @@
 
 .sessionName {
     font-style: italic;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     margin: 13px;
 }
@@ -71,6 +71,7 @@
 
     &:hover {
         color: var(--chakra-colors-brand-primary);
+        cursor: pointer;
     }
 }
 
@@ -81,75 +82,54 @@
 }
 
 .settings {
-    font-size: 20px;
-    margin-top: 2px;
+    font-size: 18px;
     font-weight: 500;
+    margin-top: 4px;
     margin-left: 20px;
 
     &:hover {
         color: var(--chakra-colors-brand-primary);
         background-color: white !important;
+        cursor: pointer;
     }
 }
 
 .project {
-    font-size: 20px;
-    margin-top: 3px;
+    font-size: 18px;
     font-weight: 500;
+    margin-top: 5px;
     margin-left: 20px;
 
     &:hover {
         color: var(--chakra-colors-brand-primary);
         background-color: white !important;
+        cursor: pointer;
     }
 }
 
 .signout {
-    font-size: 20px;
-    margin-top: 2px;
-    margin-left: 20px;
+    font-size: 18px;
     font-weight: 500;
+    margin-left: 20px;
+    margin-top: 5px;
 
     &:hover {
         color: var(--chakra-colors-brand-primary);
         background-color: white !important;
+        cursor: pointer;
     }
 }
 
-.settingDropdown {
-    display: flex;
-    margin-top: 10px;
-}
-
-.settingIcon {
+.icon {
     font-size: 30px;
     padding: 3px;
     border-radius: 25px;
     background-color: rgb(216, 216, 216);
 }
 
-.projectDropdown {
+.allDropdown {
     display: flex;
     margin-top: 20px;
-}
-
-.projectIcon {
-    font-size: 30px;
-    padding: 4px;
-    border-radius: 25px;
-    background-color: rgb(216, 216, 216);
-}
-
-.signoutDropdown {
-    display: flex;
-    margin-top: 20px;
-}
-
-.signoutIcon {
-    font-size: 30px;
-    padding: 3px;
-    border-radius: 25px;
-    background-color: rgb(216, 216, 216);
 }
 
 @media only screen and (max-width: 478px) {

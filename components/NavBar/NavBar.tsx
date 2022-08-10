@@ -43,31 +43,27 @@ export default function NavBar() {
               <Menu>
                 <MenuButton className={styles.menu}>
                   <Box className={styles.profile} justifyContent="end">
-                    <a>
-                      <Avatar src={session.user?.image ?? ""} size="sm" />
-                    </a>
+                    <Avatar src={session.user?.image ?? ""} size="sm" />
                   </Box>
                 </MenuButton>
                 <MenuList className={styles.menuList}>
-                  <a>
-                    <Avatar className={styles.sessionImage} src={session.user?.image ?? ""} size="md" />
-                    <span className={styles.sessionName}>{session.user?.name}</span>
-                    <span className={styles.viewProfile}>
-                      <a href="#">View Profile</a>
-                    </span>
-                  </a>
+                  <Avatar className={styles.sessionImage} src={session.user?.image ?? ""} size="md" />
+                  <span className={styles.sessionName}>{session.user?.name}</span>
+                  <span className={styles.viewProfile}>
+                    View Profile
+                  </span>
                   <div className={styles.divider}>
-                    <div className={styles.settingDropdown}>
-                      <span className={styles.settingIcon}><AiFillSetting /></span>
-                      <a href="#" className={styles.settings}>Settings</a>
+                    <div className={styles.allDropdown}>
+                      <span className={styles.icon}><AiFillSetting /></span>
+                      <span className={styles.settings}>Settings</span>
                     </div>
-                    <div className={styles.projectDropdown}>
-                      <span className={styles.projectIcon}><AiOutlineProject /></span>
-                      <a href="#" className={styles.project}>Your Projects</a>
+                    <div className={styles.allDropdown}>
+                      <span className={styles.icon}><AiOutlineProject /></span>
+                      <span className={styles.project}>Your Projects</span>
                     </div>
-                    <div className={styles.signoutDropdown}>
-                      <span className={styles.projectIcon}><AiOutlineLogout /></span>
-                      <a href="#" onClick={() =>
+                    <div className={styles.allDropdown}>
+                      <span className={styles.icon}><AiOutlineLogout /></span>
+                      <a onClick={() =>
                         signOut({
                           callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"}/api/auth/logout`,
                         })
