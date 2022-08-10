@@ -9,6 +9,7 @@ import { Avatar } from '@chakra-ui/react'
 
 export default function NavBar() {
   const { data: session } = useSession();
+  const { data: session } = useSession();
   const { width } = useWindowResize();
 
   let createText = "Create Project";
