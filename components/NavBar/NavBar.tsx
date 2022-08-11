@@ -6,6 +6,7 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import { BsFillInboxFill } from "react-icons/bs";
 import { AiFillSetting, AiOutlineLogout, AiOutlineProject } from "react-icons/ai";
 import { Avatar } from '@chakra-ui/react'
+import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -46,31 +47,7 @@ export default function NavBar() {
                     <Avatar src={session.user?.image ?? ""} size="sm" />
                   </Box>
                 </MenuButton>
-                <MenuList className={styles.menuList}>
-                  <Avatar className={styles.sessionImage} src={session.user?.image ?? ""} size="md" />
-                  <span className={styles.sessionName}>{session.user?.name}</span>
-                  <span className={styles.viewProfile}>
-                    View Profile
-                  </span>
-                  <div className={styles.divider}>
-                    <div className={styles.allDropdown}>
-                      <span className={styles.icon}><AiFillSetting /></span>
-                      <span className={styles.settings}>Settings</span>
-                    </div>
-                    <div className={styles.allDropdown}>
-                      <span className={styles.icon}><AiOutlineProject /></span>
-                      <span className={styles.project}>Your Projects</span>
-                    </div>
-                    <div className={styles.allDropdown}>
-                      <span className={styles.icon}><AiOutlineLogout /></span>
-                      <a onClick={() =>
-                        signOut({
-                          callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"}/api/auth/logout`,
-                        })
-                      } className={styles.signout}>Sign out</a>
-                    </div>
-                  </div>
-                </MenuList>
+                <ProfileDropdown />
               </Menu>
             </>
           ) : (

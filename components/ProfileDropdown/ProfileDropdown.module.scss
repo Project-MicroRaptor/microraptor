@@ -1,0 +1,96 @@
+// After Login
+
+.menuList {
+    color: black !important;
+    margin-top: -5px;
+    padding: 20px;
+    border: 2px solid rgb(175, 175, 175) !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+.sessionName {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 12px;
+    position: relative;
+    top: 7px;
+}
+
+.sessionImage {
+    margin-top: 8px;
+    border: 2px solid grey !important;
+}
+
+.viewProfile {
+    display: block;
+    font-size: 14px;
+    margin-left: 63px;
+    position: relative;
+    bottom: 20px;
+    color: var(--chakra-colors-brand-primary);
+
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+.divider {
+    border-top: 1px solid rgb(216, 216, 216);
+    position: relative;
+    bottom: 10px;
+}
+
+.settings {
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: 4px;
+    margin-left: 20px;
+
+    &:hover {
+        color: var(--chakra-colors-brand-primary);
+        background-color: white !important;
+        cursor: pointer;
+    }
+}
+
+.project {
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: 4px;
+    margin-left: 20px;
+
+    &:hover {
+        color: var(--chakra-colors-brand-primary);
+        background-color: white !important;
+        cursor: pointer;
+    }
+}
+
+.signout {
+    font-size: 17px;
+    font-weight: 500;
+    margin-left: 20px;
+    margin-top: 4px;
+
+    &:hover {
+        color: var(--chakra-colors-brand-primary);
+        background-color: white !important;
+        cursor: pointer;
+    }
+}
+
+.icon {
+    font-size: 28px;
+    padding: 3px;
+    border-radius: 20px;
+    background-color: rgb(216, 216, 216);
+}
+
+.item {
+    display: flex;
+    margin-top: 13px;
+}
