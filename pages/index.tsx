@@ -1,10 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
-import LogInOutButton from "../components/LogInOutButton/LogInOutButton";
 import ProjectCard from "../components/ProjectCard/ProjectCard";
 import NavBar from "../components/NavBar/NavBar";
-
-import { PrismaClient } from "@prisma/client";
 import {prisma} from "./api/auth/prisma"
 import styles from "../styles/Home.module.scss";
 
@@ -98,7 +95,6 @@ const Home: NextPage<Props> = ({projects}) => {
             targetFunding={project.targetFunding}
             />
         })}
-        <LogInOutButton></LogInOutButton>
       </main>
 
       <footer className={styles.footer}>
