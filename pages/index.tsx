@@ -1,12 +1,43 @@
 import Head from "next/head";
 import Image from "next/image";
 import LogInOutButton from "../components/LogInOutButton/LogInOutButton";
+import ProjectCard from "../components/ProjectCard/ProjectCard";
 
+import { PrismaClient } from "@prisma/client";
+import {prisma} from "./api/auth/prisma"
 import styles from "../styles/Home.module.scss";
 
 import type { NextPage } from "next";
 
-const Home: NextPage = () => {
+type Props = {
+  projects: {
+    id: string
+    name: string
+    shortDescription: string
+    images: string[]
+    currentFunding: number
+    targetFunding: number
+  }[]
+}
+
+export async function getServerSideProps() {
+  const projects = await prisma.project.findMany({
+    where: {
+      active: true,
+    },
+    select: {
+      id: true,
+      name: true,
+      shortDescription: true,
+      images: true,
+      currentFunding: true,
+      targetFunding: true,
+    }
+  })
+  return { props: {projects} }
+}
+
+const Home: NextPage<Props> = ({projects}) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -54,7 +85,17 @@ const Home: NextPage = () => {
             </p>
           </a>
         </div>
-        <LogInOutButton />
+        {projects.map(project => {
+          return <ProjectCard 
+            key={project.id} // Each child in a list should have a unique "key" prop.
+            name={project.name} 
+            shortDescription={project.shortDescription} 
+            image={project.images[0]}
+            currentFunding={project.currentFunding}
+            targetFunding={project.targetFunding}
+            />
+        })}
+        <LogInOutButton></LogInOutButton>
       </main>
 
       <footer className={styles.footer}>
