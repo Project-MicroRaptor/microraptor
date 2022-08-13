@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import ProjectCard from "../components/ProjectCard/ProjectCard";
 import NavBar from "../components/NavBar/NavBar";
-import {prisma} from "./api/auth/prisma"
+import { prisma } from "../db/prisma"
 import styles from "../styles/Home.module.scss";
 
 import type { NextPage } from "next";
@@ -31,11 +31,11 @@ export async function getServerSideProps() {
       currentFunding: true,
       targetFunding: true,
     }
-  })
-  return { props: {projects} }
+  });
+  return { props: { projects } };
 }
 
-const Home: NextPage<Props> = ({projects}) => {
+const Home: NextPage<Props> = ({ projects }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -86,14 +86,14 @@ const Home: NextPage<Props> = ({projects}) => {
           </a>
         </div>
         {projects.map(project => {
-          return <ProjectCard 
+          return <ProjectCard
             key={project.id} // Each child in a list should have a unique "key" prop.
-            name={project.name} 
-            shortDescription={project.shortDescription} 
+            name={project.name}
+            shortDescription={project.shortDescription}
             image={project.images[0]}
             currentFunding={project.currentFunding}
             targetFunding={project.targetFunding}
-            />
+          />
         })}
       </main>
 

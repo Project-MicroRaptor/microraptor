@@ -7,4 +7,3 @@ const ProgressStyles = {
 };
   
 export default ProgressStyles;
-  
