@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import ProjectCard from "../components/ProjectCard/ProjectCard";
+import ProjectCardBrowser from "../components/ProjectCardBrowser/ProjectCardBrowser";
 import NavBar from "../components/NavBar/NavBar";
 import { prisma } from "../db/prisma"
 import styles from "../styles/Home.module.scss";
@@ -35,7 +35,7 @@ export async function getServerSideProps() {
   return { props: { projects } };
 }
 
-const Home: NextPage<Props> = ({ projects }) => {
+const Home: NextPage<Props> = (props) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -47,54 +47,7 @@ const Home: NextPage<Props> = ({ projects }) => {
       <NavBar />
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-        {projects.map(project => {
-          return <ProjectCard
-            key={project.id} // Each child in a list should have a unique "key" prop.
-            name={project.name}
-            shortDescription={project.shortDescription}
-            image={project.images[0]}
-            currentFunding={project.currentFunding}
-            targetFunding={project.targetFunding}
-          />
-        })}
+        <ProjectCardBrowser {...props} />
       </main>
 
       <footer className={styles.footer}>

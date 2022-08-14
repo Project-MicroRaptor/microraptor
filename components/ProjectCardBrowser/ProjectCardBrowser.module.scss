@@ -1,0 +1,17 @@
+.browser {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a {
+        flex: 0 0 21%;
+        min-width: 350px;
+        max-width: 350px;
+    }
+}
+
+.noProjects {
+    max-width: 500px;
+    text-align: center;
+}
