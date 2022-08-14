@@ -1,12 +1,41 @@
 import Head from "next/head";
 import Image from "next/image";
+import ProjectCard from "../components/ProjectCard/ProjectCard";
 import NavBar from "../components/NavBar/NavBar";
-
+import { prisma } from "../db/prisma"
 import styles from "../styles/Home.module.scss";
 
 import type { NextPage } from "next";
 
-const Home: NextPage = () => {
+type Props = {
+  projects: {
+    id: string
+    name: string
+    shortDescription: string
+    images: string[]
+    currentFunding: number
+    targetFunding: number
+  }[]
+}
+
+export async function getServerSideProps() {
+  const projects = await prisma.project.findMany({
+    where: {
+      active: true,
+    },
+    select: {
+      id: true,
+      name: true,
+      shortDescription: true,
+      images: true,
+      currentFunding: true,
+      targetFunding: true,
+    }
+  });
+  return { props: { projects } };
+}
+
+const Home: NextPage<Props> = ({ projects }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -56,6 +85,16 @@ const Home: NextPage = () => {
             </p>
           </a>
         </div>
+        {projects.map(project => {
+          return <ProjectCard
+            key={project.id} // Each child in a list should have a unique "key" prop.
+            name={project.name}
+            shortDescription={project.shortDescription}
+            image={project.images[0]}
+            currentFunding={project.currentFunding}
+            targetFunding={project.targetFunding}
+          />
+        })}
       </main>
 
       <footer className={styles.footer}>
