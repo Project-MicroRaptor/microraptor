@@ -2,11 +2,11 @@
     color: black !important;
     margin-top: -7px;
     padding: 20px;
-    border: 2px solid rgb(175, 175, 175) !important;
+    border: 1px solid grey !important;
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
     border-bottom-left-radius: 10px !important;
-    border-bottom-right-radius: 10px !important;
 }
 
 .sessionName {
@@ -47,12 +47,6 @@
     font-weight: 500;
     margin-top: 4px;
     margin-left: 20px;
-
-    &:hover {
-        color: var(--chakra-colors-brand-primary);
-        background-color: white !important;
-        cursor: pointer;
-    }
 }
 
 .icon {
@@ -65,4 +59,10 @@
 .item {
     display: flex;
     margin-top: 13px;
+
+    &:hover {
+        color: var(--chakra-colors-brand-primary);
+        background-color: white !important;
+        cursor: pointer;
+    }
 }
