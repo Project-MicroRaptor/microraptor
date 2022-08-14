@@ -14,7 +14,7 @@ type Props = {
 
 export default function ProjectCardBrowser(props: Props) {
     if (props.projects.length == 0) {
-        return (<p className={styles.noProjects}>There are currently no projects looking for funding. Why not start one by selecting "Create Project" in the upper left hand corner?</p>);
+        return (<p className={styles.noProjects}>There are currently no projects looking for funding. Why not start one by selecting Create Project in the upper left hand corner?</p>);
     }
 
     return (
