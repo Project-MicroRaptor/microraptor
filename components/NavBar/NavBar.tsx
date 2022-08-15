@@ -1,10 +1,9 @@
 import styles from "./NavBar.module.scss";
-import { Flex, Box, Spacer, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Flex, Box, Spacer, Menu, MenuButton } from "@chakra-ui/react";
 import useWindowResize from "./../../hooks/useWindowResize";
 import Link from "next/link";
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { BsFillInboxFill } from "react-icons/bs";
-import { AiFillSetting, AiOutlineLogout, AiOutlineProject } from "react-icons/ai";
 import { Avatar } from '@chakra-ui/react'
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 
