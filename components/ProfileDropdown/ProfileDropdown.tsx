@@ -12,7 +12,7 @@ export default function ProfileDropdown() {
 
     return (
         <MenuList className={styles.menuList} borderTopRadius="0" borderBottomLeftRadius="10" borderBottomEndRadius="0" color="black" borderColor="grey">
-            <Avatar className={styles.sessionImage} src={session.user?.image ?? ""} size="md" />
+            <Avatar className={styles.sessionImage} src={session.user?.image ?? ""} size="md" border="2px solid grey" />
             <span className={styles.sessionName}>{session.user?.name}</span>
             <span className={styles.viewProfile}>
                 View Profile
