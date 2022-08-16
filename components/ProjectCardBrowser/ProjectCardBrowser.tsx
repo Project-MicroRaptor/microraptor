@@ -33,7 +33,7 @@ export default function ProjectCardBrowser() {
     }
 
     return (
-        <SimpleGrid minChildWidth="350px" spacing="40px" >
+        <SimpleGrid className={styles.grid} columns={[1,2,3,4]} minChildWidth="350px" spacing="20px">
             {data.map(project => {
                 return (
                     <ProjectCard
