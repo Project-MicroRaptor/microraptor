@@ -18,6 +18,7 @@ const Home: NextPage = () => {
       <NavBar />
 
       <ProjectCardBrowser />
+      
     </div>
   );
 };

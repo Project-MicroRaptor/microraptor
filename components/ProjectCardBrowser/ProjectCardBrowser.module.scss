@@ -1,4 +1,25 @@
+.container {
+  max-width: 1600px;
+  margin: auto;
+}
+
+.grid {
+  margin-top: 40px;
+  grid-template-columns: repeat(auto-fit, 350px);
+  justify-content: center;
+}
+
 .noProjects {
-    max-width: 500px;
-    text-align: center;
+  max-width: 500px;
+  text-align: center;
+}
+
+.Spinner {
+  margin: auto;
+}
+
+.spinnerContainer {
+  width:100%;
+  height:100%;
+  display: flex;
 }
