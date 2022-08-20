@@ -1,39 +1,55 @@
 import TabSwitcher from "../TabSwitcher/TabSwitcher";
-import { BsFillPlusSquareFill, BsFillPencilFill, BsFillImageFill, BsFillGiftFill, BsFillCheckCircleFill } from "react-icons/bs";
+import {
+  BsFillPlusSquareFill,
+  BsFillPencilFill,
+  BsFillImageFill,
+  BsFillGiftFill,
+  BsFillCheckCircleFill,
+} from "react-icons/bs";
 import { useState } from "react";
+import MyProjectForm from "../FormSections/MyProjectForm";
+import { Button } from "@chakra-ui/react";
 
 import styles from "./ProjectForm.module.scss";
-import { Button } from "@chakra-ui/react";
 
 export default function ProjectForm() {
   const [selectedTab, setSelectedTab] = useState(0);
-
-  const tabs = [
-    {
-      name: 'My Project',
-      icon: <BsFillPlusSquareFill />
-    }, 
-    {
-      name: 'Details',
-      icon: <BsFillPencilFill />,
-    },
-    {
-      name: 'Photos',
-      icon: <BsFillImageFill />,
-    },
-    {
-      name: 'Rewards',
-      icon: <BsFillGiftFill />
-    },
-    {
-      name: 'Preview',
-      icon: <BsFillCheckCircleFill />
-    },
-  ];
+  const [formData, setFormData] = useState({});
 
   const onChangeTab = (tab: number) => {
     setSelectedTab(tab);
-  }
+  };
+
+  const onFormChange = (id: string, value: any) => {
+    setFormData({
+      ...formData,
+      [id]: value,
+    });
+  };
+
+  const tabs = [
+    {
+      name: "My Project",
+      icon: <BsFillPlusSquareFill />,
+      form: <MyProjectForm formData={formData} onFormChange={onFormChange} />,
+    },
+    {
+      name: "Details",
+      icon: <BsFillPencilFill />,
+    },
+    {
+      name: "Photos",
+      icon: <BsFillImageFill />,
+    },
+    {
+      name: "Rewards",
+      icon: <BsFillGiftFill />,
+    },
+    {
+      name: "Preview",
+      icon: <BsFillCheckCircleFill />,
+    },
+  ];
 
   return (
     <div className={styles.container}>
@@ -44,17 +60,28 @@ export default function ProjectForm() {
           onChangeTab={onChangeTab}
         />
       </div>
+      <div className={styles.form}>{tabs[selectedTab].form}</div>
       <div className={styles.buttons}>
         {selectedTab > 0 && (
-          <Button width="100px" onClick={() => onChangeTab(selectedTab - 1)}>Back</Button>
+          <Button width="100px" onClick={() => onChangeTab(selectedTab - 1)}>
+            Back
+          </Button>
         )}
         {selectedTab < tabs.length - 1 && (
-          <Button float="right" width="100px" onClick={() => onChangeTab(selectedTab + 1)}>Next</Button>
+          <Button
+            float="right"
+            width="100px"
+            onClick={() => onChangeTab(selectedTab + 1)}
+          >
+            Next
+          </Button>
         )}
         {selectedTab === tabs.length - 1 && (
-          <Button float="right" width="100px" disabled>Submit</Button>
+          <Button float="right" width="100px" disabled>
+            Submit
+          </Button>
         )}
       </div>
     </div>
-  )
+  );
 }
