@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar/NavBar";
 import styles from "../styles/Home.module.scss";
 
 import type { NextPage } from "next";
+import ProjectInfo from './../components/ProjectInfo/ProjectInfo';
 
 const Home: NextPage = () => {
   return (
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
       </Head>
 
       <NavBar />
+      <ProjectInfo />
 
       <main className={styles.main}>
         <h1 className={styles.title}>

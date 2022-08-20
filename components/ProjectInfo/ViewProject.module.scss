@@ -1,0 +1,20 @@
+.projectContainer {
+    font-family: 'Inter';
+}
+
+.projectImage {
+    width: 650px;
+
+    img {
+        border-radius: 10px;
+        margin-left: 70px;
+        margin-top: 40px;
+    }
+}
+
+.name {
+    display: block;
+    margin-top: 50px;
+    font-size: 25px;
+    font-weight: 400;
+}
