@@ -8,10 +8,10 @@ import {
 } from "react-icons/bs";
 import { useState } from "react";
 import MyProjectForm from "../FormSections/MyProjectForm";
+import DetailsForm from "../FormSections/DetailsForm";
 import { Button } from "@chakra-ui/react";
 
 import styles from "./ProjectForm.module.scss";
-import DetailsForm from "../FormSections/DetailsForm";
 
 export default function ProjectForm() {
   const [selectedTab, setSelectedTab] = useState(0);
