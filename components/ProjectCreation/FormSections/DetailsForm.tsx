@@ -11,7 +11,7 @@ export default function DetailsForm(props: Props) {
 
   return (
     <div className={styles.container}>
-      <FormControl className={styles.formControl} isRequired>
+      <FormControl className={styles.formControl}>
         <FormLabel htmlFor="aboutBusiness" className={styles.formLabel}>
           About the Business
         </FormLabel>
@@ -25,7 +25,7 @@ export default function DetailsForm(props: Props) {
         />
       </FormControl>
 
-      <FormControl className={styles.formControl} isRequired>
+      <FormControl className={styles.formControl}>
         <FormLabel htmlFor="aboutOwner" className={styles.formLabel}>
           About the Owner
         </FormLabel>
@@ -39,7 +39,7 @@ export default function DetailsForm(props: Props) {
         />
       </FormControl>
 
-      <FormControl className={styles.formControl} isRequired>
+      <FormControl className={styles.formControl}>
         <FormLabel htmlFor="businessPlan" className={styles.formLabel}>
           Business Plan
         </FormLabel>
