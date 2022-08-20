@@ -71,6 +71,21 @@ export default function MyProjectForm(props: Props) {
         />
       </FormControl>
 
+      <FormControl className={styles.formControl} isRequired>
+        <FormLabel htmlFor="shortDescription" className={styles.formLabel}>
+          Short Description
+        </FormLabel>
+        <Input
+          type="text"
+          id="shortDescription"
+          value={formData.shortDescription ?? ""}
+          className={styles.formInput}
+          onChange={(event) =>
+            onFormChange(event.target.id, event.target.value)
+          }
+        />
+      </FormControl>
+
       <FormControl className={`${styles.formControl} ${styles.inputLeft}`} isRequired>
         <FormLabel htmlFor="targetFunding" className={styles.formLabel}>
           Target Funding
