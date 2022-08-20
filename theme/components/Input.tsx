@@ -6,6 +6,9 @@ const InputStyles = {
       borderRadius: "5px",
     },
   },
+  defaultProps: {
+    focusBorderColor: "brand.primary"
+  }
 };
 
 export default InputStyles;

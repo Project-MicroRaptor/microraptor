@@ -12,20 +12,13 @@
   margin-top: 30px;
 }
 
-.buttons {
-  margin-left: 70px;
-  margin-right: 70px;
-  margin-top: 50px;
+.buttons button {
+    margin: 50px 0px;
 }
 
 
 @media only screen and (max-width: 700px) {
   .container {
     width: 95%;
-  }
-
-  .buttons {
-    margin-left: 10px;
-    margin-right: 10px;
   }
 }
