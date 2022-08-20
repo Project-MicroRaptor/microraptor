@@ -11,11 +11,12 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import { ProjectCategories } from "../../../types/categories";
 import { SingleDatepicker } from "chakra-dayzed-datepicker";
 import { dateFormat, dayNames, monthNames } from "../../../utils/calendarUtils";
+import SwitchButton from "../../SwitchButton/SwitchButton";
+import NumberFormat from "react-number-format";
 
 import styles from "./ProfileSections.module.scss";
 
 import type { ProjectCategory } from "../../../types/categories";
-import SwitchButton from "../../SwitchButton/SwitchButton";
 
 type Props = {
   formData: any;
@@ -29,8 +30,6 @@ export default function MyProjectForm(props: Props) {
     const buttons = Object.keys(ProjectCategories).map((key) => {
       const category = ProjectCategories[key as keyof ProjectCategory];
       const selected = formData.categories && formData.categories[key];
-
-      console.log(formData, selected);
 
       return (
         <SwitchButton
@@ -72,7 +71,7 @@ export default function MyProjectForm(props: Props) {
         />
       </FormControl>
 
-      <FormControl className={styles.formControl} isRequired>
+      <FormControl className={`${styles.formControl} ${styles.inputLeft}`} isRequired>
         <FormLabel htmlFor="targetFunding" className={styles.formLabel}>
           Target Funding
         </FormLabel>
@@ -80,13 +79,12 @@ export default function MyProjectForm(props: Props) {
           <InputLeftElement pointerEvents="none">
             <BsCurrencyDollar />
           </InputLeftElement>
-          <Input
-            type="number"
+          <NumberFormat
+            thousandSeparator
+            customInput={Input}
             id="targetFunding"
             value={formData.targetFunding ?? ""}
-            onChange={(event) => {
-              onFormChange(event.target.id, event.target.value);
-            }}
+            onValueChange={(values) => onFormChange("targetFunding", values.floatValue)}
           />
         </InputGroup>
       </FormControl>
