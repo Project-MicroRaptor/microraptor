@@ -1,10 +1,10 @@
 .container {
   max-width: 1600px;
   margin: auto;
+  padding: 30px;
 }
 
 .grid {
-  margin-top: 40px;
   grid-template-columns: repeat(auto-fit, 350px);
   justify-content: center;
 }
