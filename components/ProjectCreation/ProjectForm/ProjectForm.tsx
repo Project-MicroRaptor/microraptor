@@ -8,6 +8,7 @@ import {
 } from "react-icons/bs";
 import { useState } from "react";
 import MyProjectForm from "../FormSections/MyProjectForm";
+import PhotosForm from "../FormSections/PhotosForm";
 import { Button } from "@chakra-ui/react";
 
 import styles from "./ProjectForm.module.scss";
@@ -40,6 +41,7 @@ export default function ProjectForm() {
     {
       name: "Photos",
       icon: <BsFillImageFill />,
+      form: <PhotosForm formData={formData} onFormChange={onFormChange} />,
     },
     {
       name: "Rewards",
