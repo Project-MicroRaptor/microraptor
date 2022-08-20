@@ -3,5 +3,3 @@ export const fetcher = async (url: string) => {
     const data: any = await response.json();
     return data;
 };
-
-export default fetcher;

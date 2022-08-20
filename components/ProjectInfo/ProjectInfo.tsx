@@ -32,7 +32,7 @@ export default function ProjectInfo() {
           postcode={project.postcode}
         />
       );
-    })}
+    })};
     </>
-  }
+  };
 }

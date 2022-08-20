@@ -62,6 +62,6 @@ export default function ViewProject(props: ProjectInfo) {
         <Button width="250px" borderRadius={4} fontSize={17}>Enquire about Project</Button>
       </Stack>
     </div >
-  )
+  );
 }
 
