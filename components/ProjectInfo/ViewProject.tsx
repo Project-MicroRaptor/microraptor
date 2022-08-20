@@ -2,7 +2,6 @@ import styles from './ViewProject.module.scss';
 import { Center } from '@chakra-ui/react';
 import { Progress } from "@chakra-ui/react";
 
-
 export interface ProjectInfo {
   name: string;
   shortDescription: string;
@@ -22,10 +21,13 @@ export default function ViewProject(props: ProjectInfo) {
         <img src={props?.image} alt={props.name} />
       </div>
 
-      <p>
-        ${props.currentFunding.toLocaleString()} of $
-        {props.targetFunding.toLocaleString()} already raised!
-      </p>
+      <div className={styles.fund}>
+        <Center>
+          ${props.currentFunding.toLocaleString()} of $
+          {props.targetFunding.toLocaleString()} already raised!
+        </Center>
+      </div>
+
     </div>
   )
 }

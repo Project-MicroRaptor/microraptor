@@ -6,7 +6,6 @@ import { prisma } from "../db/prisma"
 import styles from "../styles/Home.module.scss";
 
 import type { NextPage } from "next";
-import ProjectInfo from './../components/ProjectInfo/ProjectInfo';
 
 type Props = {
   projects: {
@@ -46,7 +45,7 @@ const Home: NextPage<Props> = ({ projects }) => {
       </Head>
 
       <NavBar />
-      <ProjectInfo />
+
 
       <main className={styles.main}>
         <h1 className={styles.title}>
