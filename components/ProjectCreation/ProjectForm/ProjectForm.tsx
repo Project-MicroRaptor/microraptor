@@ -11,6 +11,7 @@ import MyProjectForm from "../FormSections/MyProjectForm";
 import { Button } from "@chakra-ui/react";
 
 import styles from "./ProjectForm.module.scss";
+import DetailsForm from "../FormSections/DetailsForm";
 
 export default function ProjectForm() {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -36,6 +37,7 @@ export default function ProjectForm() {
     {
       name: "Details",
       icon: <BsFillPencilFill />,
+      form: <DetailsForm formData={formData} onFormChange={onFormChange} />
     },
     {
       name: "Photos",
