@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { fetcher } from './../utils/swr';
+import { fetcher } from '../../utils/swr';
 import useSWR from "swr";
 import ViewProject from '../../components/ProjectInfo/ViewProject';
 

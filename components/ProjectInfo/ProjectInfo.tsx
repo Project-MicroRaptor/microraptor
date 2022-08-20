@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import ViewProject from './ViewProject';
-import { fetcher } from './../../pages/utils/swr';
+import { fetcher } from '../../utils/swr';
 
 type Info = {
   id: string;
