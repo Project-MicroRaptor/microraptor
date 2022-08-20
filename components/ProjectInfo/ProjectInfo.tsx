@@ -9,6 +9,7 @@ type Info = {
   images: string[];
   currentFunding: number;
   targetFunding: number;
+  postcode: number;
 }[];
 
 export default function ProjectInfo() {
@@ -28,6 +29,7 @@ export default function ProjectInfo() {
           image={project.images[0]}
           currentFunding={project.currentFunding}
           targetFunding={project.targetFunding}
+          postcode={project.postcode}
         />
       );
     })}

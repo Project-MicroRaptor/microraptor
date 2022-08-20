@@ -10,7 +10,7 @@
 
     img {
         border-radius: 10px;
-        margin-top: 20px;
+        margin-top: 40px;
     }
 }
 
@@ -21,7 +21,53 @@
     font-weight: 400;
 }
 
-.fund {
-    position: absolute;
+.categoriesItem {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight: 500;
 
+    .categoriesIcon,
+    .locationIcon {
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+    .content {
+        margin-left: 10px;
+    }
+}
+
+.progressContainer {
+    width: 40%;
+    height: 20%;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+.fundingText {
+
+    p {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .current {
+        color: var(--chakra-colors-brand-primary);
+        font-weight: 900;
+    }
+}
+
+.backersAmount p,
+.daysAmount p {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }
