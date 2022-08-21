@@ -46,6 +46,9 @@ model User {
   accounts      Account[]
   sessions      Session[]
   projects      Project[]
+  location      String?
+  age           Int?
+  bio           String?
 }
 
 model Project {
@@ -84,13 +87,4 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-}
-
-model Profile {
-  name      String?
-  location  String?
-  age       Int?
-  bio       String?
-  image     String?
-  projects  Project[]
 }
