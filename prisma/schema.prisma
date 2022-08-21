@@ -86,3 +86,11 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Profile {
+  name      String?
+  location  String?
+  age       Int?
+  bio       String?
+  image     String?
+  projects  Project[]
+}
