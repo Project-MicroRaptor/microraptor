@@ -2,6 +2,9 @@ import { useRouter } from 'next/router';
 import { fetcher } from '../../utils/swr';
 import useSWR from "swr";
 import ViewProject from '../../components/ProjectInfo/ViewProject';
+import NavBar from './../../components/NavBar/NavBar';
+import { Spinner } from "@chakra-ui/react";
+import styles from './[id].module.scss';
 
 type Projects = {
     id: string;
@@ -11,6 +14,9 @@ type Projects = {
     currentFunding: number;
     targetFunding: number;
     postcode: number;
+    categories: string[];
+    createdAt: number;
+    completedAt: number;
 };
 
 export default function ProjectView() {
@@ -18,11 +24,11 @@ export default function ProjectView() {
     const { id } = router.query;
     const { data, error } = useSWR<Projects>(`/api/project/${id}`, fetcher);
 
-    console.log(data);
-
     if (!data) {
         return null;
     }
+
+    <NavBar />
 
     return (
         <ViewProject
@@ -32,6 +38,9 @@ export default function ProjectView() {
             currentFunding={data.currentFunding}
             targetFunding={data.targetFunding}
             postcode={data.postcode}
+            categories={data.categories}
+            createdAt={data.createdAt}
+            completedAt={data.completedAt}
         />
     );
 };

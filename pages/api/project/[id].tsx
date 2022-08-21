@@ -20,6 +20,9 @@ export default async function handler(
                 currentFunding: true,
                 targetFunding: true,
                 postcode: true,
+                categories: true,
+                createdAt: true,
+                completedAt: true,
             },
         });
         res.json(projectinfo);

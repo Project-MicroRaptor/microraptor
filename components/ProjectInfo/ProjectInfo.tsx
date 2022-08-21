@@ -10,6 +10,9 @@ type Info = {
   currentFunding: number;
   targetFunding: number;
   postcode: number;
+  categories: string[];
+  createdAt: number;
+  completedAt: number;
 }[];
 
 export default function ProjectInfo() {
@@ -30,6 +33,9 @@ export default function ProjectInfo() {
           currentFunding={project.currentFunding}
           targetFunding={project.targetFunding}
           postcode={project.postcode}
+          categories={project.categories}
+          createdAt={project.createdAt}
+          completedAt={project.completedAt}
         />
       );
     })};

@@ -15,6 +15,10 @@ const overrides = {
     Progress,
     Input,
   },
+  fonts: {
+    heading: 'Inter',
+    body: 'Inter'
+  }
 };
 
 export default extendTheme(overrides);
