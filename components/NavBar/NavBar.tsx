@@ -1,10 +1,11 @@
 import styles from "./NavBar.module.scss";
-import { Flex, Box, Spacer } from "@chakra-ui/react";
+import { Flex, Box, Spacer, Menu, MenuButton } from "@chakra-ui/react";
 import useWindowResize from "./../../hooks/useWindowResize";
 import Link from "next/link";
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { BsFillInboxFill } from "react-icons/bs";
 import { Avatar } from '@chakra-ui/react'
+import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -39,13 +40,14 @@ export default function NavBar() {
               <Box className={styles.inbox} justifyContent="end">
                 <a><BsFillInboxFill fontSize="30px" /></a>
               </Box>
-              <Box className={styles.profile} justifyContent="end">
-                <a onClick={() =>
-                  signOut({
-                    callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"}/api/auth/logout`,
-                  })
-                }><Avatar src={session.user?.image ?? ""} size="sm" /></a>
-              </Box>
+              <Menu>
+                <MenuButton className={styles.menu}>
+                  <Box className={styles.profile} justifyContent="end">
+                    <Avatar src={session.user?.image ?? ""} size="sm" />
+                  </Box>
+                </MenuButton>
+                <ProfileDropdown />
+              </Menu>
             </>
           ) : (
             <Box className={styles.side} justifyContent="end">
