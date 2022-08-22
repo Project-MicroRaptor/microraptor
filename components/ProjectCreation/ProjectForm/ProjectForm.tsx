@@ -8,6 +8,7 @@ import {
 } from "react-icons/bs";
 import { useState } from "react";
 import MyProjectForm from "../FormSections/MyProjectForm";
+import DetailsForm from "../FormSections/DetailsForm";
 import { Button } from "@chakra-ui/react";
 
 import styles from "./ProjectForm.module.scss";
@@ -36,6 +37,7 @@ export default function ProjectForm() {
     {
       name: "Details",
       icon: <BsFillPencilFill />,
+      form: <DetailsForm formData={formData} onFormChange={onFormChange} />
     },
     {
       name: "Photos",
