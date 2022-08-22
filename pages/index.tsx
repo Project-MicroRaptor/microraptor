@@ -8,7 +8,7 @@ import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>MicroRaptor</title>
         <meta name="description" content="Welcome to Microraptor" />
