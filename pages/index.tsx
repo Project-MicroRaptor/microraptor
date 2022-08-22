@@ -1,8 +1,6 @@
 import Head from "next/head";
-import Image from "next/image";
 import ProjectCardBrowser from "../components/ProjectCardBrowser/ProjectCardBrowser";
 import NavBar from "../components/NavBar/NavBar";
-import styles from "../styles/Home.module.scss";
 
 import type { NextPage } from "next";
 
