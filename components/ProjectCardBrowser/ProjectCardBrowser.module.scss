@@ -1,0 +1,17 @@
+.container {
+  max-width: 1600px;
+  margin: auto;
+  padding: 30px;
+}
+
+.grid {
+  grid-template-columns: repeat(auto-fit, 350px);
+  justify-content: center;
+}
+
+.spinnerContainer,
+.error,
+.noProjects {
+  margin-top: 200px;
+  text-align: center;
+}
