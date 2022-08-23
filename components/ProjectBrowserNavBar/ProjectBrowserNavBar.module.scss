@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: fit-content;
+  border-width: 1px;
+  border-color: grey;
+  border-radius: 30px;
+  margin: auto;
+  margin-bottom: 30px;
+  padding: 5px;
+
+  Button,
+  Input {
+    border-width: 0px;
+    border-radius: 30px;
+    flex-grow: 1;
+  }
+
+  > * {
+    flex-grow: 1;
+  }
+
+  .areaContainer > * {
+    flex-grow: 1;
+  }
+
+  .searchContainer {
+    flex-grow: 1;
+  }
+}
