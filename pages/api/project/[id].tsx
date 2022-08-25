@@ -23,10 +23,13 @@ export default async function handler(
                 categories: true,
                 createdAt: true,
                 completedAt: true,
+                aboutBusiness: true,
+                aboutOwner: true,
+                businessPlan: true,
+                rewards: true,
             },
         });
         res.json(projectinfo);
     }
-
     res.status(404);
 }

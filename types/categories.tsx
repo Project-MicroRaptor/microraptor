@@ -7,6 +7,7 @@ const ProjectCategories = {
   Technology: "Technology",
   Games: "Games",
   Music: "Music",
+  Sport: "Sport",
   Other: "Other",
 };
 
