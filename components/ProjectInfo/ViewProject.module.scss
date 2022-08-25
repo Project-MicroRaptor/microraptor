@@ -1,132 +1,132 @@
 .projectImage {
-    img {
-        border-radius: 10px;
-        margin-top: 40px;
-        display: block;
-    }
+  img {
+    border-radius: 10px;
+    margin-top: 40px;
+    display: block;
+  }
 }
 
 .name {
-    display: block;
-    margin-top: 50px;
-    font-size: 25px;
-    font-weight: 400;
+  display: block;
+  margin-top: 50px;
+  font-size: 25px;
+  font-weight: 400;
 }
 
 .categoriesItem {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
 
-    .categoriesIcon {
-        font-size: 20px;
-    }
+  .categoriesIcon {
+    font-size: 20px;
+  }
 
-    .content,
-    .locationIcon {
-        margin-left: 10px;
-    }
+  .content,
+  .locationIcon {
+    margin-left: 10px;
+  }
 }
 
 .progressContainer {
-    margin-top: 45px;
+  margin-top: 45px;
 
-    .progressBar {
-        width: 300px;
+  .progressBar {
+    width: 300px;
+  }
+
+  .fundingText {
+    p {
+      width: 100%;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 500;
     }
 
-    .fundingText {
-        p {
-            width: 100%;
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        .current {
-            color: var(--chakra-colors-brand-primary);
-            font-weight: 900;
-        }
+    .current {
+      color: var(--chakra-colors-brand-primary);
+      font-weight: 900;
     }
+  }
 }
 
 .backersAmount p,
 .daysAmount p {
-    margin-top: 10px;
-    font-size: 18px;
-    font-weight: 500;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .buttons {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 @media only screen and (max-width: 577px) {
-    .buttons {
-        display: grid;
-        row-gap: 20px;
-        justify-content: center;
-    }
+  .buttons {
+    display: grid;
+    row-gap: 20px;
+    justify-content: center;
+  }
 }
 
 @media only screen and (max-width: 767px) {
 
-    .projectContainer {
-        text-align: center;
-    }
+  .projectContainer {
+    text-align: center;
+  }
 
-    .projectImage {
-        display: grid;
-        width: 350px;
-        margin: auto;
-    }
+  .projectImage {
+    display: grid;
+    width: 350px;
+    margin: auto;
+  }
 
-    .categoriesItem {
-        margin-top: 10px;
-        margin-right: 42px;
-        justify-content: center;
-    }
+  .categoriesItem {
+    margin-top: 10px;
+    margin-right: 42px;
+    justify-content: center;
+  }
 
-    .progressContainer {
-        display: block;
+  .progressContainer {
+    display: block;
 
-        .progressBar {
-            margin: auto;
-        }
+    .progressBar {
+      margin: auto;
     }
+  }
 
-    .buttons {
-        display: grid;
-        row-gap: 20px;
-        justify-content: center;
-        padding: 30px;
-    }
+  .buttons {
+    display: grid;
+    row-gap: 20px;
+    justify-content: center;
+    padding: 30px;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-    .projectImage {
-        display: grid;
-        width: 450px;
-    }
+  .projectImage {
+    display: grid;
+    width: 450px;
+  }
 
-    .gridLeft {
-        grid-column-start: 5;
-    }
+  .gridLeft {
+    grid-column-start: 5;
+  }
 
-    .gridRight {
-        grid-column-start: 6;
-        grid-column-end: 11;
-    }
+  .gridRight {
+    grid-column-start: 6;
+    grid-column-end: 11;
+  }
 
-    .categoriesItem {
-        margin-top: 5px;
-        margin-right: 10%;
-    }
+  .categoriesItem {
+    margin-top: 5px;
+    margin-right: 10%;
+  }
 
-    .buttons {
-        grid-column-start: 2;
-        display: flex;
-        gap: 20px;
-        padding: 2 0px;
-    }
+  .buttons {
+    grid-column-start: 2;
+    display: flex;
+    gap: 20px;
+    padding: 2 0px;
+  }
 }

@@ -3,7 +3,6 @@ import { Center, Progress, Grid, GridItem } from '@chakra-ui/react';
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { Button } from "@chakra-ui/react";
-import NavBar from './../NavBar/NavBar';
 import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
 
