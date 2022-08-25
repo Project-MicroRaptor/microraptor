@@ -1,49 +1,48 @@
 .projectContainer {
-    height: 275px;
-    width: 350px;
-    margin: 20px;
-    border-radius: 15px;
-    border-width: 1px;
-    border-color: grey;
+  height: 275px;
+  width: 350px;
+  border-radius: 15px;
+  border-width: 1px;
+  border-color: grey;
 
-    .imageContainer {
-        height: 50%;
-        width: 100%;
-        background-color: var(--chakra-colors-brand-primary);
-        contain: content;
-        border-top-left-radius: 14px;
-        border-top-right-radius: 14px;
+  .imageContainer {
+    height: 50%;
+    width: 100%;
+    background-color: var(--chakra-colors-brand-primary);
+    contain: content;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+  }
+
+  .infoContainer {
+    height: 30%;
+    padding: 10px;
+
+    h2 {
+      font-size: large;
+      padding-top: 10px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      font-weight: bold;
     }
 
-    .infoContainer {
-        height: 30%;
-        padding: 10px;
-
-        h2 {
-            font-size: large;
-            padding-top: 10px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            font-weight: bold;
-        }
-
-        p {
-            font-size: small;
-            padding-bottom: 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+    p {
+      font-size: small;
+      padding-bottom: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
+  }
 
-    .progressContainer {
-        height: 20%;
-        padding: 10px;
+  .progressContainer {
+    height: 20%;
+    padding: 10px;
 
-        p {
-            font-size: x-small;
-            text-align: center;
-        }
+    p {
+      font-size: x-small;
+      text-align: center;
     }
+  }
 }
