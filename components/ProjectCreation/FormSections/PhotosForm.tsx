@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Input, Textarea } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 
 import styles from "./ProfileSections.module.scss";
 
