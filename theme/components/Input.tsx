@@ -1,3 +1,5 @@
+//import type { ComponentStyleConfig } from "@chakra-ui/theme";
+
 const InputStyles = {
   baseStyle: {
     field: {
@@ -6,9 +8,20 @@ const InputStyles = {
       borderRadius: "5px",
     },
   },
+
+  variants: {
+    main: {
+      
+    },
+
+    settings:{
+      borderColor: "red",
+    },
+  },
   defaultProps: {
-    focusBorderColor: "brand.primary"
-  }
+    focusBorderColor: "brand.primary",
+    // variant: "main",
+  },
 };
 
 export default InputStyles;

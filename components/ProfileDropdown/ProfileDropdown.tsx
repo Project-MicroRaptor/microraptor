@@ -2,6 +2,7 @@ import { useSession, signOut } from "next-auth/react";
 import { AiFillSetting, AiOutlineLogout, AiOutlineProject } from "react-icons/ai";
 import { MenuList, Avatar } from '@chakra-ui/react';
 import styles from './ProfileDropdown.module.scss';
+import Link from "next/link";
 
 export default function ProfileDropdown() {
   const { data: session } = useSession();
@@ -20,7 +21,11 @@ export default function ProfileDropdown() {
       <div className={styles.divider}>
         <div className={styles.item}>
           <span className={styles.icon}><AiFillSetting /></span>
-          <span className={styles.dropdownItem}>Settings</span>
+          <span className={styles.dropdownItem}>
+            <Link href="/settings">
+                <a>{"Settings"}</a>
+            </Link>
+          </span>
         </div>
         <div className={styles.item}>
           <span className={styles.icon}><AiOutlineProject /></span>
