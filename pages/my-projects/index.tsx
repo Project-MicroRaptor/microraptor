@@ -14,7 +14,6 @@ import styles from "./myProjects.module.scss";
 
 const MyProjects: AuthNextPage = (props) => {
   const { data, error } = useSWR<ProjectCards>("/api/my-projects", fetcher);
-  console.log(data);
   return (
     <>
       <Head>
@@ -22,10 +21,9 @@ const MyProjects: AuthNextPage = (props) => {
         <meta name="description" content="My Projects" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <div className={styles.container}>
         <NavBar />
-        <div>
+        <div className={styles.container}>
+          <h1>Active Projects</h1>
         {data && data.map(project => {
           return <ProjectCard
             key={project.id} // Each child in a list should have a unique "key" prop.
@@ -37,7 +35,6 @@ const MyProjects: AuthNextPage = (props) => {
           />
         })}
         </div>
-      </div>
     </>
   );
 };
