@@ -1,4 +1,4 @@
-import styles from "./ProjectBrowserNavBar.module.scss";
+import styles from "./ProjectSearch.module.scss";
 import { useState } from "react";
 import {
   HStack,
@@ -11,18 +11,20 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
+
 import { ProjectCategories } from "../../types/categories";
+import { RadiusDistances } from "../../types/radiusDistances";
 import { SearchType } from "../../types/search";
 
-export default function BrowseBar() {
+export default function ProjectSearch() {
   const [selectionState, setSelection] = useState(SearchType.Featured);
-  const [categoryState, setCategory] = useState("Category");
-  const [distanceState, setDistance] = useState("Any Distance");
+  const [categoryState, setCategory] = useState<string | null>(null);
+  const [distanceState, setDistance] = useState<number | null>(null);
 
   function FeaturedOnClick() {
     setSelection(SearchType.Featured);
-    setCategory("Category");
-    setDistance("Any Distance");
+    setCategory(null);
+    setDistance(null);
   }
 
   function CategoryOnClick(category: string) {
@@ -32,7 +34,7 @@ export default function BrowseBar() {
 
   function SearchOnClick() {
     setSelection(SearchType.Search);
-    setCategory("Category");
+    setCategory(null);
   }
 
   return (
@@ -52,16 +54,13 @@ export default function BrowseBar() {
             : { variant: "outline" })}
           as={Button}
         >
-          {categoryState}
+          {categoryState == null ? "All Categories" : categoryState}
         </MenuButton>
         <MenuList>
-          {Object.keys(ProjectCategories).map((category) => {
+          {Object.entries(ProjectCategories).map(([key, value]) => {
             return (
-              <MenuItem
-                key={category}
-                onClick={() => CategoryOnClick(category)}
-              >
-                {category}
+              <MenuItem key={key} onClick={() => CategoryOnClick(value)}>
+                {value}
               </MenuItem>
             );
           })}
@@ -72,15 +71,21 @@ export default function BrowseBar() {
         <Button variant="outline" disabled>
           All Locations
         </Button>
+
         <Menu>
           <MenuButton variant="outline" as={Button}>
-            {distanceState}
+            {distanceState == null
+              ? "Any Distance"
+              : "< " + distanceState + "km"}
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => setDistance("< 5km")}>&lt; 5km</MenuItem>
-            <MenuItem onClick={() => setDistance("< 10km")}>&lt; 10km</MenuItem>
-            <MenuItem onClick={() => setDistance("< 20km")}>&lt; 20km</MenuItem>
-            <MenuItem onClick={() => setDistance("< 50km")}>&lt; 50km</MenuItem>
+            {Object.entries(RadiusDistances).map(([key, value]) => {
+              return (
+                <MenuItem key={key} onClick={() => setDistance(value)}>
+                  {key}
+                </MenuItem>
+              );
+            })}
           </MenuList>
         </Menu>
       </HStack>

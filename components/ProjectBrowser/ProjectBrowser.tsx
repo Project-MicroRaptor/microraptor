@@ -1,7 +1,7 @@
 import styles from "./ProjectBrowser.module.scss";
-import ProjectBrowserNavBar from "../ProjectBrowserNavBar/ProjectBrowserNavBar"
+import ProjectSearch from "../ProjectSearch/ProjectSearch"
 import ProjectCard from "../ProjectCard/ProjectCard";
-import { SimpleGrid, Spinner, Grid } from "@chakra-ui/react";
+import { SimpleGrid, Spinner } from "@chakra-ui/react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/swr";
 
@@ -48,7 +48,7 @@ export default function ProjectBrowser() {
 
   return (
     <div className={styles.container}>
-        <ProjectBrowserNavBar />
+        <ProjectSearch />
         <SimpleGrid className={styles.grid} spacing="40px">
           {data.map((project) => {
             return (
