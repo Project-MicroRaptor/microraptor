@@ -28,6 +28,7 @@ export default function ViewProject(props: ProjectInfo) {
   const targetFunding = props?.targetFunding ?? 0;
   const currentFunding = props?.currentFunding ?? 0;
   const completedAt = props?.completedAt ?? new Date().toISOString();
+  const backers = 0;
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -89,7 +90,7 @@ export default function ViewProject(props: ProjectInfo) {
               </p>
             </span>
             <span className={styles.backersAmount}>
-              <p>0 backer</p>
+              <p>{backers} backers</p>
             </span>
             <span className={styles.daysAmount}>
               <p>{daysRemaining()} days to go</p>

@@ -3,6 +3,8 @@ import { fetcher } from '../../utils/swr';
 import useSWR from "swr";
 import ViewProject from '../../components/ProjectInfo/ViewProject';
 import NavBar from './../../components/NavBar/NavBar';
+import { Spinner, Heading } from '@chakra-ui/react';
+import styles from './[id].module.scss';
 
 type Projects = {
   id: string;
@@ -26,7 +28,21 @@ export default function ProjectView() {
   const { id } = router.query;
   const { data, error } = useSWR<Projects>(`/api/project/${id}`, fetcher);
 
+  if (error) {
+    return <Heading className={styles.error}>404 | Page Not Found</Heading>;
+  }
   if (!data) {
+    <div className={styles.spinner}>
+      <Spinner
+        margin="auto"
+        width="200px"
+        height="200px"
+        thickness="12px"
+        color="brand.primary"
+        emptyColor="gray.200"
+        speed="1s"
+      />
+    </div>
     return null;
   }
 
