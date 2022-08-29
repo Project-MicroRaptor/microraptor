@@ -1,16 +1,20 @@
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import ProjectCard, { ProjectProps } from "../../components/ProjectCard/ProjectCard";
 
 import styles from "./ProjectCardwButton.module.scss";
 
-export default function ProjectCardwButton() {
+
+export default function ProjectCardwButton(props: ProjectProps) {
   return (
+    <div className={styles.container}>
     <ProjectCard
-      key={project.id} // Each child in a list should have a unique "key" prop.
-      name={project.name}
-      shortDescription={project.shortDescription}
-      image={project.images[0]}
-      currentFunding={project.currentFunding}
-      targetFunding={project.targetFunding}
+      key={key} // Each child in a list should have a unique "key" prop.
+      name={props.name}
+      shortDescription={props.shortDescription}
+      image={props.image}
+      currentFunding={props.currentFunding}
+      targetFunding={props.targetFunding}
     />
+    <button className={styles.button}>Edit</button>
+    </div>
   );
 }
