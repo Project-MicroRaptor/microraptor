@@ -33,6 +33,15 @@ export default function ProjectView() {
       <>
         <NavBar />
         <Heading className={styles.error}>404 | Page Not Found</Heading>
+        <Spinner
+          margin="auto"
+          width="200px"
+          height="200px"
+          thickness="12px"
+          color="brand.primary"
+          emptyColor="gray.200"
+          speed="1s"
+        />
       </>
     );
   }
