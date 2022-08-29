@@ -28,40 +28,31 @@ export default function ProjectView() {
   const { id } = router.query;
   const { data, error } = useSWR<Projects>(`/api/project/${id}`, fetcher);
 
-  if (error) {
+  if (error)
     return (
       <>
         <NavBar />
         <Heading className={styles.error}>404 | Page Not Found</Heading>
-        <Spinner
-          margin="auto"
-          width="200px"
-          height="200px"
-          thickness="12px"
-          color="brand.primary"
-          emptyColor="gray.200"
-          speed="1s"
-        />
       </>
     );
-  }
 
-  if (!data) {
-    <>
-      <div className={styles.spinner}>
-        <Spinner
-          margin="auto"
-          width="200px"
-          height="200px"
-          thickness="12px"
-          color="brand.primary"
-          emptyColor="gray.200"
-          speed="1s"
-        />
-      </div>
-    </>
-    return null;
-  }
+  if (!data)
+    return (
+      <>
+        <NavBar />
+        <div className={styles.spinner}>
+          <Spinner
+            margin="auto"
+            width="200px"
+            height="200px"
+            thickness="12px"
+            color="brand.primary"
+            emptyColor="gray.200"
+            speed="1s"
+          />
+        </div>
+      </>
+    );
 
   return (
     <>
