@@ -1,9 +1,10 @@
-import styles from "./ProjectBrowser.module.scss";
 import ProjectSearch from "../ProjectSearch/ProjectSearch"
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { SimpleGrid, Spinner } from "@chakra-ui/react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/swr";
+
+import styles from "./ProjectBrowser.module.scss";
 
 type Projects = {
   id: string;

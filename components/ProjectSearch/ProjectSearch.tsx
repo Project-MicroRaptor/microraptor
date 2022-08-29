@@ -1,4 +1,3 @@
-import styles from "./ProjectSearch.module.scss";
 import { useState } from "react";
 import {
   HStack,
@@ -15,6 +14,8 @@ import { BsSearch } from "react-icons/bs";
 import { ProjectCategories } from "../../types/categories";
 import { RadiusDistances } from "../../types/radiusDistances";
 import { SearchType } from "../../types/search";
+
+import styles from "./ProjectSearch.module.scss";
 
 export default function ProjectSearch() {
   const [selectionState, setSelection] = useState(SearchType.Featured);
