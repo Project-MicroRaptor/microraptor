@@ -2,7 +2,7 @@ import Head from "next/head";
 import NavBar from "../../components/NavBar/NavBar";
 import { fetcher } from "../../utils/swr";
 import useSWR from "swr";
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import ProjectCardwButton from "../../components/ProjectCardwButton/ProjectCardwButton";
 
 import type { AuthNextPage } from "../../types/appProps";
 import type { ProjectCards } from "../../types/projectTypes";
@@ -25,7 +25,7 @@ const MyProjects: AuthNextPage = (props) => {
         <div className={styles.container}>
           <h1>Active Projects</h1>
         {data && data.map(project => {
-          return <ProjectCard
+          return <ProjectCardwButton
             key={project.id} // Each child in a list should have a unique "key" prop.
             name={project.name}
             shortDescription={project.shortDescription}
