@@ -25,7 +25,6 @@ export default function ProjectSearch() {
   function FeaturedOnClick() {
     setSelection(SearchType.Featured);
     setCategory(null);
-    setDistance(null);
   }
 
   function CategoryOnClick(category: string) {
@@ -35,7 +34,6 @@ export default function ProjectSearch() {
 
   function SearchOnClick() {
     setSelection(SearchType.Search);
-    setCategory(null);
   }
 
   return (
@@ -57,7 +55,19 @@ export default function ProjectSearch() {
         >
           {categoryState == null ? "All Categories" : categoryState}
         </MenuButton>
-        <MenuList>
+        <MenuList
+          sx={{
+            "&::-webkit-scrollbar": {
+              width: "8px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: `rgba(0, 0, 0, 0.15)`,
+              borderRadius: "30px",
+            },
+          }}
+          maxHeight="300px"
+          overflowY="scroll"
+        >
           {Object.entries(ProjectCategories).map(([key, value]) => {
             return (
               <MenuItem key={key} onClick={() => CategoryOnClick(value)}>
@@ -80,6 +90,7 @@ export default function ProjectSearch() {
               : "< " + distanceState + "km"}
           </MenuButton>
           <MenuList>
+            <MenuItem onClick={() => setDistance(null)}>Any Distance</MenuItem>
             {Object.entries(RadiusDistances).map(([key, value]) => {
               return (
                 <MenuItem key={key} onClick={() => setDistance(value)}>

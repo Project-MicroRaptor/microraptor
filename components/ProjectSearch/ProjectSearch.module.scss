@@ -8,12 +8,12 @@
   border-radius: 30px;
   margin: auto;
   margin-bottom: 30px;
-  padding: 5px;
+  overflow: hidden;
 
   Button,
   Input {
     border-width: 0px;
-    border-radius: 30px;
+    border-radius: 0px;
     flex-grow: 1;
   }
 
