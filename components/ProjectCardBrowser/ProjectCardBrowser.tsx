@@ -58,7 +58,7 @@ export default function ProjectCardBrowser() {
         {data.map((project) => {
           return (
             <ProjectCard
-              key={project.id}
+              id={project.id}
               name={project.name}
               shortDescription={project.shortDescription}
               image={project.images[0]}

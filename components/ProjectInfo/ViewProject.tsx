@@ -7,6 +7,7 @@ import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
 
 export interface ProjectInfo {
+  id?: string;
   name?: string;
   shortDescription?: string;
   images?: string[];

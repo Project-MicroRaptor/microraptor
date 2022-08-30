@@ -2,6 +2,7 @@ import styles from "./ProjectCard.module.scss";
 import { Progress } from "@chakra-ui/react";
 
 export interface ProjectProps {
+  id: string;
   name: string;
   shortDescription: string;
   image?: string;
@@ -11,8 +12,7 @@ export interface ProjectProps {
 
 export default function ProjectCard(props: ProjectProps) {
   return (
-    // TODO: href direct to project page.
-    <a className={styles.projectContainer}>
+    <a href={`project/${props.id}`} className={styles.projectContainer} >
       <div className={styles.imageContainer}>
         {props?.image && <img src={props?.image} alt={props.name} />}
       </div>
@@ -34,6 +34,6 @@ export default function ProjectCard(props: ProjectProps) {
           {props.targetFunding.toLocaleString()} already raised!
         </p>
       </div>
-    </a>
+    </a >
   );
 }
