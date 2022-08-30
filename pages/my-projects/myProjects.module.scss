@@ -1,5 +1,5 @@
 .container {
-  width: 1400px;
+  width: 1510px;
   margin: auto;
   padding-top: 5%;
 
@@ -17,4 +17,12 @@
   float: right;
   font-size: 2.5em;
   padding-right: 50px;
+}
+.react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.react-horizontal-scrolling-menu--scroll-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
