@@ -1,23 +1,8 @@
-.container {
-    width: 100%;
-    height: 150%;
-    padding: 20px;
-    border-right: 3px solid rgb(236, 233, 233);
-    font-family: "Inter", sans-serif;
-}
-
 .containertitle {
-    width: 90%;
+    width: 100%;
     height: 100%;
     padding: 20px;
     font-family: "Inter", sans-serif;
-}
-
-.title{
-    font-size: 30px;
-    text-align: left;
-    font-weight: bold;
-    padding-bottom: 40px;
 }
 
 .accounttitle{
@@ -25,11 +10,6 @@
     text-align: left;
     font-weight: bold;
     padding-bottom: 10px;
-}
-.buttons{
-    padding: 20px;
-    font-size: 30px;
-    color: black;
 }
 
 .accountfields{
@@ -52,7 +32,7 @@
 }
 
 .formlabel{
-    width: 20%;
+    width: 200px;
 }
 
 .forminput{

@@ -2,8 +2,8 @@ import Head from "next/head";
 import styles from "./settings.module.scss";
 import type { AuthNextPage } from "../../types/appProps";
 import NavBar from "../../components/NavBar/NavBar";
-import { Grid, GridItem } from "@chakra-ui/react";
-import SettingsTab from "../../components/Settings/SettingsTab";
+import { Grid, GridItem, Flex, Box } from "@chakra-ui/react";
+import SettingsMenu from "../../components/Settings/SettingsMenu";
 import PagePicker from "../../components/Settings/PagePicker";
 import { useState } from "react";
 
@@ -29,8 +29,15 @@ const Settings: AuthNextPage = (props) => {
       <div>
         <NavBar />
         <div>
-        <SettingsTab onPageClick={getPage} />
-        <PagePicker pageName={pageName} />
+            <Flex flexWrap={"wrap"}>
+              <Box className={styles.settingsMenu}>
+              <SettingsMenu onPageClick={getPage} />
+              </Box>
+              <Box width="1000px">
+              <PagePicker pageName={pageName} />
+              </Box>
+            </Flex>
+
           {/* <Grid
             templateAreas={`"nav main"`}
             gridTemplateColumns={"300px 1fr"}

@@ -23,7 +23,7 @@ export default function ProfileSettings() {
         <Center>
           <Button
             className={styles.uploadbutton}
-            width="10%"
+            width="100px"
             justifyContent="center"
             leftIcon={<BsUpload />}
           >

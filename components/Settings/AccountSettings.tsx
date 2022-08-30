@@ -7,6 +7,7 @@ import {
   Box,
   HStack,
   Flex,
+  Center,
 } from "@chakra-ui/react";
 
 export default function AccountSettings() {
@@ -108,7 +109,9 @@ export default function AccountSettings() {
           </Box>
           <hr className={styles.notificationdivider} />
           <div className={styles.savebox}>
+            <Center>
             <Button>Save Changes</Button>
+            </Center>
           </div>
         </FormControl>
       </div>

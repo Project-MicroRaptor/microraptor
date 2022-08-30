@@ -1,0 +1,134 @@
+.container {
+    width: 100%;
+    height: 700px;
+    padding: 20px;
+    border-right: 3px solid rgb(236, 233, 233);
+    font-family: "Inter", sans-serif;
+}
+
+.title{
+    font-size: 30px;
+    text-align: left;
+    font-weight: bold;
+    padding-bottom: 16px;
+}
+
+.buttons{
+    padding: 20;
+    font-size: 30px;
+    width: 200px;
+    align-self: center;
+    // color: black;
+}
+
+.btn{
+    font-size: 17px;
+    width: 200px;
+    height: 42px;
+    color: black;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 7px;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+}
+
+// .btn:focus{
+//     background-color: #17a2b8;
+//     color: #ffffff;
+// }
+
+.btn:hover{
+    background-color: #17a2b8;
+     color: #ffffff;
+     
+}
+
+
+.icn{
+    font-size: 22px;
+    text-align: center;
+    padding: 0px 8px 0px 10px;
+}
+
+.flexcontainer{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+@media screen and (max-width: 1300px) {
+    .container {
+      //display: none;
+      height: 110px;
+      border-right: none;
+    }
+
+    .title{
+        font-size: 30px;
+        font-weight: bold;
+        padding-bottom: 5px;
+        // text-align: center;
+        // border: 3px solid black;
+
+    }
+
+    .buttons{
+        width: 100px;
+        padding: 0px 20px 20px 20px;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        flex: 100%;
+        // border: 3px solid black;
+    }
+    
+    .cbuttons{
+        // color: black;
+    }
+
+    .flexcontainer{        
+        display: flex;
+        // width: 370px;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        // border: 3px solid black;
+
+    }
+
+    .cbutton{
+        width: 110px;
+        padding: 10px;
+
+    }
+
+    .btn{
+        font-size: 14px;
+        width: 120px;
+        height: 42px;
+    }
+
+    .icn{
+        font-size: 16px;
+        padding: 0px 6px 0px 4px;
+    }
+
+  }
+
+
+  @media screen and ( max-width: 350px) {
+    .title{
+        font-size: 30px;
+        // text-align: center;
+        font-weight: bold;
+        padding-bottom: 5px;
+    }
+
+
+
+  }
