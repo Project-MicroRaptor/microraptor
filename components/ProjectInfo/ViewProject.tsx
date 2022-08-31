@@ -60,6 +60,7 @@ export default function ViewProject(props: ProjectInfo) {
   return (
     <div className={styles.projectContainer}>
       <span className={styles.name}>
+        <title>{name}</title>
         <Center>{name}</Center>
       </span>
 
@@ -107,6 +108,6 @@ export default function ViewProject(props: ProjectInfo) {
           <Button width="250px" borderRadius={4} fontSize={16} disabled>Enquire about Project</Button>
         </GridItem>
       </Grid>
-    </div>
+    </div >
   )
 };

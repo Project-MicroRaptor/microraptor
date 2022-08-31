@@ -63,15 +63,7 @@
   margin-top: 50px;
 }
 
-@media only screen and (max-width: 577px) {
-  .buttons {
-    display: grid;
-    row-gap: 20px;
-    justify-content: center;
-  }
-}
-
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 840px) {
   .projectContainer {
     text-align: center;
   }
@@ -111,10 +103,10 @@
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 841px) {
   .projectImage {
     display: grid;
-    width: 450px;
+    width: 490px;
   }
 
   .gridLeft {
@@ -123,12 +115,12 @@
   }
 
   .gridRight {
-    grid-column-start: 6;
-    grid-column-end: 11;
+    grid-column-start: 8;
+    grid-column-end: 12;
   }
 
   .progressContainer {
-    margin-left: 30px;
+    margin-left: 20px;
   }
 
   .categoriesItem {
@@ -137,9 +129,9 @@
   }
 
   .buttons {
-    grid-column-start: 5;
-    grid-column-end: 9;
     display: flex;
+    grid-column-start: 6;
+    grid-column-end: 9;
     gap: 20px;
   }
 }
