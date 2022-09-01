@@ -1,4 +1,3 @@
-import TabSwitcher from "../TabSwitcher/TabSwitcher";
 import {
   BsFillPlusSquareFill,
   BsFillPencilFill,
@@ -7,10 +6,13 @@ import {
   BsFillCheckCircleFill,
 } from "react-icons/bs";
 import { useState } from "react";
+import { Button } from "@chakra-ui/react";
+
+import TabSwitcher from "../TabSwitcher/TabSwitcher";
 import MyProjectForm from "../FormSections/MyProjectForm";
 import DetailsForm from "../FormSections/DetailsForm";
 import PhotosForm from "../FormSections/PhotosForm";
-import { Button } from "@chakra-ui/react";
+import RewardsForm from "../FormSections/RewardsForm";
 
 import styles from "./ProjectForm.module.scss";
 
@@ -48,6 +50,7 @@ export default function ProjectForm() {
     {
       name: "Rewards",
       icon: <BsFillGiftFill />,
+      form: <RewardsForm formData={formData} onFormChange={onFormChange} />
     },
     {
       name: "Preview",
