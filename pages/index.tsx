@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar/NavBar";
 import { prisma } from "../db/prisma"
 import styles from "../styles/Home.module.scss";
 
-import type { NextPage } from "next";
+import type { NextPage, InferGetServerSidePropsType } from "next";
 
 type Props = {
   projects: {
@@ -35,7 +35,7 @@ export async function getServerSideProps() {
   return { props: { projects } };
 }
 
-const Home: NextPage<Props> = ({ projects }) => {
+const Home: NextPage<Props> = ({ projects }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -88,6 +88,7 @@ const Home: NextPage<Props> = ({ projects }) => {
         {projects.map(project => {
           return <ProjectCard
             key={project.id} // Each child in a list should have a unique "key" prop.
+            id={project.id}
             name={project.name}
             shortDescription={project.shortDescription}
             image={project.images[0]}

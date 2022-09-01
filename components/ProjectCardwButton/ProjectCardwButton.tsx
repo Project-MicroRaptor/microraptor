@@ -8,6 +8,7 @@ export default function ProjectCardwButton(props: ProjectProps) {
   return (
     <div className={styles.container}>
       <ProjectCard
+        id={props.id}
         name={props.name}
         shortDescription={props.shortDescription}
         image={props.image}
