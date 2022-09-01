@@ -13,7 +13,7 @@ export default async function handler(
     console.log(session);
     const projects = await prisma.project.findMany({
         where: {
-          active: true,
+          ownerId: session.user.id,
         },
         select: {
           id: true,

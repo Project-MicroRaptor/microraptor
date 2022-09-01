@@ -23,6 +23,12 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   debug: process.env.NODE_ENV === "development" ? true : false,
+  callbacks: {
+    session: async({session, user}) => {
+      session.user.id = user.id
+      return Promise.resolve(session);
+    }
+  }
 };
 
 export default NextAuth(authOptions);

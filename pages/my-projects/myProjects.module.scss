@@ -1,5 +1,5 @@
 .container {
-  width: 1510px;
+  width: 60%;
   margin: auto;
   padding-top: 5%;
 
@@ -7,17 +7,16 @@
     font-size: 3em;
   }
 }
-.slider {
-  align-items: center;
-}
 .card{
   display: inline-block;
 }
 .arrows{
+  display: flex;
   float: right;
   font-size: 2.5em;
-  padding-right: 50px;
+  margin-right: 5%;
 }
+
 .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
   display: none;
 }
@@ -26,3 +25,18 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+@media only screen and (max-width: 1000px) {
+  .container {
+    width: 95%;
+    h1 {
+      text-align: center;
+    }
+   
+  }
+  .arrows{
+    float: none;
+    justify-content: center;
+  }
+}
+

@@ -9,26 +9,14 @@ import type { ProjectCards } from "../../types/projectTypes";
 
 import styles from "./myProjects.module.scss";
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
-import {
-  LeftArrow,
-  RightArrow,
-} from "../../components/HorizontalSlider/arrows";
+import { LeftArrow, RightArrow } from "../../components/HorizontalSlider/Arrows";
 
 const MyProjects: AuthNextPage = (props) => {
   const { data, error } = useSWR<ProjectCards>("/api/my-projects", fetcher);
 
   const Arrows = () => (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        fontSize: "2.5em",
-      }}
-    >
-      <div style={{ marginLeft: "10px", display: "flex" }}>
-        <LeftArrow /> <RightArrow />
-      </div>
+    <div className={styles.arrows}>
+      <LeftArrow /> <RightArrow />
     </div>
   );
 
@@ -46,6 +34,7 @@ const MyProjects: AuthNextPage = (props) => {
       </div>
     );
   });
+  console.log(data);
   return (
     <>
       <Head>
@@ -56,6 +45,7 @@ const MyProjects: AuthNextPage = (props) => {
       <NavBar />
       <div className={styles.container}>
         <h1>Active Projects</h1>
+        
         <div className={styles.slider}>
           {cards && <ScrollMenu Header={Arrows}>{cards}</ScrollMenu>}
         </div>
