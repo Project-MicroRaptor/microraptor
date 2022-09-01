@@ -1,9 +1,12 @@
 import { useRouter } from 'next/router';
 import { fetcher } from '../../utils/swr';
+import { Spinner, Heading } from '@chakra-ui/react';
+import Head from 'next/head';
 import useSWR from "swr";
+
 import ViewProject from '../../components/ProjectInfo/ViewProject';
 import NavBar from './../../components/NavBar/NavBar';
-import { Spinner, Heading } from '@chakra-ui/react';
+
 import styles from './[id].module.scss';
 
 type Projects = {
@@ -31,6 +34,11 @@ export default function ProjectView() {
   if (error)
     return (
       <>
+        <Head>
+          <title>MicroRaptor</title>
+          <meta name="description" content="Error" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavBar />
         <Heading className={styles.error}>404 | Page Not Found</Heading>
       </>
@@ -39,6 +47,11 @@ export default function ProjectView() {
   if (!data)
     return (
       <>
+        <Head>
+          <title>MicroRaptor</title>
+          <meta name="description" content="Loading" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavBar />
         <div className={styles.spinner}>
           <Spinner
@@ -56,6 +69,11 @@ export default function ProjectView() {
 
   return (
     <>
+      <Head>
+        <title>{data.name}</title>
+        <meta name="description" content={data.name} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <NavBar />
       <ViewProject
         name={data.name}
