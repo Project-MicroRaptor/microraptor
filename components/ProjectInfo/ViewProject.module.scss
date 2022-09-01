@@ -99,7 +99,6 @@
     display: grid;
     row-gap: 20px;
     justify-content: center;
-    padding: 30px;
   }
 }
 
@@ -130,8 +129,8 @@
 
   .buttons {
     display: flex;
-    grid-column-start: 6;
-    grid-column-end: 9;
+    padding-top: 50px;
+    margin: auto;
     gap: 20px;
   }
 }
