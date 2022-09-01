@@ -1,5 +1,5 @@
 import Head from "next/head";
-import ProjectCardBrowser from "../components/ProjectCardBrowser/ProjectCardBrowser";
+import ProjectBrowser from "../components/ProjectBrowser/ProjectBrowser";
 import NavBar from "../components/NavBar/NavBar";
 
 import type { NextPage } from "next";
@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
       <NavBar />
 
-      <ProjectCardBrowser />
+      <ProjectBrowser />
       
     </div>
   );

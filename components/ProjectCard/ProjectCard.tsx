@@ -1,5 +1,6 @@
-import styles from "./ProjectCard.module.scss";
 import { Progress } from "@chakra-ui/react";
+
+import styles from "./ProjectCard.module.scss";
 
 export interface ProjectProps {
   id: string;

@@ -9,9 +9,13 @@
   justify-content: center;
 }
 
-.spinnerContainer,
-.error,
 .noProjects {
-  margin-top: 200px;
+  max-width: 500px;
   text-align: center;
+}
+
+.spinnerContainer {
+  width:100%;
+  height:100%;
+  display: flex;
 }
