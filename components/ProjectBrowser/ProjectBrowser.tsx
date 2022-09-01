@@ -49,21 +49,22 @@ export default function ProjectBrowser() {
 
   return (
     <div className={styles.container}>
-        <ProjectSearch />
-        <SimpleGrid className={styles.grid} spacing="40px">
-          {data.map((project) => {
-            return (
-              <ProjectCard
-                key={project.id}
-                name={project.name}
-                shortDescription={project.shortDescription}
-                image={project.images[0]}
-                currentFunding={project.currentFunding}
-                targetFunding={project.targetFunding}
-              />
-            );
-          })}
-        </SimpleGrid>
+      <ProjectSearch />
+      <SimpleGrid className={styles.grid} spacing="40px">
+        {data.map((project) => {
+          return (
+            <ProjectCard
+              id={project.id}
+              key={project.id}
+              name={project.name}
+              shortDescription={project.shortDescription}
+              image={project.images[0]}
+              currentFunding={project.currentFunding}
+              targetFunding={project.targetFunding}
+            />
+          );
+        })}
+      </SimpleGrid>
     </div>
   );
 }
