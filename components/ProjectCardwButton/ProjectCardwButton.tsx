@@ -15,7 +15,7 @@ export default function ProjectCardwButton(props: ProjectProps) {
         currentFunding={props.currentFunding}
         targetFunding={props.targetFunding}
       />
-      <Button className={styles.button}>Edit</Button>
+      <Button className={styles.button} disabled>Edit</Button>
     </div>
   );
 }

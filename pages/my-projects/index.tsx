@@ -21,7 +21,7 @@ const MyProjects: AuthNextPage = (props) => {
       </Head>
       <NavBar />
       <div className={styles.container}>
-        <h1>Owned Projects</h1>
+        <h1>My Projects</h1>
         {data && data.length > 0 ? (
           <ProjectsSlider projects={data} />
         ) : (
