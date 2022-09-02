@@ -2,7 +2,7 @@ import ProjectCard from "../ProjectCard/ProjectCard";
 import { ProjectProps } from "../../types/projectCardProps";
 import { Button } from "@chakra-ui/react";
 
-import styles from "./ProjectCardwButton.module.scss";
+import styles from "./ProjectCardEdit.module.scss";
 
 export default function ProjectCardEdit(props: ProjectProps) {
   return (

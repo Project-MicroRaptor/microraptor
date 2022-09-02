@@ -1,6 +1,6 @@
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { ProjectCardsProps } from "../../types/projectCardProps";
-import ProjectCardEdit from "../ProjectCardwButton/ProjectCardEdit";
+import ProjectCardEdit from "../ProjectCardEdit/ProjectCardEdit";
 import { LeftArrow, RightArrow } from "./Arrows";
 
 import styles from "./ProjectsSlider.module.scss";
