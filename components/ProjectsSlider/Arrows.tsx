@@ -6,7 +6,7 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 function Arrow({
   children,
   disabled,
-  onClick
+  onClick,
 }: {
   children: React.ReactNode;
   disabled: boolean;
@@ -23,7 +23,7 @@ function Arrow({
         justifyContent: "center",
         right: "1%",
         opacity: disabled ? "0" : "1",
-        userSelect: "none"
+        userSelect: "none",
       }}
     >
       {children}
@@ -36,14 +36,13 @@ export function LeftArrow() {
     isFirstItemVisible,
     scrollPrev,
     visibleItemsWithoutSeparators,
-    initComplete
+    initComplete,
   } = React.useContext(VisibilityContext);
 
   const [disabled, setDisabled] = React.useState(
     !initComplete || (initComplete && isFirstItemVisible)
   );
   React.useEffect(() => {
-    // NOTE: detect if whole component visible
     if (visibleItemsWithoutSeparators.length) {
       setDisabled(isFirstItemVisible);
     }
@@ -51,17 +50,14 @@ export function LeftArrow() {
 
   return (
     <Arrow disabled={disabled} onClick={() => scrollPrev()}>
-      <BsArrowLeft/>
+      <BsArrowLeft />
     </Arrow>
   );
 }
 
 export function RightArrow() {
-  const {
-    isLastItemVisible,
-    scrollNext,
-    visibleItemsWithoutSeparators
-  } = React.useContext(VisibilityContext);
+  const { isLastItemVisible, scrollNext, visibleItemsWithoutSeparators } =
+    React.useContext(VisibilityContext);
 
   // console.log({ isLastItemVisible });
   const [disabled, setDisabled] = React.useState(
@@ -75,7 +71,7 @@ export function RightArrow() {
 
   return (
     <Arrow disabled={disabled} onClick={() => scrollNext()}>
-      <BsArrowRight/>
+      <BsArrowRight />
     </Arrow>
   );
 }

@@ -1,16 +1,16 @@
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { ProjectCardsProps } from "../../types/projectCardProps";
-import ProjectCardwButton from "../ProjectCardwButton/ProjectCardwButton";
+import ProjectCardEdit from "../ProjectCardwButton/ProjectCardEdit";
 import { LeftArrow, RightArrow } from "./Arrows";
 
 import styles from "./ProjectsSlider.module.scss";
 
 type Props = {
- projects: Array<ProjectCardsProps>
-}
+  projects: Array<ProjectCardsProps>;
+};
 
 export default function ProjectsSlider(props: Props) {
-  const {projects} = props;
+  const { projects } = props;
 
   const Arrows = () => (
     <div className={styles.arrows}>
@@ -21,8 +21,8 @@ export default function ProjectsSlider(props: Props) {
   const cards = projects?.map((project) => {
     return (
       <div key={project.id} className={styles.card}>
-        <ProjectCardwButton
-          id={project.id} 
+        <ProjectCardEdit
+          id={project.id}
           name={project.name}
           shortDescription={project.shortDescription}
           image={project.images[0]}

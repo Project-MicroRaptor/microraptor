@@ -28,7 +28,9 @@ const MyProjects: AuthNextPage = (props) => {
         ) : (
           <h2>
             You have no projects, you can create one{" "}
-            <Link href="/create-project"><a className={styles.createProject}>here!</a></Link>
+            <Link href="/create-project">
+              <a className={styles.createProject}>here!</a>
+            </Link>
           </h2>
         )}
       </div>

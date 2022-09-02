@@ -1,10 +1,10 @@
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import ProjectCard from "../ProjectCard/ProjectCard";
 import { ProjectProps } from "../../types/projectCardProps";
 import { Button } from "@chakra-ui/react";
 
 import styles from "./ProjectCardwButton.module.scss";
 
-export default function ProjectCardwButton(props: ProjectProps) {
+export default function ProjectCardEdit(props: ProjectProps) {
   return (
     <div className={styles.container}>
       <ProjectCard
@@ -15,7 +15,9 @@ export default function ProjectCardwButton(props: ProjectProps) {
         currentFunding={props.currentFunding}
         targetFunding={props.targetFunding}
       />
-      <Button className={styles.button} disabled>Edit</Button>
+      <Button className={styles.button} disabled>
+        Edit
+      </Button>
     </div>
   );
 }

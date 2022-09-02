@@ -2,9 +2,9 @@ import Head from "next/head";
 import ProjectBrowser from "../components/ProjectBrowser/ProjectBrowser";
 import NavBar from "../components/NavBar/NavBar";
 
-import type { NextPage, InferGetServerSidePropsType } from "next";
+import type { NextPage } from "next";
 
-const Home: NextPage = (props) => {
+const Home: NextPage = () => {
   return (
     <div>
       <Head>
@@ -16,7 +16,6 @@ const Home: NextPage = (props) => {
       <NavBar />
 
       <ProjectBrowser />
-      
     </div>
   );
 };
