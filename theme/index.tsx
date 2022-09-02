@@ -7,6 +7,7 @@ import colors from "./colors";
 import Button from "./components/Button";
 import Progress from "./components/Progress";
 import Input from "./components/Input";
+import Textarea from "./components/Textarea";
 
 const overrides = {
   colors,
@@ -14,7 +15,12 @@ const overrides = {
     Button,
     Progress,
     Input,
+    Textarea,
   },
+  fonts: {
+    heading: 'Inter',
+    body: 'Inter'
+  }
 };
 
 export default extendTheme(overrides);
