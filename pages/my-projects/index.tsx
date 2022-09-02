@@ -8,6 +8,7 @@ import type { ProjectCards } from "../../types/projectTypes";
 
 import styles from "./myProjects.module.scss";
 import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
+import Link from "next/link";
 
 const MyProjects: AuthNextPage = (props) => {
   const { data, error } = useSWR<ProjectCards>("/api/my-projects", fetcher);
@@ -27,7 +28,7 @@ const MyProjects: AuthNextPage = (props) => {
         ) : (
           <h2>
             You have no projects, you can create one{" "}
-            <a className={styles.createProject} href="/create-project">here!</a>
+            <Link href="/create-project"><a className={styles.createProject}>here!</a></Link>
           </h2>
         )}
       </div>
