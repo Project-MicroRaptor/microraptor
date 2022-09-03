@@ -43,16 +43,13 @@ export default function ProjectSearch(props: ProjectSearchProps) {
   }
 
   function PerformSearch() {
-    if (props.selectionState == SearchType.Featured)
-      props.setSelection(SearchType.Search);
-
+    props.setSelection(SearchType.Search);
     if (inputRef.current != null) {
       props.setSearch(inputRef.current.value);
     }
-
-    console.log("Searched");
   }
 
+  // Delay by timeout while still typing before performing search.
   let timer: NodeJS.Timeout;
   function debounce(func: Function, timeout = 500) {
     if (timer) clearTimeout(timer);
@@ -68,6 +65,7 @@ export default function ProjectSearch(props: ProjectSearchProps) {
           ? {}
           : { variant: "outline" })}
         onClick={FeaturedOnClick}
+        _focus={{ boxShadow: "none" }}
       >
         Featured
       </Button>
@@ -78,6 +76,7 @@ export default function ProjectSearch(props: ProjectSearchProps) {
             ? {}
             : { variant: "outline" })}
           as={Button}
+          _focus={{ boxShadow: "none" }}
         >
           {props.categoryState == null ? "All Categories" : props.categoryState}
         </MenuButton>
@@ -105,12 +104,16 @@ export default function ProjectSearch(props: ProjectSearchProps) {
       </Menu>
 
       <HStack className={styles.areaContainer}>
-        <Button variant="outline" disabled>
+        <Button variant="outline" disabled _focus={{ boxShadow: "none" }}>
           All Locations
         </Button>
 
         <Menu>
-          <MenuButton variant="outline" as={Button}>
+          <MenuButton
+            variant="outline"
+            as={Button}
+            _focus={{ boxShadow: "none" }}
+          >
             {props.distanceState == null
               ? "Any Distance"
               : "< " + props.distanceState + "km"}
@@ -141,6 +144,7 @@ export default function ProjectSearch(props: ProjectSearchProps) {
           aria-label="Search Projects"
           icon={<BsSearch />}
           onClick={PerformSearch}
+          _focus={{ boxShadow: "none" }}
         />
       </HStack>
     </div>
