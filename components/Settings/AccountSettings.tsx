@@ -6,7 +6,6 @@ import {
   Button,
   Box,
   HStack,
-  Flex,
   Center,
 } from "@chakra-ui/react";
 
