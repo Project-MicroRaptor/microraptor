@@ -76,6 +76,7 @@ export default function ProjectBrowser() {
               return (
                 <ProjectCard
                   key={project.id}
+                  id={project.id}
                   name={project.name}
                   shortDescription={project.shortDescription}
                   image={project.images[0]}
