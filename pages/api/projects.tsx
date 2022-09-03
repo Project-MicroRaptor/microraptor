@@ -5,9 +5,21 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  let query = {};
+  if (req.query?.name) {
+    query = {
+      ...query,
+      active: true,
+      name: {
+        contains: req.query.name,
+        mode: "insensitive",
+      },
+    };
+  }
+
   const projects = await prisma.project.findMany({
     where: {
-      active: true,
+      ...query,
     },
     select: {
       id: true,
