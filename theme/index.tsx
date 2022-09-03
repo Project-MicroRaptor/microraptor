@@ -17,6 +17,10 @@ const overrides = {
     Input,
     Textarea,
   },
+  fonts: {
+    heading: 'Inter',
+    body: 'Inter'
+  }
 };
 
 export default extendTheme(overrides);

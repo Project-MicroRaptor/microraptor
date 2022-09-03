@@ -5,6 +5,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/swr";
 import { SearchType } from "../../types/search";
+
 import styles from "./ProjectBrowser.module.scss";
 
 type Projects = {

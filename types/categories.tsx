@@ -14,7 +14,7 @@ const ProjectCategories = {
   HomeImprovement: "Home Improvement",
   HVAC: "HVAC",
   Insurance: "Insurance",
-  LawnCare: "LawnCare",
+  LawnCare: "Lawn Care",
   Legal: "Legal",
   Locksmith: "Locksmith",
   MovingStorage: "Moving / Storage",
