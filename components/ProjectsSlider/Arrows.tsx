@@ -59,7 +59,6 @@ export function RightArrow() {
   const { isLastItemVisible, scrollNext, visibleItemsWithoutSeparators } =
     React.useContext(VisibilityContext);
 
-  // console.log({ isLastItemVisible });
   const [disabled, setDisabled] = React.useState(
     !visibleItemsWithoutSeparators.length && isLastItemVisible
   );
