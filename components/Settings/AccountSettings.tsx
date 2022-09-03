@@ -14,9 +14,54 @@ export default function AccountSettings() {
     <div className={styles.containertitle}>
       <h1 className={styles.accounttitle}>Account Settings</h1>
       <hr className={styles.accountdivider} />
-
       <div className={styles.formbox}>
-        <FormControl>
+        <div className={styles.forminputbox}>
+          <form>
+            <div className={styles.accbox}>
+              <label className={styles.inputlabel}>Name</label>
+              <input
+                className={styles.inputbox}
+                type="text"
+                placeholder="name"
+              ></input>
+              <button className={styles.inputbutton}>Edit</button>
+            </div>
+            <hr />
+            <div className={styles.accbox}>
+              <label className={styles.inputlabel}>Email</label>
+              <input
+                className={styles.inputbox}
+                type="text"
+                placeholder="email"
+              ></input>
+              <button className={styles.inputbutton}>Edit</button>
+            </div>
+            <hr />
+            <div className={styles.accbox}>
+              <label className={styles.inputlabel}>Change Password</label>
+              <input
+                className={styles.inputbox}
+                type="text"
+                placeholder="********"
+              ></input>
+              <button className={styles.inputbutton}>Edit</button>
+            </div>
+            <hr />
+            <div className={styles.accbox}>
+              <label className={styles.inputlabel}>Address</label>
+              <input
+                className={styles.inputbox}
+                type="text"
+                placeholder="address"
+              ></input>
+              <button className={styles.inputbutton}>Edit</button>
+            </div>
+            <div className={styles.savebox}>
+              <button className={styles.savebutton}>Save</button>
+            </div>
+          </form>
+        </div>
+        {/* <FormControl>
           <Box className={styles.accountbox}>
             <HStack spacing="24px">
               <FormLabel className={styles.formlabel}>Name</FormLabel>
@@ -24,7 +69,7 @@ export default function AccountSettings() {
                 className={styles.forminput}
                 placeholder="name"
                 size="md"
-                borderColor="#ffffff"
+                // borderColor="#ffffff"
                 textAlign="center"
               />
               <Button
@@ -109,10 +154,10 @@ export default function AccountSettings() {
           <hr className={styles.notificationdivider} />
           <div className={styles.savebox}>
             <Center>
-            <Button>Save Changes</Button>
+              <Button>Save Changes</Button>
             </Center>
           </div>
-        </FormControl>
+        </FormControl> */}
       </div>
     </div>
   );

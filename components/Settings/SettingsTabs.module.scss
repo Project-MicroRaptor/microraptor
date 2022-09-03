@@ -79,3 +79,83 @@
 .profilebox{
     padding-bottom: 15px;
 }
+
+.inputlabel{
+    width: 200px;
+    font-weight: bold;
+    text-align: left;
+    margin: 5px 5px 5px 0px;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+.forminputbox{
+    display: flex;
+    flex-direction: column;
+}
+.inputbox{
+    box-sizing: border-box;
+    width: 75%;
+    text-align: center;
+    border-radius: 6px;
+    height: 40px;
+    margin: 5px;
+}
+.inputbox:hover{
+    border: 2px solid #17a2b8;
+}
+
+.inputbox:focus{
+    outline: 2px solid #17a2b8;
+}
+
+.inputbutton{
+    width: 20%;
+    color: #17a2b8;
+    background: #ffffff;
+    font-weight: bold;
+    margin: 5px 0px 5px 5px;
+}
+
+.inputbutton:hover{
+    background-color: #17a2b8;
+    border-radius: 6px;
+    color: #ffffff;  
+}
+
+.savebutton{
+    background-color: #17a2b8;
+    border-radius: 6px;
+    color: #ffffff;
+    height: 40px;
+    width: 100px;
+    font-weight: bold;
+}
+
+.accountinputbox{
+    padding: 10px;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    margin: 5px;
+
+}
+
+.accbox{
+    display: flex;
+    flex-direction: row;
+    padding: 15px 0px 15px 0px;
+}
+
+
+@media screen and ( max-width: 400px) {
+    .inputlabel{
+        width: 150px;
+    } 
+
+    .inputbutton{
+        margin: 20px 20px 5px 15px;
+    }
+
+  }
