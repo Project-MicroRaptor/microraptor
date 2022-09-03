@@ -138,6 +138,7 @@ export default function ProjectSearch(props: ProjectSearchProps) {
           placeholder="Search by keyword..."
           ref={inputRef}
           onChange={() => debounce(() => PerformSearch())}
+          _focus={{ boxShadow: "none" }}
         />
         <IconButton
           variant="outline"
