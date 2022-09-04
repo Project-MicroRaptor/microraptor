@@ -87,6 +87,7 @@
     align-items: center;
     align-content: center;
     align-self: center;
+    border: 1px solid black
 }
 
 .forminputbox{
@@ -148,8 +149,17 @@
     padding: 15px 0px 15px 0px;
 }
 
-@media screen and ( max-width: 400px) {
+@media screen and ( max-width: 500px) {
     .inputlabel{
-        width: 120px;
-    } 
+        width: 100px;
+        font-size: 14px;
+    }
+    .inputbox{
+        font-size: 14px;
+    }
+
+    .inputbutton{
+        font-size: 14px;
+    }
+
   }
