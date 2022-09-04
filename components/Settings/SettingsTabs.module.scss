@@ -1,3 +1,4 @@
+//Shared with AccountSettings, NotificaitonSettings, profileSettings
 .containertitle {
     width: 100%;
     height: 100%;
@@ -31,6 +32,23 @@
     border-radius: 5px;
 }
 
+//NotificationSettings only
+.switch{
+    vertical-align: middle;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+//ProfileSettings only 
+.profilebox{
+    padding-bottom: 15px;
+}
+
+.uploadbutton{
+    padding: 20px;
+}
+
+//AccountSetttings only
 .formlabel{
     width: 200px;
 }
@@ -45,17 +63,10 @@
 }
 
 .formbox{
-    padding: 10px;
     width: 100%;
     align-items: center;
     align-content: center;
     align-self: center;
-}
-
-.switch{
-    vertical-align: middle;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 .accountbox{
@@ -66,18 +77,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.uploadbutton{
-    padding: 20px;
-}
-
-.notificationdivider{
-    padding-top: 20px;
-}
-
-.profilebox{
-    padding-bottom: 15px;
 }
 
 .inputlabel{
@@ -94,6 +93,7 @@
     display: flex;
     flex-direction: column;
 }
+
 .inputbox{
     box-sizing: border-box;
     width: 75%;
@@ -102,6 +102,7 @@
     height: 40px;
     margin: 5px;
 }
+
 .inputbox:hover{
     border: 2px solid #17a2b8;
 }
@@ -139,7 +140,6 @@
     align-content: center;
     align-self: center;
     margin: 5px;
-
 }
 
 .accbox{
@@ -148,14 +148,8 @@
     padding: 15px 0px 15px 0px;
 }
 
-
 @media screen and ( max-width: 400px) {
     .inputlabel{
-        width: 150px;
+        width: 120px;
     } 
-
-    .inputbutton{
-        margin: 20px 20px 5px 15px;
-    }
-
   }

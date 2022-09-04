@@ -13,11 +13,9 @@
     padding-bottom: 16px;
 }
 
-.buttons{
-    padding: 20;
-    font-size: 30px;
-    width: 200px;
-    align-self: center;
+.flexcontainer{
+    display: flex;
+    flex-direction: column;
 }
 
 .btn{
@@ -44,10 +42,7 @@
     padding: 0px 8px 0px 10px;
 }
 
-.flexcontainer{
-    display: flex;
-    flex-direction: column;
-}
+
 
 @media screen and (max-width: 1300px) {
     .container {
@@ -61,26 +56,12 @@
         padding-bottom: 5px;
     }
 
-    .buttons{
-        width: 100px;
-        padding: 0px 20px 20px 20px;
-        align-items: center;
-        justify-content: center;
-        align-content: center;
-        flex: 100%;
-    }   
-
     .flexcontainer{        
         display: flex;
         width: 100%;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-    }
-
-    .cbutton{
-        width: 110px;
-        padding: 10px;
     }
 
     .btn{
