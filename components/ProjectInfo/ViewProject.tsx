@@ -9,7 +9,6 @@ import type { ProjectCategory } from "../../types/categories";
 import styles from './ViewProject.module.scss';
 
 export interface ProjectInfo {
-  key?: string;
   id?: string;
   name?: string;
   shortDescription?: string;
@@ -61,7 +60,7 @@ export default function ViewProject(props: ProjectInfo) {
   }
 
   return (
-    <div className={styles.projectContainer}>
+    <div className={styles.projectContainer} key={props.id}>
       <span className={styles.name}>
         <Center>{name}</Center>
       </span>
