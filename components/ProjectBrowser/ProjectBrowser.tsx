@@ -1,8 +1,10 @@
-import styles from "./ProjectCardBrowser.module.scss";
+import ProjectSearch from "../ProjectSearch/ProjectSearch"
 import ProjectCard from "../ProjectCard/ProjectCard";
-import { SimpleGrid, Spinner, Heading } from "@chakra-ui/react";
+import { SimpleGrid, Spinner } from "@chakra-ui/react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/swr";
+
+import styles from "./ProjectBrowser.module.scss";
 
 type Projects = {
   id: string;
@@ -13,12 +15,11 @@ type Projects = {
   targetFunding: number;
 }[];
 
-export default function ProjectCardBrowser() {
+export default function ProjectBrowser() {
   const { data, error } = useSWR<Projects>("/api/projects", fetcher);
 
   // Error message.
-  if (error)
-    return <Heading className={styles.error}>An error occured.</Heading>;
+  if (error) return <div>An error occured.</div>;
 
   // Waiting for data.
   if (!data)
@@ -39,25 +40,21 @@ export default function ProjectCardBrowser() {
   // No projects.
   if (data.length == 0) {
     return (
-      <div className={styles.noProjects}>
-        <Heading size="lg">
-          There are currently no projects looking for funding.
-        </Heading>
-        <br />
-        <Heading size="sm">
-          Why not start one by selecting Create Project in the upper left hand
-          corner?
-        </Heading>
-      </div>
+      <p className={styles.noProjects}>
+        There are currently no projects looking for funding. Why not start one
+        by selecting Create Project in the upper left hand corner?
+      </p>
     );
   }
 
   return (
     <div className={styles.container}>
+      <ProjectSearch />
       <SimpleGrid className={styles.grid} spacing="40px">
         {data.map((project) => {
           return (
             <ProjectCard
+              id={project.id}
               key={project.id}
               name={project.name}
               shortDescription={project.shortDescription}
