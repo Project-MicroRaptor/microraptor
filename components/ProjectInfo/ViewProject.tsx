@@ -9,6 +9,7 @@ import type { ProjectCategory } from "../../types/categories";
 import styles from './ViewProject.module.scss';
 
 export interface ProjectInfo {
+  key?: string;
   id?: string;
   name?: string;
   shortDescription?: string;
