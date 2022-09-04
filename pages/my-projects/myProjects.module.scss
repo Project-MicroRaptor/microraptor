@@ -6,8 +6,11 @@
   h1 {
     font-size: 2em;
   }
-  .createProject:hover {
+  .createProject {
     text-decoration: underline;
+  }
+  .createProject:hover {
+    color: var(--chakra-colors-brand-primary);
   }
 }
 

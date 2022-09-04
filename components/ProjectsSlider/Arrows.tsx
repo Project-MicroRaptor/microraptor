@@ -22,7 +22,7 @@ function Arrow({
         flexDirection: "column",
         justifyContent: "center",
         right: "1%",
-        opacity: disabled ? "0" : "1",
+        visibility: disabled ? "hidden" : "visible",
         userSelect: "none",
       }}
     >
