@@ -9,7 +9,6 @@ export default async function handler(
   if (req.query?.name) {
     query = {
       ...query,
-      active: true,
       name: {
         contains: req.query.name,
         mode: "insensitive",
@@ -19,6 +18,7 @@ export default async function handler(
 
   const projects = await prisma.project.findMany({
     where: {
+      active: true,
       ...query,
     },
     select: {

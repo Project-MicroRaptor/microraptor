@@ -30,28 +30,32 @@ type ProjectSearchProps = {
 export default function ProjectSearch(props: ProjectSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  function FeaturedOnClick() {
+  function onFeaturedClick() {
     props.setSelection(SearchType.Featured);
     props.setCategory(null);
     props.setSearch(null);
     if (inputRef.current != null) inputRef.current.value = "";
   }
 
-  function CategoryOnClick(category: string) {
+  function onCategoryClick(category: string) {
     props.setSelection(SearchType.Category);
     props.setCategory(category);
+    props.setSearch(null);
+    if (inputRef.current != null) inputRef.current.value = "";
   }
 
-  function PerformSearch() {
-    props.setSelection(SearchType.Search);
+  function performSearch() {
     if (inputRef.current != null) {
       props.setSearch(inputRef.current.value);
+      if (inputRef.current.value == "") props.setSelection(SearchType.Featured);
     }
   }
 
   // Delay by timeout while still typing before performing search.
   let timer: NodeJS.Timeout;
   function debounce(func: Function, timeout = 500) {
+    props.setSelection(SearchType.Search);
+    props.setCategory(null);
     if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
       func.apply(func);
@@ -64,7 +68,7 @@ export default function ProjectSearch(props: ProjectSearchProps) {
         {...(props.selectionState == SearchType.Featured
           ? {}
           : { variant: "outline" })}
-        onClick={FeaturedOnClick}
+        onClick={onFeaturedClick}
         _focus={{ boxShadow: "none" }}
       >
         Featured
@@ -95,7 +99,7 @@ export default function ProjectSearch(props: ProjectSearchProps) {
         >
           {Object.entries(ProjectCategories).map(([key, value]) => {
             return (
-              <MenuItem key={key} onClick={() => CategoryOnClick(value)}>
+              <MenuItem key={key} onClick={() => onCategoryClick(value)}>
                 {value}
               </MenuItem>
             );
@@ -137,14 +141,14 @@ export default function ProjectSearch(props: ProjectSearchProps) {
         <Input
           placeholder="Search by keyword..."
           ref={inputRef}
-          onChange={() => debounce(() => PerformSearch())}
+          onChange={() => debounce(() => performSearch())}
           _focus={{ boxShadow: "none" }}
         />
         <IconButton
           variant="outline"
           aria-label="Search Projects"
           icon={<BsSearch />}
-          onClick={PerformSearch}
+          onClick={performSearch}
           _focus={{ boxShadow: "none" }}
         />
       </HStack>
