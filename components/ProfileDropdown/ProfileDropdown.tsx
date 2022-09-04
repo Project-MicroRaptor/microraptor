@@ -2,10 +2,11 @@ import { useSession, signOut } from "next-auth/react";
 import { AiFillSetting, AiOutlineLogout, AiOutlineProject } from "react-icons/ai";
 import { MenuList, Avatar } from '@chakra-ui/react';
 import styles from './ProfileDropdown.module.scss';
+import Link from 'next/link';
 
 export default function ProfileDropdown() {
   const { data: session } = useSession();
-
+//TODO: Add immediate redirect to user's profile, rather than entering User ID. Waiting on Isaac's Your Profile PR
   if (!session) {
     return null;
   }
@@ -15,7 +16,9 @@ export default function ProfileDropdown() {
       <Avatar className={styles.sessionImage} src={session.user?.image ?? ""} size="md" border="2px solid grey" />
       <span className={styles.sessionName}>{session.user?.name}</span>
       <span className={styles.viewProfile}>
-        View Profile
+        <Link href="/profile">
+          <a>View Profile</a> 
+        </Link>
       </span>
       <div className={styles.divider}>
         <div className={styles.item}>
