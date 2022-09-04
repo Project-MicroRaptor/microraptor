@@ -30,7 +30,7 @@ export default function ProjectView() {
   const router = useRouter();
   const { id } = router.query;
   const { data, error } = useSWR<Projects>(`/api/project/${id}`, fetcher);
-
+  console.log(data);
   if (error)
     return (
       <>
