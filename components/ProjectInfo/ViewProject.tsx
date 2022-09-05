@@ -151,7 +151,7 @@ export default function ViewProject(props: ProjectInfo) {
 
                 {props.rewards.map((reward: ProjectRewards, i) => {
                   return (
-                    <span key={reward.id}>
+                    <span key={reward.name}>
                       <p className={styles.tier}><b>Reward Tier {i + 1}</b> - {reward.name}
                         <div>
                           Contribute ${reward.cost} or more and receive the following:
