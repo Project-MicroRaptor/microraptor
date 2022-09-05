@@ -1,8 +1,15 @@
+import { useSession } from "next-auth/react";
 import styles from "./SettingsTabs.module.scss";
 import { Image, Textarea, Box, Center, Button } from "@chakra-ui/react";
 import { BsUpload } from "react-icons/bs";
 
 export default function ProfileSettings() {
+  const { data: session } = useSession();
+
+  if (!session) {
+    return null;
+  }
+
   return (
     <div className={styles.containertitle}>
       <h1 className={styles.accounttitle}>Profile</h1>
@@ -14,8 +21,8 @@ export default function ProfileSettings() {
           <Image
             borderRadius="full"
             boxSize="250px"
-            src="https://bit.ly/dan-abramov"
-            alt="Dan Abramov"
+            src={session.user?.image ?? ""}
+            alt=""
           />
         </Center>
       </Box>
@@ -43,7 +50,6 @@ export default function ProfileSettings() {
         textAlign="center"
         placeholder="Tell us about yourself...."
         size="md"
-        // backgroundColor="LightGray"
         height="150px"
       />
     </div>

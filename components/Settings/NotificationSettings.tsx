@@ -14,7 +14,7 @@ export default function NotificationSettings() {
             </Box>
             <Spacer />
             <Box>
-              <Switch className={styles.switch} colorScheme="teal" size="md" />
+              <Switch className={styles.switch} colorScheme="brand" size="md" />
             </Box>
           </Flex>
           <p className={styles.accountsubfields}>
@@ -29,7 +29,7 @@ export default function NotificationSettings() {
             </Box>
             <Spacer />
             <Box>
-              <Switch className={styles.switch} colorScheme="teal" size="md" />
+              <Switch className={styles.switch} colorScheme="brand" size="md" />
             </Box>
           </Flex>
           <p className={styles.accountsubfields}>

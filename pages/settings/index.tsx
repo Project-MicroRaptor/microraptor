@@ -5,12 +5,10 @@ import { Flex, Box } from "@chakra-ui/react";
 import SettingsMenu from "../../components/Settings/SettingsMenu";
 import PagePicker from "../../components/Settings/PagePicker";
 import { useState } from "react";
+import { Pages } from "../../components/Settings/SettingsMenu";
 
-const Settings: AuthNextPage = (props) => {
-  const [pageName, setPageName] = useState(0);
-  const getPage = (pageName: any) => {
-    setPageName(pageName);
-  };
+const Settings: AuthNextPage = () => {
+  const [pageName, setPageName] = useState(Pages.AccountSettings);
 
   return (
     <>
@@ -25,7 +23,7 @@ const Settings: AuthNextPage = (props) => {
         <div>
           <Flex flexWrap={"wrap"}>
             <Box>
-              <SettingsMenu onPageClick={getPage} />
+              <SettingsMenu onPageClick={(page) => setPageName(page)} />
             </Box>
             <Box width="1000px">
               <PagePicker pageName={pageName} />

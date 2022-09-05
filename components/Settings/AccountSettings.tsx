@@ -1,3 +1,4 @@
+import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import styles from "./SettingsTabs.module.scss";
 
 export default function AccountSettings() {
@@ -7,50 +8,64 @@ export default function AccountSettings() {
       <hr className={styles.accountdivider} />
       <div className={styles.formbox}>
         <div className={styles.forminputbox}>
-          <form>
+          <FormControl>
             <div className={styles.accbox}>
-              <label className={styles.inputlabel}>Name</label>
-              <input
+              <FormLabel className={styles.inputlabel}>Name</FormLabel>
+              <Input
                 className={styles.inputbox}
                 type="text"
-                placeholder="name"
-              ></input>
-              <button className={styles.inputbutton}>Edit</button>
+                placeholder="Name"
+                variant="settings"
+              />
+              <Button className={styles.inputbutton} variant="settings">
+                Edit
+              </Button>
             </div>
             <hr />
             <div className={styles.accbox}>
-              <label className={styles.inputlabel}>Email</label>
-              <input
+              <FormLabel className={styles.inputlabel}>Email</FormLabel>
+              <Input
                 className={styles.inputbox}
                 type="text"
-                placeholder="email"
-              ></input>
-              <button className={styles.inputbutton}>Edit</button>
+                placeholder="Email"
+                variant="settings"
+              />
+              <Button className={styles.inputbutton} variant="settings">
+                Edit
+              </Button>
             </div>
             <hr />
             <div className={styles.accbox}>
-              <label className={styles.inputlabel}>Change Password</label>
-              <input
+              <FormLabel className={styles.inputlabel}>
+                Change Password
+              </FormLabel>
+              <Input
                 className={styles.inputbox}
                 type="text"
                 placeholder="********"
-              ></input>
-              <button className={styles.inputbutton}>Edit</button>
+                variant="settings"
+              />
+              <Button className={styles.inputbutton} variant="settings">
+                Edit
+              </Button>
             </div>
             <hr />
             <div className={styles.accbox}>
-              <label className={styles.inputlabel}>Address</label>
-              <input
+              <FormLabel className={styles.inputlabel}>Address</FormLabel>
+              <Input
                 className={styles.inputbox}
                 type="text"
-                placeholder="address"
-              ></input>
-              <button className={styles.inputbutton}>Edit</button>
+                placeholder="Address"
+                variant="settings"
+              />
+              <Button className={styles.inputbutton} variant="settings">
+                Edit
+              </Button>
             </div>
             <div className={styles.savebox}>
-              <button className={styles.savebutton}>Save</button>
+              <Button className={styles.savebutton}>Save</Button>
             </div>
-          </form>
+          </FormControl>
         </div>
       </div>
     </div>

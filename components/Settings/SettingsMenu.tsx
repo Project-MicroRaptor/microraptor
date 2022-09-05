@@ -13,7 +13,7 @@ export interface SettingsTabProps {
   onPageClick: (pageName: Pages) => void;
 }
 
-export default function SettingsTab(props: any) {
+export default function SettingsTab(props: SettingsTabProps) {
   return (
     <div className={styles.container}>
       <div className={styles.title}>Settings</div>

@@ -1,4 +1,21 @@
 const InputStyles = {
+  variants: {
+    settings: {
+      field: {
+        color: "white",
+        borderColor: "white",
+        width: "75%",
+        _hover: {
+          border: "2px",
+          color: "brand.primary",
+        },
+        _focus: {
+          border: "2px",
+          color: "brand.primary",
+        }
+      },
+    },
+  },
   baseStyle: {
     field: {
       width: "100%",

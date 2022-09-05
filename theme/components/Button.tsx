@@ -10,6 +10,15 @@ const ButtonStyles = {
         },
       },
     },
+    settings: {
+      width: "20%",
+      bg: "white",
+      color: "brand.primary",
+      _hover: {
+        bg: "brand.primary",
+        color: "white",
+      },
+    },
   },
   defaultProps: {
     variant: "base",
