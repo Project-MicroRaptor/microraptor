@@ -7,6 +7,7 @@ import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
 
 import styles from './ViewProject.module.scss';
+import { ProjectRewards } from '../../types/project';
 
 export interface ProjectInfo {
   id?: string;
@@ -22,7 +23,7 @@ export interface ProjectInfo {
   aboutBusiness?: string;
   aboutOwner?: string;
   businessPlan?: string;
-  rewards?: any[];
+  rewards?: Array<ProjectRewards>;
 }
 
 export default function ViewProject(props: ProjectInfo) {
@@ -111,10 +112,10 @@ export default function ViewProject(props: ProjectInfo) {
       <div className={styles.campaignWrapper}>
         <div className={styles.leftNav}>
           <div className={styles.left}>
-            {props.aboutBusiness && <a href="#section1">About the Business</a>}
-            {props.aboutOwner && <a href="#section2">About the Owner</a>}
-            {props.businessPlan && <a href="#section3">Business Plan</a>}
-            {props.rewards && props.rewards.length > 0 && <a href="#section4">Rewards</a>}
+            {props.aboutBusiness && <a href="#aboutBusiness">About the Business</a>}
+            {props.aboutOwner && <a href="#aboutOwner">About the Owner</a>}
+            {props.businessPlan && <a href="#businessPlan">Business Plan</a>}
+            {props.rewards && props.rewards.length > 0 && <a href="#rewards">Rewards</a>}
           </div>
         </div>
 
@@ -122,35 +123,35 @@ export default function ViewProject(props: ProjectInfo) {
           <div className={styles.right}>
             {props.aboutBusiness && (
               <>
-                <p id="section1">About the Business</p>
+                <p id="aboutBusiness">About the Business</p>
                 <span>{props.aboutBusiness}</span>
               </>
             )}
 
             {props.aboutOwner && (
               <>
-                <p id="section2">About the Owner</p>
+                <p id="aboutOwner">About the Owner</p>
                 <span>{props.aboutOwner}</span>
               </>
             )}
 
             {props.businessPlan && (
               <>
-                <p id="section3">Business Plan</p>
+                <p id="businessPlan">Business Plan</p>
                 <span>{props.businessPlan}</span>
               </>
             )}
 
             {props.rewards && props.rewards.length > 0 && (
               <div className={styles.rewardButton}>
-                <p id="section4">Rewards</p>
+                <p id="rewards">Rewards</p>
                 <span>
                   <p className={styles.topTier}>Contribute without a reward</p>
                 </span>
 
-                {props.rewards.map((reward, i) => {
+                {props.rewards.map((reward: ProjectRewards, i) => {
                   return (
-                    <span key={reward.id}>
+                    <span>
                       <p className={styles.tier}><b>Reward Tier {i + 1}</b> - {reward.name}
                         <div>
                           Contribute ${reward.cost} or more and receive the following:
