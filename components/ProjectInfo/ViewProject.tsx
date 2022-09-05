@@ -1,4 +1,4 @@
-import { Center, Progress, Grid, GridItem } from '@chakra-ui/react';
+import { Center, Progress } from '@chakra-ui/react';
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { Button } from "@chakra-ui/react";
@@ -60,7 +60,7 @@ export default function ViewProject(props: ProjectInfo) {
   }
 
   return (
-    <div className={styles.projectContainer} key={props.id}>
+    <div className={styles.projectContainer}>
       <span className={styles.name}>
         <Center>{name}</Center>
       </span>
@@ -148,9 +148,9 @@ export default function ViewProject(props: ProjectInfo) {
                 </span>
 
                 {props.rewards.map((reward, i) => {
-                  console.log(props.rewards)
+
                   return (
-                    <span>
+                    <span key={reward.id}>
                       <p className={styles.tier}><b>Reward Tier {i + 1}</b> - {reward.name}
                         <div>
                           Contribute ${reward.cost} or more and receive the following:
