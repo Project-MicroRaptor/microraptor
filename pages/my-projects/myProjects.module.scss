@@ -7,10 +7,10 @@
     font-size: 2em;
   }
   .createProject {
-    text-decoration: underline;
+    color: var(--chakra-colors-brand-primary);
   }
   .createProject:hover {
-    color: var(--chakra-colors-brand-primary);
+    text-decoration: underline;
   }
 }
 
