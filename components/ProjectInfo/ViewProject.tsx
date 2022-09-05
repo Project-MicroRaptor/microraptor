@@ -79,27 +79,25 @@ export default function ViewProject(props: ProjectInfo) {
           </div>
         </div>
 
-        <div className={styles.gridRight}>
-          <div className={styles.progressContainer}>
-            <Progress
-              value={(currentFunding / targetFunding) * 100}
-              size="sm"
-              borderStartRadius={30}
-              borderEndRadius={30}
-              className={styles.progressBar}
-            />
-            <span className={styles.fundingText}>
-              <p>
-                <span className={styles.current}> ${currentFunding?.toLocaleString()}</span> pledged of ${targetFunding?.toLocaleString()} goal
-              </p>
-            </span>
-            <span className={styles.backersAmount}>
-              <p>{backers} backers</p>
-            </span>
-            <span className={styles.daysAmount}>
-              <p>{daysRemaining()} days to go</p>
-            </span>
-          </div>
+        <div className={styles.progressContainer}>
+          <Progress
+            value={(currentFunding / targetFunding) * 100}
+            size="sm"
+            borderStartRadius={30}
+            borderEndRadius={30}
+            className={styles.progressBar}
+          />
+          <span className={styles.fundingText}>
+            <p>
+              <span className={styles.current}> ${currentFunding?.toLocaleString()}</span> pledged of ${targetFunding?.toLocaleString()} goal
+            </p>
+          </span>
+          <span className={styles.backersAmount}>
+            <p>{backers} backers</p>
+          </span>
+          <span className={styles.daysAmount}>
+            <p>{daysRemaining()} days to go</p>
+          </span>
         </div>
       </div>
 
