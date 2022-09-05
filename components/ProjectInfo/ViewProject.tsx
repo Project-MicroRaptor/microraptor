@@ -107,6 +107,7 @@ export default function ViewProject(props: ProjectInfo) {
         <Button width="250px" borderRadius={4} fontSize={16} disabled>Fund this Project</Button>
         <Button width="250px" borderRadius={4} fontSize={16} disabled>Enquire about Project</Button>
       </div>
+
       <div className={styles.campaignWrapper}>
         <div className={styles.leftNav}>
           <div className={styles.left}>

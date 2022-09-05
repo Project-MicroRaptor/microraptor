@@ -174,40 +174,40 @@
 }
 
 @media only screen and (min-width: 841px) {
-  .projectImage {
-    display: grid;
-    width: 490px;
-  }
-
   .productWrapper {
     align-items: center;
+
+    .categoriesItem {
+      margin-top: 10px;
+      margin-right: 10%;
+    }
+
+    .projectImage {
+      display: grid;
+      width: 490px;
+    }
+
+    .progressContainer {
+      margin-left: 20px;
+    }
   }
 
   .projectContainer {
     padding: 0 40px;
-  }
 
-  .progressContainer {
-    margin-left: 20px;
-  }
+    .buttons {
+      justify-content: center;
+      gap: 20px;
+    }
 
-  .categoriesItem {
-    margin-top: 10px;
-    margin-right: 10%;
-  }
+    .leftNav {
+      text-align: center;
+      margin-top: 30px;
+    }
 
-  .buttons {
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .leftNav {
-    text-align: center;
-    margin-top: 30px;
-  }
-
-  .rightNav {
-    margin-top: 0;
+    .rightNav {
+      margin-top: 0;
+    }
   }
 }
 
