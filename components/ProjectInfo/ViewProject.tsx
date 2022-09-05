@@ -148,7 +148,6 @@ export default function ViewProject(props: ProjectInfo) {
                 </span>
 
                 {props.rewards.map((reward, i) => {
-
                   return (
                     <span key={reward.id}>
                       <p className={styles.tier}><b>Reward Tier {i + 1}</b> - {reward.name}
