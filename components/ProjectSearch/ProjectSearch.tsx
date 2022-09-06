@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   HStack,
   Button,
@@ -10,50 +9,80 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
-
 import { ProjectCategories } from "../../types/categories";
 import { RadiusDistances } from "../../types/radiusDistances";
 import { SearchType } from "../../types/search";
+import React, { useRef } from "react";
 
 import styles from "./ProjectSearch.module.scss";
 
-export default function ProjectSearch() {
-  const [selectionState, setSelection] = useState(SearchType.Featured);
-  const [categoryState, setCategory] = useState<string | null>(null);
-  const [distanceState, setDistance] = useState<number | null>(null);
+type ProjectSearchProps = {
+  selectionState: SearchType;
+  setSelection: React.Dispatch<React.SetStateAction<SearchType>>;
+  categoryState: string | null;
+  setCategory: React.Dispatch<React.SetStateAction<string | null>>;
+  distanceState: number | null;
+  setDistance: React.Dispatch<React.SetStateAction<number | null>>;
+  searchState: string | null;
+  setSearch: React.Dispatch<React.SetStateAction<string | null>>;
+};
 
-  function FeaturedOnClick() {
-    setSelection(SearchType.Featured);
-    setCategory(null);
+export default function ProjectSearch(props: ProjectSearchProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  function onFeaturedClick() {
+    props.setSelection(SearchType.Featured);
+    props.setCategory(null);
+    props.setSearch(null);
+    if (inputRef.current != null) inputRef.current.value = "";
   }
 
-  function CategoryOnClick(category: string) {
-    setSelection(SearchType.Category);
-    setCategory(category);
+  function onCategoryClick(category: string) {
+    props.setSelection(SearchType.Category);
+    props.setCategory(category);
+    props.setSearch(null);
+    if (inputRef.current != null) inputRef.current.value = "";
   }
 
-  function SearchOnClick() {
-    setSelection(SearchType.Search);
+  function performSearch() {
+    if (inputRef.current != null) {
+      props.setSearch(inputRef.current.value);
+      if (inputRef.current.value == "") props.setSelection(SearchType.Featured);
+    }
+  }
+
+  // Delay by timeout while still typing before performing search.
+  let timer: NodeJS.Timeout;
+  function debounce(func: Function, timeout = 500) {
+    props.setSelection(SearchType.Search);
+    props.setCategory(null);
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(func);
+    }, timeout);
   }
 
   return (
     <div className={styles.container}>
       <Button
-        {...(selectionState == SearchType.Featured
+        {...(props.selectionState == SearchType.Featured
           ? {}
           : { variant: "outline" })}
-        onClick={FeaturedOnClick}
+        onClick={onFeaturedClick}
+        _focus={{ boxShadow: "none" }}
       >
         Featured
       </Button>
+
       <Menu>
         <MenuButton
-          {...(selectionState == SearchType.Category
+          {...(props.selectionState == SearchType.Category
             ? {}
             : { variant: "outline" })}
           as={Button}
+          _focus={{ boxShadow: "none" }}
         >
-          {categoryState == null ? "All Categories" : categoryState}
+          {props.categoryState == null ? "All Categories" : props.categoryState}
         </MenuButton>
         <MenuList
           sx={{
@@ -70,7 +99,7 @@ export default function ProjectSearch() {
         >
           {Object.entries(ProjectCategories).map(([key, value]) => {
             return (
-              <MenuItem key={key} onClick={() => CategoryOnClick(value)}>
+              <MenuItem key={key} onClick={() => onCategoryClick(value)}>
                 {value}
               </MenuItem>
             );
@@ -79,21 +108,27 @@ export default function ProjectSearch() {
       </Menu>
 
       <HStack className={styles.areaContainer}>
-        <Button variant="outline" disabled>
+        <Button variant="outline" disabled _focus={{ boxShadow: "none" }}>
           All Locations
         </Button>
 
         <Menu>
-          <MenuButton variant="outline" as={Button}>
-            {distanceState == null
+          <MenuButton
+            variant="outline"
+            as={Button}
+            _focus={{ boxShadow: "none" }}
+          >
+            {props.distanceState == null
               ? "Any Distance"
-              : "< " + distanceState + "km"}
+              : "< " + props.distanceState + "km"}
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => setDistance(null)}>Any Distance</MenuItem>
+            <MenuItem onClick={() => props.setDistance(null)}>
+              Any Distance
+            </MenuItem>
             {Object.entries(RadiusDistances).map(([key, value]) => {
               return (
-                <MenuItem key={key} onClick={() => setDistance(value)}>
+                <MenuItem key={key} onClick={() => props.setDistance(value)}>
                   {key}
                 </MenuItem>
               );
@@ -103,11 +138,18 @@ export default function ProjectSearch() {
       </HStack>
 
       <HStack className={styles.searchContainer}>
-        <Input placeholder="Search by keyword..." />
+        <Input
+          placeholder="Search by keyword..."
+          ref={inputRef}
+          onChange={() => debounce(() => performSearch())}
+          _focus={{ boxShadow: "none" }}
+        />
         <IconButton
           variant="outline"
           aria-label="Search Projects"
-          icon={<BsSearch onClick={SearchOnClick} />}
+          icon={<BsSearch />}
+          onClick={performSearch}
+          _focus={{ boxShadow: "none" }}
         />
       </HStack>
     </div>
