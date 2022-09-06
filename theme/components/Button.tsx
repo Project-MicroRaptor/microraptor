@@ -19,6 +19,14 @@ const ButtonStyles = {
         color: "white",
       },
     },
+    settingsMenu: {
+      bg: "white",
+      color: "black",
+      _hover: {
+        bg: "brand.primary",
+        color: "white",
+      },
+    },
   },
   defaultProps: {
     variant: "base",

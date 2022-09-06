@@ -11,7 +11,7 @@ const Settings: AuthNextPage = () => {
   const [pageName, setPageName] = useState(Pages.AccountSettings);
 
   return (
-    <>
+    <div>
       <Head>
         <title>MicroRaptor - Settings</title>
         <meta name="description" content="Settings" />
@@ -31,7 +31,7 @@ const Settings: AuthNextPage = () => {
           </Flex>
         </div>
       </div>
-    </>
+      </div>
   );
 };
 

@@ -3,21 +3,21 @@ import { Switch, Box, Flex, Spacer } from "@chakra-ui/react";
 
 export default function NotificationSettings() {
   return (
-    <div className={styles.containertitle}>
-      <h1 className={styles.accounttitle}>Notification Settings</h1>
-      <hr className={styles.accountdivider} />
+    <div className={styles.containerTitle}>
+      <h1 className={styles.accountTitle}>Notification Settings</h1>
+      <hr className={styles.accountDivider} />
       <Box>
         <Box>
           <Flex>
             <Box>
-              <p className={styles.accountfields}>Project Updates</p>
+              <p className={styles.accountFields}>Project Updates</p>
             </Box>
             <Spacer />
             <Box>
               <Switch className={styles.switch} colorScheme="brand" size="md" />
             </Box>
           </Flex>
-          <p className={styles.accountsubfields}>
+          <p className={styles.accountSubFields}>
             Receive emails about popular projects
           </p>
         </Box>
@@ -25,14 +25,14 @@ export default function NotificationSettings() {
         <Box>
           <Flex>
             <Box>
-              <p className={styles.accountfields}>Message Enquires</p>
+              <p className={styles.accountFields}>Message Enquires</p>
             </Box>
             <Spacer />
             <Box>
               <Switch className={styles.switch} colorScheme="brand" size="md" />
             </Box>
           </Flex>
-          <p className={styles.accountsubfields}>
+          <p className={styles.accountSubFields}>
             Receive emails for enquiries
           </p>
         </Box>

@@ -3,67 +3,67 @@ import styles from "./SettingsTabs.module.scss";
 
 export default function AccountSettings() {
   return (
-    <div className={styles.containertitle}>
-      <h1 className={styles.accounttitle}>Account Settings</h1>
-      <hr className={styles.accountdivider} />
-      <div className={styles.formbox}>
-        <div className={styles.forminputbox}>
+    <div className={styles.containerTitle}>
+      <h1 className={styles.accountTitle}>Account Settings</h1>
+      <hr className={styles.accountDivider} />
+      <div className={styles.formBox}>
+        <div className={styles.formInputBox}>
           <FormControl>
-            <div className={styles.accbox}>
-              <FormLabel className={styles.inputlabel}>Name</FormLabel>
+            <div className={styles.accBox}>
+              <FormLabel className={styles.inputLabel}>Name</FormLabel>
               <Input
-                className={styles.inputbox}
+                className={styles.inputBox}
                 type="text"
                 placeholder="Name"
                 variant="settings"
               />
-              <Button className={styles.inputbutton} variant="settings">
+              <Button className={styles.inputButton} variant="settings">
                 Edit
               </Button>
             </div>
             <hr />
-            <div className={styles.accbox}>
-              <FormLabel className={styles.inputlabel}>Email</FormLabel>
+            <div className={styles.accBox}>
+              <FormLabel className={styles.inputLabel}>Email</FormLabel>
               <Input
-                className={styles.inputbox}
+                className={styles.inputBox}
                 type="text"
                 placeholder="Email"
                 variant="settings"
               />
-              <Button className={styles.inputbutton} variant="settings">
+              <Button className={styles.inputButton} variant="settings">
                 Edit
               </Button>
             </div>
             <hr />
-            <div className={styles.accbox}>
-              <FormLabel className={styles.inputlabel}>
+            <div className={styles.accBox}>
+              <FormLabel className={styles.inputLabel}>
                 Change Password
               </FormLabel>
               <Input
-                className={styles.inputbox}
+                className={styles.inputBox}
                 type="text"
                 placeholder="********"
                 variant="settings"
               />
-              <Button className={styles.inputbutton} variant="settings">
+              <Button className={styles.inputButton} variant="settings">
                 Edit
               </Button>
             </div>
             <hr />
-            <div className={styles.accbox}>
-              <FormLabel className={styles.inputlabel}>Address</FormLabel>
+            <div className={styles.accBox}>
+              <FormLabel className={styles.inputLabel}>Address</FormLabel>
               <Input
-                className={styles.inputbox}
+                className={styles.inputBox}
                 type="text"
                 placeholder="Address"
                 variant="settings"
               />
-              <Button className={styles.inputbutton} variant="settings">
+              <Button className={styles.inputButton} variant="settings">
                 Edit
               </Button>
             </div>
-            <div className={styles.savebox}>
-              <Button className={styles.savebutton}>Save</Button>
+            <div className={styles.saveBox}>
+              <Button className={styles.saveButton}>Save</Button>
             </div>
           </FormControl>
         </div>

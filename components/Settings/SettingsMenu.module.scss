@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  height: 700px;
+  height: 94vh;
   padding: 20px;
   border-right: 3px solid rgb(236, 233, 233);
   font-family: "Inter", sans-serif;
@@ -13,7 +13,7 @@
   padding-bottom: 16px;
 }
 
-.flexcontainer {
+.flexContainer {
   display: flex;
   flex-direction: column;
 }
@@ -24,11 +24,12 @@
   height: 42px;
   color: black;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
   border-radius: 7px;
   flex-direction: row;
   display: flex;
-  align-items: center;
+  align-items: left;
+  margin: 1px 1px 15px 1px;
 
   &:hover {
     background-color: var(--chakra-colors-brand-primary);
@@ -38,7 +39,7 @@
 
 .icn {
   font-size: 22px;
-  text-align: center;
+  text-align: left;
   padding: 0px 8px 0px 10px;
 }
 
@@ -54,7 +55,7 @@
     padding-bottom: 5px;
   }
 
-  .flexcontainer {
+  .flexContainer {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -64,7 +65,7 @@
 
   .btn {
     font-size: 14px;
-    width: 120px;
+    width: 150px;
     height: 42px;
   }
 
@@ -74,12 +75,15 @@
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 470px) {
   .container {
     height: 175px;
   }
 
-  .flexcontainer {
+  .flexContainer {
     flex-direction: column;
+  }
+  .btn {
+    margin-bottom:0px;
   }
 }

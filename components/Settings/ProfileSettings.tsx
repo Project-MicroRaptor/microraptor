@@ -11,12 +11,12 @@ export default function ProfileSettings() {
   }
 
   return (
-    <div className={styles.containertitle}>
-      <h1 className={styles.accounttitle}>Profile</h1>
-      <hr className={styles.accountdivider} />
-      <p className={styles.accountfields}>Profile Picture</p>
+    <div className={styles.containerTitle}>
+      <h1 className={styles.accountTitle}>Profile</h1>
+      <hr className={styles.accountDivider} />
+      <p className={styles.accountFields}>Profile Picture</p>
 
-      <Box className={styles.profilebox}>
+      <Box className={styles.profileBox}>
         <Center alignContent="center" justifyContent="center">
           <Image
             borderRadius="full"
@@ -26,10 +26,10 @@ export default function ProfileSettings() {
           />
         </Center>
       </Box>
-      <Box className={styles.profilebox}>
+      <Box className={styles.profileBox}>
         <Center>
           <Button
-            className={styles.uploadbutton}
+            className={styles.uploadButton}
             width="100px"
             justifyContent="center"
             leftIcon={<BsUpload />}
@@ -45,7 +45,7 @@ export default function ProfileSettings() {
         </Center>
       </Box>
 
-      <p className={styles.accountfields}>BIO</p>
+      <p className={styles.accountFields}>BIO</p>
       <Textarea
         textAlign="center"
         placeholder="Tell us about yourself...."
