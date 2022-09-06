@@ -26,7 +26,8 @@ export default function ProjectBrowser() {
   // API Route -- Retrieve Projects
   var queryString = "/api/projects?";
   if (searchState) queryString += new URLSearchParams({ name: searchState });
-  if (categoryState != null) queryString += new URLSearchParams({ category: categoryState.toString() });
+  if (categoryState != null)
+    queryString += new URLSearchParams({ category: categoryState.toString() });
   var { data, error } = useSWR<Projects>(queryString, fetcher);
 
   function displayProjects() {
