@@ -74,11 +74,13 @@
     display: grid;
     gap: 20px;
 
-    &:hover {
+    a:hover {
       cursor: pointer;
+      color: var(--chakra-colors-brand-primary);
     }
   }
 }
+
 
 .rightNav {
   flex: 1;
@@ -95,12 +97,15 @@
       text-align: justify;
       display: block;
       margin-top: 10px;
+      white-space: pre-wrap;
     }
   }
 
   &:hover {
-    a {
-      cursor: pointer;
+
+    p,
+    span {
+      cursor: default;
     }
   }
 }
