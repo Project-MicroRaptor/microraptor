@@ -143,10 +143,6 @@ export default function ViewProject(props: ProjectInfo) {
             {props.rewards && props.rewards.length > 0 && (
               <div className={styles.rewardButton}>
                 <p id="rewards">Rewards</p>
-                <span>
-                  <p className={styles.topTier}>Contribute without a reward</p>
-                </span>
-
                 {props.rewards.map((reward: ProjectRewards, i) => {
                   return (
                     <span key={i}>
