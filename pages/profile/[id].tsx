@@ -13,8 +13,6 @@ type Profile = {
   id: string;
   name: string;
   bio: string;
-  age: number;
-  location: string;
   image: string;
 };
 
@@ -55,8 +53,6 @@ export default function ProfileView() {
       <ViewProfile
         name={data.name}
         bio={data.bio}
-        age={data.age}
-        location={data.location}
         image={data.image}
       />
     </div>

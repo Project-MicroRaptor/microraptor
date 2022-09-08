@@ -7,91 +7,40 @@
 
 
 .profileContainer {
-  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  text-align: center;
+  overflow: hidden;
+}
+
+.profileName 
+{
+  padding-top: 20px;
+  text-align: center;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.profileName:hover{
+  overflow: visible;
 }
 
 .profileImage {
-  margin-top: 5px;
-  float: left;
+  padding-top: 25px;
 }
-
-.profileName {
-  text-align: left;
-  float: left;
-  padding: 5px;
-}
-
 
 .profileBio {
-  h3 {
-    margin-top: 10px;
-    padding-top: 15px;
-    position: absolute;
-    top: 50px;
-    left: 700px;
-    float: right;
-    text-align: right;
-    font-size: x-large;
-    font-weight: bold;
-    padding: 10px;
-  }
-
-  p {
-    padding-right: 5px;
-    padding-top: 10px;
-    position: absolute;
-    top: 100px;
-    left: 710px;
-    float: right;
-    text-align: left;
-  }
-}
-
-.profileLocation,
-.profileAge {
-
-  h1,
   h2 {
-    text-align: left;
-    float: center;
-    font-size: medium;
-    padding: 5px;
-    overflow: hidden;
-    white-space: nowrap;
     font-weight: bold;
-    display: inline;
+    font-size: x-large;
+    padding-top: 15px;
   }
-
   p {
-    text-align: left;
-    float: center;
-    display: inline;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .profileContainer {
-    width: 100%;
-
-    .profileBio {
-
-      h3 {
-        position: fixed;
-        text-align: center;
-        left: 200px;
-        top: 200px;
-        width: 20%;
-        padding-top: 20px
-      }
-
-      p {
-        position: fixed;
-        left: 30px;
-        top: 250px;
-        width: 90%;
-        text-align: justify;
-        padding-top: 20px;
-      }
-    }
+    text-align: justify;
+    padding-top: 5px;
+    padding: 10px;
   }
 }

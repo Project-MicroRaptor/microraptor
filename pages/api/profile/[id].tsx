@@ -16,8 +16,6 @@ export default async function handler(
                 id: true,
                 name: true,
                 bio: true,
-                age: true,
-                location: true,
                 image: true,
             },
         });
