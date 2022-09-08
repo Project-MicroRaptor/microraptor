@@ -1,7 +1,7 @@
 import Head from "next/head";
 import type { AuthNextPage } from "../../types/appProps";
 import NavBar from "../../components/NavBar/NavBar";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Divider, Hide } from "@chakra-ui/react";
 import SettingsMenu from "../../components/Settings/SettingsMenu";
 import PagePicker from "../../components/Settings/PagePicker";
 import { useState } from "react";
@@ -21,17 +21,25 @@ const Settings: AuthNextPage = () => {
       <div>
         <NavBar />
         <div>
-          <Flex flexWrap={"wrap"}>
+          <Flex flexWrap={"wrap"} height="100%">
             <Box>
               <SettingsMenu onPageClick={(page) => setPageName(page)} />
             </Box>
-            <Box width="1000px">
+            <Hide breakpoint="(max-width: 860px)">
+              <Divider
+                orientation="vertical"
+                height="auto"
+                color="rgb(236, 233, 233)"
+                borderLeftWidth="3px"
+              />
+            </Hide>
+            <Box flexGrow={1}>
               <PagePicker pageName={pageName} />
             </Box>
           </Flex>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 
