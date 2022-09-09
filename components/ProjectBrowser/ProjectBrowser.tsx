@@ -1,5 +1,6 @@
 import ProjectSearch from "../ProjectSearch/ProjectSearch";
 import ProjectCard from "../ProjectCard/ProjectCard";
+import { ProjectCategories, ProjectCategory } from "../../types/categories";
 import { SimpleGrid, Spinner, Heading, Link } from "@chakra-ui/react";
 import { useState } from "react";
 import useSWR from "swr";
@@ -26,6 +27,11 @@ export default function ProjectBrowser() {
   // API Route -- Retrieve Projects
   var queryString = "/api/projects?";
   if (searchState) queryString += new URLSearchParams({ name: searchState });
+  if (categoryState != null) {
+    var categoryKey = Object.keys(ProjectCategories).find((key) => ProjectCategories[key as keyof ProjectCategory] == categoryState);
+    if (categoryKey != null) queryString += new URLSearchParams({ category: categoryKey });
+  }
+    
   var { data, error } = useSWR<Projects>(queryString, fetcher);
 
   function displayProjects() {

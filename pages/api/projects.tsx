@@ -5,6 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // Retrieve all projects matching user input.
   let query = {};
   if (req.query?.name) {
     query = {
@@ -16,6 +17,17 @@ export default async function handler(
     };
   }
 
+  // Retrieve all projects within given category.
+  if (req.query?.category) {
+    query = {
+      ...query,
+      categories: {
+        has: req.query.category,
+      },
+    };
+  }
+
+  // Retrieve all active projects, filter by API Request parameters.
   const projects = await prisma.project.findMany({
     where: {
       active: true,
@@ -30,5 +42,13 @@ export default async function handler(
       targetFunding: true,
     },
   });
+
+  // Sort projects based on percentage funded - descending.
+  projects.sort(
+    (a, b) =>
+      b.currentFunding / b.targetFunding - a.currentFunding / a.targetFunding
+  );
+
+  // Return projects in response.
   res.json(projects);
 }
