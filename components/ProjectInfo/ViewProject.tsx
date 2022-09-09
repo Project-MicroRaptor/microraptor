@@ -1,4 +1,4 @@
-import { Center, Progress } from '@chakra-ui/react';
+import { Center, Heading, Progress } from '@chakra-ui/react';
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { Button } from "@chakra-ui/react";
@@ -121,28 +121,28 @@ export default function ViewProject(props: ProjectInfo) {
           <div className={styles.right}>
             {props.aboutBusiness && (
               <>
-                <p id="aboutBusiness">About the Business</p>
+                <Heading id="aboutBusiness" size="md">About the Business</Heading>
                 <span>{props.aboutBusiness}</span>
               </>
             )}
 
             {props.aboutOwner && (
               <>
-                <p id="aboutOwner">About the Owner</p>
+                <Heading id="aboutOwner" size="md">About the Owner</Heading>
                 <span>{props.aboutOwner}</span>
               </>
             )}
 
             {props.businessPlan && (
               <>
-                <p id="businessPlan">Business Plan</p>
+                <Heading id="businessPlan" size="md">Business Plan</Heading>
                 <span>{props.businessPlan}</span>
               </>
             )}
 
             {props.rewards && props.rewards.length > 0 && (
               <div className={styles.rewardButton}>
-                <p id="rewards">Rewards</p>
+                <Heading id="rewards" size="md">Rewards</Heading>
                 {props.rewards.map((reward: ProjectRewards, i) => {
                   return (
                     <span key={i}>

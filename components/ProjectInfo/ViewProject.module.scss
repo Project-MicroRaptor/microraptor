@@ -103,13 +103,6 @@
 }
 
 .rewardButton {
-  .topTier {
-    border: 1px solid black;
-    border-radius: 15px;
-    padding: 20px;
-    font-weight: 400;
-  }
-
   .tier {
     border: 1px solid black;
     border-radius: 15px;
@@ -170,6 +163,10 @@
 
   .campaignWrapper {
     padding: 20px;
+
+    .left {
+      margin-bottom: 50px;
+    }
   }
 }
 
