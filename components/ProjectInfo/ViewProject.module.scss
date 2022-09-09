@@ -134,8 +134,11 @@
 
   .projectImage {
     display: grid;
-    width: 350px;
-    margin: auto;
+
+    img {
+      max-height: 350px;
+      width: 500px;
+    }
   }
 
   .categoriesItem {
@@ -182,7 +185,11 @@
 
     .projectImage {
       display: grid;
-      width: 490px;
+
+      img {
+        max-height: 370px;
+        width: 500px;
+      }
     }
 
     .progressContainer {
