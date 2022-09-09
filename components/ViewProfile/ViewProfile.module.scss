@@ -13,19 +13,17 @@
   flex-flow: column;
   text-align: center;
   overflow: hidden;
+  max-width: 1200px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin: auto;
 }
 
 .profileName 
 {
   padding-top: 20px;
-  text-align: center;
-  max-width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.profileName:hover{
-  overflow: visible;
+  max-width: 80%;
+  word-break: break-word;
 }
 
 .profileImage {
@@ -39,8 +37,18 @@
     padding-top: 15px;
   }
   p {
+    white-space: pre-wrap;
     text-align: justify;
     padding-top: 5px;
     padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .profileContainer {
+    display: flex;
+    flex-basis: 100%;
+    width: 370px;
+    flex-wrap: wrap;
   }
 }

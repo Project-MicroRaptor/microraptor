@@ -13,7 +13,6 @@ export default function ViewProfile(props: Profile) {
     const name = props?.name ?? "";
     const bio = props?.bio ?? "";
 
-
     return (
         <div className={styles.profileContainer}>
             <div className={styles.profileName}>
@@ -23,8 +22,8 @@ export default function ViewProfile(props: Profile) {
                 <Avatar src={props?.image ?? ""} size="2xl" border="2px solid grey" />
             </div>
             <div className={styles.profileBio}>
-                <h2> Bio: </h2>
-                <p> {bio} </p>
+                <h2>Bio:</h2>
+                <p>{bio}</p>
             </div>
         </div>
     )
