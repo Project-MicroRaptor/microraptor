@@ -16,7 +16,6 @@ const Home: NextPage = () => {
       <NavBar />
 
       <ProjectBrowser />
-      
     </div>
   );
 };

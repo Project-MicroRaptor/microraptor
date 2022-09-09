@@ -1,15 +1,6 @@
-import { Progress } from "@chakra-ui/react";
-
 import styles from "./ProjectCard.module.scss";
-
-export interface ProjectProps {
-  id: string;
-  name: string;
-  shortDescription: string;
-  image?: string;
-  currentFunding: number;
-  targetFunding: number;
-}
+import { Progress } from "@chakra-ui/react";
+import { ProjectProps } from "../../types/projectCardProps";
 
 export default function ProjectCard(props: ProjectProps) {
   return (
