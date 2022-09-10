@@ -61,9 +61,62 @@
 
 .buttons {
   margin-top: 50px;
-  margin: auto;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.leftNav {
+  margin-top: 3px;
+
+  .left {
+    font-weight: 500;
+    font-size: 16px;
+    display: grid;
+    gap: 20px;
+
+    a:hover {
+      cursor: pointer;
+      color: var(--chakra-colors-brand-primary);
+    }
+  }
+}
+
+.rightNav {
+  flex: 1;
+  margin-top: 30px;
+
+  .right {
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0 auto;
+
+    span {
+      margin-bottom: 20px;
+      font-size: 15px;
+      text-align: justify;
+      display: block;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+  }
+}
+
+.rewardButton {
+  .tier {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 20px;
+  }
+}
+
+.campaignWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.productWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 @media only screen and (max-width: 840px) {
@@ -73,8 +126,11 @@
 
   .projectImage {
     display: grid;
-    width: 350px;
-    margin: auto;
+
+    img {
+      max-height: 350px;
+      width: 500px;
+    }
   }
 
   .categoriesItem {
@@ -85,7 +141,6 @@
   }
 
   .gridLeft {
-    grid-column-start: 1;
     max-width: 368px;
     margin: 0 auto;
   }
@@ -102,36 +157,102 @@
     display: grid;
     row-gap: 20px;
     justify-content: center;
+    padding: 30px;
+  }
+
+  .campaignWrapper {
+    padding: 20px;
+
+    .left {
+      margin-bottom: 50px;
+    }
   }
 }
 
 @media only screen and (min-width: 841px) {
-  .projectImage {
-    display: grid;
-    width: 490px;
+  .productWrapper {
+    align-items: center;
+
+    .categoriesItem {
+      margin-top: 10px;
+      margin-right: 10%;
+      max-width: 530px;
+    }
+
+    .projectImage {
+      display: grid;
+
+      img {
+        max-height: 370px;
+        width: 500px;
+      }
+    }
+
+    .progressContainer {
+      margin-left: 20px;
+      text-align: center;
+    }
   }
 
-  .gridLeft {
-    grid-column-start: 5;
-    max-width: 460px;
+  .projectContainer {
+    padding: 0 40px;
+
+    .buttons {
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .leftNav {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .rightNav {
+      margin-top: 0;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .projectContainer {
+    padding: 0 100px;
   }
 
-  .gridRight {
-    grid-column-start: 8;
-    grid-column-end: 12;
-  }
-
-  .progressContainer {
-    margin-left: 20px;
-  }
-
-  .categoriesItem {
-    margin-top: 10px;
-    margin-right: 10%;
-  }
-
-  .buttons {
-    display: flex;
+  .campaignWrapper {
+    flex-direction: row;
     gap: 20px;
+    margin-top: 40px;
+
+    .leftNav {
+      text-align: left;
+      margin-top: 0;
+    }
+  }
+
+  .productWrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .progressContainer {
+      text-align: start;
+    }
+  }
+}
+
+@media only screen and (min-width: 1140px) {
+  .campaignWrapper {
+    gap: 100px;
+  }
+
+  .projectContainer {
+    width: 1107px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .projectContainer {
+    width: 1300px;
   }
 }
