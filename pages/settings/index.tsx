@@ -1,7 +1,7 @@
 import Head from "next/head";
 import type { AuthNextPage } from "../../types/appProps";
 import NavBar from "../../components/NavBar/NavBar";
-import { Flex, Box, Divider, Hide } from "@chakra-ui/react";
+import { Flex, Box, Divider, Hide, Show } from "@chakra-ui/react";
 import SettingsMenu from "../../components/Settings/SettingsMenu";
 import PagePicker from "../../components/Settings/PagePicker";
 import { useState } from "react";
@@ -25,7 +25,7 @@ const Settings: AuthNextPage = () => {
             <Box>
               <SettingsMenu onPageClick={(page) => setPageName(page)} />
             </Box>
-            <Hide breakpoint="(max-width: 860px)">
+            <Hide breakpoint={"(min-width:10px)" && "(max-width: 860px)"}>
               <Divider
                 orientation="vertical"
                 height="auto"
