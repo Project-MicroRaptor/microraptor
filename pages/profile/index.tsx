@@ -12,7 +12,7 @@ import styles from "./profile.module.scss";
 const MyProfile: AuthNextPage = (props) => {
 
   const { data, error } = useSWR<Profile>("/api/my-profile", fetcher);
-  
+
   if (error)
     return <Heading className={styles.error}> 404 | Page not found </Heading>;
 

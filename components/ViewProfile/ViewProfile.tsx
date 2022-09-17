@@ -12,7 +12,7 @@ export default function ViewProfile(props: Profile) {
     const name = props?.name ?? "";
     const bio = props?.bio ?? "";
 
-    //%pos; seems to be the only way to have an apostrophe without ESLint throwing an error
+    //&pos; seems to be the only way to have an apostrophe without ESLint throwing an error
     return (
         <div className={styles.profileContainer}>
             <div className={styles.profileName}>
