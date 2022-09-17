@@ -8,6 +8,7 @@ import NavBar from '../../components/NavBar/NavBar';
 
 import styles from './[id].module.scss';
 import type { Profile } from '../../types/profile';
+import Head from 'next/head';
 
 export default function ProfileView() {
   const router = useRouter();
@@ -44,7 +45,13 @@ export default function ProfileView() {
 
 
   return (
+
     <div className={styles.container}>
+      <Head>
+        <title>MicroRaptor - {data.name}&apos;s Profile</title>
+        <meta name="description" content="User Profile" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <NavBar />
       <ViewProfile
         name={data.name}
