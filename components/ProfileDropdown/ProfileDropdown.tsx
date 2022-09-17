@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function ProfileDropdown() {
   const { data: session } = useSession();
-  //TODO: Add immediate redirect to user's profile, rather than entering User ID. Waiting on Isaac's Your Profile PR
+
   if (!session) {
     return null;
   }
@@ -31,7 +31,7 @@ export default function ProfileDropdown() {
         border="2px solid grey"
       />
       <span className={styles.sessionName}>{session.user?.name}</span>
-      <Link href="/profile">
+      <Link href={`/profile/${session.user.id}`}>
         <span className={styles.viewProfile}>View Profile</span>
       </Link>
       <div className={styles.divider}>

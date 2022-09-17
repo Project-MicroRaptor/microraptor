@@ -19,8 +19,7 @@
   margin: auto;
 }
 
-.profileName 
-{
+.profileName {
   padding-top: 20px;
   max-width: 80%;
   word-break: break-word;
@@ -36,19 +35,11 @@
     font-size: x-large;
     padding-top: 15px;
   }
+
   p {
     white-space: pre-wrap;
     text-align: justify;
     padding-top: 5px;
     padding: 10px;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .profileContainer {
-    display: flex;
-    flex-basis: 100%;
-    width: 370px;
-    flex-wrap: wrap;
   }
 }

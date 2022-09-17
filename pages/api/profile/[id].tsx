@@ -1,18 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../db/prisma"
-import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "./auth/[...nextauth]";
+import { prisma } from '../../../db/prisma';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await unstable_getServerSession(req, res, authOptions);
-  if (session) {
-    // Signed in
+  const { id } = req.query;
+
+  if (id && typeof id == "string") {
     const profile = await prisma.user.findUnique({
       where: {
-        id: session.user.id,
+        id
       },
       select: {
         id: true,
@@ -22,9 +20,6 @@ export default async function handler(
       },
     });
     res.json(profile);
-  } else {
-    // Not Signed in
-    res.status(401);
   }
-  res.end();
+  res.status(404);
 }
