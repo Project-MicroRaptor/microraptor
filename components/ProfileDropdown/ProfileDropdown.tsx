@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function ProfileDropdown() {
   const { data: session } = useSession();
-//TODO: Add immediate redirect to user's profile, rather than entering User ID. Waiting on Isaac's Your Profile PR
+  //TODO: Add immediate redirect to user's profile, rather than entering User ID. Waiting on Isaac's Your Profile PR
   if (!session) {
     return null;
   }
@@ -31,7 +31,9 @@ export default function ProfileDropdown() {
         border="2px solid grey"
       />
       <span className={styles.sessionName}>{session.user?.name}</span>
-      <span className={styles.viewProfile}>View Profile</span>
+      <Link href="/profile">
+        <span className={styles.viewProfile}>View Profile</span>
+      </Link>
       <div className={styles.divider}>
         <div className={styles.item}>
           <span className={styles.icon}>
@@ -40,20 +42,19 @@ export default function ProfileDropdown() {
           <span className={styles.dropdownItem}>Settings</span>
         </div>
         <Link href="/my-projects">
-        <div className={styles.item}>
-          <span className={styles.icon}>
-            <AiOutlineProject />
-          </span>
-          <span className={styles.dropdownItem}>Your Projects</span>
-        </div>
+          <div className={styles.item}>
+            <span className={styles.icon}>
+              <AiOutlineProject />
+            </span>
+            <span className={styles.dropdownItem}>Your Projects</span>
+          </div>
         </Link>
         <div
           className={styles.item}
           onClick={() =>
             signOut({
-              callbackUrl: `${
-                process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"
-              }/api/auth/logout`,
+              callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"
+                }/api/auth/logout`,
             })
           }
         >
