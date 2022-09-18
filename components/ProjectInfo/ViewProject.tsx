@@ -48,6 +48,7 @@ export default function ViewProject(props: ProjectInfo) {
   const currentFunding = props?.currentFunding ?? 0;
   const completedAt = props?.completedAt ?? new Date().toISOString();
   const backers = 0;
+  const shortDescription = props?.shortDescription || props.shortDescription !== "" ? props.shortDescription : "No Description";
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -79,7 +80,8 @@ export default function ViewProject(props: ProjectInfo) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
-  const shareText = props.shortDescription + "\n\nView my project here: " + window.location.href;
+  const shareText = shortDescription + "\n\nView my project here: " + window.location.href;
+  console.log(props.shortDescription)
 
   return (
     <div className={styles.projectContainer}>
