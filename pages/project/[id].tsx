@@ -8,6 +8,7 @@ import ViewProject from '../../components/ProjectInfo/ViewProject';
 import NavBar from './../../components/NavBar/NavBar';
 
 import styles from './[id].module.scss';
+import { ProjectRewards } from '../../types/project';
 
 type Projects = {
   id: string;
@@ -23,7 +24,7 @@ type Projects = {
   aboutBusiness: string;
   aboutOwner: string;
   businessPlan: string;
-  rewards: string[];
+  rewards: Array<ProjectRewards>;
 };
 
 export default function ProjectView() {
