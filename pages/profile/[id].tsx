@@ -18,6 +18,11 @@ export default function ProfileView() {
   if (error)
     return (
       <>
+        <Head>
+          <title>MicroRaptor</title>
+          <meta name="description" content="User Profile" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavBar />
         <Heading className={styles.error}> 404 | Page not found </Heading>;
       </>
@@ -27,6 +32,11 @@ export default function ProfileView() {
   if (!data)
     return (
       <>
+        <Head>
+          <title>MicroRaptor</title>
+          <meta name="description" content="User Profile" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavBar />
         <div className={styles.spinner}>
           <Spinner
