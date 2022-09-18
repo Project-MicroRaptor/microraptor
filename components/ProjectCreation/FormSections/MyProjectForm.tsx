@@ -21,10 +21,13 @@ import type { ProjectCategory } from "../../../types/categories";
 type Props = {
   formData: any;
   onFormChange: (id: string, value: any) => void;
+  errors: {
+    [key: string]: boolean,
+  }
 };
 
 export default function MyProjectForm(props: Props) {
-  const { onFormChange, formData } = props;
+  const { onFormChange, formData, errors } = props;
 
   const CategoryButtons = () => {
     const buttons = Object.keys(ProjectCategories).map((key) => {
@@ -41,6 +44,7 @@ export default function MyProjectForm(props: Props) {
               [key]: value,
             })
           }
+          isInvalid={errors?.categories}
         >
           {category}
         </SwitchButton>
@@ -68,6 +72,7 @@ export default function MyProjectForm(props: Props) {
           onChange={(event) =>
             onFormChange(event.target.id, event.target.value)
           }
+          isInvalid={errors?.name}
         />
       </FormControl>
 
@@ -83,6 +88,7 @@ export default function MyProjectForm(props: Props) {
           onChange={(event) =>
             onFormChange(event.target.id, event.target.value)
           }
+          isInvalid={errors?.shortDescription}
         />
       </FormControl>
 
@@ -100,6 +106,7 @@ export default function MyProjectForm(props: Props) {
             id="targetFunding"
             value={formData.targetFunding ?? ""}
             onValueChange={(values) => onFormChange("targetFunding", values.floatValue)}
+            isInvalid={errors?.targetFunding}
           />
         </InputGroup>
       </FormControl>
@@ -117,6 +124,11 @@ export default function MyProjectForm(props: Props) {
             monthNames: monthNames,
             dayNames: dayNames,
           }}
+          propsConfigs={{
+            inputProps: {
+              isInvalid: errors?.completedAt,
+            }
+          }}
         />
       </FormControl>
 
@@ -132,6 +144,7 @@ export default function MyProjectForm(props: Props) {
           onChange={(event) =>
             onFormChange(event.target.id, event.target.value)
           }
+          isInvalid={errors?.postcode}
         />
       </FormControl>
 

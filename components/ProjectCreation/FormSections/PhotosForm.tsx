@@ -5,10 +5,13 @@ import styles from "./ProfileSections.module.scss";
 type Props = {
   formData: any;
   onFormChange: (id: string, value: any) => void;
+  errors: {
+    [key: string]: boolean,
+  }
 };
 
 export default function ImageForm(props: Props) {
-  const { onFormChange, formData } = props;
+  const { onFormChange, formData, errors } = props;
   const imageArray = Array(6); // number of images
 
   const ImageFormControls = (array: Array<null>) => {
@@ -35,6 +38,7 @@ export default function ImageForm(props: Props) {
                 [i]: event.target.value,
               })
             }
+            isInvalid={i === 0 && errors.image}
           />
         </FormControl>
       );

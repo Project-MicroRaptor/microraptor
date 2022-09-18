@@ -15,12 +15,15 @@ import DetailsForm from "../FormSections/DetailsForm";
 import PhotosForm from "../FormSections/PhotosForm";
 import RewardsForm from "../FormSections/RewardsForm";
 import { createProject } from "../../../db/dbUtils";
+import {validateMyProjectForm, validatePhotosForm } from "../../../utils/formValidation";
 
 import styles from "./ProjectForm.module.scss";
+import type { FormErrors } from "../../../utils/formValidation";
 
 export default function ProjectForm() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [formData, setFormData] = useState<any>({});
+  const [errorData, setErrorData] = useState<FormErrors>({});
 
   const onChangeTab = (tab: number) => {
     setSelectedTab(tab);
@@ -31,9 +34,55 @@ export default function ProjectForm() {
       ...formData,
       [id]: value,
     });
+
+    setErrorData({
+      ...errorData,
+      [id]: false,
+    });
+  };
+
+  const validateForm = () => {
+    let page: number | null = null;
+    let errors: FormErrors = {};
+
+    // My Project Form Validation
+    const myProjectValidation = validateMyProjectForm(formData);
+    if (page === null && myProjectValidation.page !== null) {
+      page = myProjectValidation.page;
+    }
+    if (myProjectValidation.errors) {
+      errors = {
+        ...errors,
+        ...(myProjectValidation.errors)
+      }
+    }
+
+    const photosValidation = validatePhotosForm(formData);
+    if (page === null && photosValidation.page !== null) {
+      page = photosValidation.page;
+    }
+    if (photosValidation.errors) {
+      errors = {
+        ...errors,
+        ...(photosValidation.errors)
+      }
+    }
+
+    return {
+      page,
+      errors
+    };
   };
 
   const submitProject = async () => {
+    const {page, errors} = validateForm();
+
+    if (page !== null && errors) {
+      onChangeTab(page);
+      setErrorData(errors);
+      return;
+    }
+
     if (!formData || Object.keys(formData).length == 0) {
       return;
     }
@@ -76,7 +125,7 @@ export default function ProjectForm() {
     {
       name: "My Project",
       icon: <BsFillPlusSquareFill />,
-      form: <MyProjectForm formData={formData} onFormChange={onFormChange} />,
+      form: <MyProjectForm formData={formData} onFormChange={onFormChange} errors={errorData} />,
     },
     {
       name: "Details",
@@ -86,7 +135,7 @@ export default function ProjectForm() {
     {
       name: "Photos",
       icon: <BsFillImageFill />,
-      form: <PhotosForm formData={formData} onFormChange={onFormChange} />,
+      form: <PhotosForm formData={formData} onFormChange={onFormChange} errors={errorData} />,
     },
     {
       name: "Rewards",
