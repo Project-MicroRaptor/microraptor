@@ -9,7 +9,6 @@ import {
   ModalHeader,
   ModalOverlay,
   Progress,
-  toast,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -80,7 +79,7 @@ export default function ViewProject(props: ProjectInfo) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
-  const shareText = shortDescription + "\n\nView my project here: " + window.location.href;
+  const shareText = name + "\n\n" + shortDescription + "\n\nView my project here: " + window.location.href;
   console.log(props.shortDescription)
 
   return (
