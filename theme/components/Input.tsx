@@ -2,7 +2,6 @@ const InputStyles = {
   variants: {
     settings: {
       field: {
-        color: "white",
         borderColor: "white",
         width: "75%",
         _hover: {
