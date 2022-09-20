@@ -121,28 +121,28 @@ export default function ViewProject(props: ProjectInfo) {
           <div className={styles.right}>
             {props.aboutBusiness && (
               <>
-                <Heading id="aboutBusiness" size="md">About the Business</Heading>
+                <Heading id="aboutBusiness" size="md" marginBottom={3}>About the Business</Heading>
                 <span>{props.aboutBusiness}</span>
               </>
             )}
 
             {props.aboutOwner && (
               <>
-                <Heading id="aboutOwner" size="md">About the Owner</Heading>
+                <Heading id="aboutOwner" size="md" marginBottom={3} marginTop={5}>About the Owner</Heading>
                 <span>{props.aboutOwner}</span>
               </>
             )}
 
             {props.businessPlan && (
               <>
-                <Heading id="businessPlan" size="md">Business Plan</Heading>
+                <Heading id="businessPlan" size="md" marginBottom={3} marginTop={5}>Business Plan</Heading>
                 <span>{props.businessPlan}</span>
               </>
             )}
 
             {props.rewards && props.rewards.length > 0 && (
               <div className={styles.rewardButton}>
-                <Heading id="rewards" size="md">Rewards</Heading>
+                <Heading id="rewards" size="md" marginBottom={3} marginTop={5}>Rewards</Heading>
                 {props.rewards.map((reward: ProjectRewards, i) => {
                   return (
                     <span key={i}>

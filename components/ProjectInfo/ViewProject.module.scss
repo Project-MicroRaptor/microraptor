@@ -83,19 +83,17 @@
 
 .rightNav {
   flex: 1;
-  margin-top: 30px;
 
   .right {
     font-weight: 500;
     font-size: 20px;
     margin: 0 auto;
+    margin-bottom: 20px;
 
     span {
-      margin-bottom: 20px;
       font-size: 15px;
       text-align: justify;
       display: block;
-      margin-top: 10px;
       white-space: pre-wrap;
     }
   }
@@ -166,6 +164,10 @@
     .left {
       margin-bottom: 50px;
     }
+
+    .right {
+      margin-top: 30px;
+    }
   }
 }
 
@@ -210,6 +212,10 @@
     .rightNav {
       margin-top: 0;
     }
+
+    .right {
+      margin-top: 30px;
+    }
   }
 }
 
@@ -225,6 +231,10 @@
 
     .leftNav {
       text-align: left;
+      margin-top: 0;
+    }
+
+    .right {
       margin-top: 0;
     }
   }
