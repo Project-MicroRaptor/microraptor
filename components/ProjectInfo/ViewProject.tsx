@@ -147,12 +147,12 @@ export default function ViewProject(props: ProjectInfo) {
                   return (
                     <span key={i}>
                       <p className={styles.tier}><b>Reward Tier {i + 1}</b> - {reward.name}
-                        <div>
+                        <span>
                           Contribute ${reward.cost} or more and receive the following:
-                        </div>
-                        <div>
+                        </span>
+                        <span>
                           {reward.description}
-                        </div>
+                        </span>
                       </p>
                     </span>
                   )
