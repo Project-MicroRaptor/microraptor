@@ -120,40 +120,40 @@ export default function ViewProject(props: ProjectInfo) {
         <div className={styles.rightNav}>
           <div className={styles.right}>
             {props.aboutBusiness && (
-              <>
+              <div className={styles.rightHeading}>
                 <Heading id="aboutBusiness" size="md" marginBottom={3}>About the Business</Heading>
                 <span>{props.aboutBusiness}</span>
-              </>
+              </div>
             )}
 
             {props.aboutOwner && (
-              <>
-                <Heading id="aboutOwner" size="md" marginBottom={3} marginTop={5}>About the Owner</Heading>
+              <div className={styles.rightHeading}>
+                <Heading id="aboutOwner" size="md" marginBottom={3}>About the Owner</Heading>
                 <span>{props.aboutOwner}</span>
-              </>
+              </div>
             )}
 
             {props.businessPlan && (
-              <>
-                <Heading id="businessPlan" size="md" marginBottom={3} marginTop={5}>Business Plan</Heading>
+              <div className={styles.rightHeading}>
+                <Heading id="businessPlan" size="md" marginBottom={3}>Business Plan</Heading>
                 <span>{props.businessPlan}</span>
-              </>
+              </div>
             )}
 
             {props.rewards && props.rewards.length > 0 && (
               <div className={styles.rewardButton}>
-                <Heading id="rewards" size="md" marginBottom={3} marginTop={5}>Rewards</Heading>
+                <Heading id="rewards" size="md" marginBottom={3}>Rewards</Heading>
                 {props.rewards.map((reward: ProjectRewards, i) => {
                   return (
                     <span key={i}>
-                      <p className={styles.tier}><b>Reward Tier {i + 1}</b> - {reward.name}
+                      <span className={styles.tier}><b>Reward Tier {i + 1}</b> - {reward.name}
                         <span>
                           Contribute ${reward.cost} or more and receive the following:
                         </span>
                         <span>
                           {reward.description}
                         </span>
-                      </p>
+                      </span>
                     </span>
                   )
                 }

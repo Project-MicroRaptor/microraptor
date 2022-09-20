@@ -90,6 +90,10 @@
     margin: 0 auto;
     margin-bottom: 20px;
 
+    .rightHeading {
+      margin-bottom: 20px;
+    }
+
     span {
       font-size: 15px;
       text-align: justify;
@@ -207,14 +211,11 @@
     .leftNav {
       text-align: center;
       margin-top: 30px;
-    }
 
-    .rightNav {
-      margin-top: 0;
-    }
-
-    .right {
-      margin-top: 30px;
+      .left {
+        margin-top: 20px;
+        margin-bottom: 50px;
+      }
     }
   }
 }
@@ -232,10 +233,10 @@
     .leftNav {
       text-align: left;
       margin-top: 0;
-    }
 
-    .right {
-      margin-top: 0;
+      .left {
+        margin-top: 0;
+      }
     }
   }
 
