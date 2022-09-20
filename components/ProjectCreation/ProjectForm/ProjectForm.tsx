@@ -15,10 +15,11 @@ import DetailsForm from "../FormSections/DetailsForm";
 import PhotosForm from "../FormSections/PhotosForm";
 import RewardsForm from "../FormSections/RewardsForm";
 import { createProject } from "../../../db/dbUtils";
-import {validateMyProjectForm, validatePhotosForm } from "../../../utils/formValidation";
+import {validateMyProjectForm, validatePhotosForm, validateRewardsForm } from "../../../utils/formValidation";
 
 import styles from "./ProjectForm.module.scss";
 import type { FormErrors } from "../../../utils/formValidation";
+import { ProjectRewards } from "../../../types/project";
 
 export default function ProjectForm() {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -29,16 +30,18 @@ export default function ProjectForm() {
     setSelectedTab(tab);
   };
 
-  const onFormChange = (id: string, value: any) => {
+  const onFormChange = (id: string, value: any, updateErrorData: boolean = true) => {
     setFormData({
       ...formData,
       [id]: value,
     });
 
-    setErrorData({
-      ...errorData,
-      [id]: false,
-    });
+    if (updateErrorData) {
+      setErrorData({
+        ...errorData,
+        [id]: false,
+      });
+    }
   };
 
   const validateForm = () => {
@@ -57,6 +60,7 @@ export default function ProjectForm() {
       }
     }
 
+    // Photos Form Validation
     const photosValidation = validatePhotosForm(formData);
     if (page === null && photosValidation.page !== null) {
       page = photosValidation.page;
@@ -65,6 +69,17 @@ export default function ProjectForm() {
       errors = {
         ...errors,
         ...(photosValidation.errors)
+      }
+    }
+
+    const rewardsValidation = validateRewardsForm(formData);
+    if (page === null && rewardsValidation.page !== null) {
+      page = rewardsValidation.page;
+    }
+    if (rewardsValidation.errors) {
+      errors = {
+        ...errors,
+        ...(rewardsValidation.errors)
       }
     }
 
@@ -101,6 +116,15 @@ export default function ProjectForm() {
       });
     }
 
+    const rewards: Array<ProjectRewards> = [];
+    if (formData?.rewards) {
+      Object.values(formData?.rewards).forEach((reward: any) => {
+        if (reward?.name && reward?.description && reward?.cost) {
+          rewards.push(reward);
+        }
+      });
+    }
+
     const projectDetails = {
       name: formData?.name,
       completedAt: formData?.completedAt?.toISOString(),
@@ -114,7 +138,9 @@ export default function ProjectForm() {
       images,
     };
 
-    const response = await createProject(projectDetails);
+    const rewardDetails = rewards;
+
+    const response = await createProject(projectDetails, rewardDetails);
 
     if (response?.project?.id) {
       Router.push(`/project/${response.project.id}`);
@@ -140,7 +166,7 @@ export default function ProjectForm() {
     {
       name: "Rewards",
       icon: <BsFillGiftFill />,
-      form: <RewardsForm formData={formData} onFormChange={onFormChange} />
+      form: <RewardsForm formData={formData} onFormChange={onFormChange} errors={errorData} />
     },
     {
       name: "Preview",

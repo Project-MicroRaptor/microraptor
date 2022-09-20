@@ -39,6 +39,24 @@ export default async function handler(
           },
         },
       });
+
+      const rewardDetails = body.rewardDetails;
+      if (rewardDetails && Array.isArray(rewardDetails)) {
+        rewardDetails.forEach(async (reward) => {
+          await prisma.projectReward.create({
+            data: {
+              name: reward.name,
+              description: reward.description,
+              cost: reward.cost,
+              project: {
+                connect: {
+                  id: project.id,
+                },
+              },
+            },
+          })
+        })
+      }
   
       res.status(200).json({project});
     } catch (e) {

@@ -1,16 +1,18 @@
 import RewardsBuilder from "../../RewardsBuilder/RewardsBuilder";
 
 import type { ProjectRewards } from "../../../types/project";
+import type { FormErrors } from "../../../utils/formValidation";
 
 import styles from "./ProfileSections.module.scss";
 
 type Props = {
   formData: any;
-  onFormChange: (id: string, value: any) => void;
+  onFormChange: (id: string, value: any, updateErrorData?: boolean) => void;
+  errors: FormErrors
 };
 
 export default function RewardsForm(props: Props) {
-  const { onFormChange, formData } = props;
+  const { onFormChange, formData, errors } = props;
 
   const onDeleteReward = (index: number) => {
     const rewards = formData?.rewards;
@@ -35,7 +37,7 @@ export default function RewardsForm(props: Props) {
     onFormChange("rewards", {
       ...rewards
     });
-    onFormChange("rewardCount", formData?.rewardCount - 1);
+    onFormChange("rewardCount", formData?.rewardCount - 1, false);
   };
 
   const onEditReward = (index: number, reward: ProjectRewards) => {
@@ -54,9 +56,11 @@ export default function RewardsForm(props: Props) {
         rewards={formData?.rewards}
         rewardCount={formData?.rewardCount ?? 0}
         onDeleteReward={onDeleteReward}
-        onAddReward={() => onFormChange("rewardCount", !isNaN(formData?.rewardCount) ? formData?.rewardCount + 1 : 1)}
+        onAddReward={() => onFormChange("rewardCount", !isNaN(formData?.rewardCount) ? formData?.rewardCount + 1 : 1, false)}
         onEditReward={onEditReward}
-      />
+        errors={errors}
+        />
+      <p className={styles.red}>* All fields in each reward are required. All rewards must be ordered according to level cost.</p>
     </div>
   );
 }

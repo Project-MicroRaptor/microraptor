@@ -7,6 +7,7 @@ import {
 import { BsCurrencyDollar, BsFillDashCircleFill, BsFillPlusCircleFill } from "react-icons/bs";
 import NumberFormat from "react-number-format";
 import { ProjectRewards } from "../../types/project";
+import { FormErrors } from "../../utils/formValidation";
 
 import styles from "./RewardsBuilder.module.scss";
 
@@ -16,15 +17,19 @@ type Props = {
   onDeleteReward: (index: number) => void;
   onAddReward: () => void;
   onEditReward: (index: number, reward: ProjectRewards) => void;
+  errors?: FormErrors;
 };
 
 export default function RewardsBuilder(props: Props) {
-  const { rewards, rewardCount, onDeleteReward, onAddReward, onEditReward} = props;
+  const { rewards, rewardCount, onDeleteReward, onAddReward, onEditReward, errors = {}} = props;
+
+  const rewardsErrors = errors?.rewards ?? null;
+  console.log(rewardsErrors);
 
   const rewardTabs = [...Array(rewardCount)].map((element, i) => {
     const level = i + 1;
     return (
-      <div className={styles.rewardContainer} key={i}>
+      <div className={`${styles.rewardContainer} ${rewardsErrors && typeof rewardsErrors !== "boolean" && rewardsErrors.hasOwnProperty(i) ? styles.error : ''}`} key={i}>
         <div className={styles.top}>
           <div className={styles.level}>Level {level}</div>
           <div className={styles.name}>
