@@ -79,8 +79,7 @@ export default function ViewProject(props: ProjectInfo) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
-  const shareText = name + "\n\n" + shortDescription + "\n\nView my project here: " + window.location.href;
-  console.log(props.shortDescription)
+  const shareText = name + "\n\n" + shortDescription + "\n\nView the MicroRaptor project page here: " + window.location.href;
 
   return (
     <div className={styles.projectContainer}>
