@@ -23,7 +23,7 @@ import type { CreateFormData } from "../../../types/createForm";
 type Props = {
   formData: CreateFormData;
   onFormChange: (id: string, value: any) => void;
-  errors: FormErrors
+  errors: FormErrors;
 };
 
 export default function MyProjectForm(props: Props) {
@@ -92,7 +92,10 @@ export default function MyProjectForm(props: Props) {
         />
       </FormControl>
 
-      <FormControl className={`${styles.formControl} ${styles.inputLeft}`} isRequired>
+      <FormControl
+        className={`${styles.formControl} ${styles.inputLeft}`}
+        isRequired
+      >
         <FormLabel htmlFor="targetFunding" className={styles.formLabel}>
           Target Funding
         </FormLabel>
@@ -105,7 +108,9 @@ export default function MyProjectForm(props: Props) {
             customInput={Input}
             id="targetFunding"
             value={formData.targetFunding ?? ""}
-            onValueChange={(values) => onFormChange("targetFunding", values.floatValue)}
+            onValueChange={(values) =>
+              onFormChange("targetFunding", values.floatValue)
+            }
             isInvalid={!!errors?.targetFunding}
           />
         </InputGroup>
@@ -127,7 +132,7 @@ export default function MyProjectForm(props: Props) {
           propsConfigs={{
             inputProps: {
               isInvalid: !!errors?.completedAt,
-            }
+            },
           }}
         />
       </FormControl>
@@ -140,7 +145,7 @@ export default function MyProjectForm(props: Props) {
           type="number"
           id="postcode"
           className={styles.formInput}
-          value={formData.postcode ?? ""}
+          value={formData?.postcode ?? ""}
           onChange={(event) =>
             onFormChange(event.target.id, event.target.value)
           }

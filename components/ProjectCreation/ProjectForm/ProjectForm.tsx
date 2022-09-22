@@ -5,7 +5,7 @@ import {
   BsFillGiftFill,
   BsFillCheckCircleFill,
 } from "react-icons/bs";
-import Router from 'next/router'
+import Router from "next/router";
 import { useState } from "react";
 import { Button } from "@chakra-ui/react";
 
@@ -15,12 +15,16 @@ import DetailsForm from "../FormSections/DetailsForm";
 import PhotosForm from "../FormSections/PhotosForm";
 import RewardsForm from "../FormSections/RewardsForm";
 import { createProject } from "../../../db/dbUtils";
-import {validateMyProjectForm, validatePhotosForm, validateRewardsForm } from "../../../utils/formValidation";
+import {
+  validateMyProjectForm,
+  validatePhotosForm,
+  validateRewardsForm,
+} from "../../../utils/formValidation";
 
 import styles from "./ProjectForm.module.scss";
 import type { FormErrors } from "../../../utils/formValidation";
 import type { ProjectRewards } from "../../../types/project";
-import type{ CreateFormData } from "../../../types/createForm";
+import type { CreateFormData } from "../../../types/createForm";
 
 export default function ProjectForm() {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -32,7 +36,11 @@ export default function ProjectForm() {
     setSelectedTab(tab);
   };
 
-  const onFormChange = (id: string, value: any, updateErrorData: boolean = true) => {
+  const onFormChange = (
+    id: string,
+    value: any,
+    updateErrorData: boolean = true
+  ) => {
     setFormData({
       ...formData,
       [id]: value,
@@ -58,8 +66,8 @@ export default function ProjectForm() {
     if (myProjectValidation.errors) {
       errors = {
         ...errors,
-        ...(myProjectValidation.errors)
-      }
+        ...myProjectValidation.errors,
+      };
     }
 
     // Photos Form Validation
@@ -70,8 +78,8 @@ export default function ProjectForm() {
     if (photosValidation.errors) {
       errors = {
         ...errors,
-        ...(photosValidation.errors)
-      }
+        ...photosValidation.errors,
+      };
     }
 
     const rewardsValidation = validateRewardsForm(formData);
@@ -81,19 +89,19 @@ export default function ProjectForm() {
     if (rewardsValidation.errors) {
       errors = {
         ...errors,
-        ...(rewardsValidation.errors)
-      }
+        ...rewardsValidation.errors,
+      };
     }
 
     return {
       page,
-      errors
+      errors,
     };
   };
 
   const submitProject = async () => {
     setSendingData(true);
-    const {page, errors} = validateForm();
+    const { page, errors } = validateForm();
 
     if (page !== null && errors) {
       onChangeTab(page);
@@ -137,9 +145,9 @@ export default function ProjectForm() {
       postcode: Number(formData.postcode),
       shortDescription: formData.shortDescription,
       categories,
-      ...(formData?.aboutBusiness && {aboutBusiness: formData.aboutBusiness}),
-      ...(formData?.aboutOwner && {aboutOwner: formData.aboutOwner}),
-      ...(formData?.businessPlan && {businessPlan: formData.businessPlan}),
+      ...(formData?.aboutBusiness && { aboutBusiness: formData.aboutBusiness }),
+      ...(formData?.aboutOwner && { aboutOwner: formData.aboutOwner }),
+      ...(formData?.businessPlan && { businessPlan: formData.businessPlan }),
       images,
     };
 
@@ -152,28 +160,46 @@ export default function ProjectForm() {
     if (response?.project?.id) {
       Router.push(`/project/${response.project.id}`);
     }
-  }
+  };
 
   const tabs = [
     {
       name: "My Project",
       icon: <BsFillPlusSquareFill />,
-      form: <MyProjectForm formData={formData} onFormChange={onFormChange} errors={errorData} />,
+      form: (
+        <MyProjectForm
+          formData={formData}
+          onFormChange={onFormChange}
+          errors={errorData}
+        />
+      ),
     },
     {
       name: "Details",
       icon: <BsFillPencilFill />,
-      form: <DetailsForm formData={formData} onFormChange={onFormChange} />
+      form: <DetailsForm formData={formData} onFormChange={onFormChange} />,
     },
     {
       name: "Photos",
       icon: <BsFillImageFill />,
-      form: <PhotosForm formData={formData} onFormChange={onFormChange} errors={errorData} />,
+      form: (
+        <PhotosForm
+          formData={formData}
+          onFormChange={onFormChange}
+          errors={errorData}
+        />
+      ),
     },
     {
       name: "Rewards",
       icon: <BsFillGiftFill />,
-      form: <RewardsForm formData={formData} onFormChange={onFormChange} errors={errorData} />
+      form: (
+        <RewardsForm
+          formData={formData}
+          onFormChange={onFormChange}
+          errors={errorData}
+        />
+      ),
     },
     {
       name: "Preview",
@@ -207,7 +233,12 @@ export default function ProjectForm() {
           </Button>
         )}
         {selectedTab === tabs.length - 1 && (
-          <Button float="right" width="100px" onClick={() => submitProject()} isLoading={sendingData}>
+          <Button
+            float="right"
+            width="100px"
+            onClick={() => submitProject()}
+            isLoading={sendingData}
+          >
             Submit
           </Button>
         )}

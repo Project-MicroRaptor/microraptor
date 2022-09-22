@@ -1,11 +1,13 @@
 export type FormErrors = {
-  [key: string]: boolean | {[key: string]: boolean | {[key: string]: boolean}};
+  [key: string]:
+    | boolean
+    | { [key: string]: boolean | { [key: string]: boolean } };
 };
 
 type ErrorPageObject = {
-  errors: FormErrors,
-  page: number | null,
-}
+  errors: FormErrors;
+  page: number | null;
+};
 
 export function validateMyProjectForm(formData: any): ErrorPageObject {
   let page: number | null = null;
@@ -63,13 +65,16 @@ export function validateRewardsForm(formData: any): ErrorPageObject {
     return { page, errors };
   }
 
-  Object.entries(formData.rewards).forEach(reward => {
+  Object.entries(formData.rewards).forEach((reward) => {
     const [key, values]: [string, any] = reward;
     const keyNum = Number(key);
 
     if (!isNaN(keyNum) && 0 < keyNum) {
       // Check if previous reward exists
-      if (!formData.rewards?.[keyNum - 1] && typeof errors.rewards !== "boolean") {
+      if (
+        !formData.rewards?.[keyNum - 1] &&
+        typeof errors.rewards !== "boolean"
+      ) {
         errors.rewards = {
           ...errors.rewards,
           [keyNum - 1]: true,
@@ -82,26 +87,26 @@ export function validateRewardsForm(formData: any): ErrorPageObject {
     // Check if values exist
     if (!values?.name || !values?.description || !values?.cost) {
       errors.rewards = {
-        ...(typeof errors.rewards === 'object' ? errors.rewards : {}),
+        ...(typeof errors.rewards === "object" ? errors.rewards : {}),
         [keyNum]: true,
       };
       page = 3;
       return;
     }
-    
+
     if (!isNaN(keyNum) && 0 < keyNum) {
       const prevReward = formData?.rewards[keyNum - 1];
       // Check if prev cost is higher than current cost
       if (values?.cost && prevReward?.cost > values?.cost) {
         errors.rewards = {
-          ...(typeof errors.rewards === 'object' ? errors.rewards : {}),
+          ...(typeof errors.rewards === "object" ? errors.rewards : {}),
           [keyNum]: true,
         };
         page = 3;
         return;
       }
     }
-  })
+  });
 
   return { page, errors };
 }

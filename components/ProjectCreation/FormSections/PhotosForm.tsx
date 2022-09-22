@@ -8,7 +8,7 @@ import styles from "./ProfileSections.module.scss";
 type Props = {
   formData: CreateFormData;
   onFormChange: (id: string, value: any) => void;
-  errors: FormErrors
+  errors: FormErrors;
 };
 
 export default function ImageForm(props: Props) {
