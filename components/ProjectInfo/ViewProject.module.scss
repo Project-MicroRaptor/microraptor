@@ -1,8 +1,12 @@
 .projectImage {
+  border-radius: 10px;
+  margin-top: 40px;
+  display: block;
+  contain: content;
+
   img {
-    border-radius: 10px;
-    margin-top: 40px;
-    display: block;
+    min-width: 100%;
+    min-height: 100%;
   }
 }
 
@@ -128,12 +132,8 @@
   }
 
   .projectImage {
-    display: grid;
-
-    img {
-      max-height: 350px;
-      width: 500px;
-    }
+    height: 365px;
+    width: 355px;
   }
 
   .categoriesItem {
@@ -187,12 +187,8 @@
     }
 
     .projectImage {
-      display: grid;
-
-      img {
-        max-height: 370px;
-        width: 500px;
-      }
+      height: 375px;
+      width: 365px;
     }
 
     .progressContainer {
