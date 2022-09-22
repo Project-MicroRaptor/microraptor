@@ -38,20 +38,19 @@ model Session {
 }
 
 model User {
-  id             String        @id @default(cuid())
-  name           String?
-  email          String?       @unique
-  emailVerified  DateTime?
-  image          String?
-  accounts       Account[]
-  sessions       Session[]
-  projects       Project[]
-  location       String?
-  age            Int?
-  bio            String?
-  Message        Message[]
-  MessageGroup   MessageGroup? @relation(fields: [messageGroupId], references: [id])
-  messageGroupId String?
+  id            String         @id @default(cuid())
+  name          String?
+  email         String?        @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  projects      Project[]
+  location      String?
+  age           Int?
+  bio           String?
+  MessageGroups MessageGroup[]
+  Message       Message[]
 }
 
 model Project {
@@ -105,5 +104,5 @@ model Message {
   from      User         @relation(fields: [fromId], references: [id])
   fromId    String
   body      String
-  timestamp DateTime @default(now())
+  timestamp DateTime     @default(now())
 }
