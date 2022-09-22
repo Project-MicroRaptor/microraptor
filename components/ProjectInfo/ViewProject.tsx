@@ -1,5 +1,7 @@
 import {
   Center,
+  FormControl,
+  FormLabel,
   Heading,
   Modal,
   ModalBody,
@@ -9,6 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Progress,
+  Textarea,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -78,6 +81,8 @@ export default function ViewProject(props: ProjectInfo) {
   const finalRef = React.useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const message = "";
+  const isOpenMes = isOpen,  onOpenMes = onOpen, onCloseMes = onClose;
 
   const shareText = name + "\n\n" + shortDescription + "\n\nView the MicroRaptor project page here: " + window.location.href;
 
@@ -136,7 +141,7 @@ export default function ViewProject(props: ProjectInfo) {
         <Button width="250px" borderRadius={4} fontSize={16} disabled>
           Fund this Project
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>
+        <Button width="250px" borderRadius={4} fontSize={16} onClick={onOpenMes}>
           Enquire about Project
         </Button>
       </div>
@@ -229,6 +234,36 @@ export default function ViewProject(props: ProjectInfo) {
               Copy
             </Button>
             <Button onClick={onClose} variant="ghost">
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal
+        finalFocusRef={finalRef}
+        isOpen={isOpenMes}
+        onClose={onCloseMes}
+        size={"xl"}
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Share Project</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+          <FormControl className={styles.formControl}>
+        <FormLabel htmlFor="message" className={styles.formLabel}>
+          About the Business
+        </FormLabel>
+        <Textarea
+          id="message"
+          value={message ?? ""}
+          className={styles.formInput}
+        />
+      </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onCloseMes} variant="ghost">
               Close
             </Button>
           </ModalFooter>
