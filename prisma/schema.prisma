@@ -49,8 +49,8 @@ model User {
   location      String?
   age           Int?
   bio           String?
-  MessageGroups MessageGroup[]
-  Message       Message[]
+  messageGroups MessageGroup[]
+  message       Message[]
 }
 
 model Project {
@@ -94,7 +94,7 @@ model VerificationToken {
 model MessageGroup {
   id      String    @id @default(cuid())
   users   User[]
-  Message Message[]
+  message Message[]
 }
 
 model Message {
