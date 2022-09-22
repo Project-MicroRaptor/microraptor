@@ -92,9 +92,9 @@ model VerificationToken {
 }
 
 model MessageGroup {
-  id      String    @id @default(cuid())
-  users   User[]
-  message Message[]
+  id       String    @id @default(cuid())
+  users    User[]
+  messages Message[]
 }
 
 model Message {
