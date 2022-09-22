@@ -1,13 +1,27 @@
-import { Center, Heading, Progress } from '@chakra-ui/react';
+import {
+  Center,
+  Heading,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Progress,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { Button } from "@chakra-ui/react";
+import React from "react";
 
 import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
 
-import styles from './ViewProject.module.scss';
-import { ProjectRewards } from '../../types/project';
+import styles from "./ViewProject.module.scss";
+import { ProjectRewards } from "../../types/project";
 
 export interface ProjectInfo {
   id?: string;
@@ -33,6 +47,7 @@ export default function ViewProject(props: ProjectInfo) {
   const currentFunding = props?.currentFunding ?? 0;
   const completedAt = props?.completedAt ?? new Date().toISOString();
   const backers = 0;
+  const shortDescription = props?.shortDescription || props.shortDescription !== "" ? props.shortDescription : "No Description";
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -44,13 +59,13 @@ export default function ViewProject(props: ProjectInfo) {
       return 0;
     }
     return totalDays;
-  }
+  };
 
   const categories: string[] = [];
 
   props.categories?.forEach((category) => {
     if (ProjectCategories[category as keyof ProjectCategory]) {
-      categories.push(ProjectCategories[category as keyof ProjectCategory])
+      categories.push(ProjectCategories[category as keyof ProjectCategory]);
     } else {
       categories.push(category);
     }
@@ -59,6 +74,12 @@ export default function ViewProject(props: ProjectInfo) {
   if (categories.length == 0) {
     categories.push("None");
   }
+
+  const finalRef = React.useRef(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+
+  const shareText = name + "\n\n" + shortDescription + "\n\nView the MicroRaptor project page here: " + window.location.href;
 
   return (
     <div className={styles.projectContainer}>
@@ -69,7 +90,10 @@ export default function ViewProject(props: ProjectInfo) {
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
           <div className={styles.projectImage}>
-            <img src={props?.images?.length ? props?.images[0] : "/default.png"} alt={props.name} />
+            <img
+              src={props?.images?.length ? props?.images[0] : "/default.png"}
+              alt={props.name}
+            />
           </div>
           <div className={styles.categoriesItem}>
             <AiOutlineTag className={styles.categoriesIcon} />
@@ -89,7 +113,11 @@ export default function ViewProject(props: ProjectInfo) {
           />
           <span className={styles.fundingText}>
             <p>
-              <span className={styles.current}> ${currentFunding?.toLocaleString()}</span> pledged of ${targetFunding?.toLocaleString()} goal
+              <span className={styles.current}>
+                {" "}
+                ${currentFunding?.toLocaleString()}
+              </span>{" "}
+              pledged of ${targetFunding?.toLocaleString()} goal
             </p>
           </span>
           <span className={styles.backersAmount}>
@@ -102,18 +130,28 @@ export default function ViewProject(props: ProjectInfo) {
       </div>
 
       <div className={styles.buttons}>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>Share</Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>Fund this Project</Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>Enquire about Project</Button>
+        <Button width="250px" borderRadius={4} fontSize={16} onClick={onOpen}>
+          Share
+        </Button>
+        <Button width="250px" borderRadius={4} fontSize={16} disabled>
+          Fund this Project
+        </Button>
+        <Button width="250px" borderRadius={4} fontSize={16} disabled>
+          Enquire about Project
+        </Button>
       </div>
 
       <div className={styles.campaignWrapper}>
         <div className={styles.leftNav}>
           <div className={styles.left}>
-            {props.aboutBusiness && <a href="#aboutBusiness">About the Business</a>}
+            {props.aboutBusiness && (
+              <a href="#aboutBusiness">About the Business</a>
+            )}
             {props.aboutOwner && <a href="#aboutOwner">About the Owner</a>}
             {props.businessPlan && <a href="#businessPlan">Business Plan</a>}
-            {props.rewards && props.rewards.length > 0 && <a href="#rewards">Rewards</a>}
+            {props.rewards && props.rewards.length > 0 && (
+              <a href="#rewards">Rewards</a>
+            )}
           </div>
         </div>
 
@@ -155,14 +193,47 @@ export default function ViewProject(props: ProjectInfo) {
                         </span>
                       </span>
                     </span>
-                  )
-                }
-                )}
+                  );
+                })}
               </div>
             )}
           </div>
         </div>
       </div>
-    </div >
-  )
-};
+      <Modal
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        size={"xl"}
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Share Project</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <p className={styles.modalp}>{shareText}</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              mr={3}
+              onClick={() => {
+                navigator.clipboard.writeText(shareText);
+                toast({
+                  title: "Text copied",
+                  duration: 2000,
+                  isClosable: true,
+                });
+              }}
+            >
+              Copy
+            </Button>
+            <Button onClick={onClose} variant="ghost">
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </div>
+  );
+}

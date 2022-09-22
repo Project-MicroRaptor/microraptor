@@ -37,15 +37,19 @@ export default function ProfileDropdown() {
           <span className={styles.icon}>
             <AiFillSetting />
           </span>
-          <span className={styles.dropdownItem}>Settings</span>
+          <span className={styles.dropdownItem}>
+            <Link href="/settings">
+              <a>{"Settings"}</a>
+            </Link>
+          </span>
         </div>
         <Link href="/my-projects">
-        <div className={styles.item}>
-          <span className={styles.icon}>
-            <AiOutlineProject />
-          </span>
-          <span className={styles.dropdownItem}>Your Projects</span>
-        </div>
+          <div className={styles.item}>
+            <span className={styles.icon}>
+              <AiOutlineProject />
+            </span>
+            <span className={styles.dropdownItem}>Your Projects</span>
+          </div>
         </Link>
         <div
           className={styles.item}
