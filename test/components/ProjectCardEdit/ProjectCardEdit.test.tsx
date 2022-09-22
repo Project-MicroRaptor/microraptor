@@ -1,10 +1,10 @@
-import { render } from "@testing-library/react"
+import { render } from "@testing-library/react";
 import ProjectCardEdit from "../../../src/components/ProjectCardEdit/ProjectCardEdit";
 
 describe("ProjectCardEdit", () => {
   test("ProjectCardEdit renders correctly", () => {
     render(
-      <ProjectCardEdit 
+      <ProjectCardEdit
         id="1"
         name="Test Project"
         shortDescription="Short Description"
@@ -12,5 +12,5 @@ describe("ProjectCardEdit", () => {
         targetFunding={0}
       />
     );
-  })
-})
+  });
+});
