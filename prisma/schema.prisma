@@ -50,7 +50,7 @@ model User {
   age           Int?
   bio           String?
   messageGroups MessageGroup[]
-  message       Message[]
+  messages       Message[]
 }
 
 model Project {
