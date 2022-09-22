@@ -19,12 +19,14 @@ import {validateMyProjectForm, validatePhotosForm, validateRewardsForm } from ".
 
 import styles from "./ProjectForm.module.scss";
 import type { FormErrors } from "../../../utils/formValidation";
-import { ProjectRewards } from "../../../types/project";
+import type { ProjectRewards } from "../../../types/project";
+import type{ CreateFormData } from "../../../types/createForm";
 
 export default function ProjectForm() {
   const [selectedTab, setSelectedTab] = useState(0);
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<CreateFormData>({});
   const [errorData, setErrorData] = useState<FormErrors>({});
+  const [sendingData, setSendingData] = useState<boolean>(false);
 
   const onChangeTab = (tab: number) => {
     setSelectedTab(tab);
@@ -90,15 +92,18 @@ export default function ProjectForm() {
   };
 
   const submitProject = async () => {
+    setSendingData(true);
     const {page, errors} = validateForm();
 
     if (page !== null && errors) {
       onChangeTab(page);
       setErrorData(errors);
+      setSendingData(false);
       return;
     }
 
     if (!formData || Object.keys(formData).length == 0) {
+      setSendingData(false);
       return;
     }
 
@@ -126,21 +131,23 @@ export default function ProjectForm() {
     }
 
     const projectDetails = {
-      name: formData?.name,
-      completedAt: formData?.completedAt?.toISOString(),
-      targetFunding: Number(formData?.targetFunding),
-      postcode: Number(formData?.postcode),
-      shortDescription: formData?.shortDescription,
+      name: formData.name,
+      completedAt: formData.completedAt?.toISOString(),
+      targetFunding: Number(formData.targetFunding),
+      postcode: Number(formData.postcode),
+      shortDescription: formData.shortDescription,
       categories,
-      ...(formData?.aboutBusiness && {aboutBusiness: formData?.aboutBusiness}),
-      ...(formData?.aboutOwner && {aboutOwner: formData?.aboutOwner}),
-      ...(formData?.businessPlan && {businessPlan: formData?.businessPlan}),
+      ...(formData?.aboutBusiness && {aboutBusiness: formData.aboutBusiness}),
+      ...(formData?.aboutOwner && {aboutOwner: formData.aboutOwner}),
+      ...(formData?.businessPlan && {businessPlan: formData.businessPlan}),
       images,
     };
 
     const rewardDetails = rewards;
 
     const response = await createProject(projectDetails, rewardDetails);
+
+    setSendingData(false);
 
     if (response?.project?.id) {
       Router.push(`/project/${response.project.id}`);
@@ -200,7 +207,7 @@ export default function ProjectForm() {
           </Button>
         )}
         {selectedTab === tabs.length - 1 && (
-          <Button float="right" width="100px" onClick={() => submitProject()}>
+          <Button float="right" width="100px" onClick={() => submitProject()} isLoading={sendingData}>
             Submit
           </Button>
         )}

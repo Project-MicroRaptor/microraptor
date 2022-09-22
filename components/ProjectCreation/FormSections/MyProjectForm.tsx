@@ -18,9 +18,10 @@ import styles from "./ProfileSections.module.scss";
 
 import type { ProjectCategory } from "../../../types/categories";
 import type { FormErrors } from "../../../utils/formValidation";
+import type { CreateFormData } from "../../../types/createForm";
 
 type Props = {
-  formData: any;
+  formData: CreateFormData;
   onFormChange: (id: string, value: any) => void;
   errors: FormErrors
 };
@@ -36,7 +37,7 @@ export default function MyProjectForm(props: Props) {
       return (
         <SwitchButton
           key={key}
-          selected={selected}
+          selected={!!selected}
           onChange={(value) =>
             onFormChange("categories", {
               ...formData.categories,

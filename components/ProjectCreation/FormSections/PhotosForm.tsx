@@ -1,10 +1,12 @@
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
-import { FormErrors } from "../../../utils/formValidation";
+
+import type { CreateFormData } from "../../../types/createForm";
+import type { FormErrors } from "../../../utils/formValidation";
 
 import styles from "./ProfileSections.module.scss";
 
 type Props = {
-  formData: any;
+  formData: CreateFormData;
   onFormChange: (id: string, value: any) => void;
   errors: FormErrors
 };

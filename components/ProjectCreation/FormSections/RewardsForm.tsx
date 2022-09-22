@@ -1,12 +1,13 @@
 import RewardsBuilder from "../../RewardsBuilder/RewardsBuilder";
 
+import type { CreateFormData } from "../../../types/createForm";
 import type { ProjectRewards } from "../../../types/project";
 import type { FormErrors } from "../../../utils/formValidation";
 
 import styles from "./ProfileSections.module.scss";
 
 type Props = {
-  formData: any;
+  formData: CreateFormData;
   onFormChange: (id: string, value: any, updateErrorData?: boolean) => void;
   errors: FormErrors
 };
@@ -16,6 +17,7 @@ export default function RewardsForm(props: Props) {
 
   const onDeleteReward = (index: number) => {
     const rewards = formData?.rewards;
+    const rewardCount = formData?.rewardCount ?? 1;
     // Delete rewards index
     if (rewards && rewards[index]) {
       delete rewards[index];
@@ -37,7 +39,7 @@ export default function RewardsForm(props: Props) {
     onFormChange("rewards", {
       ...rewards
     });
-    onFormChange("rewardCount", formData?.rewardCount - 1, false);
+    onFormChange("rewardCount", rewardCount - 1, false);
   };
 
   const onEditReward = (index: number, reward: ProjectRewards) => {
@@ -56,7 +58,7 @@ export default function RewardsForm(props: Props) {
         rewards={formData?.rewards}
         rewardCount={formData?.rewardCount ?? 0}
         onDeleteReward={onDeleteReward}
-        onAddReward={() => onFormChange("rewardCount", !isNaN(formData?.rewardCount) ? formData?.rewardCount + 1 : 1, false)}
+        onAddReward={() => onFormChange("rewardCount", formData?.rewardCount && !isNaN(formData?.rewardCount) ? formData?.rewardCount + 1 : 1, false)}
         onEditReward={onEditReward}
         errors={errors}
         />

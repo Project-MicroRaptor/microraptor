@@ -12,8 +12,10 @@ import { FormErrors } from "../../utils/formValidation";
 import styles from "./RewardsBuilder.module.scss";
 
 type Props = {
-  rewards: Array<ProjectRewards>;
-  rewardCount: number;
+  rewards?: {
+    [key:string]: ProjectRewards
+  };
+  rewardCount: number | undefined;
   onDeleteReward: (index: number) => void;
   onAddReward: () => void;
   onEditReward: (index: number, reward: ProjectRewards) => void;
@@ -24,8 +26,7 @@ export default function RewardsBuilder(props: Props) {
   const { rewards, rewardCount, onDeleteReward, onAddReward, onEditReward, errors = {}} = props;
 
   const rewardsErrors = errors?.rewards ?? null;
-  console.log(rewardsErrors);
-
+  
   const rewardTabs = [...Array(rewardCount)].map((element, i) => {
     const level = i + 1;
     return (
