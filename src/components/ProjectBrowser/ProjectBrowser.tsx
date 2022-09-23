@@ -28,10 +28,13 @@ export default function ProjectBrowser() {
   var queryString = "/api/projects?";
   if (searchState) queryString += new URLSearchParams({ name: searchState });
   if (categoryState != null) {
-    var categoryKey = Object.keys(ProjectCategories).find((key) => ProjectCategories[key as keyof ProjectCategory] == categoryState);
-    if (categoryKey != null) queryString += new URLSearchParams({ category: categoryKey });
+    var categoryKey = Object.keys(ProjectCategories).find(
+      (key) => ProjectCategories[key as keyof ProjectCategory] == categoryState
+    );
+    if (categoryKey != null)
+      queryString += new URLSearchParams({ category: categoryKey });
   }
-    
+
   var { data, error } = useSWR<Projects>(queryString, fetcher);
 
   function displayProjects() {
@@ -100,13 +103,13 @@ export default function ProjectBrowser() {
     <div className={styles.container}>
       <ProjectSearch
         selectionState={selectionState}
-        setSelection={setSelection}
+        setSelection={(selection) => setSelection(selection)}
         categoryState={categoryState}
-        setCategory={setCategory}
+        setCategory={(category) => setCategory(category)}
         distanceState={distanceState}
-        setDistance={setDistance}
+        setDistance={(distance) => setDistance(distance)}
         searchState={searchState}
-        setSearch={setSearch}
+        setSearch={(search) => setSearch(search)}
       />
       {displayProjects()}
     </div>

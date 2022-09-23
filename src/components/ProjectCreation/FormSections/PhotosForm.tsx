@@ -7,7 +7,7 @@ type Props = {
   onFormChange: (id: string, value: any) => void;
 };
 
-export default function ImageForm(props: Props) {
+export default function PhotosForm(props: Props) {
   const { onFormChange, formData } = props;
   const imageArray = Array(6); // number of images
 

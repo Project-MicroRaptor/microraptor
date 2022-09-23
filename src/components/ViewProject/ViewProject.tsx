@@ -10,7 +10,7 @@ import {
   ModalOverlay,
   Progress,
   useDisclosure,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
@@ -47,7 +47,10 @@ export default function ViewProject(props: ProjectInfo) {
   const currentFunding = props?.currentFunding ?? 0;
   const completedAt = props?.completedAt ?? new Date().toISOString();
   const backers = 0;
-  const shortDescription = props?.shortDescription || props.shortDescription !== "" ? props.shortDescription : "No Description";
+  const shortDescription =
+    props?.shortDescription || props.shortDescription !== ""
+      ? props.shortDescription
+      : "No Description";
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -79,7 +82,12 @@ export default function ViewProject(props: ProjectInfo) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
-  const shareText = name + "\n\n" + shortDescription + "\n\nView the MicroRaptor project page here: " + window.location.href;
+  const shareText =
+    name +
+    "\n\n" +
+    shortDescription +
+    "\n\nView the MicroRaptor project page here: " +
+    window.location.href;
 
   return (
     <div className={styles.projectContainer}>
@@ -130,7 +138,13 @@ export default function ViewProject(props: ProjectInfo) {
       </div>
 
       <div className={styles.buttons}>
-        <Button width="250px" borderRadius={4} fontSize={16} onClick={onOpen}>
+        <Button
+          width="250px"
+          borderRadius={4}
+          fontSize={16}
+          onClick={onOpen}
+          data-testid="share-button"
+        >
           Share
         </Button>
         <Button width="250px" borderRadius={4} fontSize={16} disabled>
@@ -159,38 +173,46 @@ export default function ViewProject(props: ProjectInfo) {
           <div className={styles.right}>
             {props.aboutBusiness && (
               <div className={styles.rightHeading}>
-                <Heading id="aboutBusiness" size="md" marginBottom={3}>About the Business</Heading>
+                <Heading id="aboutBusiness" size="md" marginBottom={3}>
+                  About the Business
+                </Heading>
                 <span>{props.aboutBusiness}</span>
               </div>
             )}
 
             {props.aboutOwner && (
               <div className={styles.rightHeading}>
-                <Heading id="aboutOwner" size="md" marginBottom={3}>About the Owner</Heading>
+                <Heading id="aboutOwner" size="md" marginBottom={3}>
+                  About the Owner
+                </Heading>
                 <span>{props.aboutOwner}</span>
               </div>
             )}
 
             {props.businessPlan && (
               <div className={styles.rightHeading}>
-                <Heading id="businessPlan" size="md" marginBottom={3}>Business Plan</Heading>
+                <Heading id="businessPlan" size="md" marginBottom={3}>
+                  Business Plan
+                </Heading>
                 <span>{props.businessPlan}</span>
               </div>
             )}
 
             {props.rewards && props.rewards.length > 0 && (
               <div className={styles.rewardButton}>
-                <Heading id="rewards" size="md" marginBottom={3}>Rewards</Heading>
+                <Heading id="rewards" size="md" marginBottom={3}>
+                  Rewards
+                </Heading>
                 {props.rewards.map((reward: ProjectRewards, i) => {
                   return (
                     <span key={i}>
-                      <span className={styles.tier}><b>Reward Tier {i + 1}</b> - {reward.name}
+                      <span className={styles.tier}>
+                        <b>Reward Tier {i + 1}</b> - {reward.name}
                         <span>
-                          Contribute ${reward.cost} or more and receive the following:
+                          Contribute ${reward.cost} or more and receive the
+                          following:
                         </span>
-                        <span>
-                          {reward.description}
-                        </span>
+                        <span>{reward.description}</span>
                       </span>
                     </span>
                   );
@@ -212,7 +234,9 @@ export default function ViewProject(props: ProjectInfo) {
           <ModalHeader>Share Project</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <p className={styles.modalp}>{shareText}</p>
+            <p className={styles.modalp} data-testid="share-modal">
+              {shareText}
+            </p>
           </ModalBody>
           <ModalFooter>
             <Button
@@ -222,9 +246,10 @@ export default function ViewProject(props: ProjectInfo) {
                 toast({
                   title: "Text copied",
                   duration: 2000,
-                  isClosable: true,
+                  isClosable: true
                 });
               }}
+              data-testid="share-copy-button"
             >
               Copy
             </Button>

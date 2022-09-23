@@ -86,7 +86,10 @@ export default function MyProjectForm(props: Props) {
         />
       </FormControl>
 
-      <FormControl className={`${styles.formControl} ${styles.inputLeft}`} isRequired>
+      <FormControl
+        className={`${styles.formControl} ${styles.inputLeft}`}
+        isRequired
+      >
         <FormLabel htmlFor="targetFunding" className={styles.formLabel}>
           Target Funding
         </FormLabel>
@@ -99,7 +102,9 @@ export default function MyProjectForm(props: Props) {
             customInput={Input}
             id="targetFunding"
             value={formData.targetFunding ?? ""}
-            onValueChange={(values) => onFormChange("targetFunding", values.floatValue)}
+            onValueChange={(values) =>
+              onFormChange("targetFunding", values.floatValue)
+            }
           />
         </InputGroup>
       </FormControl>
