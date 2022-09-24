@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE "MessageGroup" (
     "id" TEXT NOT NULL,
+    "projectId" TEXT NOT NULL,
 
     CONSTRAINT "MessageGroup_pkey" PRIMARY KEY ("id")
 );
@@ -27,6 +28,9 @@ CREATE UNIQUE INDEX "_MessageGroupToUser_AB_unique" ON "_MessageGroupToUser"("A"
 
 -- CreateIndex
 CREATE INDEX "_MessageGroupToUser_B_index" ON "_MessageGroupToUser"("B");
+
+-- AddForeignKey
+ALTER TABLE "MessageGroup" ADD CONSTRAINT "MessageGroup_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Message" ADD CONSTRAINT "Message_groupId_fkey" FOREIGN KEY ("groupId") REFERENCES "MessageGroup"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

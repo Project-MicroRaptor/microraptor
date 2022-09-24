@@ -72,6 +72,7 @@ model Project {
   images           String[]
   attachments      String[]
   rewards          ProjectReward[]
+  MessageGroups    MessageGroup[]
 }
 
 model ProjectReward {
@@ -92,9 +93,11 @@ model VerificationToken {
 }
 
 model MessageGroup {
-  id       String    @id @default(cuid())
-  users    User[]
-  messages Message[]
+  id        String    @id @default(cuid())
+  users     User[]
+  messages  Message[]
+  project   Project   @relation(fields: [projectId], references: [id])
+  projectId String
 }
 
 model Message {
