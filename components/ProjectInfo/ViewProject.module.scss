@@ -183,12 +183,12 @@
     .categoriesItem {
       margin-top: 10px;
       margin-right: 10%;
-      max-width: 530px;
+      max-width: 430px;
     }
 
     .projectImage {
       height: 375px;
-      width: 365px;
+      width: 400px;
     }
 
     .progressContainer {
@@ -256,11 +256,5 @@
   .projectContainer {
     width: 1107px;
     margin: 0 auto;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  .projectContainer {
-    width: 1300px;
   }
 }
