@@ -36,9 +36,9 @@ export default async function handler(
     });
 
     if (typeof project === "object" && project.id) {
-      res.status(200).json({ status: "success", data: project, description: "Update Successfully!" });
+      res.status(200).json({ status: "success", data: project, description: "Updated Successfully!" });
     } else {
-      res.status(200).json({ status: "failed", description: "Update Unsuccessfully!" });
+      res.status(200).json({ status: "failed", description: "Internal Server Error" });
     }
 
   } catch (e) {
