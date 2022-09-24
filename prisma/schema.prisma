@@ -72,7 +72,7 @@ model Project {
   images           String[]
   attachments      String[]
   rewards          ProjectReward[]
-  MessageGroups    MessageGroup[]
+  messageGroups    MessageGroup[]
 }
 
 model ProjectReward {
