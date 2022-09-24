@@ -40,12 +40,21 @@ var locationPlaces: Locations[];
         columns: headers,
         cast: (value, context) => {
           if (context.header) return value;
-          if (context.column === "id") return Number(value);
-          if (context.column === "postcode") return Number(value);
-          if (context.column === "locality") return String(value);
-          if (context.column === "state") return String(value);
-          if (context.column === "longitude") return Number(value);
-          if (context.column === "latitude") return Number(value);
+
+          switch(context.column){
+            case "id":
+              return Number(value);
+            case "postcode":
+              return Number(value);
+            case "locality":
+              return String(value);
+            case "state":
+              return String(value);
+            case "longitude": 
+             return Number(value);
+            case "latitude":
+              return Number(value);
+          }
         },
       },
       (error, result: Locations[]) => {
