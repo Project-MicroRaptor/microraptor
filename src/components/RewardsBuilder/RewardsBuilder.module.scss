@@ -8,6 +8,11 @@
   width: calc(100% - 5px);
 }
 
+.error {
+  border-color: var(--chakra-colors-red-600);
+  border-width: 2px;
+}
+
 .top {
   display: flex;
   align-items: flex-start;
