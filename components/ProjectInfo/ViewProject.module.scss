@@ -132,8 +132,8 @@
   }
 
   .projectImage {
-    height: 365px;
     width: 355px;
+    max-height: 340px;
   }
 
   .categoriesItem {
@@ -187,8 +187,8 @@
     }
 
     .projectImage {
-      height: 375px;
-      width: 400px;
+      width: 410px;
+      max-height: 355px;
     }
 
     .progressContainer {
