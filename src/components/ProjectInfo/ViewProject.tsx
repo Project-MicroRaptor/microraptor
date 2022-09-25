@@ -11,10 +11,11 @@ import {
   Progress,
   useDisclosure,
   useToast,
+  Button,
+  Badge,
 } from "@chakra-ui/react";
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
-import { Button } from "@chakra-ui/react";
 import React from "react";
 
 import { ProjectCategories } from "../../types/categories";
@@ -38,6 +39,7 @@ export interface ProjectInfo {
   aboutOwner?: string;
   businessPlan?: string;
   rewards?: Array<ProjectRewards>;
+  active?: boolean;
 }
 
 export default function ViewProject(props: ProjectInfo) {
@@ -83,9 +85,21 @@ export default function ViewProject(props: ProjectInfo) {
 
   return (
     <div className={styles.projectContainer}>
-      <span className={styles.name}>
-        <Center>{name}</Center>
-      </span>
+      <Center className={styles.name}>
+        <Heading>{name}</Heading>
+        {props.active ? (
+          <></>
+        ) : (
+          <Badge
+            className={styles.inactiveBanner}
+            colorScheme="red"
+            variant="solid"
+            fontSize="md"
+          >
+            Inactive
+          </Badge>
+        )}
+      </Center>
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>

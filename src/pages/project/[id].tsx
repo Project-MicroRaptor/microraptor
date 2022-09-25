@@ -1,14 +1,14 @@
-import { useRouter } from 'next/router';
-import { fetcher } from '../../utils/swr';
-import { Spinner, Heading } from '@chakra-ui/react';
-import Head from 'next/head';
+import { useRouter } from "next/router";
+import { fetcher } from "../../utils/swr";
+import { Spinner, Heading } from "@chakra-ui/react";
+import Head from "next/head";
 import useSWR from "swr";
 
-import ViewProject from '../../components/ProjectInfo/ViewProject';
-import NavBar from './../../components/NavBar/NavBar';
+import ViewProject from "../../components/ProjectInfo/ViewProject";
+import NavBar from "./../../components/NavBar/NavBar";
 
-import styles from './[id].module.scss';
-import { ProjectRewards } from '../../types/project';
+import styles from "./[id].module.scss";
+import { ProjectRewards } from "../../types/project";
 
 type Projects = {
   id: string;
@@ -25,6 +25,7 @@ type Projects = {
   aboutOwner: string;
   businessPlan: string;
   rewards: Array<ProjectRewards>;
+  active: boolean;
 };
 
 export default function ProjectView() {
@@ -90,7 +91,8 @@ export default function ProjectView() {
         aboutOwner={data.aboutOwner}
         businessPlan={data.businessPlan}
         rewards={data.rewards}
+        active={data.active}
       />
     </>
   );
-};
+}
