@@ -1,0 +1,84 @@
+.rewardContainer {
+  border-width: 1px;
+  border-color: black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 30px;
+  position: relative;
+  width: calc(100% - 5px);
+}
+
+.error {
+  border-color: var(--chakra-colors-red-600);
+  border-width: 2px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.level {
+  line-height: 40px;
+}
+
+.name {
+  flex-grow: 1;
+}
+
+.cost {
+  max-width: 150px;
+
+  input {
+    padding-left: 30px;
+  }
+}
+
+.delete {
+  display: inline-block;
+  position: absolute;
+  right: -15px;
+  top: -14px;
+  cursor: pointer;
+
+  svg {
+    height: 18px;
+    width: 18px;
+    fill: var(--chakra-colors-red-600);
+  }
+}
+
+.add {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  svg {
+    fill: var(--chakra-colors-brand-primary);
+    margin: auto;
+    height: 18px;
+    width: 18px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .top {
+    display: block;
+    margin-bottom: 0;
+  }
+
+  .level {
+    text-align: center;
+  }
+
+  .level,
+  .name,
+  .cost {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 10px;
+  }
+}
