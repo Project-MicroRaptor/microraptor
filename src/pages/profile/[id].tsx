@@ -3,11 +3,11 @@ import { fetcher } from '../../utils/swr';
 import useSWR from 'swr';
 import { Spinner, Heading } from '@chakra-ui/react';
 
-import ViewProfile from '../../components/ViewProfile/ViewProfile';
+import ViewProfile from '../../../components/ViewProfile/ViewProfile';
 import NavBar from '../../components/NavBar/NavBar';
 
 import styles from './[id].module.scss';
-import type { Profile } from '../../types/profile';
+import type { Profile } from '../../../types/profile';
 import Head from 'next/head';
 
 export default function ProfileView() {

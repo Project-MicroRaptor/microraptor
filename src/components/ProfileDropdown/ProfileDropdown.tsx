@@ -31,7 +31,9 @@ export default function ProfileDropdown() {
         border="2px solid grey"
       />
       <span className={styles.sessionName}>{session.user?.name}</span>
-      <span className={styles.viewProfile}>View Profile</span>
+      <Link href={`/profile/${session.user.id}`}>
+        <span className={styles.viewProfile}>View Profile</span>
+      </Link>
       <div className={styles.divider}>
         <div className={styles.item}>
           <span className={styles.icon}>
@@ -55,9 +57,8 @@ export default function ProfileDropdown() {
           className={styles.item}
           onClick={() =>
             signOut({
-              callbackUrl: `${
-                process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"
-              }/api/auth/logout`,
+              callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"
+                }/api/auth/logout`,
             })
           }
         >
