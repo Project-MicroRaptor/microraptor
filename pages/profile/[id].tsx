@@ -51,7 +51,7 @@ export default function ProfileView() {
   return (
     <div>
       <Head>
-        <title>MicroRaptor - {data ? data.name : 'Microraptor'}</title>
+        <title> {data ? `Microraptor - ${data.name}'s Profile` : 'MicroRaptor'}</title>
         <meta name="description" content="User Profile" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
