@@ -14,30 +14,13 @@ export default function ProfileView() {
   const router = useRouter();
   const { id } = router.query;
   const { data, error } = useSWR<Profile>(`/api/profile/${id}`, fetcher);
+  
+  function displayProfile() {
+    if (error) 
+      return <Heading className={styles.error}> 404 | Page not found </Heading>;
 
-  if (error)
-    return (
-      <>
-        <Head>
-          <title>MicroRaptor</title>
-          <meta name="description" content="User Profile" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <NavBar />
-        <Heading className={styles.error}> 404 | Page not found </Heading>;
-      </>
-    )
-
-
-  if (!data)
-    return (
-      <>
-        <Head>
-          <title>MicroRaptor</title>
-          <meta name="description" content="User Profile" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <NavBar />
+    else if (!data) {
+      return (
         <div className={styles.spinner}>
           <Spinner
             margin="auto"
@@ -49,25 +32,31 @@ export default function ProfileView() {
             speed="1s"
           />
         </div>
-      </>
-    );
+      );
+    }
 
-
+    else {
+      return (
+        <div>
+          <ViewProfile
+            name={data.name}
+            bio={data.bio}
+            image={data.image}
+          />
+        </div>
+      );
+    }
+  }
 
   return (
-
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>MicroRaptor - {data.name}&apos;s Profile</title>
+        <title>MicroRaptor - {data ? data.name : 'Microraptor'}</title>
         <meta name="description" content="User Profile" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <ViewProfile
-        name={data.name}
-        bio={data.bio}
-        image={data.image}
-      />
+      {displayProfile()}
     </div>
-  );
+  )
 };
