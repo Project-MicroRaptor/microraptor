@@ -38,9 +38,9 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
@@ -49,36 +49,39 @@ model User {
   location      String?
   age           Int?
   bio           String?
+  messageGroups MessageGroup[]
+  messages      Message[]
 }
 
 model Project {
-  id                String    @id @default(cuid())
-  name              String
-  createdAt         DateTime  @default(now())
-  completedAt       DateTime  @default(dbgenerated("(now() + '1 year'::interval)"))
-  owner             User      @relation(fields: [ownerId], references: [id])
-  ownerId           String
-  active            Boolean   @default(true)
-  targetFunding     Float
-  currentFunding    Float     @default(0)
-  postcode          Int
-  shortDescription  String
-  aboutBusiness     String?
-  aboutOwner        String?
-  businessPlan      String?
-  categories        String[]
-  images            String[]
-  attachments       String[]
-  rewards           ProjectReward[]
+  id               String          @id @default(cuid())
+  name             String
+  createdAt        DateTime        @default(now())
+  completedAt      DateTime        @default(dbgenerated("(now() + '1 year'::interval)"))
+  owner            User            @relation(fields: [ownerId], references: [id])
+  ownerId          String
+  active           Boolean         @default(true)
+  targetFunding    Float
+  currentFunding   Float           @default(0)
+  postcode         Int
+  shortDescription String
+  aboutBusiness    String?
+  aboutOwner       String?
+  businessPlan     String?
+  categories       String[]
+  images           String[]
+  attachments      String[]
+  rewards          ProjectReward[]
+  messageGroups    MessageGroup[]
 }
 
 model ProjectReward {
-  id            String    @id @default(cuid())
-  project       Project   @relation(fields: [projectID], references: [id])
-  projectID     String
-  name          String
-  description   String
-  cost          Float
+  id          String  @id @default(cuid())
+  project     Project @relation(fields: [projectID], references: [id])
+  projectID   String
+  name        String
+  description String
+  cost        Float
 }
 
 model VerificationToken {
@@ -87,4 +90,22 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model MessageGroup {
+  id        String    @id @default(cuid())
+  users     User[]
+  messages  Message[]
+  project   Project   @relation(fields: [projectId], references: [id])
+  projectId String
+}
+
+model Message {
+  id        String       @id @default(cuid())
+  group     MessageGroup @relation(fields: [groupId], references: [id])
+  groupId   String
+  from      User         @relation(fields: [fromId], references: [id])
+  fromId    String
+  body      String
+  timestamp DateTime     @default(now())
 }
