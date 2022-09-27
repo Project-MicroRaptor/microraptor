@@ -1,14 +1,31 @@
 import { useSession } from "next-auth/react";
-import styles from "./SettingsTabs.module.scss";
 import { Image, Textarea, Box, Center, Button, useToast, UseToastOptions } from "@chakra-ui/react";
 import { BsUpload } from "react-icons/bs";
-import { useState } from "react";
-import { updateProfileSetting } from "../../db/dbUtils";
+import { useState, useEffect } from "react";
 
-export default function ProfileSettings() {
+import { updateProfileSetting, getProfileSetting } from "../../db/dbUtils";
+
+import styles from "./SettingsTabs.module.scss";
+
+export interface ProjectInfo {
+  bio?: string;
+}
+
+export default function ProfileSettings(props: ProjectInfo) {
   const { data: session } = useSession();
   const [bio, setBio] = useState("");
-  const toast = useToast()
+  const [isBioChange, setBioChange] = useState(false);
+
+  const toast = useToast();
+
+  const onChangeBio = ({ target }: { target: any }) => {
+    setBio(target?.value);
+    setBioChange(true);
+  }
+
+  const tabSwitch = ({ target }: { target: any }) => {
+    window.localStorage.setItem('tempBio', target?.value);
+  }
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -34,8 +51,30 @@ export default function ProfileSettings() {
       }
     }
 
+    setBioChange(false);
+
     toast(toastInfo);
+
+    if (window.localStorage.tempBio) {
+      delete window.localStorage.tempBio;
+    }
   }
+
+  useEffect(() => {
+    (async () => {
+      const response = await getProfileSetting();
+      const tempBio = window.localStorage.tempBio;
+
+      if (response && response.data && response.data.bio) {
+        setBio(response.data.bio);
+      }
+
+      if (tempBio) {
+        setBio(tempBio);
+        setBioChange(true);
+      };
+    })();
+  }, []);
 
   if (!session) {
     return null;
@@ -78,13 +117,17 @@ export default function ProfileSettings() {
       <Textarea
         textAlign="center"
         placeholder="Tell us about yourself...."
-        onChange={({ target }) => setBio(target?.value)}
         size="md"
         height="150px"
+        value={bio}
+        onChange={onChangeBio}
+        onBlur={tabSwitch}
       />
-      <div className={styles.saveBox}>
-        <Button className={styles.saveButton} onClick={handleSubmit}>Save</Button>
-      </div>
+      {isBioChange && (
+        <div className={styles.saveBox}>
+          <Button className={styles.saveButton} onClick={handleSubmit}>Save</Button>
+        </div>
+      )}
     </div>
   );
 }
