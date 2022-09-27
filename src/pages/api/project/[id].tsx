@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from './../../../db/prisma';
+import { prisma } from "./../../../db/prisma";
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,7 +10,7 @@ export default async function handler(
   if (id && typeof id == "string") {
     const projectinfo = await prisma.project.findUnique({
       where: {
-        id
+        id,
       },
       select: {
         id: true,
@@ -33,6 +33,7 @@ export default async function handler(
             description: true,
           },
         },
+        active: true,
       },
     });
     res.json(projectinfo);

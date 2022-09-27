@@ -17,14 +17,17 @@ import NumberFormat from "react-number-format";
 import styles from "./ProfileSections.module.scss";
 
 import type { ProjectCategory } from "../../../types/categories";
+import type { FormErrors } from "../../../utils/formValidation";
+import type { CreateFormData } from "../../../types/createForm";
 
 type Props = {
-  formData: any;
+  formData: CreateFormData;
   onFormChange: (id: string, value: any) => void;
+  errors: FormErrors;
 };
 
 export default function MyProjectForm(props: Props) {
-  const { onFormChange, formData } = props;
+  const { onFormChange, formData, errors } = props;
 
   const CategoryButtons = () => {
     const buttons = Object.keys(ProjectCategories).map((key) => {
@@ -34,13 +37,14 @@ export default function MyProjectForm(props: Props) {
       return (
         <SwitchButton
           key={key}
-          selected={selected}
+          selected={!!selected}
           onChange={(value) =>
             onFormChange("categories", {
               ...formData.categories,
               [key]: value,
             })
           }
+          isInvalid={!!errors?.categories}
         >
           {category}
         </SwitchButton>
@@ -68,6 +72,7 @@ export default function MyProjectForm(props: Props) {
           onChange={(event) =>
             onFormChange(event.target.id, event.target.value)
           }
+          isInvalid={!!errors?.name}
         />
       </FormControl>
 
@@ -83,6 +88,7 @@ export default function MyProjectForm(props: Props) {
           onChange={(event) =>
             onFormChange(event.target.id, event.target.value)
           }
+          isInvalid={!!errors?.shortDescription}
         />
       </FormControl>
 
@@ -105,6 +111,7 @@ export default function MyProjectForm(props: Props) {
             onValueChange={(values) =>
               onFormChange("targetFunding", values.floatValue)
             }
+            isInvalid={!!errors?.targetFunding}
           />
         </InputGroup>
       </FormControl>
@@ -122,6 +129,11 @@ export default function MyProjectForm(props: Props) {
             monthNames: monthNames,
             dayNames: dayNames,
           }}
+          propsConfigs={{
+            inputProps: {
+              isInvalid: !!errors?.completedAt,
+            },
+          }}
         />
       </FormControl>
 
@@ -133,10 +145,11 @@ export default function MyProjectForm(props: Props) {
           type="number"
           id="postcode"
           className={styles.formInput}
-          value={formData.postcode ?? ""}
+          value={formData?.postcode ?? ""}
           onChange={(event) =>
             onFormChange(event.target.id, event.target.value)
           }
+          isInvalid={!!errors?.postcode}
         />
       </FormControl>
 

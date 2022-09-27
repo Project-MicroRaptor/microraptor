@@ -1,8 +1,9 @@
 import { FormControl, FormLabel, Textarea } from "@chakra-ui/react";
+import { CreateFormData } from "../../../types/createForm";
 import styles from "./ProfileSections.module.scss";
 
 type Props = {
-  formData: any;
+  formData: CreateFormData;
   onFormChange: (id: string, value: any) => void;
 };
 
