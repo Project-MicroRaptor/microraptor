@@ -1,4 +1,5 @@
 import {
+  Badge,
   Center,
   Heading,
   Modal,
@@ -38,6 +39,7 @@ export interface ProjectInfo {
   aboutOwner?: string;
   businessPlan?: string;
   rewards?: Array<ProjectRewards>;
+  active?: boolean;
 }
 
 export default function ViewProject(props: ProjectInfo) {
@@ -91,6 +93,21 @@ export default function ViewProject(props: ProjectInfo) {
 
   return (
     <div className={styles.projectContainer}>
+      <Center className={styles.name}>
+        <Heading>{name}</Heading>
+        {props.active ? (
+          <></>
+        ) : (
+          <Badge
+            className={styles.inactiveBanner}
+            colorScheme="red"
+            variant="solid"
+            fontSize="md"
+          >
+            Inactive
+          </Badge>
+        )}
+      </Center>
       <span className={styles.name}>
         <Center>{name}</Center>
       </span>
