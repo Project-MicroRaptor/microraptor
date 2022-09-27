@@ -4,6 +4,10 @@ import PhotosForm from "../../../../src/components/ProjectCreation/FormSections/
 describe("PhotosForm", () => {
   test("PhotosForm should render correctly", () => {
     const formData = {};
-    render(<PhotosForm formData={formData} onFormChange={() => {}} />);
+    const errors = {};
+
+    render(
+      <PhotosForm formData={formData} onFormChange={() => {}} errors={errors} />
+    );
   });
 });

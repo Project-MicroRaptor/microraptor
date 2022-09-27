@@ -4,6 +4,14 @@ import RewardsForm from "../../../../src/components/ProjectCreation/FormSections
 describe("RewardsForm", () => {
   test("RewardsForm should render correctly", () => {
     const formData = {};
-    render(<RewardsForm formData={formData} onFormChange={() => {}} />);
+    const errors = {};
+
+    render(
+      <RewardsForm
+        formData={formData}
+        onFormChange={() => {}}
+        errors={errors}
+      />
+    );
   });
 });
