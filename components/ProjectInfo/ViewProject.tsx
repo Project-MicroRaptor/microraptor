@@ -1,7 +1,6 @@
 import {
   Center,
   FormControl,
-  FormLabel,
   Heading,
   Modal,
   ModalBody,
@@ -25,12 +24,14 @@ import type { ProjectCategory } from "../../types/categories";
 
 import styles from "./ViewProject.module.scss";
 import { ProjectRewards } from "../../types/project";
+import { User } from "next-auth";
 
 export interface ProjectInfo {
   id?: string;
   name?: string;
   shortDescription?: string;
   images?: string[];
+  owner?: User;
   currentFunding?: number;
   targetFunding?: number;
   postcode?: number;
@@ -42,6 +43,8 @@ export interface ProjectInfo {
   businessPlan?: string;
   rewards?: Array<ProjectRewards>;
 }
+
+export function CreateMessageGroup(message: String){}
 
 export default function ViewProject(props: ProjectInfo) {
   const name = props?.name ?? "Missing";
@@ -78,11 +81,16 @@ export default function ViewProject(props: ProjectInfo) {
     categories.push("None");
   }
 
+  let [message, setValue] = React.useState('')
+  let handleInputChange = (e: any) => {
+    let inputValue = e.target.value
+    setValue(inputValue)
+  }
+
   const finalRef = React.useRef(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const message = "";
-  const isOpenMes = isOpen,  onOpenMes = onOpen, onCloseMes = onClose;
+  const { isOpen: isShareOpen , onOpen: onShareOpen, onClose: onShareClose } = useDisclosure()
+  const { isOpen: isMssgOpen , onOpen: onMssgOpen, onClose: onMssgClose } = useDisclosure()
 
   const shareText = name + "\n\n" + shortDescription + "\n\nView the MicroRaptor project page here: " + window.location.href;
 
@@ -135,13 +143,13 @@ export default function ViewProject(props: ProjectInfo) {
       </div>
 
       <div className={styles.buttons}>
-        <Button width="250px" borderRadius={4} fontSize={16} onClick={onOpen}>
+        <Button width="250px" borderRadius={4} fontSize={16} onClick={onShareOpen}>
           Share
         </Button>
         <Button width="250px" borderRadius={4} fontSize={16} disabled>
           Fund this Project
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} onClick={onOpenMes}>
+        <Button width="250px" borderRadius={4} fontSize={16} onClick={onMssgOpen}>
           Enquire about Project
         </Button>
       </div>
@@ -207,8 +215,8 @@ export default function ViewProject(props: ProjectInfo) {
       </div>
       <Modal
         finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={isShareOpen}
+        onClose={onShareClose}
         size={"xl"}
         isCentered
       >
@@ -233,7 +241,7 @@ export default function ViewProject(props: ProjectInfo) {
             >
               Copy
             </Button>
-            <Button onClick={onClose} variant="ghost">
+            <Button onClick={onShareClose} variant="ghost">
               Close
             </Button>
           </ModalFooter>
@@ -241,30 +249,30 @@ export default function ViewProject(props: ProjectInfo) {
       </Modal>
       <Modal
         finalFocusRef={finalRef}
-        isOpen={isOpenMes}
-        onClose={onCloseMes}
-        size={"xl"}
+        isOpen={isMssgOpen}
+        onClose={onMssgClose}
+        size="xl"
         isCentered
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Share Project</ModalHeader>
+          <ModalHeader>Enquire about {props.name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
           <FormControl className={styles.formControl}>
-        <FormLabel htmlFor="message" className={styles.formLabel}>
-          About the Business
-        </FormLabel>
         <Textarea
           id="message"
-          value={message ?? ""}
+          value={message}
+          onChange={handleInputChange}
           className={styles.formInput}
+          resize="vertical"
+          min-height="100%"
         />
       </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onCloseMes} variant="ghost">
-              Close
+            <Button onClick={CreateMessageGroup(message)}>
+              Submit
             </Button>
           </ModalFooter>
         </ModalContent>
