@@ -25,6 +25,7 @@ import type { ProjectCategory } from "../../types/categories";
 import styles from "./ViewProject.module.scss";
 import { ProjectRewards } from "../../types/project";
 import { User } from "next-auth";
+import { useSession } from "next-auth/react";
 
 export interface ProjectInfo {
   id?: string;
@@ -44,7 +45,12 @@ export interface ProjectInfo {
   rewards?: Array<ProjectRewards>;
 }
 
-export function CreateMessageGroup(message: String){}
+export function CreateMessageGroup(message: String){
+ // const { data: session } = useSession();
+
+  
+  window.location.href = "/inbox";
+}
 
 export default function ViewProject(props: ProjectInfo) {
   const name = props?.name ?? "Missing";
@@ -271,7 +277,7 @@ export default function ViewProject(props: ProjectInfo) {
       </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={CreateMessageGroup(message)}>
+            <Button onClick={() => CreateMessageGroup(message)}>
               Submit
             </Button>
           </ModalFooter>
