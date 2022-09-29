@@ -46,8 +46,6 @@ model User {
   accounts      Account[]
   sessions      Session[]
   projects      Project[]
-  location      String?
-  age           Int?
   bio           String?
   messageGroups MessageGroup[]
   messages      Message[]

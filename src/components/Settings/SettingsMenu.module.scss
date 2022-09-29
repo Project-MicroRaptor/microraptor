@@ -2,7 +2,7 @@
   width: 100%;
   height: calc(100vh - 57px);
   padding: 20px;
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
 }
 
 .title {
@@ -28,18 +28,18 @@
   flex-direction: row;
   display: flex;
   align-items: left;
-  margin: 1px 1px 15px 1px;
+  margin: 1px 1px 15px;
 
   &:hover {
     background-color: var(--chakra-colors-brand-primary);
-    color: #ffffff;
+    color: #fff;
   }
 }
 
 .icn {
   font-size: 22px;
   text-align: left;
-  padding: 0px 8px 0px 10px;
+  padding: 0 8px 0 10px;
 }
 
 @media screen and (max-width: 860px) {
@@ -70,7 +70,7 @@
 
   .icn {
     font-size: 16px;
-    padding: 0px 6px 0px 4px;
+    padding: 0 6px 0 4px;
   }
 }
 
@@ -82,7 +82,8 @@
   .flexContainer {
     flex-direction: column;
   }
+
   .btn {
-    margin-bottom:0px;
+    margin-bottom: 0;
   }
 }

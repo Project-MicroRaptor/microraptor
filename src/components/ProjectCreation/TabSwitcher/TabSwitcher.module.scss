@@ -6,6 +6,7 @@
 .item {
   cursor: pointer;
   flex: 1 1 0px;
+
   &:hover {
     color: var(--chakra-colors-brand-primary);
   }

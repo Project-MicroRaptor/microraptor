@@ -11,13 +11,13 @@ function MyApp({ Component, pageProps }: AuthAppProps) {
   return (
     <SessionProvider>
       <ChakraProvider theme={theme}>
-          {Component.requireAuth ? (
-            <AuthGuard>
-              <Component {...pageProps} />
-            </AuthGuard>
-          ) : (
+        {Component.requireAuth ? (
+          <AuthGuard>
             <Component {...pageProps} />
-          )}
+          </AuthGuard>
+        ) : (
+          <Component {...pageProps} />
+        )}
       </ChakraProvider>
     </SessionProvider>
   );
