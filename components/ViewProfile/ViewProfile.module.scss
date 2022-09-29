@@ -20,7 +20,7 @@
 }
 
 .profileName {
-  padding-top: 20px;
+  margin-top: 20px;
   max-width: 80%;
   word-break: break-word;
 }
@@ -32,14 +32,14 @@
 .profileBio {
   h2 {
     font-weight: bold;
-    font-size: x-large;
-    padding-top: 15px;
+    font-size: 1.5em;
+    margin-top: 15px;
   }
 
   p {
     white-space: pre-wrap;
     text-align: justify;
-    padding-top: 5px;
+    margin-top: 5px;
     padding: 10px;
   }
 }
