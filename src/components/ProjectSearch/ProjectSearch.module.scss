@@ -10,10 +10,10 @@
   margin-bottom: 30px;
   overflow: hidden;
 
-  Button,
-  Input {
-    border-width: 0px;
-    border-radius: 0px;
+  button,
+  input {
+    border-width: 0;
+    border-radius: 0;
     flex-grow: 1;
     text-align: center;
   }

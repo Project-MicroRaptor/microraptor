@@ -38,6 +38,13 @@
   }
 }
 
+.backersAmount p,
+.daysAmount p {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
 .progressContainer {
   margin-top: 45px;
 
@@ -58,13 +65,6 @@
       font-weight: 900;
     }
   }
-}
-
-.backersAmount p,
-.daysAmount p {
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: 500;
 }
 
 .buttons {
@@ -180,7 +180,7 @@
   }
 }
 
-.modalp{
+.modalp {
   white-space: pre-wrap;
 }
 
