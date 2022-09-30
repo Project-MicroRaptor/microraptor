@@ -3,7 +3,7 @@ import { Heading, Avatar } from '@chakra-ui/react';
 
 import type { Profile } from '../../types/profile';
 
-//TODO: Profile Cards for Active and Backed Projects
+
 export default function ViewProfile(props: Profile) {
   const name = props?.name ?? "";
   const bio = props?.bio ?? "";
@@ -22,6 +22,9 @@ export default function ViewProfile(props: Profile) {
           <p>{bio}</p>
         </div>
       )}
+      <div className={styles.profileProjects}>
+        <h2>Active Projects:</h2>
+      </div>
     </div>
   )
 };
