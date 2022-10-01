@@ -2,6 +2,7 @@ import {
   Badge,
   Center,
   Heading,
+  Link,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -108,9 +109,6 @@ export default function ViewProject(props: ProjectInfo) {
           </Badge>
         )}
       </Center>
-      <span className={styles.name}>
-        <Center>{name}</Center>
-      </span>
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
@@ -164,8 +162,8 @@ export default function ViewProject(props: ProjectInfo) {
         >
           Share
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>
-          Fund this Project
+        <Button width="250px" borderRadius={4} fontSize={16}>
+          <Link href={`/project/fund/${props.id}`}>Fund this Project</Link>
         </Button>
         <Button width="250px" borderRadius={4} fontSize={16} disabled>
           Enquire about Project

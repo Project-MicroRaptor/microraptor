@@ -78,6 +78,7 @@ export default function ProjectView() {
       </Head>
       <NavBar />
       <ViewProject
+        id={data.id}
         name={data.name}
         shortDescription={data.shortDescription}
         images={data.images}
