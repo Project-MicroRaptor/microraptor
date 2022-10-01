@@ -70,7 +70,15 @@ export default function OrderSummary(props: OrderSummaryProps) {
       <div className={styles.content}>
         <div className={styles.project}>
           <div className={styles.thumbnailContainer}>
-            <Image className={styles.thumbnail} src={props.images[0]} />
+            {props.images.length == 0 ? (
+              <></>
+            ) : (
+              <Image
+                className={styles.thumbnail}
+                src={props.images[0]}
+                alt=""
+              />
+            )}
           </div>
           <Text>
             <b>
