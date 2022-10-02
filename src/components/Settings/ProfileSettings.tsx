@@ -68,12 +68,10 @@ export default function ProfileSettings(props: ProjectInfo) {
       }
 
       if (bio) {
-        setBio(bio);
-        setBioChange(true);
+        setBio(bio), setBioChange(true);
       };
     })();
   }, []);
-
 
   return (
     <div className={styles.containerTitle}>
