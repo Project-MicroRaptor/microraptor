@@ -18,8 +18,21 @@ export default function ProfileSettings(props: ProjectInfo) {
   const [isBioChange, setBioChange] = useState(props && props.bio.length > 0);
   const setBio = props.setBio;
   const bio = props.bio;
-
   const toast = useToast();
+
+  useEffect(() => {
+    (async () => {
+      const response = await getProfileSetting();
+
+      if (response && response.data && response.data.bio) {
+        setBio(response.data.bio);
+      }
+
+      if (bio) {
+        setBio(bio), setBioChange(true);
+      };
+    })();
+  }, []);
 
   if (!session) {
     return null;
@@ -58,20 +71,6 @@ export default function ProfileSettings(props: ProjectInfo) {
 
     toast(toastInfo);
   }
-
-  useEffect(() => {
-    (async () => {
-      const response = await getProfileSetting();
-
-      if (response && response.data && response.data.bio) {
-        setBio(response.data.bio);
-      }
-
-      if (bio) {
-        setBio(bio), setBioChange(true);
-      };
-    })();
-  }, []);
 
   return (
     <div className={styles.containerTitle}>
