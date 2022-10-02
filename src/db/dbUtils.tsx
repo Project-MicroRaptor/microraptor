@@ -17,7 +17,7 @@ export async function createProject(
 export async function updateProfileSetting(
   setting: ProfileSetting,
 ) {
-  return fetch("/api/update-profile", {
+  return fetch("/api/profile", {
     method: "POST",
     body: JSON.stringify(setting),
   }).then((res) => {
@@ -26,7 +26,7 @@ export async function updateProfileSetting(
 }
 
 export async function getProfileSetting() {
-  return fetch("/api/get-profile", {
+  return fetch("/api/profile", {
     method: "GET",
   }).then((res) => {
     return res.json();

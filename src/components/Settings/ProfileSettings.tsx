@@ -8,29 +8,30 @@ import { updateProfileSetting, getProfileSetting } from "../../db/dbUtils";
 import styles from "./SettingsTabs.module.scss";
 
 export interface ProjectInfo {
-  bio?: string;
+  bio: string;
+  onChange: (event: React.ChangeEvent) => void;
+  setBio: (bio: string) => void;
 }
 
 export default function ProfileSettings(props: ProjectInfo) {
   const { data: session } = useSession();
-  const [bio, setBio] = useState("");
-  const [isBioChange, setBioChange] = useState(false);
+  const [isBioChange, setBioChange] = useState(props && props.bio.length > 0);
 
   const toast = useToast();
 
-  const onChangeBio = ({ target }: { target: any }) => {
-    setBio(target?.value);
-    setBioChange(true);
+  if (!session) {
+    return null;
   }
 
-  const tabSwitch = ({ target }: { target: any }) => {
-    window.localStorage.setItem('tempBio', target?.value);
+  const onChangeBio = (event: React.ChangeEvent) => {
+    props.onChange(event);
+    setBioChange(true);
   }
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
-    const response = await updateProfileSetting({ bio });
+    const response = await updateProfileSetting({ bio: props.bio });
     let toastInfo: UseToastOptions;
 
     if (response && response.status === "success") {
@@ -54,31 +55,23 @@ export default function ProfileSettings(props: ProjectInfo) {
     setBioChange(false);
 
     toast(toastInfo);
-
-    if (window.localStorage.tempBio) {
-      delete window.localStorage.tempBio;
-    }
   }
 
   useEffect(() => {
     (async () => {
       const response = await getProfileSetting();
-      const tempBio = window.localStorage.tempBio;
 
       if (response && response.data && response.data.bio) {
-        setBio(response.data.bio);
+        props.setBio(response.data.bio);
       }
 
-      if (tempBio) {
-        setBio(tempBio);
+      if (props.bio) {
+        props.setBio(props.bio);
         setBioChange(true);
       };
     })();
   }, []);
 
-  if (!session) {
-    return null;
-  }
 
   return (
     <div className={styles.containerTitle}>
@@ -119,9 +112,8 @@ export default function ProfileSettings(props: ProjectInfo) {
         placeholder="Tell us about yourself...."
         size="md"
         height="150px"
-        value={bio}
+        value={props.bio}
         onChange={onChangeBio}
-        onBlur={tabSwitch}
       />
       {isBioChange && (
         <div className={styles.saveBox}>
