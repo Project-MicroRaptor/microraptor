@@ -6,7 +6,7 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
+  MenuItem
 } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
 import { ProjectCategories } from "../../types/categories";
@@ -18,13 +18,13 @@ import styles from "./ProjectSearch.module.scss";
 
 type ProjectSearchProps = {
   selectionState: SearchType;
-  setSelection: React.Dispatch<React.SetStateAction<SearchType>>;
+  setSelection: (selection: SearchType) => void;
   categoryState: string | null;
-  setCategory: React.Dispatch<React.SetStateAction<string | null>>;
+  setCategory: (category: string | null) => void;
   distanceState: number | null;
-  setDistance: React.Dispatch<React.SetStateAction<number | null>>;
+  setDistance: (distance: number | null) => void;
   searchState: string | null;
-  setSearch: React.Dispatch<React.SetStateAction<string | null>>;
+  setSearch: (search: string | null) => void;
 };
 
 export default function ProjectSearch(props: ProjectSearchProps) {
@@ -70,6 +70,7 @@ export default function ProjectSearch(props: ProjectSearchProps) {
           : { variant: "outline" })}
         onClick={onFeaturedClick}
         _focus={{ boxShadow: "none" }}
+        data-testid="featured-button"
       >
         Featured
       </Button>
@@ -81,25 +82,30 @@ export default function ProjectSearch(props: ProjectSearchProps) {
             : { variant: "outline" })}
           as={Button}
           _focus={{ boxShadow: "none" }}
+          data-testid="category-button"
         >
           {props.categoryState == null ? "All Categories" : props.categoryState}
         </MenuButton>
         <MenuList
           sx={{
             "&::-webkit-scrollbar": {
-              width: "8px",
+              width: "8px"
             },
             "&::-webkit-scrollbar-thumb": {
               backgroundColor: `rgba(0, 0, 0, 0.15)`,
-              borderRadius: "30px",
-            },
+              borderRadius: "30px"
+            }
           }}
           maxHeight="300px"
           overflowY="scroll"
         >
           {Object.entries(ProjectCategories).map(([key, value]) => {
             return (
-              <MenuItem key={key} onClick={() => onCategoryClick(value)}>
+              <MenuItem
+                key={key}
+                onClick={() => onCategoryClick(value)}
+                data-testid={key}
+              >
                 {value}
               </MenuItem>
             );
@@ -117,18 +123,26 @@ export default function ProjectSearch(props: ProjectSearchProps) {
             variant="outline"
             as={Button}
             _focus={{ boxShadow: "none" }}
+            data-testid="distance-button"
           >
             {props.distanceState == null
               ? "Any Distance"
               : "< " + props.distanceState + "km"}
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => props.setDistance(null)}>
+            <MenuItem
+              onClick={() => props.setDistance(null)}
+              data-testid="anyDistance"
+            >
               Any Distance
             </MenuItem>
             {Object.entries(RadiusDistances).map(([key, value]) => {
               return (
-                <MenuItem key={key} onClick={() => props.setDistance(value)}>
+                <MenuItem
+                  key={key}
+                  data-testid={key}
+                  onClick={() => props.setDistance(value)}
+                >
                   {key}
                 </MenuItem>
               );
@@ -143,6 +157,7 @@ export default function ProjectSearch(props: ProjectSearchProps) {
           ref={inputRef}
           onChange={() => debounce(() => performSearch())}
           _focus={{ boxShadow: "none" }}
+          data-testid="search-bar"
         />
         <IconButton
           variant="outline"

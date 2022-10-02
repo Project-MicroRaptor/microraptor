@@ -1,0 +1,45 @@
+.spinnerContainer,
+.error,
+.noProfile {
+  margin-top: 200px;
+  text-align: center;
+}
+
+
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  text-align: center;
+  overflow: hidden;
+  max-width: 1200px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin: auto;
+}
+
+.profileName {
+  margin-top: 20px;
+  max-width: 80%;
+  word-break: break-word;
+}
+
+.profileImage {
+  padding-top: 25px;
+}
+
+.profileBio {
+  h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 15px;
+  }
+
+  p {
+    white-space: pre-wrap;
+    text-align: justify;
+    margin-top: 5px;
+    padding: 10px;
+  }
+}

@@ -17,6 +17,7 @@ export default function DetailsForm(props: Props) {
           About the Business
         </FormLabel>
         <Textarea
+          data-testid="aboutBusiness"
           id="aboutBusiness"
           value={formData.aboutBusiness ?? ""}
           className={styles.formInput}
@@ -31,6 +32,7 @@ export default function DetailsForm(props: Props) {
           About the Owner
         </FormLabel>
         <Textarea
+          data-testid="aboutOwner"
           id="aboutOwner"
           value={formData.aboutOwner ?? ""}
           className={styles.formInput}
@@ -45,6 +47,7 @@ export default function DetailsForm(props: Props) {
           Business Plan
         </FormLabel>
         <Textarea
+          data-testid="businessPlan"
           id="businessPlan"
           value={formData.businessPlan ?? ""}
           className={styles.formInput}

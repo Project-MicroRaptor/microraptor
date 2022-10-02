@@ -4,7 +4,7 @@ import { Spinner, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 import useSWR from "swr";
 
-import ViewProject from "../../components/ProjectInfo/ViewProject";
+import ViewProject from "../../components/ViewProject/ViewProject";
 import NavBar from "./../../components/NavBar/NavBar";
 
 import styles from "./[id].module.scss";

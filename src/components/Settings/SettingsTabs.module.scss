@@ -1,11 +1,11 @@
-//Shared with AccountSettings, NotificaitonSettings, profileSettings
+// Shared with AccountSettings, NotificaitonSettings, profileSettings
 .containerTitle {
   max-width: 1000px;
   min-width: 375px;
   width: 100%;
   height: 100%;
   padding: 20px;
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
 }
 
 .accountTitle {
@@ -16,7 +16,7 @@
 }
 
 .accountFields {
-  padding: 20px 0px 5px 0px;
+  padding: 20px 0 5px;
   font-size: 20px;
   text-align: left;
   font-weight: bold;
@@ -30,18 +30,18 @@
 }
 
 .accountDivider {
-  border-top: 4px solid rgb(236, 233, 233);
+  border-top: 4px solid rgb(236 233 233);
   border-radius: 5px;
 }
 
-//NotificationSettings only
+// NotificationSettings only
 .switch {
   vertical-align: middle;
   top: 50%;
   transform: translateY(-50%);
 }
 
-//ProfileSettings only
+// ProfileSettings only
 .profileBox {
   padding-bottom: 15px;
 }
@@ -50,7 +50,7 @@
   padding: 20px;
 }
 
-//AccountSetttings only
+// AccountSetttings only
 .formLabel {
   width: 200px;
 }
@@ -72,7 +72,7 @@
 }
 
 .accountBox {
-  padding: 15px 0px;
+  padding: 15px 0;
 }
 
 .saveBox {
@@ -85,7 +85,7 @@
   width: 200px;
   font-weight: bold;
   text-align: left;
-  margin: 5px 5px 5px 0px;
+  margin: 5px 5px 5px 0;
   align-items: center;
   align-content: center;
   align-self: center;
@@ -105,13 +105,13 @@
 }
 
 .inputButton {
-  margin: 5px 0px 5px 5px;
+  margin: 5px 0 5px 5px;
 }
 
 .saveButton {
   background-color: var(--chakra-colors-brand-primary);
   border-radius: 6px;
-  color: #ffffff;
+  color: #fff;
   height: 40px;
   width: 100px;
   font-weight: bold;
@@ -129,7 +129,7 @@
 .accBox {
   display: flex;
   flex-direction: row;
-  padding: 15px 0px;
+  padding: 15px 0;
 }
 
 @media screen and (max-width: 500px) {
