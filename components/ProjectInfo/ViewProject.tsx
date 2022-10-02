@@ -45,8 +45,8 @@ export interface ProjectInfo {
   rewards?: Array<ProjectRewards>;
 }
 
-export function CreateMessageGroup(message: String){
- // const { data: session } = useSession();
+export function CreateMessageGroup(message: String, session: any){
+ 
 
   
   window.location.href = "/inbox";
@@ -60,6 +60,7 @@ export default function ViewProject(props: ProjectInfo) {
   const completedAt = props?.completedAt ?? new Date().toISOString();
   const backers = 0;
   const shortDescription = props?.shortDescription || props.shortDescription !== "" ? props.shortDescription : "No Description";
+  const { data: session } = useSession();
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -277,7 +278,7 @@ export default function ViewProject(props: ProjectInfo) {
       </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={() => CreateMessageGroup(message)}>
+            <Button onClick={() => CreateMessageGroup(message, session)}>
               Submit
             </Button>
           </ModalFooter>
