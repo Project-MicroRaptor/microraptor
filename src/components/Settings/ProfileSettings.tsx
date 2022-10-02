@@ -16,6 +16,8 @@ export interface ProjectInfo {
 export default function ProfileSettings(props: ProjectInfo) {
   const { data: session } = useSession();
   const [isBioChange, setBioChange] = useState(props && props.bio.length > 0);
+  const setBio = props.setBio;
+  const bio = props.bio;
 
   const toast = useToast();
 
@@ -62,11 +64,11 @@ export default function ProfileSettings(props: ProjectInfo) {
       const response = await getProfileSetting();
 
       if (response && response.data && response.data.bio) {
-        props.setBio(response.data.bio);
+        setBio(response.data.bio);
       }
 
-      if (props.bio) {
-        props.setBio(props.bio);
+      if (bio) {
+        setBio(bio);
         setBioChange(true);
       };
     })();
