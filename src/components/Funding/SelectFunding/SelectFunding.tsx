@@ -85,26 +85,28 @@ export default function SelectFunding(props: PaymentSummaryProps) {
                 </Text>
               </Radio>
             </div>
-            {props.rewards.length > 0
-              ? props.rewards.map((reward, index) => {
-                  return (
-                    <div className={styles.reward} key={index}>
-                      <Radio value={(index + 2).toString()}>
-                        <Text>
-                          <b>
-                            Reward Tier {index + 1}: {reward.name}
-                            <br />
-                          </b>
-                          Contribute ${reward.cost} or more and receive the
-                          following:
+            {props.rewards.length > 0 ? (
+              props.rewards.map((reward, index) => {
+                return (
+                  <div className={styles.reward} key={index}>
+                    <Radio value={(index + 2).toString()}>
+                      <Text>
+                        <b>
+                          Reward Tier {index + 1}: {reward.name}
                           <br />
-                          <li>{reward.description}</li>
-                        </Text>
-                      </Radio>
-                    </div>
-                  );
-                })
-              : {}}
+                        </b>
+                        Contribute ${reward.cost} or more and receive the
+                        following:
+                        <br />
+                        <li>{reward.description}</li>
+                      </Text>
+                    </Radio>
+                  </div>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </RadioGroup>
           <br />
 
