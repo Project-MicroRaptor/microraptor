@@ -9,7 +9,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-
   const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session) {
@@ -21,38 +20,46 @@ export default async function handler(
     if (req.method === "GET") {
       const user = await prisma.user.findUnique({
         where: {
-          id: session.user.id,
+          id: session.user.id
         },
         select: {
-          bio: true,
-        },
+          bio: true
+        }
       });
 
-      if (typeof user === "object") {
+      if (user) {
         res.status(200).json({ status: "success", data: user });
       } else {
         res.status(200).json({ status: "failed" });
       }
-    } else {
+    } else if (req.method === "POST") {
       const body = JSON.parse(req.body);
       const bio = body.bio;
 
-      const project = await prisma.user.update({
+      const user = await prisma.user.update({
         where: {
-          id: session.user.id,
+          id: session.user.id
         },
         data: {
           bio
-        },
+        }
       });
 
-      if (typeof project === "object" && project.id) {
-        res.status(200).json({ status: "success", data: project, description: "Updated Successfully!" });
+      if (user?.id) {
+        res.status(200).json({
+          status: "success",
+          data: user,
+          description: "Updated Successfully!"
+        });
       } else {
-        res.status(200).json({ status: "failed", description: "Internal Server Error" });
+        res
+          .status(200)
+          .json({ status: "failed", description: "Internal Server Error" });
       }
+    } else {
+      res.status(405);
+      return;
     }
-
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       res.status(500).send(`A Prisma error has occurred: ${e.code}`);

@@ -9,7 +9,7 @@ import {
   UseToastOptions
 } from "@chakra-ui/react";
 import { BsUpload } from "react-icons/bs";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { updateProfileSetting, getProfileSetting } from "../../db/dbUtils";
 
