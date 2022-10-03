@@ -85,7 +85,7 @@ export default function ProfileSettings(props: ProjectInfo) {
       <p className={styles.accountFields}>Profile Picture</p>
       <Box className={styles.profileBox}>
         <Center alignContent="center" justifyContent="center">
-          <Avatar size="3xl" src={session.user?.image ?? ""} />
+          <Avatar size="2xl" src={session.user?.image ?? ""} />
         </Center>
       </Box>
       <Box className={styles.profileBox}>
