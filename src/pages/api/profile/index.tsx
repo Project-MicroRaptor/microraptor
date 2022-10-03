@@ -30,7 +30,7 @@ export default async function handler(
       if (user) {
         res.status(200).json({ status: "success", data: user });
       } else {
-        res.status(200).json({ status: "failed" });
+        res.status(500).json({ status: "failed" });
       }
     } else if (req.method === "POST") {
       const body = JSON.parse(req.body);
@@ -53,7 +53,7 @@ export default async function handler(
         });
       } else {
         res
-          .status(200)
+          .status(500)
           .json({ status: "failed", description: "Internal Server Error" });
       }
     } else {

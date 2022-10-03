@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import {
-  Image,
+  Avatar,
   Textarea,
   Box,
   Center,
@@ -25,7 +25,6 @@ export interface ProjectInfo {
 export default function ProfileSettings(props: ProjectInfo) {
   const { data: session } = useSession();
   const { bio, setBio, isBioChange, setBioChange } = props;
-  console.log(isBioChange, bio);
   const toast = useToast();
 
   useEffect(() => {
@@ -56,7 +55,7 @@ export default function ProfileSettings(props: ProjectInfo) {
     const response = await updateProfileSetting({ bio: props.bio });
     let toastInfo: UseToastOptions;
 
-    if (response && response.status === "success") {
+    if (response?.status === "success") {
       toastInfo = {
         title: "Profile Setting",
         description: response.description,
@@ -86,12 +85,7 @@ export default function ProfileSettings(props: ProjectInfo) {
       <p className={styles.accountFields}>Profile Picture</p>
       <Box className={styles.profileBox}>
         <Center alignContent="center" justifyContent="center">
-          <Image
-            borderRadius="full"
-            boxSize="150px"
-            src={session.user?.image ?? ""}
-            alt=""
-          />
+          <Avatar size="3xl" src={session.user?.image ?? ""} />
         </Center>
       </Box>
       <Box className={styles.profileBox}>
