@@ -90,6 +90,15 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Location {
+	id Int @id
+	postcode Int
+	locality String	
+	state String	
+	longitude Float	
+	latitude Float
+}	
+
 model MessageGroup {
   id        String    @id @default(cuid())
   users     User[]
