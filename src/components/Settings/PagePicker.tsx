@@ -10,19 +10,18 @@ type Props = {
 
 export default function PagePicker(props: Props) {
   const { pageName } = props;
-  const [tempBio, setBio] = useState("");
-  const onChangeBio = ({ target }: { target: any }) => {
-    setBio(target?.value);
-  }
+  const [bio, setBio] = useState("");
+  const [isBioChange, setBioChange] = useState(false);
 
   switch (pageName) {
     case Pages.ProfileSettings:
       return (
         <div>
           <ProfileSettings
-            bio={tempBio}
+            bio={bio}
             setBio={setBio}
-            onChange={onChangeBio}
+            isBioChange={isBioChange}
+            setBioChange={setBioChange}
           />
         </div>
       );

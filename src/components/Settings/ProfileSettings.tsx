@@ -1,5 +1,13 @@
 import { useSession } from "next-auth/react";
-import { Image, Textarea, Box, Center, Button, useToast, UseToastOptions } from "@chakra-ui/react";
+import {
+  Image,
+  Textarea,
+  Box,
+  Center,
+  Button,
+  useToast,
+  UseToastOptions
+} from "@chakra-ui/react";
 import { BsUpload } from "react-icons/bs";
 import { useState, useEffect } from "react";
 
@@ -9,39 +17,38 @@ import styles from "./SettingsTabs.module.scss";
 
 export interface ProjectInfo {
   bio: string;
-  onChange: (event: React.ChangeEvent) => void;
   setBio: (bio: string) => void;
+  isBioChange: boolean;
+  setBioChange: (changed: boolean) => void;
 }
 
 export default function ProfileSettings(props: ProjectInfo) {
   const { data: session } = useSession();
-  const [isBioChange, setBioChange] = useState(props && props.bio.length > 0);
-  const setBio = props.setBio;
-  const bio = props.bio;
+  const { bio, setBio, isBioChange, setBioChange } = props;
+  console.log(isBioChange, bio);
   const toast = useToast();
 
   useEffect(() => {
     (async () => {
+      if (bio) return;
+
       const response = await getProfileSetting();
 
-      if (response && response.data && response.data.bio) {
+      if (response?.data?.bio) {
         setBio(response.data.bio);
       }
-
-      if (bio) {
-        setBio(bio), setBioChange(true);
-      };
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!session) {
     return null;
   }
 
-  const onChangeBio = (event: React.ChangeEvent) => {
-    props.onChange(event);
+  const onChangeBio = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setBio(event?.target?.value);
     setBioChange(true);
-  }
+  };
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -51,26 +58,26 @@ export default function ProfileSettings(props: ProjectInfo) {
 
     if (response && response.status === "success") {
       toastInfo = {
-        title: 'Profile Setting',
+        title: "Profile Setting",
         description: response.description,
-        status: 'success',
+        status: "success",
         duration: 4000,
-        isClosable: true,
-      }
+        isClosable: true
+      };
     } else {
       toastInfo = {
-        title: 'Profile Setting',
+        title: "Profile Setting",
         description: response.description,
-        status: 'error',
+        status: "error",
         duration: 4000,
-        isClosable: true,
-      }
+        isClosable: true
+      };
     }
 
     setBioChange(false);
 
     toast(toastInfo);
-  }
+  };
 
   return (
     <div className={styles.containerTitle}>
@@ -107,7 +114,6 @@ export default function ProfileSettings(props: ProjectInfo) {
       </Box>
       <p className={styles.accountFields}>BIO</p>
       <Textarea
-        textAlign="center"
         placeholder="Tell us about yourself...."
         size="md"
         height="150px"
@@ -116,7 +122,9 @@ export default function ProfileSettings(props: ProjectInfo) {
       />
       {isBioChange && (
         <div className={styles.saveBox}>
-          <Button className={styles.saveButton} onClick={handleSubmit}>Save</Button>
+          <Button className={styles.saveButton} onClick={handleSubmit}>
+            Save
+          </Button>
         </div>
       )}
     </div>
