@@ -26,6 +26,7 @@ import styles from "./ViewProject.module.scss";
 import { ProjectRewards } from "../../types/project";
 import { User } from "next-auth";
 import { useSession } from "next-auth/react";
+import { CreateMessageGroup } from "../../utils/dbUtils";
 
 export interface ProjectInfo {
   id?: string;
@@ -43,13 +44,6 @@ export interface ProjectInfo {
   aboutOwner?: string;
   businessPlan?: string;
   rewards?: Array<ProjectRewards>;
-}
-
-export function CreateMessageGroup(message: String, session: any){
- 
-
-  
-  window.location.href = "/inbox";
 }
 
 export default function ViewProject(props: ProjectInfo) {
