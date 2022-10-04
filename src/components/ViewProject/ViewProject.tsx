@@ -25,16 +25,20 @@ import type { ProjectCategory } from "../../types/categories";
 
 import styles from "./ViewProject.module.scss";
 import { ProjectRewards } from "../../types/project";
-import { User } from "next-auth";
 import { useSession } from "next-auth/react";
-import { CreateMessageGroup } from "../../utils/dbUtils";
+import { createMessageGroup } from "../../utils/dbUtils";
+import router from "next/router";
 
 export interface ProjectInfo {
   id?: string;
   name?: string;
   shortDescription?: string;
   images?: string[];
-  owner?: User;
+  owner?: {
+    id: string;
+    name: string;
+    image: string;
+  };
   currentFunding?: number;
   targetFunding?: number;
   postcode?: number;
@@ -59,7 +63,6 @@ export default function ViewProject(props: ProjectInfo) {
     props?.shortDescription || props.shortDescription !== ""
       ? props.shortDescription
       : "No Description";
-  const { data: session } = useSession();
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -87,16 +90,24 @@ export default function ViewProject(props: ProjectInfo) {
     categories.push("None");
   }
 
-  let [message, setValue] = React.useState('')
+  let [message, setValue] = React.useState("");
   let handleInputChange = (e: any) => {
-    let inputValue = e.target.value
-    setValue(inputValue)
-  }
+    let inputValue = e.target.value;
+    setValue(inputValue);
+  };
 
   const finalRef = React.useRef(null);
   const toast = useToast();
-  const { isOpen: isShareOpen , onOpen: onShareOpen, onClose: onShareClose } = useDisclosure()
-  const { isOpen: isMssgOpen , onOpen: onMssgOpen, onClose: onMssgClose } = useDisclosure()
+  const {
+    isOpen: isShareOpen,
+    onOpen: onShareOpen,
+    onClose: onShareClose
+  } = useDisclosure();
+  const {
+    isOpen: isMssgOpen,
+    onOpen: onMssgOpen,
+    onClose: onMssgClose
+  } = useDisclosure();
 
   const shareText =
     name +
@@ -181,7 +192,12 @@ export default function ViewProject(props: ProjectInfo) {
         <Button width="250px" borderRadius={4} fontSize={16} disabled>
           Fund this Project
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} onClick={onMssgOpen}>
+        <Button
+          width="250px"
+          borderRadius={4}
+          fontSize={16}
+          onClick={onMssgOpen}
+        >
           Enquire about Project
         </Button>
       </div>
@@ -302,19 +318,29 @@ export default function ViewProject(props: ProjectInfo) {
           <ModalHeader>Enquire about {props.name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-          <FormControl className={styles.formControl}>
-        <Textarea
-          id="message"
-          value={message}
-          onChange={handleInputChange}
-          className={styles.formInput}
-          resize="vertical"
-          min-height="100%"
-        />
-      </FormControl>
+            <FormControl className={styles.formControl}>
+              <Textarea
+                id="message"
+                value={message}
+                onChange={handleInputChange}
+                className={styles.formInput}
+                resize="vertical"
+                min-height="100%"
+              />
+            </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={() => CreateMessageGroup(message, session)}>
+            <Button
+              onClick={() =>
+                createMessageGroup(
+                  message,
+                  props.id ?? "",
+                  props.owner?.id ?? ""
+                ).then((res) => {
+                  if (res.id) router.push(`/inbox`);
+                })
+              }
+            >
               Submit
             </Button>
           </ModalFooter>

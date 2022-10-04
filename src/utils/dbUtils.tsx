@@ -7,16 +7,21 @@ export async function createProject(
 ) {
   return fetch("/api/project", {
     method: "POST",
-    body: JSON.stringify({ projectDetails, rewardDetails }),
+    body: JSON.stringify({ projectDetails, rewardDetails })
   }).then((res) => {
     return res.json();
   });
 }
 
-export async function CreateMessageGroup(message: String, session: any) {
-  return fetch("/api/project", {
-    method: "POST",
-    body: JSON.stringify({ projectDetails, rewardDetails }),
+export async function createMessageGroup(
+  message: string,
+  projectId: string,
+  ownerId: string
+) {
+  let queryString = "/api/message-group?";
+  queryString += new URLSearchParams({ projectId, message, ownerId });
+  return fetch(queryString, {
+    method: "POST"
   }).then((res) => {
     return res.json();
   });
