@@ -13,10 +13,7 @@ import styles from "./[id].module.scss";
 export default function ProjectFundFlow() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, error } = useSWR<FundingProps>(
-    `/api/project/fund/${id}`,
-    fetcher
-  );
+  const { data, error } = useSWR<FundingProps>(`/api/project/${id}`, fetcher);
 
   // Search Error -- Error Prompt
   if (error)

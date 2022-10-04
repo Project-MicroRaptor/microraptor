@@ -30,29 +30,37 @@ type PaymentSummaryProps = {
 };
 
 export default function SelectFunding(props: PaymentSummaryProps) {
+  // Set minimum contribution amount for reward selected.
   function onRewardSelected(selection: string) {
     props.setReward(selection);
     let reward = parseInt(selection);
-    if (reward == 1) {
+    // Reward index -1 is no reward. Minimum of $1.
+    if (reward == -1) {
       props.setContribution(1);
-    } else {
-      props.setContribution(props.rewards[reward - 2].cost);
+    }
+    // else, set minimum reward cost.
+    else {
+      props.setContribution(props.rewards[reward].cost);
     }
   }
 
   function onContributionChanged(value: number | void) {
+    // If empty, set to minimum value.
     if (!value) {
       props.setContribution(1);
-      props.setReward("1");
+      props.setReward("-1");
       return;
     }
     props.setContribution(value);
-    for (var i = props.rewards.length; i >= 0; i--) {
-      if (i == 0) {
-        props.setReward("1");
+
+    // Set highest reward based on contribution amount.
+    // Iterate backwards through rewards array using index i.
+    for (var i = props.rewards.length - 1; i >= -1; i--) {
+      if (i == -1) {
+        props.setReward("-1");
       } else {
-        if (value >= props.rewards[i - 1].cost) {
-          props.setReward((i + 1).toString());
+        if (value >= props.rewards[i].cost) {
+          props.setReward(i.toString());
           return;
         }
       }
@@ -75,7 +83,7 @@ export default function SelectFunding(props: PaymentSummaryProps) {
             value={props.reward}
           >
             <div className={styles.reward}>
-              <Radio value="1">
+              <Radio value="-1">
                 <Text>
                   <b>
                     No Reward
@@ -89,7 +97,7 @@ export default function SelectFunding(props: PaymentSummaryProps) {
               props.rewards.map((reward, index) => {
                 return (
                   <div className={styles.reward} key={index}>
-                    <Radio value={(index + 2).toString()}>
+                    <Radio value={index.toString()}>
                       <Text>
                         <b>
                           Reward Tier {index + 1}: {reward.name}
@@ -120,7 +128,6 @@ export default function SelectFunding(props: PaymentSummaryProps) {
                   thousandSeparator
                   customInput={Input}
                   prefix="$  "
-                  suffix="  AUD"
                   value={props.contribution}
                   onValueChange={(value) =>
                     onContributionChanged(value.floatValue)

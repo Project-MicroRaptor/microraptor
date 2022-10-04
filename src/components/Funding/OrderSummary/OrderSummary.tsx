@@ -26,18 +26,13 @@ type OrderSummaryProps = {
 
 export default function OrderSummary(props: OrderSummaryProps) {
   const rewardIndex = parseInt(props.reward) - 2;
-  console.log(props.rewards[rewardIndex]);
   function DisplayReward() {
-    let tier = "";
-    let cost = "";
-    let reward = "";
+    let tier = "No Reward";
+    let cost = "1";
+    let reward = "without a reward.";
     let description = "";
 
-    if (rewardIndex == -1) {
-      tier = "No Reward";
-      cost = "1";
-      reward = "without a reward.";
-    } else {
+    if (rewardIndex > -1) {
       tier =
         "Reward Tier " +
         (rewardIndex + 1) +
@@ -53,8 +48,14 @@ export default function OrderSummary(props: OrderSummaryProps) {
         <b>{tier}</b>
         <br />
         Contribute ${cost} or more {reward}
-        <br />
-        {description != "" ? <li>{description}</li> : <></>}
+        {description != "" ? (
+          <>
+            <br />
+            <li>{description}</li>
+          </>
+        ) : (
+          <></>
+        )}
       </Text>
     );
   }
