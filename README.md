@@ -9,6 +9,7 @@
 git clone https://github.com/Project-MicroRaptor/microraptor
 npm install
 npx prisma generate && npx prisma migrate dev # This should be run every time a new migration is added
+npx prisma db seed # this will populate the database tables with data as set out in the seed.tsx file
 npm run dev
 ```
 
