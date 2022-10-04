@@ -156,7 +156,7 @@ export default function ViewProject(props: ProjectInfo) {
 
       <div className={styles.buttons}>
         <Button
-          width="250px"
+          width="270px"
           borderRadius={4}
           fontSize={16}
           onClick={onOpen}
@@ -164,10 +164,10 @@ export default function ViewProject(props: ProjectInfo) {
         >
           Share
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>
+        <Button width="270px" borderRadius={4} fontSize={16} disabled>
           Fund this Project
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>
+        <Button width="270px" borderRadius={4} fontSize={16} disabled>
           Enquire about Project
         </Button>
       </div>
