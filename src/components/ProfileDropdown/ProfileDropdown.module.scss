@@ -1,0 +1,60 @@
+.menuList {
+  margin-top: -7px;
+  padding: 20px;
+}
+
+.sessionName {
+  font-size: 19px;
+  font-weight: bold;
+  margin: 12px;
+  position: relative;
+  top: 7px;
+}
+
+.sessionImage {
+  margin-top: 8px;
+}
+
+.viewProfile {
+  display: block;
+  font-size: 14px;
+  margin-left: 63px;
+  position: relative;
+  bottom: 20px;
+  color: var(--chakra-colors-brand-primary);
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.divider {
+  border-top: 1px solid rgb(216 216 216);
+  position: relative;
+  bottom: 10px;
+}
+
+.dropdownItem {
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 4px;
+  margin-left: 20px;
+}
+
+.icon {
+  font-size: 28px;
+  padding: 3px;
+  border-radius: 20px;
+  background-color: rgb(216 216 216);
+}
+
+.item {
+  display: flex;
+  margin-top: 13px;
+
+  &:hover {
+    color: var(--chakra-colors-brand-primary);
+    cursor: pointer;
+  }
+}

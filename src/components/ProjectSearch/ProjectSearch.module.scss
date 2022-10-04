@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: fit-content;
+  border-width: 1px;
+  border-color: grey;
+  border-radius: 30px;
+  margin: auto;
+  margin-bottom: 30px;
+  overflow: hidden;
+
+  button,
+  input {
+    border-width: 0;
+    border-radius: 0;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  > * {
+    flex-grow: 1;
+  }
+
+  .areaContainer > * {
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .searchContainer {
+    flex-grow: 1;
+  }
+}

@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  user-select: none;
+}
+
+.item {
+  cursor: pointer;
+  flex: 1 1 0px;
+
+  &:hover {
+    color: var(--chakra-colors-brand-primary);
+  }
+}
+
+.icon {
+  font-size: 1.5em;
+  height: 40px;
+
+  svg {
+    display: block;
+    margin: auto;
+    text-align: center;
+    height: 100%;
+  }
+}
+
+.heading {
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.selected {
+  width: 30px;
+  height: 10px;
+  background: var(--chakra-colors-brand-primary);
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 2px;
+}
