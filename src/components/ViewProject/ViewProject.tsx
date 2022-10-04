@@ -25,7 +25,6 @@ import type { ProjectCategory } from "../../types/categories";
 
 import styles from "./ViewProject.module.scss";
 import { ProjectRewards } from "../../types/project";
-import { useSession } from "next-auth/react";
 import { createMessageGroup } from "../../utils/dbUtils";
 import router from "next/router";
 
