@@ -27,6 +27,7 @@ import styles from "./ViewProject.module.scss";
 import { ProjectRewards } from "../../types/project";
 import { createMessageGroup } from "../../utils/dbUtils";
 import router from "next/router";
+import { useSession } from "next-auth/react";
 
 export interface ProjectInfo {
   id?: string;
@@ -62,6 +63,13 @@ export default function ViewProject(props: ProjectInfo) {
     props?.shortDescription || props.shortDescription !== ""
       ? props.shortDescription
       : "No Description";
+
+  let loggedInNotOwner = false;
+  const { data: session } = useSession();
+
+  if (session && session.user.id !== props.owner?.id) {
+    loggedInNotOwner = true;
+  }
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -196,6 +204,7 @@ export default function ViewProject(props: ProjectInfo) {
           borderRadius={4}
           fontSize={16}
           onClick={onMssgOpen}
+          disabled={!loggedInNotOwner}
         >
           Enquire about Project
         </Button>
