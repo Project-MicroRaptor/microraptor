@@ -15,59 +15,51 @@ export default function ProjectFundFlow() {
   const { id } = router.query;
   const { data, error } = useSWR<FundingProps>(`/api/project/${id}`, fetcher);
 
-  // Search Error -- Error Prompt
-  if (error)
-    return (
-      <>
-        <Head>
-          <title>Error</title>
-          <meta name="description" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <NavBar />
-        <Heading className={styles.error}>An error occured.</Heading>;
-      </>
-    );
-  // Waiting for Data -- Spinner
-  else if (!data) {
-    return (
-      <>
-        <Head>
-          <title>Error</title>
-          <meta name="description" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <NavBar />
-        <div className={styles.spinner}>
-          <Spinner
-            margin="auto"
-            width="200px"
-            height="200px"
-            thickness="12px"
-            color="brand.primary"
-            emptyColor="gray.200"
-            speed="1s"
-          />
-        </div>
-      </>
-    );
+  function FundingContent() {
+    // Search Error -- Error Prompt
+    if (error)
+      return <Heading className={styles.error}>An error occured.</Heading>;
+    // Waiting for Data -- Spinner
+    else if (!data) {
+      return (
+        <>
+          <div className={styles.spinner}>
+            <Spinner
+              margin="auto"
+              width="200px"
+              height="200px"
+              thickness="12px"
+              color="brand.primary"
+              emptyColor="gray.200"
+              speed="1s"
+            />
+          </div>
+        </>
+      );
+    }
+    // Display Funding Flow
+    else {
+      return (
+        <ProjectFunding
+          id={data.id}
+          name={data.name}
+          ownerId={data.ownerId}
+          images={data.images}
+          rewards={data.rewards}
+        />
+      );
+    }
   }
 
   return (
     <>
       <Head>
-        <title>{data.name}</title>
+        <title>{data ? `MicroRaptor - ${data.name}` : "MicroRaptor"}</title>
         <meta name="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <ProjectFunding
-        id={data.id}
-        name={data.name}
-        ownerId={data.ownerId}
-        images={data.images}
-        rewards={data.rewards}
-      />
+      {FundingContent()}
     </>
   );
 }

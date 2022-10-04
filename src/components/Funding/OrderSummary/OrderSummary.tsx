@@ -97,7 +97,7 @@ export default function OrderSummary(props: OrderSummaryProps) {
           <Text>Total amount:</Text>
           <Text className={styles.total}>
             <b>
-              AU${" "}
+              ${" "}
               {props.contribution.toLocaleString(undefined, {
                 minimumFractionDigits: 2
               })}
