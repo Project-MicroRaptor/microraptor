@@ -1,14 +1,82 @@
 import { useSession } from "next-auth/react";
-import styles from "./SettingsTabs.module.scss";
-import { Image, Textarea, Box, Center, Button } from "@chakra-ui/react";
+import {
+  Avatar,
+  Textarea,
+  Box,
+  Center,
+  Button,
+  useToast,
+  UseToastOptions
+} from "@chakra-ui/react";
 import { BsUpload } from "react-icons/bs";
+import { useEffect } from "react";
 
-export default function ProfileSettings() {
+import { updateProfileSetting, getProfileSetting } from "../../db/dbUtils";
+
+import styles from "./SettingsTabs.module.scss";
+
+export interface ProjectInfo {
+  bio: string;
+  setBio: (bio: string) => void;
+  isBioChange: boolean;
+  setBioChange: (changed: boolean) => void;
+}
+
+export default function ProfileSettings(props: ProjectInfo) {
   const { data: session } = useSession();
+  const { bio, setBio, isBioChange, setBioChange } = props;
+  const toast = useToast();
+
+  useEffect(() => {
+    (async () => {
+      if (bio) return;
+
+      const response = await getProfileSetting();
+
+      if (response?.data?.bio) {
+        setBio(response.data.bio);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!session) {
     return null;
   }
+
+  const onChangeBio = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setBio(event?.target?.value);
+    setBioChange(true);
+  };
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+
+    const response = await updateProfileSetting({ bio: props.bio });
+    let toastInfo: UseToastOptions;
+
+    if (response?.status === "success") {
+      toastInfo = {
+        title: "Profile Setting",
+        description: response.description,
+        status: "success",
+        duration: 4000,
+        isClosable: true
+      };
+    } else {
+      toastInfo = {
+        title: "Profile Setting",
+        description: response.description,
+        status: "error",
+        duration: 4000,
+        isClosable: true
+      };
+    }
+
+    setBioChange(false);
+
+    toast(toastInfo);
+  };
 
   return (
     <div className={styles.containerTitle}>
@@ -17,12 +85,7 @@ export default function ProfileSettings() {
       <p className={styles.accountFields}>Profile Picture</p>
       <Box className={styles.profileBox}>
         <Center alignContent="center" justifyContent="center">
-          <Image
-            borderRadius="full"
-            boxSize="250px"
-            src={session.user?.image ?? ""}
-            alt=""
-          />
+          <Avatar size="2xl" src={session.user?.image ?? ""} />
         </Center>
       </Box>
       <Box className={styles.profileBox}>
@@ -45,11 +108,19 @@ export default function ProfileSettings() {
       </Box>
       <p className={styles.accountFields}>BIO</p>
       <Textarea
-        textAlign="center"
         placeholder="Tell us about yourself...."
         size="md"
         height="150px"
+        value={props.bio}
+        onChange={onChangeBio}
       />
+      {isBioChange && (
+        <div className={styles.saveBox}>
+          <Button className={styles.saveButton} onClick={handleSubmit}>
+            Save
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
