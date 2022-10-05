@@ -17,7 +17,6 @@ type Projects = {
   shortDescription: string;
   images: string[];
   owner: Array<ProjectOwner>;
-  image: Array<ProjectOwner>;
   currentFunding: number;
   targetFunding: number;
   postcode: number;
@@ -85,7 +84,6 @@ export default function ProjectView() {
         shortDescription={data.shortDescription}
         images={data.images}
         owner={data.owner}
-        image={data.image}
         currentFunding={data.currentFunding}
         targetFunding={data.targetFunding}
         postcode={data.postcode}

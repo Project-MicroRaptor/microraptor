@@ -5,7 +5,7 @@ import { ProjectCategories } from "../../../src/types/categories";
 describe("ViewProject", () => {
   test("ViewProject renders correctly", () => {
     // Renders with no props
-    const { rerender } = render(<ViewProject />);
+    const { rerender } = render(<ViewProject owner={[]} />);
 
     // Renders with information
     rerender(
@@ -14,6 +14,7 @@ describe("ViewProject", () => {
         name="Name"
         shortDescription="Short Description"
         images={["image"]}
+        owner={[]}
         currentFunding={0}
         targetFunding={100}
         createdAt={Number(new Date(2022, 1, 1))}
@@ -38,6 +39,7 @@ describe("ViewProject", () => {
     // Render with yesterday's Date.
     rerender(
       <ViewProject
+        owner={[]}
         createdAt={new Date().getDate()}
         completedAt={new Date().getDate() - 1}
       />
@@ -48,7 +50,7 @@ describe("ViewProject", () => {
     // Setup mocks for navigator.clipboard
     Object.assign(navigator, {
       clipboard: {
-        writeText: () => {}
+        writeText: () => { }
       }
     });
     jest.spyOn(navigator.clipboard, "writeText");
@@ -56,6 +58,7 @@ describe("ViewProject", () => {
     const container = render(
       <ViewProject
         name="Test Project"
+        owner={[]}
         shortDescription="Test Short Description"
       />
     );

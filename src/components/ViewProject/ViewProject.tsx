@@ -31,7 +31,6 @@ export interface ProjectInfo {
   shortDescription?: string;
   images?: string[];
   owner: any;
-  image: Array<ProjectOwner>;
   currentFunding?: number;
   targetFunding?: number;
   postcode?: number;
