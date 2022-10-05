@@ -16,7 +16,7 @@ type Projects = {
   name: string;
   shortDescription: string;
   images: string[];
-  owner: Array<ProjectOwner>;
+  owner: ProjectOwner;
   currentFunding: number;
   targetFunding: number;
   postcode: number;

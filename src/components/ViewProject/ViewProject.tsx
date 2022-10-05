@@ -30,7 +30,7 @@ export interface ProjectInfo {
   name?: string;
   shortDescription?: string;
   images?: string[];
-  owner: any;
+  owner?: ProjectOwner;
   currentFunding?: number;
   targetFunding?: number;
   postcode?: number;
@@ -47,9 +47,9 @@ export interface ProjectInfo {
 export default function ViewProject(props: ProjectInfo) {
   const name = props?.name ?? "Missing";
   const postcode = props?.postcode ?? "None";
-  const ownerName = props?.owner.name ?? "None";
-  const image = props?.owner.image ?? "";
-  const ownerId = props?.owner.id ?? "";
+  const ownerName = props?.owner?.name ?? "None";
+  const image = props?.owner?.image ?? "";
+  const ownerId = props?.owner?.id ?? "";
   const targetFunding = props?.targetFunding ?? 0;
   const currentFunding = props?.currentFunding ?? 0;
   const completedAt = props?.completedAt ?? new Date().toISOString();
@@ -134,17 +134,19 @@ export default function ViewProject(props: ProjectInfo) {
         </div>
 
         <div className={styles.progressContainer}>
-          <div className={styles.projectOwner}>
-            <a href={`/profile/${ownerId}`}>
-              <Avatar
-                className={styles.ownerImage}
-                src={image}
-                size="md"
-                border="2px solid grey"
-              />
-              <span className={styles.ownerName}>{ownerName}</span>
-            </a>
-          </div>
+          {props.owner && (
+            <div className={styles.projectOwner}>
+              <a href={`/profile/${ownerId}`}>
+                <Avatar
+                  className={styles.ownerImage}
+                  src={image}
+                  size="md"
+                  border="2px solid grey"
+                />
+                <span className={styles.ownerName}>{ownerName}</span>
+              </a>
+            </div>
+          )}
           <Progress
             value={(currentFunding / targetFunding) * 100}
             size="sm"
