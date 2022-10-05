@@ -11,7 +11,8 @@ import {
   ModalOverlay,
   Progress,
   useDisclosure,
-  useToast
+  useToast,
+  Avatar
 } from "@chakra-ui/react";
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
@@ -20,15 +21,17 @@ import React from "react";
 
 import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
+import { ProjectRewards } from "../../types/project";
+import { ProjectOwner } from "../../types/viewProject";
 
 import styles from "./ViewProject.module.scss";
-import { ProjectRewards } from "../../types/project";
-
 export interface ProjectInfo {
   id?: string;
   name?: string;
   shortDescription?: string;
   images?: string[];
+  owner: any;
+  image: Array<ProjectOwner>;
   currentFunding?: number;
   targetFunding?: number;
   postcode?: number;
@@ -45,6 +48,9 @@ export interface ProjectInfo {
 export default function ViewProject(props: ProjectInfo) {
   const name = props?.name ?? "Missing";
   const postcode = props?.postcode ?? "None";
+  const ownerName = props?.owner.name ?? "None";
+  const image = props?.owner.image ?? "";
+  const ownerId = props?.owner.id ?? "";
   const targetFunding = props?.targetFunding ?? 0;
   const currentFunding = props?.currentFunding ?? 0;
   const completedAt = props?.completedAt ?? new Date().toISOString();
@@ -129,6 +135,17 @@ export default function ViewProject(props: ProjectInfo) {
         </div>
 
         <div className={styles.progressContainer}>
+          <div className={styles.projectOwner}>
+            <a href={`/profile/${ownerId}`}>
+              <Avatar
+                className={styles.ownerImage}
+                src={image}
+                size="md"
+                border="2px solid grey"
+              />
+              <span className={styles.ownerName}>{ownerName}</span>
+            </a>
+          </div>
           <Progress
             value={(currentFunding / targetFunding) * 100}
             size="sm"
@@ -156,7 +173,7 @@ export default function ViewProject(props: ProjectInfo) {
 
       <div className={styles.buttons}>
         <Button
-          width="250px"
+          width="270px"
           borderRadius={4}
           fontSize={16}
           onClick={onOpen}
@@ -164,10 +181,10 @@ export default function ViewProject(props: ProjectInfo) {
         >
           Share
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>
+        <Button width="270px" borderRadius={4} fontSize={16} disabled>
           Fund this Project
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>
+        <Button width="270px" borderRadius={4} fontSize={16} disabled>
           Enquire about Project
         </Button>
       </div>
@@ -276,6 +293,6 @@ export default function ViewProject(props: ProjectInfo) {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </div>
+    </div >
   );
 }

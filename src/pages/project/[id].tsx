@@ -4,17 +4,20 @@ import { Spinner, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 import useSWR from "swr";
 
-import ViewProject from "../../components/ViewProject/ViewProject";
 import NavBar from "./../../components/NavBar/NavBar";
 
 import styles from "./[id].module.scss";
 import { ProjectRewards } from "../../types/project";
+import { ProjectOwner } from "../../types/viewProject";
+import ViewProject from "../../components/ViewProject/ViewProject";
 
 type Projects = {
   id: string;
   name: string;
   shortDescription: string;
   images: string[];
+  owner: Array<ProjectOwner>;
+  image: Array<ProjectOwner>;
   currentFunding: number;
   targetFunding: number;
   postcode: number;
@@ -81,6 +84,8 @@ export default function ProjectView() {
         name={data.name}
         shortDescription={data.shortDescription}
         images={data.images}
+        owner={data.owner}
+        image={data.image}
         currentFunding={data.currentFunding}
         targetFunding={data.targetFunding}
         postcode={data.postcode}

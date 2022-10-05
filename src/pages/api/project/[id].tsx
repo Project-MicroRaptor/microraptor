@@ -17,6 +17,13 @@ export default async function handler(
         name: true,
         shortDescription: true,
         images: true,
+        owner: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+          },
+        },
         currentFunding: true,
         targetFunding: true,
         postcode: true,
