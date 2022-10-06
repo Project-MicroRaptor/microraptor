@@ -1,16 +1,16 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState, useRef } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../../utils/swr";
 import { Heading, Spinner } from "@chakra-ui/react";
 import NavBar from "../../../components/NavBar/NavBar";
 import ProjectFunding from "../../../components/Funding/ProjectFunding";
 import { FundingProps } from "../../../types/fundingProps";
+import { AuthNextPage } from "../../../types/appProps";
 
 import styles from "./[id].module.scss";
 
-export default function ProjectFundFlow() {
+const ProjectFundFlow: AuthNextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data, error } = useSWR<FundingProps>(`/api/project/${id}`, fetcher);
@@ -62,4 +62,8 @@ export default function ProjectFundFlow() {
       {FundingContent()}
     </>
   );
-}
+};
+
+export default ProjectFundFlow;
+
+ProjectFundFlow.requireAuth = true;

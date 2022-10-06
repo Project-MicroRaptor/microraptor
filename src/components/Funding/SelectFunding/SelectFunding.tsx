@@ -33,6 +33,7 @@ export default function SelectFunding(props: PaymentSummaryProps) {
   // Set minimum contribution amount for reward selected.
   function onRewardSelected(selection: string) {
     props.setReward(selection);
+    // Radio Value stored as string, parse to int for indexing rewards.
     let reward = parseInt(selection);
     // Reward index -1 is no reward. Minimum of $1.
     if (reward == -1) {
@@ -44,27 +45,27 @@ export default function SelectFunding(props: PaymentSummaryProps) {
     }
   }
 
-  function onContributionChanged(value: number | void) {
+  function onContributionChanged(contribution: number | void) {
     // If empty, set to minimum value.
-    if (!value) {
+    if (!contribution) {
       props.setContribution(1);
       props.setReward("-1");
       return;
     }
-    props.setContribution(value);
 
-    // Set highest reward based on contribution amount.
-    // Iterate backwards through rewards array using index i.
-    for (var i = props.rewards.length - 1; i >= -1; i--) {
-      if (i == -1) {
-        props.setReward("-1");
-      } else {
-        if (value >= props.rewards[i].cost) {
-          props.setReward(i.toString());
-          return;
-        }
+    // In case rewards are unorderd, map through all rewards
+    // and find maximum reward for contribution amount.
+    let maxReward = 0;
+    let maxRewardIndex = -1;
+    props.rewards.map((reward, index) => {
+      if (reward.cost <= contribution && reward.cost > maxReward) {
+        maxReward = reward.cost;
+        maxRewardIndex = index;
       }
-    }
+    });
+
+    props.setContribution(contribution);
+    props.setReward(maxRewardIndex.toString());
   }
 
   return (

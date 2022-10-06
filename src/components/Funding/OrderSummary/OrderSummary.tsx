@@ -25,13 +25,17 @@ type OrderSummaryProps = {
 };
 
 export default function OrderSummary(props: OrderSummaryProps) {
-  const rewardIndex = parseInt(props.reward) - 2;
   function DisplayReward() {
+    // rewardIndex for accessing correct reward in array.
+    const rewardIndex = parseInt(props.reward);
+
+    // Default information to no reward.
     let tier = "No Reward";
     let cost = "1";
     let reward = "without a reward.";
     let description = "";
 
+    // If rewardIndex isn't "no reward" option, update reward information.
     if (rewardIndex > -1) {
       tier =
         "Reward Tier " +
