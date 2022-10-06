@@ -14,6 +14,7 @@ import MyProjectForm from "../FormSections/MyProjectForm";
 import DetailsForm from "../FormSections/DetailsForm";
 import PhotosForm from "../FormSections/PhotosForm";
 import RewardsForm from "../FormSections/RewardsForm";
+import PreviewForm from "../FormSections/PreviewForm";
 import { createProject } from "../../../db/dbUtils";
 import {
   validateMyProjectForm,
@@ -204,45 +205,53 @@ export default function ProjectForm() {
     {
       name: "Preview",
       icon: <BsFillCheckCircleFill />,
+      form: <PreviewForm formData={formData} />,
+      fullWidth: true,
     },
   ];
 
   return (
-    <div className={styles.container}>
-      <div className={styles.switcher}>
-        <TabSwitcher
-          tabs={tabs}
-          selectedTab={selectedTab}
-          onChangeTab={onChangeTab}
-        />
+    <>
+      <div className={styles.center}>
+        <div className={styles.switcher}>
+          <TabSwitcher
+            tabs={tabs}
+            selectedTab={selectedTab}
+            onChangeTab={onChangeTab}
+          />
+        </div>
       </div>
-      <div className={styles.form}>{tabs[selectedTab].form}</div>
-      <div className={styles.buttons}>
-        {selectedTab > 0 && (
-          <Button width="100px" onClick={() => onChangeTab(selectedTab - 1)}>
-            Back
-          </Button>
-        )}
-        {selectedTab < tabs.length - 1 && (
-          <Button
-            float="right"
-            width="100px"
-            onClick={() => onChangeTab(selectedTab + 1)}
-          >
-            Next
-          </Button>
-        )}
-        {selectedTab === tabs.length - 1 && (
-          <Button
-            float="right"
-            width="100px"
-            onClick={() => submitProject()}
-            isLoading={sendingData}
-          >
-            Submit
-          </Button>
-        )}
+      <div className={tabs[selectedTab]?.fullWidth ? `` : `${styles.center}`}>
+        <div className={styles.form}>{tabs[selectedTab].form}</div>
       </div>
-    </div>
+      <div className={styles.center}>
+        <div className={styles.buttons}>
+          {selectedTab > 0 && (
+            <Button width="100px" onClick={() => onChangeTab(selectedTab - 1)}>
+              Back
+            </Button>
+          )}
+          {selectedTab < tabs.length - 1 && (
+            <Button
+              float="right"
+              width="100px"
+              onClick={() => onChangeTab(selectedTab + 1)}
+            >
+              Next
+            </Button>
+          )}
+          {selectedTab === tabs.length - 1 && (
+            <Button
+              float="right"
+              width="100px"
+              onClick={() => submitProject()}
+              isLoading={sendingData}
+            >
+              Submit
+            </Button>
+          )}
+        </div>
+      </div>
+    </>
   );
 }
