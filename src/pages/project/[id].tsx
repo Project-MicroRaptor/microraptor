@@ -26,6 +26,11 @@ type Projects = {
   businessPlan: string;
   rewards: Array<ProjectRewards>;
   active: boolean;
+  owner: {
+    id: string;
+    name: string;
+    image: string;
+  };
 };
 
 export default function ProjectView() {
@@ -93,6 +98,7 @@ export default function ProjectView() {
         businessPlan={data.businessPlan}
         rewards={data.rewards}
         active={data.active}
+        owner={data.owner}
       />
     </>
   );
