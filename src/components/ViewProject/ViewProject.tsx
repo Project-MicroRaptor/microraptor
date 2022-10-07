@@ -42,6 +42,7 @@ export interface ProjectInfo {
   businessPlan?: string;
   rewards?: Array<ProjectRewards>;
   active?: boolean;
+  preview?: boolean;
 }
 
 export default function ViewProject(props: ProjectInfo) {
@@ -113,9 +114,6 @@ export default function ViewProject(props: ProjectInfo) {
           </Badge>
         )}
       </Center>
-      <span className={styles.name}>
-        <Center>{name}</Center>
-      </span>
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
@@ -179,6 +177,7 @@ export default function ViewProject(props: ProjectInfo) {
           fontSize={16}
           onClick={onOpen}
           data-testid="share-button"
+          disabled={!!props?.preview}
         >
           Share
         </Button>
