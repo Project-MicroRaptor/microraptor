@@ -38,7 +38,9 @@ export default function NavBar() {
           {session ? (
             <>
               <Box className={styles.inbox} justifyContent="end">
+                <Link href="/inbox">
                 <a><BsFillInboxFill fontSize="30px" /></a>
+                </Link>
               </Box>
               <Menu>
                 <MenuButton className={styles.menu}>
