@@ -3,13 +3,12 @@ import { fetcher } from "../../utils/swr";
 import { Spinner, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 import useSWR from "swr";
-
 import NavBar from "./../../components/NavBar/NavBar";
+import ViewProject from "../../components/ViewProject/ViewProject";
+import { ProjectRewards } from "../../types/project";
+import { ProjectOwner } from "../../types/projectOwner";
 
 import styles from "./[id].module.scss";
-import { ProjectRewards } from "../../types/project";
-import { ProjectOwner } from "../../types/viewProject";
-import ViewProject from "../../components/ViewProject/ViewProject";
 
 type Projects = {
   id: string;

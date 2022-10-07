@@ -22,7 +22,7 @@ import React from "react";
 import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
 import { ProjectRewards } from "../../types/project";
-import { ProjectOwner } from "../../types/viewProject";
+import { ProjectOwner } from "../../types/projectOwner";
 
 import styles from "./ViewProject.module.scss";
 export interface ProjectInfo {
