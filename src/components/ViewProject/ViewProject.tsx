@@ -1,6 +1,7 @@
 import {
   Badge,
   Center,
+  FormControl,
   Heading,
   Modal,
   ModalBody,
@@ -10,6 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Progress,
+  Textarea,
   useDisclosure,
   useToast
 } from "@chakra-ui/react";
@@ -23,12 +25,20 @@ import type { ProjectCategory } from "../../types/categories";
 
 import styles from "./ViewProject.module.scss";
 import { ProjectRewards } from "../../types/project";
+import { createMessageGroup } from "../../utils/dbUtils";
+import router from "next/router";
+import { useSession } from "next-auth/react";
 
 export interface ProjectInfo {
   id?: string;
   name?: string;
   shortDescription?: string;
   images?: string[];
+  owner?: {
+    id: string;
+    name: string;
+    image: string;
+  };
   currentFunding?: number;
   targetFunding?: number;
   postcode?: number;
@@ -40,6 +50,7 @@ export interface ProjectInfo {
   businessPlan?: string;
   rewards?: Array<ProjectRewards>;
   active?: boolean;
+  preview?: boolean;
 }
 
 export default function ViewProject(props: ProjectInfo) {
@@ -53,6 +64,13 @@ export default function ViewProject(props: ProjectInfo) {
     props?.shortDescription || props.shortDescription !== ""
       ? props.shortDescription
       : "No Description";
+
+  let loggedInNotOwner = false;
+  const { data: session } = useSession();
+
+  if (session && session.user.id !== props.owner?.id) {
+    loggedInNotOwner = true;
+  }
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -80,9 +98,24 @@ export default function ViewProject(props: ProjectInfo) {
     categories.push("None");
   }
 
+  let [message, setValue] = React.useState("");
+  let handleInputChange = (e: any) => {
+    let inputValue = e.target.value;
+    setValue(inputValue);
+  };
+
   const finalRef = React.useRef(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const {
+    isOpen: isShareOpen,
+    onOpen: onShareOpen,
+    onClose: onShareClose
+  } = useDisclosure();
+  const {
+    isOpen: isMssgOpen,
+    onOpen: onMssgOpen,
+    onClose: onMssgClose
+  } = useDisclosure();
 
   const shareText =
     name +
@@ -108,9 +141,6 @@ export default function ViewProject(props: ProjectInfo) {
           </Badge>
         )}
       </Center>
-      <span className={styles.name}>
-        <Center>{name}</Center>
-      </span>
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
@@ -159,15 +189,22 @@ export default function ViewProject(props: ProjectInfo) {
           width="270px"
           borderRadius={4}
           fontSize={16}
-          onClick={onOpen}
+          onClick={onShareOpen}
           data-testid="share-button"
+          disabled={!!props?.preview}
         >
           Share
         </Button>
         <Button width="270px" borderRadius={4} fontSize={16} disabled>
           Fund this Project
         </Button>
-        <Button width="270px" borderRadius={4} fontSize={16} disabled>
+        <Button
+          width="250px"
+          borderRadius={4}
+          fontSize={16}
+          onClick={onMssgOpen}
+          disabled={!loggedInNotOwner}
+        >
           Enquire about Project
         </Button>
       </div>
@@ -241,8 +278,8 @@ export default function ViewProject(props: ProjectInfo) {
       </div>
       <Modal
         finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={isShareOpen}
+        onClose={onShareClose}
         size={"xl"}
         isCentered
       >
@@ -270,8 +307,48 @@ export default function ViewProject(props: ProjectInfo) {
             >
               Copy
             </Button>
-            <Button onClick={onClose} variant="ghost">
+            <Button onClick={onShareClose} variant="ghost">
               Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal
+        finalFocusRef={finalRef}
+        isOpen={isMssgOpen}
+        onClose={onMssgClose}
+        size="xl"
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Enquire about {props.name}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormControl className={styles.formControl}>
+              <Textarea
+                id="message"
+                value={message}
+                onChange={handleInputChange}
+                className={styles.formInput}
+                resize="vertical"
+                min-height="100%"
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              onClick={() =>
+                createMessageGroup(
+                  message,
+                  props.id ?? "",
+                  props.owner?.id ?? ""
+                ).then((res) => {
+                  if (res.id) router.push(`/inbox`);
+                })
+              }
+            >
+              Submit
             </Button>
           </ModalFooter>
         </ModalContent>
