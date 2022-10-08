@@ -3,7 +3,7 @@ import {
   BsFillPencilFill,
   BsFillImageFill,
   BsFillGiftFill,
-  BsFillCheckCircleFill,
+  BsFillCheckCircleFill
 } from "react-icons/bs";
 import Router from "next/router";
 import { useState } from "react";
@@ -15,21 +15,29 @@ import DetailsForm from "../FormSections/DetailsForm";
 import PhotosForm from "../FormSections/PhotosForm";
 import RewardsForm from "../FormSections/RewardsForm";
 import PreviewForm from "../FormSections/PreviewForm";
-import { createProject } from "../../../db/dbUtils";
+import { createProject, updateProject } from "../../../db/dbUtils";
 import {
   validateMyProjectForm,
   validatePhotosForm,
-  validateRewardsForm,
+  validateRewardsForm
 } from "../../../utils/formValidation";
 
 import styles from "./ProjectForm.module.scss";
 import type { FormErrors } from "../../../utils/formValidation";
-import type { ProjectRewards } from "../../../types/project";
 import type { CreateFormData } from "../../../types/createForm";
+import { formDataToProjectInfo } from "../../../utils/project";
 
-export default function ProjectForm() {
+type Props = {
+  projectId?: string;
+  initialFormData?: CreateFormData;
+  editMode?: boolean;
+};
+
+export default function ProjectForm(props: Props) {
+  const { projectId, initialFormData = {}, editMode = false } = props;
+
   const [selectedTab, setSelectedTab] = useState(0);
-  const [formData, setFormData] = useState<CreateFormData>({});
+  const [formData, setFormData] = useState<CreateFormData>(initialFormData);
   const [errorData, setErrorData] = useState<FormErrors>({});
   const [sendingData, setSendingData] = useState<boolean>(false);
 
@@ -44,13 +52,13 @@ export default function ProjectForm() {
   ) => {
     setFormData({
       ...formData,
-      [id]: value,
+      [id]: value
     });
 
     if (updateErrorData) {
       setErrorData({
         ...errorData,
-        [id]: false,
+        [id]: false
       });
     }
   };
@@ -67,7 +75,7 @@ export default function ProjectForm() {
     if (myProjectValidation.errors) {
       errors = {
         ...errors,
-        ...myProjectValidation.errors,
+        ...myProjectValidation.errors
       };
     }
 
@@ -79,7 +87,7 @@ export default function ProjectForm() {
     if (photosValidation.errors) {
       errors = {
         ...errors,
-        ...photosValidation.errors,
+        ...photosValidation.errors
       };
     }
 
@@ -90,13 +98,13 @@ export default function ProjectForm() {
     if (rewardsValidation.errors) {
       errors = {
         ...errors,
-        ...rewardsValidation.errors,
+        ...rewardsValidation.errors
       };
     }
 
     return {
       page,
-      errors,
+      errors
     };
   };
 
@@ -116,45 +124,14 @@ export default function ProjectForm() {
       return;
     }
 
-    const categories: Array<string> = [];
-    if (formData?.categories) {
-      Object.entries(formData?.categories)?.forEach(([key, value]) => {
-        if (value) categories.push(key);
-      });
+    const { projectDetails, rewardDetails } = formDataToProjectInfo(formData);
+
+    let response;
+    if (editMode && projectId) {
+      response = await updateProject(projectId, projectDetails);
+    } else {
+      response = await createProject(projectDetails, rewardDetails);
     }
-
-    const images: Array<string> = [];
-    if (formData?.image) {
-      Object.values(formData?.image)?.forEach((value: any) => {
-        if (value) images.push(value);
-      });
-    }
-
-    const rewards: Array<ProjectRewards> = [];
-    if (formData?.rewards) {
-      Object.values(formData?.rewards).forEach((reward: any) => {
-        if (reward?.name && reward?.description && reward?.cost) {
-          rewards.push(reward);
-        }
-      });
-    }
-
-    const projectDetails = {
-      name: formData.name,
-      completedAt: formData.completedAt?.toISOString(),
-      targetFunding: Number(formData.targetFunding),
-      postcode: Number(formData.postcode),
-      shortDescription: formData.shortDescription,
-      categories,
-      ...(formData?.aboutBusiness && { aboutBusiness: formData.aboutBusiness }),
-      ...(formData?.aboutOwner && { aboutOwner: formData.aboutOwner }),
-      ...(formData?.businessPlan && { businessPlan: formData.businessPlan }),
-      images,
-    };
-
-    const rewardDetails = rewards;
-
-    const response = await createProject(projectDetails, rewardDetails);
 
     setSendingData(false);
 
@@ -172,13 +149,14 @@ export default function ProjectForm() {
           formData={formData}
           onFormChange={onFormChange}
           errors={errorData}
+          editMode
         />
-      ),
+      )
     },
     {
       name: "Details",
       icon: <BsFillPencilFill />,
-      form: <DetailsForm formData={formData} onFormChange={onFormChange} />,
+      form: <DetailsForm formData={formData} onFormChange={onFormChange} />
     },
     {
       name: "Photos",
@@ -189,7 +167,7 @@ export default function ProjectForm() {
           onFormChange={onFormChange}
           errors={errorData}
         />
-      ),
+      )
     },
     {
       name: "Rewards",
@@ -199,15 +177,16 @@ export default function ProjectForm() {
           formData={formData}
           onFormChange={onFormChange}
           errors={errorData}
+          editMode
         />
-      ),
+      )
     },
     {
       name: "Preview",
       icon: <BsFillCheckCircleFill />,
       form: <PreviewForm formData={formData} />,
-      fullWidth: true,
-    },
+      fullWidth: true
+    }
   ];
 
   return (
@@ -244,7 +223,9 @@ export default function ProjectForm() {
             <Button
               float="right"
               width="100px"
-              onClick={() => submitProject()}
+              onClick={() => {
+                submitProject();
+              }}
               isLoading={sendingData}
             >
               Submit

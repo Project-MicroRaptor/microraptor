@@ -203,7 +203,7 @@ export default function ViewProject(props: ProjectInfo) {
           borderRadius={4}
           fontSize={16}
           onClick={onMssgOpen}
-          disabled={!loggedInNotOwner}
+          disabled={!loggedInNotOwner || !!props.preview}
         >
           Enquire about Project
         </Button>

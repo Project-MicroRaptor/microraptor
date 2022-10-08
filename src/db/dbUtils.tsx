@@ -8,18 +8,28 @@ export async function createProject(
 ) {
   return fetch("/api/project", {
     method: "POST",
-    body: JSON.stringify({ projectDetails, rewardDetails }),
+    body: JSON.stringify({ projectDetails, rewardDetails })
   }).then((res) => {
     return res.json();
   });
 }
 
-export async function updateProfileSetting(
-  setting: ProfileSetting,
+export async function updateProject(
+  id: string,
+  projectDetails: ProjectDetails
 ) {
+  return fetch(`/api/project/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ projectDetails })
+  }).then((res) => {
+    return res.json();
+  });
+}
+
+export async function updateProfileSetting(setting: ProfileSetting) {
   return fetch("/api/profile", {
     method: "POST",
-    body: JSON.stringify(setting),
+    body: JSON.stringify(setting)
   }).then((res) => {
     return res.json();
   });
@@ -27,9 +37,8 @@ export async function updateProfileSetting(
 
 export async function getProfileSetting() {
   return fetch("/api/profile", {
-    method: "GET",
+    method: "GET"
   }).then((res) => {
     return res.json();
   });
 }
-
