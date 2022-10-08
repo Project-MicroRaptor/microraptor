@@ -16,20 +16,18 @@ import {
   useToast,
   Avatar
 } from "@chakra-ui/react";
+import React from "react";
+import router from "next/router";
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { Button } from "@chakra-ui/react";
-import React from "react";
-
-import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
+import { ProjectCategories } from "../../types/categories";
 import { ProjectRewards } from "../../types/project";
-import { ProjectOwner } from "../../types/projectOwner";
+import { createMessageGroup } from "../../utils/dbUtils";
+import { useSession } from "next-auth/react";
 
 import styles from "./ViewProject.module.scss";
-import { createMessageGroup } from "../../utils/dbUtils";
-import router from "next/router";
-import { useSession } from "next-auth/react";
 
 export interface ProjectInfo {
   id?: string;
