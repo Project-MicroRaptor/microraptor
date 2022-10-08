@@ -15,7 +15,6 @@ type Projects = {
   name: string;
   shortDescription: string;
   images: string[];
-  owner: ProjectOwner;
   currentFunding: number;
   targetFunding: number;
   postcode: number;
@@ -100,7 +99,6 @@ export default function ProjectView() {
         businessPlan={data.businessPlan}
         rewards={data.rewards}
         active={data.active}
-        owner={data.owner}
       />
     </>
   );
