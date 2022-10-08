@@ -30,17 +30,19 @@ type PaymentSummaryProps = {
 };
 
 export default function SelectFunding(props: PaymentSummaryProps) {
-  // Set minimum contribution amount for reward selected.
+  // Raise contribution amount to minimum reward cost.
   function onRewardSelected(selection: string) {
     props.setReward(selection);
+
     // Radio Value stored as string, parse to int for indexing rewards.
     let reward = parseInt(selection);
-    // Reward index -1 is no reward. Minimum of $1.
-    if (reward == -1) {
-      props.setContribution(1);
-    }
-    // else, set minimum reward cost.
-    else {
+
+    // Reward index -1, no reward, no minimum contribution value.
+    if (reward == -1) return;
+
+    // If contribution lower than minimum reward value.
+    // Set contribution to minimum reward cost.
+    if (props.contribution < props.rewards[reward].cost) {
       props.setContribution(props.rewards[reward].cost);
     }
   }
@@ -48,24 +50,29 @@ export default function SelectFunding(props: PaymentSummaryProps) {
   function onContributionChanged(contribution: number | void) {
     // If empty, set to minimum value.
     if (!contribution) {
-      props.setContribution(1);
       props.setReward("-1");
       return;
     }
 
-    // In case rewards are unorderd, map through all rewards
-    // and find maximum reward for contribution amount.
-    let maxReward = 0;
-    let maxRewardIndex = -1;
-    props.rewards.map((reward, index) => {
-      if (reward.cost <= contribution && reward.cost > maxReward) {
-        maxReward = reward.cost;
-        maxRewardIndex = index;
-      }
-    });
-
+    // Set contribution value.
     props.setContribution(contribution);
-    props.setReward(maxRewardIndex.toString());
+
+    // If contribution value is less than the currently selected reward.
+    // Update to maximum possible reward.
+    if (props.reward == "-1") return;
+    if (contribution < props.rewards[parseInt(props.reward)].cost) {
+      // In case rewards are unorderd, map through all rewards
+      // and find maximum reward for contribution amount.
+      let maxReward = 0;
+      let maxRewardIndex = -1;
+      props.rewards.map((reward, index) => {
+        if (reward.cost <= contribution && reward.cost > maxReward) {
+          maxReward = reward.cost;
+          maxRewardIndex = index;
+        }
+      });
+      props.setReward(maxRewardIndex.toString());
+    }
   }
 
   return (
