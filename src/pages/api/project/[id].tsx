@@ -41,13 +41,6 @@ export default async function handler(
           }
         },
         active: true,
-        owner: {
-          select: {
-            id: true,
-            name: true,
-            image: true
-          }
-        }
       }
     });
     res.json(projectinfo);
