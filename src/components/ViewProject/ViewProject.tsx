@@ -199,7 +199,7 @@ export default function ViewProject(props: ProjectInfo) {
           Fund this Project
         </Button>
         <Button
-          width="250px"
+          width="270px"
           borderRadius={4}
           fontSize={16}
           onClick={onMssgOpen}
