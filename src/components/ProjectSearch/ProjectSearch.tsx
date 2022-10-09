@@ -13,8 +13,10 @@ import { ProjectCategories } from "../../types/categories";
 import { RadiusDistances } from "../../types/radiusDistances";
 import { SearchType } from "../../types/search";
 import React, { useRef } from "react";
-
+import {Locations} from "../../types/location"
 import styles from "./ProjectSearch.module.scss";
+import useSWR from "swr";
+import { fetcher } from "../../utils/swr";
 
 type ProjectSearchProps = {
   selectionState: SearchType;
@@ -25,11 +27,17 @@ type ProjectSearchProps = {
   setDistance: (distance: number | null) => void;
   searchState: string | null;
   setSearch: (search: string | null) => void;
+  locationState: number | null;
+  setLocation: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 export default function ProjectSearch(props: ProjectSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
+    //getting the location data and formatting it
+    const { data } = useSWR("/api/locations",fetcher);
+    const locationsStuff:Locations[] = data;
+    
   function onFeaturedClick() {
     props.setSelection(SearchType.Featured);
     props.setCategory(null);
@@ -41,6 +49,14 @@ export default function ProjectSearch(props: ProjectSearchProps) {
     props.setSelection(SearchType.Category);
     props.setCategory(category);
     props.setSearch(null);
+    if (inputRef.current != null) inputRef.current.value = "";
+  }
+
+  function onLocationClick(location: number) {
+    props.setSelection(SearchType.Location);
+    props.setCategory(null);
+    props.setSearch(null);
+    props.setLocation(location)
     if (inputRef.current != null) inputRef.current.value = "";
   }
 
@@ -114,9 +130,33 @@ export default function ProjectSearch(props: ProjectSearchProps) {
       </Menu>
 
       <HStack className={styles.areaContainer}>
-        <Button variant="outline" disabled _focus={{ boxShadow: "none" }}>
-          All Locations
-        </Button>
+        <Menu>
+          <MenuButton
+          {...(props.selectionState == SearchType.Category
+            ? {}
+            : { variant: "outline" })}
+            as={Button}
+            _focus={{ boxShadow: "none" }}
+          >
+            {props.locationState == null
+              ? "All Locations"
+              : props.locationState }
+          </MenuButton>
+          <MenuList>
+            <MenuItem onClick={() => props.setLocation(null)}>
+                All Locations
+            </MenuItem>
+
+              {/* {currently works if commented out when loading and then uncomment out after it has loaded.} */}
+              {Object.entries(locationsStuff).map(([key, value]) => {
+                return (
+                  <MenuItem key={key} onClick={() => onLocationClick(value.postcode)}>
+                    {value.postcode}
+                  </MenuItem>
+                );
+              })}
+          </MenuList>
+        </Menu>
 
         <Menu>
           <MenuButton
