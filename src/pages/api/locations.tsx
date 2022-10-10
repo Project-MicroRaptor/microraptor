@@ -5,28 +5,49 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  let postcodeQuery = {};
+  let localityQuery = {};
+  if (req.query.search && !Array.isArray(req.query.search)) {
+    let postcode = !isNaN(Number(req.query.search))
+      ? Number(req.query.search)
+      : null;
 
- 
-  let query = {};
-  req.query;
+    if (postcode) {
+      postcodeQuery = {
+        postcode: {
+          in: [postcode]
+        }
+      };
+    }
 
+    localityQuery = {
+      locality: {
+        contains: req.query.search,
+        mode: "insensitive"
+      }
+    };
+  }
 
   // Retrieve all locations
   const locations = await prisma.location.findMany({
     where: {
-      //reduce the size of the location list for testing. 
-      postcode: {in: [830,3000]},
-      // postcode: 830,
-      ...query,
+      OR: [
+        {
+          ...postcodeQuery
+        },
+        {
+          ...localityQuery
+        }
+      ]
     },
     select: {
       id: true,
       postcode: true,
-      // locality: true,
-      // state: true,
-      // longitude: true,
-      // latitude: true,
-    },
+      locality: true,
+      state: true,
+      longitude: true,
+      latitude: true
+    }
   });
 
   // Return locations in response.

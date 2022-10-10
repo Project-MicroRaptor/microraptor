@@ -6,17 +6,20 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem
+  MenuItem,
+  Modal,
+  useDisclosure
 } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
 import { ProjectCategories } from "../../types/categories";
 import { RadiusDistances } from "../../types/radiusDistances";
 import { SearchType } from "../../types/search";
 import React, { useRef } from "react";
-import {Locations} from "../../types/location"
+import { Location } from "../../types/location";
 import styles from "./ProjectSearch.module.scss";
 import useSWR from "swr";
 import { fetcher } from "../../utils/swr";
+import LocationModal from "../LocationModal/LocationModal";
 
 type ProjectSearchProps = {
   selectionState: SearchType;
@@ -27,17 +30,19 @@ type ProjectSearchProps = {
   setDistance: (distance: number | null) => void;
   searchState: string | null;
   setSearch: (search: string | null) => void;
-  locationState: number | null;
-  setLocation: React.Dispatch<React.SetStateAction<number | null>>;
+  locationState: Location | null;
+  setLocation: (location: Location | null) => void;
 };
 
 export default function ProjectSearch(props: ProjectSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-    //getting the location data and formatting it
-    const { data } = useSWR("/api/locations",fetcher);
-    const locationsStuff:Locations[] = data;
-    
+  const {
+    isOpen: isLocationOpen,
+    onOpen: onLocationOpen,
+    onClose: onLocationClose
+  } = useDisclosure();
+
   function onFeaturedClick() {
     props.setSelection(SearchType.Featured);
     props.setCategory(null);
@@ -52,12 +57,8 @@ export default function ProjectSearch(props: ProjectSearchProps) {
     if (inputRef.current != null) inputRef.current.value = "";
   }
 
-  function onLocationClick(location: number) {
-    props.setSelection(SearchType.Location);
-    props.setCategory(null);
-    props.setSearch(null);
-    props.setLocation(location)
-    if (inputRef.current != null) inputRef.current.value = "";
+  function onLocationSelect(location: Location | null) {
+    props.setLocation(location);
   }
 
   function performSearch() {
@@ -132,31 +133,23 @@ export default function ProjectSearch(props: ProjectSearchProps) {
       <HStack className={styles.areaContainer}>
         <Menu>
           <MenuButton
-          {...(props.selectionState == SearchType.Category
-            ? {}
-            : { variant: "outline" })}
+            {...(props.selectionState == SearchType.Category
+              ? {}
+              : { variant: "outline" })}
             as={Button}
             _focus={{ boxShadow: "none" }}
+            onClick={onLocationOpen}
           >
             {props.locationState == null
               ? "All Locations"
-              : props.locationState }
+              : props.locationState.locality}
           </MenuButton>
-          <MenuList>
-            <MenuItem onClick={() => props.setLocation(null)}>
-                All Locations
-            </MenuItem>
-
-              {/* {currently works if commented out when loading and then uncomment out after it has loaded.} */}
-              {Object.entries(locationsStuff).map(([key, value]) => {
-                return (
-                  <MenuItem key={key} onClick={() => onLocationClick(value.postcode)}>
-                    {value.postcode}
-                  </MenuItem>
-                );
-              })}
-          </MenuList>
         </Menu>
+        <LocationModal
+          isOpen={isLocationOpen}
+          onClose={onLocationClose}
+          selectLocation={(location) => onLocationSelect(location)}
+        />
 
         <Menu>
           <MenuButton
