@@ -7,7 +7,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Modal,
   useDisclosure
 } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
@@ -17,8 +16,6 @@ import { SearchType } from "../../types/search";
 import React, { useRef } from "react";
 import { Location } from "../../types/location";
 import styles from "./ProjectSearch.module.scss";
-import useSWR from "swr";
-import { fetcher } from "../../utils/swr";
 import LocationModal from "../LocationModal/LocationModal";
 
 type ProjectSearchProps = {
@@ -130,7 +127,7 @@ export default function ProjectSearch(props: ProjectSearchProps) {
         </MenuList>
       </Menu>
 
-      <HStack className={styles.areaContainer}>
+      <HStack>
         <Menu>
           <MenuButton
             {...(props.selectionState == SearchType.Category
@@ -150,7 +147,9 @@ export default function ProjectSearch(props: ProjectSearchProps) {
           onClose={onLocationClose}
           selectLocation={(location) => onLocationSelect(location)}
         />
+      </HStack>
 
+      <HStack>
         <Menu>
           <MenuButton
             variant="outline"
