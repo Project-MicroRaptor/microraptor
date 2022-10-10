@@ -1,4 +1,4 @@
-import { DefaultIcon, Heading, Spinner } from "@chakra-ui/react";
+import { Heading, Spinner } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
