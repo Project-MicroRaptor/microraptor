@@ -209,8 +209,8 @@
     padding: 0 40px;
 
     .buttons {
-      justify-content: center;
-      gap: 20px;
+      justify-content: space-between;
+      gap: 35px;
     }
 
     .leftNav {
@@ -232,7 +232,7 @@
 
   .campaignWrapper {
     flex-direction: row;
-    gap: 20px;
+    gap: 100px;
     margin-top: 40px;
 
     .leftNav {
@@ -258,7 +258,7 @@
 
 @media only screen and (min-width: 1140px) {
   .campaignWrapper {
-    gap: 100px;
+    gap: 120px;
   }
 
   .projectContainer {
