@@ -35,7 +35,7 @@ export interface ProjectInfo {
   id?: string;
   name?: string;
   shortDescription?: string;
-  images?: string[];
+  images?: string;
   owner?: {
     id: string;
     name: string;
@@ -60,6 +60,7 @@ export default function ViewProject(props: ProjectInfo) {
   const postcode = props?.postcode ?? "None";
   const ownerName = props?.owner?.name ?? "None";
   const image = props?.owner?.image ?? "";
+  const projectImage = props?.images ?? "none";
   const ownerId = props?.owner?.id ?? "";
   const targetFunding = props?.targetFunding ?? 0;
   const currentFunding = props?.currentFunding ?? 0;
@@ -129,12 +130,6 @@ export default function ViewProject(props: ProjectInfo) {
     "\n\nView the MicroRaptor project page here: " +
     window.location.href;
 
-  const slides: Array<{ url: string }> | undefined = props?.images?.map((image) => {
-    return (
-      { url: image }
-    );
-  })
-
   return (
     <div className={styles.projectContainer}>
       <Center className={styles.name}>
@@ -155,9 +150,11 @@ export default function ViewProject(props: ProjectInfo) {
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
-          <div className={styles.imageCarousel}>
-            <ImageSlider slides={slides} />
-          </div>
+          {props.images && (
+            <div className={styles.imageCarousel}>
+              <ImageSlider slides={projectImage} />
+            </div>
+          )}
           <div className={styles.categoriesItem}>
             <AiOutlineTag className={styles.categoriesIcon} />
             <span className={styles.content}>{categories.join(", ")}</span>
