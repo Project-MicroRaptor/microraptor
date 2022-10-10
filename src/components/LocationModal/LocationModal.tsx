@@ -9,8 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
-  useDisclosure
+  Text
 } from "@chakra-ui/react";
 import { useState, useRef } from "react";
 import useSWR from "swr";
