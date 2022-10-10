@@ -1,12 +1,31 @@
-.projectImage {
+.slideStyles {
   border-radius: 10px;
   margin-top: 40px;
   display: block;
   contain: content;
+  background-position: center;
+  min-width: 100%;
+  min-height: 100%;
+}
 
-  img {
-    min-width: 100%;
-    min-height: 100%;
+.sliderStyles {
+  height: 100%;
+  position: relative;
+}
+
+.leftArrow,
+.rightArrow {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 40px;
+  color: #868686;
+  z-index: 1;
+  cursor: pointer;
+  -webkit-user-select: none; //remove blue hightlight after multiple clicks
+
+  &:hover {
+    color: #696969;
   }
 }
 
@@ -152,9 +171,17 @@
     text-align: center;
   }
 
-  .projectImage {
+  .slideStyles {
     width: 355px;
-    max-height: 340px;
+    height: 335px;
+  }
+
+  .leftArrow {
+    left: -32px;
+  }
+
+  .rightArrow {
+    right: -35px;
   }
 
   .categoriesItem {
@@ -216,9 +243,17 @@
       max-width: 430px;
     }
 
-    .projectImage {
+    .slideStyles {
       width: 410px;
-      max-height: 355px;
+      height: 335px;
+    }
+
+    .leftArrow {
+      left: -35px;
+    }
+
+    .rightArrow {
+      right: -35px;
     }
 
     .progressContainer {

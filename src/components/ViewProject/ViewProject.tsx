@@ -24,12 +24,12 @@ import React from "react";
 import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
 import { ProjectRewards } from "../../types/project";
-import { ProjectOwner } from "../../types/projectOwner";
 
 import styles from "./ViewProject.module.scss";
 import { createMessageGroup } from "../../utils/dbUtils";
 import router from "next/router";
 import { useSession } from "next-auth/react";
+import ImageSlider from "./ImageSlider"
 
 export interface ProjectInfo {
   id?: string;
@@ -129,6 +129,12 @@ export default function ViewProject(props: ProjectInfo) {
     "\n\nView the MicroRaptor project page here: " +
     window.location.href;
 
+  const slides: Array<{ url: string }> | undefined = props?.images?.map((image) => {
+    return (
+      { url: image }
+    );
+  })
+
   return (
     <div className={styles.projectContainer}>
       <Center className={styles.name}>
@@ -149,11 +155,8 @@ export default function ViewProject(props: ProjectInfo) {
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
-          <div className={styles.projectImage}>
-            <img
-              src={props?.images?.length ? props?.images[0] : "/default.png"}
-              alt={props.name}
-            />
+          <div className={styles.imageCarousel}>
+            <ImageSlider slides={slides} />
           </div>
           <div className={styles.categoriesItem}>
             <AiOutlineTag className={styles.categoriesIcon} />
