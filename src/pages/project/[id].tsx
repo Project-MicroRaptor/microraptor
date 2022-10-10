@@ -17,6 +17,7 @@ type Projects = {
   images: string[];
   currentFunding: number;
   targetFunding: number;
+  locality: string;
   postcode: number;
   categories: string[];
   createdAt: number;
@@ -89,6 +90,7 @@ export default function ProjectView() {
         images={data.images}
         currentFunding={data.currentFunding}
         targetFunding={data.targetFunding}
+        locality={data.locality}
         postcode={data.postcode}
         categories={data.categories}
         createdAt={data.createdAt}

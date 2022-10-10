@@ -41,6 +41,7 @@ export interface ProjectInfo {
   };
   currentFunding?: number;
   targetFunding?: number;
+  locality?: string;
   postcode?: number;
   categories?: string[];
   createdAt?: number;
@@ -55,7 +56,8 @@ export interface ProjectInfo {
 
 export default function ViewProject(props: ProjectInfo) {
   const name = props?.name ?? "Missing";
-  const postcode = props?.postcode ?? "None";
+  const locality = props?.locality ?? "UNKNOWN";
+  const postcode = props?.postcode;
   const targetFunding = props?.targetFunding ?? 0;
   const currentFunding = props?.currentFunding ?? 0;
   const completedAt = props?.completedAt ?? new Date().toISOString();
@@ -64,6 +66,11 @@ export default function ViewProject(props: ProjectInfo) {
     props?.shortDescription || props.shortDescription !== ""
       ? props.shortDescription
       : "No Description";
+
+  let locationString = locality;
+  if (postcode) {
+    locationString += `, ${postcode}`;
+  }
 
   let loggedInNotOwner = false;
   const { data: session } = useSession();
@@ -154,7 +161,7 @@ export default function ViewProject(props: ProjectInfo) {
             <AiOutlineTag className={styles.categoriesIcon} />
             <span className={styles.content}>{categories.join(", ")}</span>
             <HiLocationMarker className={styles.locationIcon} />
-            <span className={styles.content}>{postcode}</span>
+            <span className={styles.content}>{locationString}</span>
           </div>
         </div>
 

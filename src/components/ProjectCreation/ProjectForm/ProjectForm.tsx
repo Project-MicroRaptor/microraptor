@@ -3,7 +3,7 @@ import {
   BsFillPencilFill,
   BsFillImageFill,
   BsFillGiftFill,
-  BsFillCheckCircleFill,
+  BsFillCheckCircleFill
 } from "react-icons/bs";
 import Router from "next/router";
 import { useState } from "react";
@@ -19,7 +19,7 @@ import { createProject } from "../../../db/dbUtils";
 import {
   validateMyProjectForm,
   validatePhotosForm,
-  validateRewardsForm,
+  validateRewardsForm
 } from "../../../utils/formValidation";
 
 import styles from "./ProjectForm.module.scss";
@@ -44,13 +44,13 @@ export default function ProjectForm() {
   ) => {
     setFormData({
       ...formData,
-      [id]: value,
+      [id]: value
     });
 
     if (updateErrorData) {
       setErrorData({
         ...errorData,
-        [id]: false,
+        [id]: false
       });
     }
   };
@@ -67,7 +67,7 @@ export default function ProjectForm() {
     if (myProjectValidation.errors) {
       errors = {
         ...errors,
-        ...myProjectValidation.errors,
+        ...myProjectValidation.errors
       };
     }
 
@@ -79,7 +79,7 @@ export default function ProjectForm() {
     if (photosValidation.errors) {
       errors = {
         ...errors,
-        ...photosValidation.errors,
+        ...photosValidation.errors
       };
     }
 
@@ -90,13 +90,13 @@ export default function ProjectForm() {
     if (rewardsValidation.errors) {
       errors = {
         ...errors,
-        ...rewardsValidation.errors,
+        ...rewardsValidation.errors
       };
     }
 
     return {
       page,
-      errors,
+      errors
     };
   };
 
@@ -143,13 +143,14 @@ export default function ProjectForm() {
       name: formData.name,
       completedAt: formData.completedAt?.toISOString(),
       targetFunding: Number(formData.targetFunding),
-      postcode: Number(formData.postcode),
+      locality: formData.location?.locality,
+      postcode: formData.location?.postcode,
       shortDescription: formData.shortDescription,
       categories,
       ...(formData?.aboutBusiness && { aboutBusiness: formData.aboutBusiness }),
       ...(formData?.aboutOwner && { aboutOwner: formData.aboutOwner }),
       ...(formData?.businessPlan && { businessPlan: formData.businessPlan }),
-      images,
+      images
     };
 
     const rewardDetails = rewards;
@@ -173,12 +174,12 @@ export default function ProjectForm() {
           onFormChange={onFormChange}
           errors={errorData}
         />
-      ),
+      )
     },
     {
       name: "Details",
       icon: <BsFillPencilFill />,
-      form: <DetailsForm formData={formData} onFormChange={onFormChange} />,
+      form: <DetailsForm formData={formData} onFormChange={onFormChange} />
     },
     {
       name: "Photos",
@@ -189,7 +190,7 @@ export default function ProjectForm() {
           onFormChange={onFormChange}
           errors={errorData}
         />
-      ),
+      )
     },
     {
       name: "Rewards",
@@ -200,14 +201,14 @@ export default function ProjectForm() {
           onFormChange={onFormChange}
           errors={errorData}
         />
-      ),
+      )
     },
     {
       name: "Preview",
       icon: <BsFillCheckCircleFill />,
       form: <PreviewForm formData={formData} />,
-      fullWidth: true,
-    },
+      fullWidth: true
+    }
   ];
 
   return (

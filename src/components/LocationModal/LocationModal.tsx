@@ -24,10 +24,11 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   selectLocation: (location: Location | null) => void;
+  noAllLocations?: boolean;
 };
 
 export default function LocationModal(props: Props) {
-  const { isOpen, onClose, selectLocation } = props;
+  const { isOpen, onClose, selectLocation, noAllLocations = false } = props;
   const [searchState, setSearchState] = useState<string>("");
   const [searchInput, setSearchInput] = useState<string>("");
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(
@@ -118,9 +119,11 @@ export default function LocationModal(props: Props) {
           />
         </ModalBody>
         <ModalFooter>
-          <Button mr={3} onClick={() => setSelectedLocation(null)}>
-            All Locations
-          </Button>
+          {!noAllLocations && (
+            <Button mr={3} onClick={() => setSelectedLocation(null)}>
+              All Locations
+            </Button>
+          )}
           <Button
             onClick={() => {
               selectLocation(selectedLocation);

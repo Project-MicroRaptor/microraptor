@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   SimpleGrid,
+  useDisclosure
 } from "@chakra-ui/react";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { ProjectCategories } from "../../../types/categories";
@@ -19,6 +20,7 @@ import styles from "./ProfileSections.module.scss";
 import type { ProjectCategory } from "../../../types/categories";
 import type { FormErrors } from "../../../utils/formValidation";
 import type { CreateFormData } from "../../../types/createForm";
+import LocationModal from "../../LocationModal/LocationModal";
 
 type Props = {
   formData: CreateFormData;
@@ -28,6 +30,12 @@ type Props = {
 
 export default function MyProjectForm(props: Props) {
   const { onFormChange, formData, errors } = props;
+
+  const {
+    isOpen: isLocationOpen,
+    onOpen: onLocationOpen,
+    onClose: onLocationClose
+  } = useDisclosure();
 
   const CategoryButtons = () => {
     const buttons = Object.keys(ProjectCategories).map((key) => {
@@ -41,7 +49,7 @@ export default function MyProjectForm(props: Props) {
           onChange={(value) =>
             onFormChange("categories", {
               ...formData.categories,
-              [key]: value,
+              [key]: value
             })
           }
           isInvalid={!!errors?.categories}
@@ -127,31 +135,39 @@ export default function MyProjectForm(props: Props) {
           configs={{
             dateFormat: dateFormat,
             monthNames: monthNames,
-            dayNames: dayNames,
+            dayNames: dayNames
           }}
           propsConfigs={{
             inputProps: {
-              isInvalid: !!errors?.completedAt,
-            },
+              isInvalid: !!errors?.completedAt
+            }
           }}
         />
       </FormControl>
 
       <FormControl className={styles.formControl} isRequired>
-        <FormLabel htmlFor="postcode" className={styles.formLabel}>
-          Postcode
+        <FormLabel htmlFor="location" className={styles.formLabel}>
+          Location
         </FormLabel>
         <Input
-          type="number"
-          id="postcode"
+          id="location"
           className={styles.formInput}
-          value={formData?.postcode ?? ""}
-          onChange={(event) =>
-            onFormChange(event.target.id, event.target.value)
+          value={
+            formData?.location
+              ? `${formData.location.locality}, ${formData.location.postcode}`
+              : ""
           }
-          isInvalid={!!errors?.postcode}
+          onChange={() => {}}
+          onClick={onLocationOpen}
+          isInvalid={!!errors?.location}
         />
       </FormControl>
+      <LocationModal
+        isOpen={isLocationOpen}
+        onClose={onLocationClose}
+        selectLocation={(location) => onFormChange("location", location)}
+        noAllLocations
+      />
 
       <Divider marginBottom="25px" />
 
