@@ -149,7 +149,7 @@ export default function ProjectForm(props: Props) {
           formData={formData}
           onFormChange={onFormChange}
           errors={errorData}
-          editMode
+          editMode={editMode}
         />
       )
     },
@@ -177,7 +177,7 @@ export default function ProjectForm(props: Props) {
           formData={formData}
           onFormChange={onFormChange}
           errors={errorData}
-          editMode
+          editMode={editMode}
         />
       )
     },

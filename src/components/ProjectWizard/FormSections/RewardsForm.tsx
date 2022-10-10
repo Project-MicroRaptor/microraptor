@@ -72,10 +72,12 @@ export default function RewardsForm(props: Props) {
         errors={errors}
         disabled={!!editMode}
       />
-      <p className={styles.red}>
-        * All fields in each reward are required. All rewards must be ordered
-        according to level cost.
-      </p>
+      {!editMode && (
+        <p className={styles.red}>
+          * All fields in each reward are required. All rewards must be ordered
+          according to level cost.
+        </p>
+      )}
     </div>
   );
 }
