@@ -36,6 +36,13 @@ export default function ProjectBrowser() {
     if (categoryKey != null)
       queryString += new URLSearchParams({ category: categoryKey });
   }
+  if (locationState && distanceState) {
+    queryString += new URLSearchParams({
+      latitude: locationState.latitude.toString(),
+      longitude: locationState.longitude.toString(),
+      radius: distanceState.toString()
+    });
+  }
 
   var { data, error } = useSWR<Projects>(queryString, fetcher);
 
