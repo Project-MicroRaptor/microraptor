@@ -61,7 +61,7 @@ export default function LocationModal(props: Props) {
         <ModalHeader>Location</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text fontSize="lg" textAlign="center">
+          <Text fontSize="lg" textAlign="center" data-testid="selectedLocation">
             Selected Location:{" "}
             {selectedLocation
               ? `${selectedLocation.locality}, ${selectedLocation.postcode}`
@@ -109,6 +109,7 @@ export default function LocationModal(props: Props) {
             </Box>
           </Box>
           <Input
+            data-testid="locationInput"
             onChange={(event) => {
               debounce(() => setSearchState(event.target.value));
               setSearchInput(event.target.value);
