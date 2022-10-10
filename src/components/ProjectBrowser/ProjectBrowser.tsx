@@ -27,22 +27,28 @@ export default function ProjectBrowser() {
   const [locationState, setLocation] = useState<Location | null>(null);
 
   // API Route -- Retrieve Projects
-  var queryString = "/api/projects?";
-  if (searchState) queryString += new URLSearchParams({ name: searchState });
+  let queryString = "/api/projects?";
+  let searchParams = {};
+  if (searchState) searchParams = { ...searchParams, name: searchState };
   if (categoryState != null) {
     var categoryKey = Object.keys(ProjectCategories).find(
       (key) => ProjectCategories[key as keyof ProjectCategory] == categoryState
     );
     if (categoryKey != null)
-      queryString += new URLSearchParams({ category: categoryKey });
+      searchParams = {
+        ...searchParams,
+        category: categoryKey
+      };
   }
   if (locationState && distanceState) {
-    queryString += new URLSearchParams({
+    searchParams = {
+      ...searchParams,
       latitude: locationState.latitude.toString(),
       longitude: locationState.longitude.toString(),
       radius: distanceState.toString()
-    });
+    };
   }
+  queryString += new URLSearchParams(searchParams);
 
   var { data, error } = useSWR<Projects>(queryString, fetcher);
 
