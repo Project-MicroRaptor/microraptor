@@ -35,7 +35,7 @@ export interface ProjectInfo {
   id?: string;
   name?: string;
   shortDescription?: string;
-  images?: string;
+  images?: Array<string>;
   owner?: {
     id: string;
     name: string;
@@ -60,7 +60,7 @@ export default function ViewProject(props: ProjectInfo) {
   const postcode = props?.postcode ?? "None";
   const ownerName = props?.owner?.name ?? "None";
   const image = props?.owner?.image ?? "";
-  const projectImage = props?.images ?? "none";
+  const projectImage = props?.images ?? [];
   const ownerId = props?.owner?.id ?? "";
   const targetFunding = props?.targetFunding ?? 0;
   const currentFunding = props?.currentFunding ?? 0;
@@ -150,9 +150,13 @@ export default function ViewProject(props: ProjectInfo) {
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
-          {props.images && (
+          {projectImage.length ? (
             <div className={styles.imageCarousel}>
-              <ImageSlider slides={projectImage} />
+              <ImageSlider images={projectImage} />
+            </div>
+          ) : (
+            <div className={styles.projectImage}>
+              <img src="/default.png" alt={name} />
             </div>
           )}
           <div className={styles.categoriesItem}>

@@ -1,3 +1,16 @@
+.projectImage {
+  border-radius: 10px;
+  margin-top: 40px;
+  width: 410px;
+  display: block;
+  contain: content;
+
+  img {
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+
 .slideStyles {
   border-radius: 10px;
   margin-top: 40px;

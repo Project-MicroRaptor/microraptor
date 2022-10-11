@@ -2,12 +2,12 @@ import { useState } from 'react';
 import styles from "./ViewProject.module.scss";
 
 type Props = {
-  slides: string;
+  images: Array<string>;
 }
 
 const ImageSlider = (props: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const slides = props.slides;
+  const slides = props.images;
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
