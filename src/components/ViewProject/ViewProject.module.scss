@@ -15,6 +15,11 @@
   margin-top: 50px;
   font-size: 25px;
   font-weight: 400;
+  word-break: break-all;
+
+  h2 {
+    text-align: center;
+  }
 
   .inactiveBanner {
     margin: 20px;

@@ -12,8 +12,8 @@ export default async function handler(
       ...query,
       name: {
         contains: req.query.name,
-        mode: "insensitive",
-      },
+        mode: "insensitive"
+      }
     };
   }
 
@@ -22,8 +22,8 @@ export default async function handler(
     query = {
       ...query,
       categories: {
-        has: req.query.category,
-      },
+        has: req.query.category
+      }
     };
   }
 
@@ -31,16 +31,17 @@ export default async function handler(
   const projects = await prisma.project.findMany({
     where: {
       active: true,
-      ...query,
+      ...query
     },
     select: {
       id: true,
       name: true,
+      active: true,
       shortDescription: true,
       images: true,
       currentFunding: true,
-      targetFunding: true,
-    },
+      targetFunding: true
+    }
   });
 
   // Sort projects based on percentage funded - descending.

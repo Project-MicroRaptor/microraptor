@@ -12,6 +12,7 @@ import styles from "./ProjectBrowser.module.scss";
 type Projects = {
   id: string;
   name: string;
+  active: boolean;
   shortDescription: string;
   images: string[];
   currentFunding: number;
@@ -86,6 +87,7 @@ export default function ProjectBrowser() {
               <ProjectCard
                 key={project.id}
                 id={project.id}
+                active={project.active}
                 name={project.name}
                 shortDescription={project.shortDescription}
                 image={project.images[0]}

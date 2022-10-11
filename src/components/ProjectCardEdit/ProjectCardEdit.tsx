@@ -10,6 +10,7 @@ export default function ProjectCardEdit(props: ProjectProps) {
       <ProjectCard
         id={props.id}
         name={props.name}
+        active={props.active}
         shortDescription={props.shortDescription}
         image={props.image}
         currentFunding={props.currentFunding}

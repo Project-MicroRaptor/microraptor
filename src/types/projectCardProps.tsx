@@ -1,6 +1,7 @@
 export interface ProjectProps {
   id: string;
   name: string;
+  active: boolean;
   shortDescription: string;
   image?: string;
   currentFunding: number;
@@ -10,6 +11,7 @@ export interface ProjectProps {
 export interface ProjectCardsProps {
   id: string;
   name: string;
+  active: boolean;
   shortDescription: string;
   images: string[];
   currentFunding: number;
