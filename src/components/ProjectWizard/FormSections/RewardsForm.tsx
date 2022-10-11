@@ -10,10 +10,11 @@ type Props = {
   formData: CreateFormData;
   onFormChange: (id: string, value: any, updateErrorData?: boolean) => void;
   errors: FormErrors;
+  editMode?: boolean;
 };
 
 export default function RewardsForm(props: Props) {
-  const { onFormChange, formData, errors } = props;
+  const { onFormChange, formData, errors, editMode = false } = props;
 
   const onDeleteReward = (index: number) => {
     const rewards = formData?.rewards;
@@ -37,7 +38,7 @@ export default function RewardsForm(props: Props) {
       });
 
     onFormChange("rewards", {
-      ...rewards,
+      ...rewards
     });
     onFormChange("rewardCount", rewardCount - 1, false);
   };
@@ -47,8 +48,8 @@ export default function RewardsForm(props: Props) {
       ...formData.rewards,
       [index]: {
         ...formData?.rewards?.[index],
-        ...reward,
-      },
+        ...reward
+      }
     });
   };
 
@@ -69,11 +70,14 @@ export default function RewardsForm(props: Props) {
         }
         onEditReward={onEditReward}
         errors={errors}
+        disabled={!!editMode}
       />
-      <p className={styles.red}>
-        * All fields in each reward are required. All rewards must be ordered
-        according to level cost.
-      </p>
+      {!editMode && (
+        <p className={styles.red}>
+          * All fields in each reward are required. All rewards must be ordered
+          according to level cost.
+        </p>
+      )}
     </div>
   );
 }

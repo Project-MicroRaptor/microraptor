@@ -9,6 +9,7 @@
   margin: auto;
   margin-bottom: 30px;
   overflow: hidden;
+  max-width: 100%;
 
   button,
   input {
@@ -19,15 +20,6 @@
   }
 
   > * {
-    flex-grow: 1;
-  }
-
-  .areaContainer > * {
-    flex-grow: 1;
-    margin: 0;
-  }
-
-  .searchContainer {
     flex-grow: 1;
   }
 }
