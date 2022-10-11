@@ -157,7 +157,9 @@ export default function MyProjectForm(props: Props) {
           className={styles.formInput}
           value={
             formData?.location
-              ? `${formData.location.locality}, ${formData.location.postcode}`
+              ? `${formData.location.locality ?? "UNKNOWN"}, ${
+                  formData.location.postcode
+                }`
               : ""
           }
           onChange={() => {}}
