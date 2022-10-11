@@ -2,6 +2,7 @@
   margin-top: 5px;
   border-radius: 25px;
   background-color: lightgray;
+  border: transparent solid 5px;
 }
 
 .avatar {
@@ -31,4 +32,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.container:hover {
+  background-color: #c9c9c9;
 }
