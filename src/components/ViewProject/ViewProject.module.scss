@@ -16,7 +16,9 @@
   margin-top: 40px;
   display: block;
   contain: content;
-  background-position: center;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
   min-width: 100%;
   min-height: 100%;
 }
