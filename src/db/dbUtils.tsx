@@ -14,6 +14,18 @@ export async function createProject(
   });
 }
 
+export async function updateProject(
+  id: string,
+  projectDetails: ProjectDetails
+) {
+  return fetch(`/api/project/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ projectDetails })
+  }).then((res) => {
+    return res.json();
+  });
+}
+
 export async function updateProfileSetting(setting: ProfileSetting) {
   return fetch("/api/profile", {
     method: "POST",

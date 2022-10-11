@@ -1,6 +1,6 @@
 import Head from "next/head";
 import NavBar from "../../components/NavBar/NavBar";
-import ProjectForm from "../../components/ProjectCreation/ProjectForm/ProjectForm";
+import ProjectForm from "../../components/ProjectWizard/ProjectForm/ProjectForm";
 
 import type { AuthNextPage } from "../../types/appProps";
 
@@ -21,7 +21,7 @@ const CreateProject: AuthNextPage = (props) => {
       </div>
     </>
   );
-}
+};
 
 export default CreateProject;
 
