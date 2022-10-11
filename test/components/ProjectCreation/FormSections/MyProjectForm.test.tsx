@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import MyProjectForm from "../../../../src/components/ProjectCreation/FormSections/MyProjectForm";
+import MyProjectForm from "../../../../src/components/ProjectWizard/FormSections/MyProjectForm";
 
 describe("MyProjectForm", () => {
   test("MyProjectForm should render correctly", () => {

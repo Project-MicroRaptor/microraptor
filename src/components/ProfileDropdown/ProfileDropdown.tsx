@@ -2,7 +2,7 @@ import { useSession, signOut } from "next-auth/react";
 import {
   AiFillSetting,
   AiOutlineLogout,
-  AiOutlineProject,
+  AiOutlineProject
 } from "react-icons/ai";
 import { MenuList, Avatar } from "@chakra-ui/react";
 import styles from "./ProfileDropdown.module.scss";
@@ -32,7 +32,7 @@ export default function ProfileDropdown() {
       />
       <span className={styles.sessionName}>{session.user?.name}</span>
       <Link href={`/profile/${session.user.id}`}>
-        <span className={styles.viewProfile}>View Profile</span>
+        <a className={styles.viewProfile}>View Profile</a>
       </Link>
       <div className={styles.divider}>
         <div className={styles.item}>
@@ -57,8 +57,9 @@ export default function ProfileDropdown() {
           className={styles.item}
           onClick={() =>
             signOut({
-              callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"
-                }/api/auth/logout`,
+              callbackUrl: `${
+                process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"
+              }/api/auth/logout`
             })
           }
         >
