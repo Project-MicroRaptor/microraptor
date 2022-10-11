@@ -1,6 +1,6 @@
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { ProjectProps } from "../../types/projectCardProps";
-import { Button } from "@chakra-ui/react";
+import { Button, Link } from "@chakra-ui/react";
 
 import styles from "./ProjectCardEdit.module.scss";
 
@@ -15,9 +15,9 @@ export default function ProjectCardEdit(props: ProjectProps) {
         currentFunding={props.currentFunding}
         targetFunding={props.targetFunding}
       />
-      <Button className={styles.button} disabled>
-        Edit
-      </Button>
+      <Link href={`/project/${props.id}/edit`}>
+        <Button className={styles.button}>Edit</Button>
+      </Link>
     </div>
   );
 }

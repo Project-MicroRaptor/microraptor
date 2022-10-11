@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { fetcher } from "../../utils/swr";
+import { fetcher } from "../../../utils/swr";
 import { Spinner, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 import useSWR from "swr";
@@ -36,7 +36,7 @@ type Projects = {
 export default function ProjectView() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, error } = useSWR<Projects>(`/api/project/${id}`, fetcher);
+  const { data, error } = useSWR<Project>(`/api/project/${id}`, fetcher);
 
   if (error)
     return (

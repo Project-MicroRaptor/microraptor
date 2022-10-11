@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import DetailsForm from "../../../../src/components/ProjectCreation/FormSections/DetailsForm";
+import DetailsForm from "../../../../src/components/ProjectWizard/FormSections/DetailsForm";
 
 describe("DetailsForm", () => {
   test("DetailsForm renders correctly", () => {
@@ -13,7 +13,7 @@ describe("DetailsForm", () => {
     const formData = {
       aboutBusiness: "About Business Data",
       aboutOwner: "About Owner Data",
-      businessPlan: "Business Plan Data",
+      businessPlan: "Business Plan Data"
     };
 
     const detailsForm = render(
@@ -31,31 +31,36 @@ describe("DetailsForm", () => {
     let changedValue;
 
     const detailsForm = render(
-      <DetailsForm formData={formData} onFormChange={(id, value) => {
-        changedId = id;
-        changedValue = value;
-      }} />
+      <DetailsForm
+        formData={formData}
+        onFormChange={(id, value) => {
+          changedId = id;
+          changedValue = value;
+        }}
+      />
     );
 
     // Change aboutBusiness text
     const aboutBusiness = detailsForm.getByTestId("aboutBusiness");
     expect(aboutBusiness).toBeTruthy();
-    fireEvent.change(aboutBusiness, {target: {value: "About Business Data"}});
+    fireEvent.change(aboutBusiness, {
+      target: { value: "About Business Data" }
+    });
     expect(changedId).toBe("aboutBusiness");
     expect(changedValue).toBe("About Business Data");
 
     // Change aboutOwner text
     const aboutOwner = detailsForm.getByTestId("aboutOwner");
     expect(aboutOwner).toBeTruthy();
-    fireEvent.change(aboutOwner, {target: {value: "About Owner Data"}});
+    fireEvent.change(aboutOwner, { target: { value: "About Owner Data" } });
     expect(changedId).toBe("aboutOwner");
     expect(changedValue).toBe("About Owner Data");
 
     // Change businessPlan text
     const businessPlan = detailsForm.getByTestId("businessPlan");
     expect(businessPlan).toBeTruthy();
-    fireEvent.change(businessPlan, {target: {value: "Business Plan Data"}});
+    fireEvent.change(businessPlan, { target: { value: "Business Plan Data" } });
     expect(changedId).toBe("businessPlan");
-    expect(changedValue).toBe("Business Plan Data"); 
+    expect(changedValue).toBe("Business Plan Data");
   });
 });
