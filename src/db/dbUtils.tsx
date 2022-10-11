@@ -42,3 +42,17 @@ export async function getProfileSetting() {
     return res.json();
   });
 }
+
+export async function createMessageGroup(
+  message: string,
+  projectId: string,
+  ownerId: string
+) {
+  let queryString = "/api/message-group?";
+  queryString += new URLSearchParams({ projectId, message, ownerId });
+  return fetch(queryString, {
+    method: "POST"
+  }).then((res) => {
+    return res.json();
+  });
+}
