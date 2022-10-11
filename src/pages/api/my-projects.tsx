@@ -12,7 +12,7 @@ export default async function handler(
     // Signed in
     const projects = await prisma.project.findMany({
       where: {
-        ownerId: session.user.id,
+        ownerId: session.user.id
       },
       select: {
         id: true,
@@ -20,8 +20,11 @@ export default async function handler(
         shortDescription: true,
         images: true,
         currentFunding: true,
-        targetFunding: true,
+        targetFunding: true
       },
+      orderBy: {
+        completedAt: "asc"
+      }
     });
     res.json(projects);
   } else {

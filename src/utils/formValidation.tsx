@@ -24,8 +24,16 @@ export function validateMyProjectForm(formData: any): ErrorPageObject {
   if (!formData?.targetFunding) {
     errors.targetFunding = true;
     page = 0;
+  } else if (formData.targetFunding <= 0) {
+    // Check if target is less than or equal to 0
+    errors.targetFunding = true;
+    page = 0;
   }
   if (!formData?.completedAt) {
+    errors.completedAt = true;
+    page = 0;
+  } else if (formData.completedAt < new Date()) {
+    // Check if completedAt is before today
     errors.completedAt = true;
     page = 0;
   }
@@ -77,7 +85,7 @@ export function validateRewardsForm(formData: any): ErrorPageObject {
       ) {
         errors.rewards = {
           ...errors.rewards,
-          [keyNum - 1]: true,
+          [keyNum - 1]: true
         };
         page = 3;
         return;
@@ -88,7 +96,7 @@ export function validateRewardsForm(formData: any): ErrorPageObject {
     if (!values?.name || !values?.description || !values?.cost) {
       errors.rewards = {
         ...(typeof errors.rewards === "object" ? errors.rewards : {}),
-        [keyNum]: true,
+        [keyNum]: true
       };
       page = 3;
       return;
@@ -100,7 +108,7 @@ export function validateRewardsForm(formData: any): ErrorPageObject {
       if (values?.cost && prevReward?.cost > values?.cost) {
         errors.rewards = {
           ...(typeof errors.rewards === "object" ? errors.rewards : {}),
-          [keyNum]: true,
+          [keyNum]: true
         };
         page = 3;
         return;

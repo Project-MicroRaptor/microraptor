@@ -1,6 +1,7 @@
 import {
   Badge,
   Center,
+  FormControl,
   Heading,
   Modal,
   ModalBody,
@@ -10,6 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Progress,
+  Textarea,
   useDisclosure,
   useToast
 } from "@chakra-ui/react";
@@ -23,12 +25,20 @@ import type { ProjectCategory } from "../../types/categories";
 
 import styles from "./ViewProject.module.scss";
 import { ProjectRewards } from "../../types/project";
+import { createMessageGroup } from "../../db/dbUtils";
+import router from "next/router";
+import { useSession } from "next-auth/react";
 
 export interface ProjectInfo {
   id?: string;
   name?: string;
   shortDescription?: string;
   images?: string[];
+  owner?: {
+    id: string;
+    name: string;
+    image: string;
+  };
   currentFunding?: number;
   targetFunding?: number;
   postcode?: number;
@@ -40,19 +50,33 @@ export interface ProjectInfo {
   businessPlan?: string;
   rewards?: Array<ProjectRewards>;
   active?: boolean;
+  preview?: boolean;
 }
 
 export default function ViewProject(props: ProjectInfo) {
-  const name = props?.name ?? "Missing";
-  const postcode = props?.postcode ?? "None";
-  const targetFunding = props?.targetFunding ?? 0;
-  const currentFunding = props?.currentFunding ?? 0;
-  const completedAt = props?.completedAt ?? new Date().toISOString();
+  const {
+    id,
+    name = "Missing",
+    shortDescription = "No Description",
+    images = [],
+    owner,
+    currentFunding = 0,
+    targetFunding = 0,
+    postcode = "None",
+    categories = [],
+    completedAt = new Date().toISOString(),
+    aboutBusiness,
+    aboutOwner,
+    businessPlan,
+    rewards,
+    active = true,
+    preview = false
+  } = props;
   const backers = 0;
-  const shortDescription =
-    props?.shortDescription || props.shortDescription !== ""
-      ? props.shortDescription
-      : "No Description";
+
+  const { data: session } = useSession();
+
+  const loggedInNotOwner = session && session.user.id !== owner?.id;
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -66,23 +90,40 @@ export default function ViewProject(props: ProjectInfo) {
     return totalDays;
   };
 
-  const categories: string[] = [];
+  const categoryStrings = [];
 
-  props.categories?.forEach((category) => {
+  categories?.forEach((category) => {
     if (ProjectCategories[category as keyof ProjectCategory]) {
-      categories.push(ProjectCategories[category as keyof ProjectCategory]);
+      categoryStrings.push(
+        ProjectCategories[category as keyof ProjectCategory]
+      );
     } else {
-      categories.push(category);
+      categoryStrings.push(category);
     }
   });
 
   if (categories.length == 0) {
-    categories.push("None");
+    categoryStrings.push("None");
   }
 
+  let [message, setValue] = React.useState("");
+  let handleInputChange = (e: any) => {
+    let inputValue = e.target.value;
+    setValue(inputValue);
+  };
+
   const finalRef = React.useRef(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const {
+    isOpen: isShareOpen,
+    onOpen: onShareOpen,
+    onClose: onShareClose
+  } = useDisclosure();
+  const {
+    isOpen: isMssgOpen,
+    onOpen: onMssgOpen,
+    onClose: onMssgClose
+  } = useDisclosure();
 
   const shareText =
     name +
@@ -95,7 +136,7 @@ export default function ViewProject(props: ProjectInfo) {
     <div className={styles.projectContainer}>
       <Center className={styles.name}>
         <Heading>{name}</Heading>
-        {props.active ? (
+        {active ? (
           <></>
         ) : (
           <Badge
@@ -108,21 +149,15 @@ export default function ViewProject(props: ProjectInfo) {
           </Badge>
         )}
       </Center>
-      <span className={styles.name}>
-        <Center>{name}</Center>
-      </span>
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
           <div className={styles.projectImage}>
-            <img
-              src={props?.images?.length ? props?.images[0] : "/default.png"}
-              alt={props.name}
-            />
+            <img src={images?.length ? images[0] : "/default.png"} alt={name} />
           </div>
           <div className={styles.categoriesItem}>
             <AiOutlineTag className={styles.categoriesIcon} />
-            <span className={styles.content}>{categories.join(", ")}</span>
+            <span className={styles.content}>{categoryStrings.join(", ")}</span>
             <HiLocationMarker className={styles.locationIcon} />
             <span className={styles.content}>{postcode}</span>
           </div>
@@ -156,18 +191,25 @@ export default function ViewProject(props: ProjectInfo) {
 
       <div className={styles.buttons}>
         <Button
-          width="250px"
+          width="270px"
           borderRadius={4}
           fontSize={16}
-          onClick={onOpen}
+          onClick={onShareOpen}
           data-testid="share-button"
+          disabled={preview}
         >
           Share
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>
+        <Button width="270px" borderRadius={4} fontSize={16} disabled>
           Fund this Project
         </Button>
-        <Button width="250px" borderRadius={4} fontSize={16} disabled>
+        <Button
+          width="270px"
+          borderRadius={4}
+          fontSize={16}
+          onClick={onMssgOpen}
+          disabled={!loggedInNotOwner || preview}
+        >
           Enquire about Project
         </Button>
       </div>
@@ -175,59 +217,56 @@ export default function ViewProject(props: ProjectInfo) {
       <div className={styles.campaignWrapper}>
         <div className={styles.leftNav}>
           <div className={styles.left}>
-            {props.aboutBusiness && (
-              <a href="#aboutBusiness">About the Business</a>
-            )}
-            {props.aboutOwner && <a href="#aboutOwner">About the Owner</a>}
-            {props.businessPlan && <a href="#businessPlan">Business Plan</a>}
-            {props.rewards && props.rewards.length > 0 && (
-              <a href="#rewards">Rewards</a>
-            )}
+            {aboutBusiness && <a href="#aboutBusiness">About the Business</a>}
+            {aboutOwner && <a href="#aboutOwner">About the Owner</a>}
+            {businessPlan && <a href="#businessPlan">Business Plan</a>}
+            {rewards && rewards.length > 0 && <a href="#rewards">Rewards</a>}
           </div>
         </div>
 
         <div className={styles.rightNav}>
           <div className={styles.right}>
-            {props.aboutBusiness && (
+            {aboutBusiness && (
               <div className={styles.rightHeading}>
                 <Heading id="aboutBusiness" size="md" marginBottom={3}>
                   About the Business
                 </Heading>
-                <span>{props.aboutBusiness}</span>
+                <span>{aboutBusiness}</span>
               </div>
             )}
 
-            {props.aboutOwner && (
+            {aboutOwner && (
               <div className={styles.rightHeading}>
                 <Heading id="aboutOwner" size="md" marginBottom={3}>
                   About the Owner
                 </Heading>
-                <span>{props.aboutOwner}</span>
+                <span>{aboutOwner}</span>
               </div>
             )}
 
-            {props.businessPlan && (
+            {businessPlan && (
               <div className={styles.rightHeading}>
                 <Heading id="businessPlan" size="md" marginBottom={3}>
                   Business Plan
                 </Heading>
-                <span>{props.businessPlan}</span>
+                <span>{businessPlan}</span>
               </div>
             )}
 
-            {props.rewards && props.rewards.length > 0 && (
+            {rewards && rewards.length > 0 && (
               <div className={styles.rewardButton}>
                 <Heading id="rewards" size="md" marginBottom={3}>
                   Rewards
                 </Heading>
-                {props.rewards.map((reward: ProjectRewards, i) => {
+                {rewards.map((reward: ProjectRewards, i) => {
                   return (
                     <span key={i}>
                       <span className={styles.tier}>
                         <b>Reward Tier {i + 1}</b> - {reward.name}
                         <span>
-                          Contribute ${reward.cost} or more and receive the
-                          following:
+                          Contribute $
+                          {reward.cost ? reward.cost.toLocaleString() : "0"} or
+                          more and receive the following:
                         </span>
                         <span>{reward.description}</span>
                       </span>
@@ -241,8 +280,8 @@ export default function ViewProject(props: ProjectInfo) {
       </div>
       <Modal
         finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={isShareOpen}
+        onClose={onShareClose}
         size={"xl"}
         isCentered
       >
@@ -270,8 +309,46 @@ export default function ViewProject(props: ProjectInfo) {
             >
               Copy
             </Button>
-            <Button onClick={onClose} variant="ghost">
+            <Button onClick={onShareClose} variant="ghost">
               Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal
+        finalFocusRef={finalRef}
+        isOpen={isMssgOpen}
+        onClose={onMssgClose}
+        size="xl"
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Enquire about {name}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormControl className={styles.formControl}>
+              <Textarea
+                id="message"
+                value={message}
+                onChange={handleInputChange}
+                className={styles.formInput}
+                resize="vertical"
+                min-height="100%"
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              onClick={() =>
+                createMessageGroup(message, id ?? "", owner?.id ?? "").then(
+                  (res) => {
+                    if (res.id) router.push(`/inbox`);
+                  }
+                )
+              }
+            >
+              Submit
             </Button>
           </ModalFooter>
         </ModalContent>

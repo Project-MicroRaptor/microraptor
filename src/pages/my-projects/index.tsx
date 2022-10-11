@@ -22,11 +22,11 @@ const MyProjects: AuthNextPage = (props) => {
       </Head>
       <NavBar />
       <div className={styles.container}>
-        <h1>My Projects</h1>
+        <h1 className={styles.heading}>My Projects</h1>
         {data && data.length > 0 ? (
           <ProjectsSlider editable projects={data} />
         ) : (
-          <h2>
+          <h2 className={styles.noProj}>
             You have no projects, you can create one{" "}
             <Link href="/create-project">
               <a className={styles.createProject}>here!</a>

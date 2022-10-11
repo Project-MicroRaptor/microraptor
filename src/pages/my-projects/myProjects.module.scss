@@ -3,7 +3,7 @@
   margin: auto;
   padding-top: 30px;
 
-  h1 {
+  .heading {
     font-size: 2em;
   }
 
@@ -20,8 +20,8 @@
   .container {
     width: 100%;
 
-    h1,
-    h2 {
+    .heading,
+    .noProj {
       text-align: center;
     }
   }

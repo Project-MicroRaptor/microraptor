@@ -10,7 +10,7 @@ export default async function handler(
   if (id && typeof id == "string") {
     const projectinfo = await prisma.project.findUnique({
       where: {
-        id,
+        id
       },
       select: {
         id: true,
@@ -30,11 +30,21 @@ export default async function handler(
           select: {
             name: true,
             cost: true,
-            description: true,
+            description: true
           },
+          orderBy: {
+            cost: "asc"
+          }
         },
         active: true,
-      },
+        owner: {
+          select: {
+            id: true,
+            name: true,
+            image: true
+          }
+        }
+      }
     });
     res.json(projectinfo);
   }
