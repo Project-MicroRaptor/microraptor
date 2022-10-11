@@ -32,6 +32,9 @@ export default async function handler(
             name: true,
             cost: true,
             description: true
+          },
+          orderBy: {
+            cost: "asc"
           }
         },
         active: true,
