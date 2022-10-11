@@ -5,7 +5,6 @@
   text-align: center;
 }
 
-
 .profileContainer {
   display: flex;
   justify-content: center;
@@ -41,5 +40,25 @@
     text-align: justify;
     margin-top: 5px;
     padding: 10px;
+  }
+}
+
+.profileProjects {
+  max-width: 1200px;
+  margin: auto;
+
+  h3 {
+    font-weight: bold;
+    margin-top: 30px;
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  h4 {
+    font-style: italic;
+    color: #b6aaaa;
+    margin-top: 50px;
+    font-size: 0.9em;
+    text-align: center;
   }
 }
