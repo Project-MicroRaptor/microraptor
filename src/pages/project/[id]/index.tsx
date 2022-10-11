@@ -66,6 +66,7 @@ export default function ProjectView() {
         images={data.images}
         currentFunding={data.currentFunding}
         targetFunding={data.targetFunding}
+        locality={data.locality}
         postcode={data.postcode}
         categories={data.categories}
         createdAt={data.createdAt}

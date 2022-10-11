@@ -7,7 +7,6 @@ export type CreateFormData = {
   targetFunding?: number;
   completedAt?: Date;
   location?: Location;
-  postcode?: string;
   categories?: {
     [key: string]: boolean;
   };
