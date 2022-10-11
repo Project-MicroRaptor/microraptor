@@ -5,8 +5,8 @@ import Head from "next/head";
 import useSWR from "swr";
 import NavBar from '../../../components/NavBar/NavBar';
 import ViewProject from "../../../components/ViewProject/ViewProject";
-import { ProjectRewards } from "../../../types/project";
-import { Project } from "../../../types/project";
+import type { ProjectRewards } from "../../../types/project";
+import type { Project } from "../../../types/project";
 
 import styles from "./projectId.module.scss";
 
