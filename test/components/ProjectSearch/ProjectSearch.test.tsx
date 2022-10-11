@@ -16,6 +16,8 @@ describe("ProjectSearch", () => {
         setDistance={() => {}}
         searchState={null}
         setSearch={() => {}}
+        locationState={null}
+        setLocation={() => {}}
       />
     );
   });
@@ -34,6 +36,8 @@ describe("ProjectSearch", () => {
         setDistance={(distance) => (distanceState = distance)}
         searchState={null}
         setSearch={() => {}}
+        locationState={null}
+        setLocation={() => {}}
       />
     );
 
@@ -65,6 +69,8 @@ describe("ProjectSearch", () => {
         setDistance={(distance) => (distanceState = distance)}
         searchState={null}
         setSearch={() => {}}
+        locationState={null}
+        setLocation={() => {}}
       />
     );
 
@@ -83,6 +89,8 @@ describe("ProjectSearch", () => {
         setDistance={(distance) => (distanceState = distance)}
         searchState={null}
         setSearch={() => {}}
+        locationState={null}
+        setLocation={() => {}}
       />
     );
 
@@ -105,6 +113,8 @@ describe("ProjectSearch", () => {
         setDistance={(distance) => (distanceState = distance)}
         searchState={null}
         setSearch={() => {}}
+        locationState={null}
+        setLocation={() => {}}
       />
     );
 
@@ -123,6 +133,8 @@ describe("ProjectSearch", () => {
         setDistance={(distance) => (distanceState = distance)}
         searchState={null}
         setSearch={() => {}}
+        locationState={null}
+        setLocation={() => {}}
       />
     );
   });
@@ -142,6 +154,8 @@ describe("ProjectSearch", () => {
         setDistance={() => {}}
         searchState={searchState}
         setSearch={(search) => (searchState = search)}
+        locationState={null}
+        setLocation={() => {}}
       />
     );
 

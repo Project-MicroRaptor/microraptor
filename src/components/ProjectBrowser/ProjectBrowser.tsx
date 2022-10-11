@@ -6,6 +6,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/swr";
 import { SearchType } from "../../types/search";
+import type { Location } from "../../types/location";
 
 import styles from "./ProjectBrowser.module.scss";
 
@@ -23,6 +24,7 @@ export default function ProjectBrowser() {
   const [categoryState, setCategory] = useState<string | null>(null);
   const [distanceState, setDistance] = useState<number | null>(null);
   const [searchState, setSearch] = useState<string | null>(null);
+  const [locationState, setLocation] = useState<Location | null>(null);
 
   // API Route -- Retrieve Projects
   var queryString = "/api/projects?";
@@ -110,6 +112,8 @@ export default function ProjectBrowser() {
         setDistance={(distance) => setDistance(distance)}
         searchState={searchState}
         setSearch={(search) => setSearch(search)}
+        locationState={locationState}
+        setLocation={(location) => setLocation(location)}
       />
       {displayProjects()}
     </div>
