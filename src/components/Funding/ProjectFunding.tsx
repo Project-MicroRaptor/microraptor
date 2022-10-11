@@ -18,7 +18,7 @@ export default function ProjectFunding(props: FundingProps) {
   // Current reward radio button selected.
   const [reward, setReward] = useState("-1");
   // Current contribution value selected.
-  const [contribution, setContribution] = useState<number>(1);
+  const [contribution, setContribution] = useState<number | undefined>(1);
 
   // Returns the correct component for the current page.
   function FundingContent() {

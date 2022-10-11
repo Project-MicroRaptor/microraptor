@@ -19,7 +19,7 @@ type OrderSummaryProps = {
     description: string;
   }[];
   reward: string;
-  contribution: number;
+  contribution: number | undefined;
   page: number;
   setPage: (page: number) => void;
 };
@@ -102,9 +102,11 @@ export default function OrderSummary(props: OrderSummaryProps) {
           <Text className={styles.total}>
             <b>
               ${" "}
-              {props.contribution.toLocaleString(undefined, {
-                minimumFractionDigits: 2
-              })}
+              {props.contribution != undefined
+                ? props.contribution.toLocaleString(undefined, {
+                    minimumFractionDigits: 2
+                  })
+                : "Error..."}
             </b>
           </Text>
         </HStack>
