@@ -202,7 +202,9 @@ export default function ViewProject(props: ProjectInfo) {
           Share
         </Button>
         <Button width="270px" borderRadius={4} fontSize={16}>
-          <Link href={`/project/fund/${props.id}`}>Fund this Project</Link>
+          <Link className={styles.fundLink} href={`/project/fund/${props.id}`}>
+            Fund this Project
+          </Link>
         </Button>
         <Button
           width="270px"
