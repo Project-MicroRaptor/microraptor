@@ -26,12 +26,9 @@ import { ProjectCategories } from "../../types/categories";
 import { ProjectRewards } from "../../types/project";
 import { createMessageGroup } from "../../db/dbUtils";
 import { useSession } from "next-auth/react";
+import ImageSlider from "./ImageSlider"
 
 import styles from "./ViewProject.module.scss";
-import { createMessageGroup } from "../../utils/dbUtils";
-import router from "next/router";
-import { useSession } from "next-auth/react";
-import ImageSlider from "./ImageSlider"
 
 export interface ProjectInfo {
   id?: string;
