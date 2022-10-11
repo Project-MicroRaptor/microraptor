@@ -1,5 +1,5 @@
 export enum SearchType {
   Featured,
   Category,
-  Search,
+  Search
 }

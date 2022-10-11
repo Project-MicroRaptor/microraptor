@@ -1,10 +1,12 @@
 import { render } from "@testing-library/react";
-import MyProjectForm from "../../../../src/components/ProjectCreation/FormSections/MyProjectForm";
+import MyProjectForm from "../../../../src/components/ProjectWizard/FormSections/MyProjectForm";
 
 describe("MyProjectForm", () => {
   test("MyProjectForm should render correctly", () => {
     const formData = {};
-    render(<MyProjectForm formData={formData} onFormChange={() => {}} />);
+    render(
+      <MyProjectForm formData={formData} onFormChange={() => {}} errors={{}} />
+    );
   });
 
   test("MyProjectForm has data pre-populated", () => {
@@ -13,11 +15,11 @@ describe("MyProjectForm", () => {
       shortDescription: "shortDescriptionData",
       targetFunding: 100000,
       completedAt: new Date(2022, 1, 1),
-      postcode: "3000",
+      postcode: "3000"
     };
 
     const projectForm = render(
-      <MyProjectForm formData={formData} onFormChange={() => {}} />
+      <MyProjectForm formData={formData} onFormChange={() => {}} errors={{}} />
     );
 
     expect(projectForm.getByDisplayValue("nameData")).toBeTruthy();

@@ -24,6 +24,7 @@ type Props = {
   onAddReward: () => void;
   onEditReward: (index: number, reward: ProjectRewards) => void;
   errors?: FormErrors;
+  disabled?: boolean;
 };
 
 export default function RewardsBuilder(props: Props) {
@@ -33,7 +34,8 @@ export default function RewardsBuilder(props: Props) {
     onDeleteReward,
     onAddReward,
     onEditReward,
-    errors
+    errors,
+    disabled = false
   } = props;
 
   const rewardsErrors = errors?.rewards ?? null;
@@ -59,6 +61,7 @@ export default function RewardsBuilder(props: Props) {
               onChange={(event) =>
                 onEditReward(i, { name: event.target.value })
               }
+              disabled={!!disabled}
             />
           </div>
           <div className={styles.cost}>
@@ -73,6 +76,7 @@ export default function RewardsBuilder(props: Props) {
                 onValueChange={(values) =>
                   onEditReward(i, { cost: values.floatValue })
                 }
+                disabled={!!disabled}
               />
             </InputGroup>
           </div>
@@ -83,16 +87,19 @@ export default function RewardsBuilder(props: Props) {
             onChange={(event) =>
               onEditReward(i, { description: event.target.value })
             }
+            disabled={!!disabled}
           />
         </div>
-        <div
-          className={styles.delete}
-          onClick={() => {
-            onDeleteReward(i);
-          }}
-        >
-          <BsFillDashCircleFill />
-        </div>
+        {!disabled && (
+          <div
+            className={styles.delete}
+            onClick={() => {
+              onDeleteReward(i);
+            }}
+          >
+            <BsFillDashCircleFill />
+          </div>
+        )}
       </div>
     );
   });
@@ -100,12 +107,14 @@ export default function RewardsBuilder(props: Props) {
   return (
     <div>
       {rewardTabs}
-      <div
-        className={`${styles.rewardContainer} ${styles.add}`}
-        onClick={() => onAddReward()}
-      >
-        <BsFillPlusCircleFill />
-      </div>
+      {!disabled && (
+        <div
+          className={`${styles.rewardContainer} ${styles.add}`}
+          onClick={() => onAddReward()}
+        >
+          <BsFillPlusCircleFill />
+        </div>
+      )}
     </div>
   );
 }
