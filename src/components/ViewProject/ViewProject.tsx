@@ -28,17 +28,14 @@ import { ProjectRewards } from "../../types/project";
 import { createMessageGroup } from "../../utils/dbUtils";
 import router from "next/router";
 import { useSession } from "next-auth/react";
+import { User } from "../../types/user";
 
 export interface ProjectInfo {
   id?: string;
   name?: string;
   shortDescription?: string;
   images?: string[];
-  owner?: {
-    id: string;
-    name: string;
-    image: string;
-  };
+  owner?: User;
   currentFunding?: number;
   targetFunding?: number;
   postcode?: number;

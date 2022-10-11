@@ -8,30 +8,7 @@ import ViewProject from "../../components/ViewProject/ViewProject";
 import NavBar from "./../../components/NavBar/NavBar";
 
 import styles from "./[id].module.scss";
-import { ProjectRewards } from "../../types/project";
-
-type Projects = {
-  id: string;
-  name: string;
-  shortDescription: string;
-  images: string[];
-  currentFunding: number;
-  targetFunding: number;
-  postcode: number;
-  categories: string[];
-  createdAt: number;
-  completedAt: number;
-  aboutBusiness: string;
-  aboutOwner: string;
-  businessPlan: string;
-  rewards: Array<ProjectRewards>;
-  active: boolean;
-  owner: {
-    id: string;
-    name: string;
-    image: string;
-  };
-};
+import { Projects } from "../../types/project";
 
 export default function ProjectView() {
   const router = useRouter();
