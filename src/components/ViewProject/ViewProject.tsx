@@ -16,14 +16,16 @@ import {
   useToast,
   Avatar
 } from "@chakra-ui/react";
+import React from "react";
+import router from "next/router";
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { Button } from "@chakra-ui/react";
-import React from "react";
-
-import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
+import { ProjectCategories } from "../../types/categories";
 import { ProjectRewards } from "../../types/project";
+import { createMessageGroup } from "../../db/dbUtils";
+import { useSession } from "next-auth/react";
 
 import styles from "./ViewProject.module.scss";
 import { createMessageGroup } from "../../utils/dbUtils";
@@ -56,27 +58,33 @@ export interface ProjectInfo {
 }
 
 export default function ViewProject(props: ProjectInfo) {
-  const name = props?.name ?? "Missing";
-  const postcode = props?.postcode ?? "None";
-  const ownerName = props?.owner?.name ?? "None";
-  const image = props?.owner?.image ?? "";
-  const projectImage = props?.images ?? [];
-  const ownerId = props?.owner?.id ?? "";
-  const targetFunding = props?.targetFunding ?? 0;
-  const currentFunding = props?.currentFunding ?? 0;
-  const completedAt = props?.completedAt ?? new Date().toISOString();
+  const {
+    id,
+    name = "Missing",
+    shortDescription = "No Description",
+    images = [],
+    owner = {
+      id: "",
+      name: "None",
+      image: "",
+    },
+    currentFunding = 0,
+    targetFunding = 0,
+    postcode = "None",
+    categories = [],
+    completedAt = new Date().toISOString(),
+    aboutBusiness,
+    aboutOwner,
+    businessPlan,
+    rewards,
+    active = true,
+    preview = false
+  } = props;
   const backers = 0;
-  const shortDescription =
-    props?.shortDescription || props.shortDescription !== ""
-      ? props.shortDescription
-      : "No Description";
 
-  let loggedInNotOwner = false;
   const { data: session } = useSession();
 
-  if (session && session.user.id !== props.owner?.id) {
-    loggedInNotOwner = true;
-  }
+  const loggedInNotOwner = session && session.user.id !== owner?.id;
 
   const daysRemaining = () => {
     const currentDate = new Date();
@@ -90,18 +98,20 @@ export default function ViewProject(props: ProjectInfo) {
     return totalDays;
   };
 
-  const categories: string[] = [];
+  const categoryStrings = [];
 
-  props.categories?.forEach((category) => {
+  categories?.forEach((category) => {
     if (ProjectCategories[category as keyof ProjectCategory]) {
-      categories.push(ProjectCategories[category as keyof ProjectCategory]);
+      categoryStrings.push(
+        ProjectCategories[category as keyof ProjectCategory]
+      );
     } else {
-      categories.push(category);
+      categoryStrings.push(category);
     }
   });
 
   if (categories.length == 0) {
-    categories.push("None");
+    categoryStrings.push("None");
   }
 
   let [message, setValue] = React.useState("");
@@ -134,7 +144,7 @@ export default function ViewProject(props: ProjectInfo) {
     <div className={styles.projectContainer}>
       <Center className={styles.name}>
         <Heading>{name}</Heading>
-        {props.active ? (
+        {active ? (
           <></>
         ) : (
           <Badge
@@ -150,9 +160,9 @@ export default function ViewProject(props: ProjectInfo) {
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
-          {projectImage.length ? (
+          {images.length ? (
             <div className={styles.imageCarousel}>
-              <ImageSlider images={projectImage} />
+              <ImageSlider images={images} />
             </div>
           ) : (
             <div className={styles.projectImage}>
@@ -161,23 +171,23 @@ export default function ViewProject(props: ProjectInfo) {
           )}
           <div className={styles.categoriesItem}>
             <AiOutlineTag className={styles.categoriesIcon} />
-            <span className={styles.content}>{categories.join(", ")}</span>
+            <span className={styles.content}>{categoryStrings.join(", ")}</span>
             <HiLocationMarker className={styles.locationIcon} />
             <span className={styles.content}>{postcode}</span>
           </div>
         </div>
 
         <div className={styles.progressContainer}>
-          {props.owner && (
+          {owner.id && (
             <div className={styles.projectOwner}>
-              <a href={`/profile/${ownerId}`}>
+              <a href={owner.id ? `/profile/${owner.id}` : ""}>
                 <Avatar
                   className={styles.ownerImage}
-                  src={image}
+                  src={owner.image}
                   size="md"
                   border="2px solid grey"
                 />
-                <span className={styles.ownerName}>{ownerName}</span>
+                <span className={styles.ownerName}>{owner.name}</span>
               </a>
             </div>
           )}
@@ -213,7 +223,7 @@ export default function ViewProject(props: ProjectInfo) {
           fontSize={16}
           onClick={onShareOpen}
           data-testid="share-button"
-          disabled={!!props?.preview}
+          disabled={preview}
         >
           Share
         </Button>
@@ -225,7 +235,7 @@ export default function ViewProject(props: ProjectInfo) {
           borderRadius={4}
           fontSize={16}
           onClick={onMssgOpen}
-          disabled={!loggedInNotOwner}
+          disabled={!loggedInNotOwner || preview}
         >
           Enquire about Project
         </Button>
@@ -234,59 +244,56 @@ export default function ViewProject(props: ProjectInfo) {
       <div className={styles.campaignWrapper}>
         <div className={styles.leftNav}>
           <div className={styles.left}>
-            {props.aboutBusiness && (
-              <a href="#aboutBusiness">About the Business</a>
-            )}
-            {props.aboutOwner && <a href="#aboutOwner">About the Owner</a>}
-            {props.businessPlan && <a href="#businessPlan">Business Plan</a>}
-            {props.rewards && props.rewards.length > 0 && (
-              <a href="#rewards">Rewards</a>
-            )}
+            {aboutBusiness && <a href="#aboutBusiness">About the Business</a>}
+            {aboutOwner && <a href="#aboutOwner">About the Owner</a>}
+            {businessPlan && <a href="#businessPlan">Business Plan</a>}
+            {rewards && rewards.length > 0 && <a href="#rewards">Rewards</a>}
           </div>
         </div>
 
         <div className={styles.rightNav}>
           <div className={styles.right}>
-            {props.aboutBusiness && (
+            {aboutBusiness && (
               <div className={styles.rightHeading}>
                 <Heading id="aboutBusiness" size="md" marginBottom={3}>
                   About the Business
                 </Heading>
-                <span>{props.aboutBusiness}</span>
+                <span>{aboutBusiness}</span>
               </div>
             )}
 
-            {props.aboutOwner && (
+            {aboutOwner && (
               <div className={styles.rightHeading}>
                 <Heading id="aboutOwner" size="md" marginBottom={3}>
                   About the Owner
                 </Heading>
-                <span>{props.aboutOwner}</span>
+                <span>{aboutOwner}</span>
               </div>
             )}
 
-            {props.businessPlan && (
+            {businessPlan && (
               <div className={styles.rightHeading}>
                 <Heading id="businessPlan" size="md" marginBottom={3}>
                   Business Plan
                 </Heading>
-                <span>{props.businessPlan}</span>
+                <span>{businessPlan}</span>
               </div>
             )}
 
-            {props.rewards && props.rewards.length > 0 && (
+            {rewards && rewards.length > 0 && (
               <div className={styles.rewardButton}>
                 <Heading id="rewards" size="md" marginBottom={3}>
                   Rewards
                 </Heading>
-                {props.rewards.map((reward: ProjectRewards, i) => {
+                {rewards.map((reward: ProjectRewards, i) => {
                   return (
                     <span key={i}>
                       <span className={styles.tier}>
                         <b>Reward Tier {i + 1}</b> - {reward.name}
                         <span>
-                          Contribute ${reward.cost} or more and receive the
-                          following:
+                          Contribute $
+                          {reward.cost ? reward.cost.toLocaleString() : "0"} or
+                          more and receive the following:
                         </span>
                         <span>{reward.description}</span>
                       </span>
@@ -344,7 +351,7 @@ export default function ViewProject(props: ProjectInfo) {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Enquire about {props.name}</ModalHeader>
+          <ModalHeader>Enquire about {name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl className={styles.formControl}>
@@ -361,13 +368,11 @@ export default function ViewProject(props: ProjectInfo) {
           <ModalFooter>
             <Button
               onClick={() =>
-                createMessageGroup(
-                  message,
-                  props.id ?? "",
-                  props.owner?.id ?? ""
-                ).then((res) => {
-                  if (res.id) router.push(`/inbox`);
-                })
+                createMessageGroup(message, id ?? "", owner?.id ?? "").then(
+                  (res) => {
+                    if (res.id) router.push(`/inbox`);
+                  }
+                )
               }
             >
               Submit
