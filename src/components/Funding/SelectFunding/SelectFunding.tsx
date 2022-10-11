@@ -10,6 +10,7 @@ import {
   Text,
   Input
 } from "@chakra-ui/react";
+import { useState } from "react";
 import NumberFormat from "react-number-format";
 import styles from "./SelectFunding.module.scss";
 
@@ -25,11 +26,18 @@ type PaymentSummaryProps = {
   setPage: (page: number) => void;
   reward: string;
   setReward: (reward: string) => void;
-  contribution: number;
-  setContribution: (contribution: number) => void;
+  contribution: number | undefined;
+  setContribution: (contribution: number | undefined) => void;
 };
 
 export default function SelectFunding(props: PaymentSummaryProps) {
+  var invalidAmount =
+    props.contribution == null || props.contribution == 0
+      ? true
+      : props.reward != "-1"
+      ? props.contribution < props.rewards[parseInt(props.reward)].cost
+      : false;
+
   // Raise contribution amount to minimum reward cost.
   function onRewardSelected(selection: string) {
     props.setReward(selection);
@@ -38,41 +46,20 @@ export default function SelectFunding(props: PaymentSummaryProps) {
     let reward = parseInt(selection);
 
     // Reward index -1, no reward, no minimum contribution value.
-    if (reward == -1) return;
-
-    // If contribution lower than minimum reward value.
-    // Set contribution to minimum reward cost.
-    if (props.contribution < props.rewards[reward].cost) {
-      props.setContribution(props.rewards[reward].cost);
-    }
-  }
-
-  function onContributionChanged(contribution: number | void) {
-    // If empty, set to minimum value.
-    if (!contribution) {
-      props.setReward("-1");
+    if (reward == -1) {
+      props.setContribution(1);
       return;
     }
 
-    // Set contribution value.
-    props.setContribution(contribution);
+    // If contribution lower than minimum reward value.
+    // Set contribution to minimum reward cost.
+    props.setContribution(props.rewards[reward].cost);
+  }
 
-    // If contribution value is less than the currently selected reward.
-    // Update to maximum possible reward.
-    if (props.reward == "-1") return;
-    if (contribution < props.rewards[parseInt(props.reward)].cost) {
-      // In case rewards are unorderd, map through all rewards
-      // and find maximum reward for contribution amount.
-      let maxReward = 0;
-      let maxRewardIndex = -1;
-      props.rewards.map((reward, index) => {
-        if (reward.cost <= contribution && reward.cost > maxReward) {
-          maxReward = reward.cost;
-          maxRewardIndex = index;
-        }
-      });
-      props.setReward(maxRewardIndex.toString());
-    }
+  function onContributionChanged(contribution: number | undefined) {
+    // Set contribution value.
+    //if (!contribution) return;
+    props.setContribution(contribution);
   }
 
   return (
@@ -136,13 +123,16 @@ export default function SelectFunding(props: PaymentSummaryProps) {
                   thousandSeparator
                   customInput={Input}
                   prefix="$  "
+                  isInvalid={invalidAmount}
                   value={props.contribution}
                   onValueChange={(value) =>
                     onContributionChanged(value.floatValue)
                   }
                 />
               </InputGroup>
-              <Button onClick={() => props.setPage(2)}>Continue</Button>
+              <Button disabled={invalidAmount} onClick={() => props.setPage(2)}>
+                Continue
+              </Button>
             </HStack>
           </HStack>
         </div>
