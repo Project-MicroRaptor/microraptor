@@ -5,7 +5,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  SimpleGrid,
+  SimpleGrid
 } from "@chakra-ui/react";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { ProjectCategories } from "../../../types/categories";
@@ -24,10 +24,11 @@ type Props = {
   formData: CreateFormData;
   onFormChange: (id: string, value: any) => void;
   errors: FormErrors;
+  editMode?: boolean;
 };
 
 export default function MyProjectForm(props: Props) {
-  const { onFormChange, formData, errors } = props;
+  const { onFormChange, formData, errors, editMode = false } = props;
 
   const CategoryButtons = () => {
     const buttons = Object.keys(ProjectCategories).map((key) => {
@@ -41,7 +42,7 @@ export default function MyProjectForm(props: Props) {
           onChange={(value) =>
             onFormChange("categories", {
               ...formData.categories,
-              [key]: value,
+              [key]: value
             })
           }
           isInvalid={!!errors?.categories}
@@ -112,6 +113,7 @@ export default function MyProjectForm(props: Props) {
               onFormChange("targetFunding", values.floatValue)
             }
             isInvalid={!!errors?.targetFunding}
+            disabled={!!editMode}
           />
         </InputGroup>
       </FormControl>
@@ -127,13 +129,14 @@ export default function MyProjectForm(props: Props) {
           configs={{
             dateFormat: dateFormat,
             monthNames: monthNames,
-            dayNames: dayNames,
+            dayNames: dayNames
           }}
           propsConfigs={{
             inputProps: {
-              isInvalid: !!errors?.completedAt,
-            },
+              isInvalid: !!errors?.completedAt
+            }
           }}
+          disabled={!!editMode}
         />
       </FormControl>
 
