@@ -81,7 +81,7 @@ export default function OrderSummary(props: OrderSummaryProps) {
               alt=""
             />
           </div>
-          <Text>
+          <Text fontSize="lg">
             <b>
               <u>{props.name}</u>
             </b>
