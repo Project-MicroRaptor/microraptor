@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import RewardsForm from "../../../../src/components/ProjectCreation/FormSections/RewardsForm";
+import RewardsForm from "../../../../src/components/ProjectWizard/FormSections/RewardsForm";
 
 describe("RewardsForm", () => {
   test("RewardsForm should render correctly", () => {
