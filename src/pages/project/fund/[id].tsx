@@ -46,6 +46,7 @@ const ProjectFundFlow: AuthNextPage = () => {
           ownerId={data.ownerId}
           images={data.images}
           rewards={data.rewards}
+          currentFunding={data.currentFunding}
         />
       );
     }

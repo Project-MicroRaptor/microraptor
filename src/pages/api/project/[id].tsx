@@ -33,6 +33,7 @@ export default async function handler(
           businessPlan: true,
           rewards: {
             select: {
+              id: true,
               name: true,
               cost: true,
               description: true

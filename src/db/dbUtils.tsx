@@ -1,6 +1,7 @@
 import type { ProjectDetails } from "../types/createForm";
 import type { ProjectRewards } from "../types/project";
 import type { ProfileSetting } from "../types/settings";
+import type { Payment } from "../types/payment";
 
 export async function createProject(
   projectDetails: ProjectDetails,
@@ -52,6 +53,24 @@ export async function createMessageGroup(
   queryString += new URLSearchParams({ projectId, message, ownerId });
   return fetch(queryString, {
     method: "POST"
+  }).then((res) => {
+    return res.json();
+  });
+}
+
+export async function createPayment(paymentInformation: Payment) {
+  return fetch("/api/payment", {
+    method: "POST",
+    body: JSON.stringify(paymentInformation)
+  }).then((res) => {
+    return res.json();
+  });
+}
+
+export async function updateProjectFunding(id: string, currentFunding: number) {
+  return fetch("/api/fundProject", {
+    method: "POST",
+    body: JSON.stringify({ id, currentFunding })
   }).then((res) => {
     return res.json();
   });
