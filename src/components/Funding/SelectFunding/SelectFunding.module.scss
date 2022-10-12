@@ -25,6 +25,10 @@
 
     .navigation {
       justify-content: space-between;
+
+      .back:hover {
+        text-decoration: none;
+      }
     }
   }
 

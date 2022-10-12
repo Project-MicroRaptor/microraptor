@@ -114,11 +114,15 @@ export default function SelectFunding(props: PaymentSummaryProps) {
           <br />
 
           <HStack className={styles.navigation}>
-            <Button className={styles.back}>
-              <Link href={`/project/${props.id}`}>Exit</Link>
+            <Button
+              className={styles.back}
+              as={Link}
+              href={`/project/${props.id}`}
+            >
+              Exit
             </Button>
             <HStack>
-              <InputGroup className={styles.contributionInput}>
+              <InputGroup>
                 <NumberFormat
                   thousandSeparator
                   customInput={Input}
