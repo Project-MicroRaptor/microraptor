@@ -6,7 +6,7 @@ export type ProjectRewards = {
   cost?: number;
 };
 
-export type Projects = {
+export type Project = {
   id: string;
   name: string;
   shortDescription: string;
