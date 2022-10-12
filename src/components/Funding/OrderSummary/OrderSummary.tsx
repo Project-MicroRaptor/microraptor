@@ -165,8 +165,13 @@ export default function OrderSummary(props: OrderSummaryProps) {
           <ModalCloseButton />
           <ModalBody>
             By selecting continue, you are committing yourself to contribute the
-            full amount of ${props.contribution}. Would you still like to
-            continue?
+            full amount of $
+            {props.contribution != undefined
+              ? props.contribution.toLocaleString(undefined, {
+                  minimumFractionDigits: 2
+                })
+              : 0}
+            . Would you still like to continue?
           </ModalBody>
 
           <ModalFooter>
