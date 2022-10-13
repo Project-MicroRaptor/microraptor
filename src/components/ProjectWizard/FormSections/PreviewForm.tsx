@@ -2,6 +2,7 @@ import { CreateFormData } from "../../../types/createForm";
 import ViewProject from "../../ViewProject/ViewProject";
 
 import type { ProjectRewards } from "../../../types/project";
+import { useSession } from 'next-auth/react';
 
 type Props = {
   formData: CreateFormData;
@@ -9,6 +10,16 @@ type Props = {
 
 export default function PreviewForm(props: Props) {
   const { formData } = props;
+  const { data: session } = useSession();
+
+  let owner;
+  if (session) {
+    owner = {
+      id: session.user.id,
+      name: session.user.name ?? "",
+      image: session.user.image ?? ""
+    };
+  }
 
   const categories: Array<string> = [];
   if (formData?.categories) {
@@ -37,6 +48,7 @@ export default function PreviewForm(props: Props) {
       shortDescription={formData?.shortDescription}
       images={images}
       currentFunding={0}
+      owner={owner ?? undefined}
       targetFunding={formData?.targetFunding}
       postcode={formData?.postcode ? Number(formData?.postcode) : undefined}
       categories={categories}
