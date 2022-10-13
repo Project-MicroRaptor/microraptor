@@ -1,5 +1,6 @@
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { ProjectCardsProps } from "../../types/projectCardProps";
+import ProjectCard from "../ProjectCard/ProjectCard";
 import ProjectCardEdit from "../ProjectCardEdit/ProjectCardEdit";
 import { LeftArrow, RightArrow } from "./Arrows";
 
@@ -7,10 +8,11 @@ import styles from "./ProjectsSlider.module.scss";
 
 type Props = {
   projects: Array<ProjectCardsProps>;
+  editable?: boolean;
 };
 
 export default function ProjectsSlider(props: Props) {
-  const { projects } = props;
+  const { projects, editable } = props;
 
   const Arrows = () => (
     <div className={styles.arrows}>
@@ -21,15 +23,27 @@ export default function ProjectsSlider(props: Props) {
   const cards = projects?.map((project) => {
     return (
       <div key={project.id} className={styles.card}>
-        <ProjectCardEdit
-          id={project.id}
-          name={project.name}
-          active={project.active}
-          shortDescription={project.shortDescription}
-          image={project.images[0]}
-          currentFunding={project.currentFunding}
-          targetFunding={project.targetFunding}
-        />
+        {editable ? (
+          <ProjectCardEdit
+            id={project.id}
+            name={project.name}
+            active={project.active}
+            shortDescription={project.shortDescription}
+            image={project.images[0]}
+            currentFunding={project.currentFunding}
+            targetFunding={project.targetFunding}
+          />
+        ) : (
+          <ProjectCard
+            id={project.id}
+            name={project.name}
+            active={project.active}
+            shortDescription={project.shortDescription}
+            image={project.images[0]}
+            currentFunding={project.currentFunding}
+            targetFunding={project.targetFunding}
+          />
+        )}
       </div>
     );
   });
