@@ -16,7 +16,7 @@ export default function ProjectCardEdit(props: ProjectProps) {
         currentFunding={props.currentFunding}
         targetFunding={props.targetFunding}
       />
-      <Link href={`/project/${props.id}/edit`}>
+      <Link href={`/project/${props.id}/edit`} className={styles.editLink}>
         <Button className={styles.button}>Edit</Button>
       </Link>
     </div>
