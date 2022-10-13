@@ -29,7 +29,6 @@ export default function AccountSettings(props: AccountInfo) {
         setName(response.data.name);
         setEmail(response.data.email);
       }
-
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
