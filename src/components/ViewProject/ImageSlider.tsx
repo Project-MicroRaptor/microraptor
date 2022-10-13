@@ -24,13 +24,22 @@ const ImageSlider = (props: Props) => {
   const image = {
     backgroundImage: `url(${slides[currentIndex]})`,
   }
+  console.log(slides.length)
 
   return (
-    <div className={styles.sliderStyles}>
-      <div className={styles.leftArrow} onClick={goToPrevious}>❰</div>
-      <div className={styles.rightArrow} onClick={goNext}>❱</div>
-      <div className={styles.slideStyles} style={image} />
-    </div >
+    <>
+      {slides.length === 1 ? (
+        <div className={styles.sliderStyles}>
+          <div className={styles.slideStyles} style={image} />
+        </div>
+      ) : (
+        <div className={styles.sliderStyles}>
+          <div className={styles.leftArrow} onClick={goToPrevious}>❰</div>
+          <div className={styles.rightArrow} onClick={goNext}>❱</div>
+          <div className={styles.slideStyles} style={image} />
+        </div>
+      )}
+    </>
   )
 };
 

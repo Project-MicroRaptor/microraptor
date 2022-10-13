@@ -180,6 +180,23 @@
   flex-direction: column;
 }
 
+@media only screen and (min-width: 350px) and (max-width: 839px) {
+  .slideStyles {
+    width: 296px !important;
+    height: 277px !important;
+    min-width: 0;
+    margin: 40px auto;
+  }
+
+  .leftArrow {
+    left: 7px !important;
+  }
+
+  .rightArrow {
+    right: 7px !important;
+  }
+}
+
 @media only screen and (max-width: 840px) {
   .projectContainer {
     text-align: center;
