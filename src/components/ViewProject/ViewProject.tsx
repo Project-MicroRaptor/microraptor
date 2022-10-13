@@ -30,8 +30,6 @@ import ImageSlider from "./ImageSlider"
 
 import styles from "./ViewProject.module.scss";
 
-import styles from "./ViewProject.module.scss";
-
 export interface ProjectInfo {
   id?: string;
   name?: string;
