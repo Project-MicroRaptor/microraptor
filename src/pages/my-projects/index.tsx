@@ -24,7 +24,7 @@ const MyProjects: AuthNextPage = (props) => {
       <div className={styles.container}>
         <h1 className={styles.heading}>My Projects</h1>
         {data && data.length > 0 ? (
-          <ProjectsSlider projects={data} />
+          <ProjectsSlider editable projects={data} />
         ) : (
           <h2 className={styles.noProj}>
             You have no projects, you can create one{" "}
