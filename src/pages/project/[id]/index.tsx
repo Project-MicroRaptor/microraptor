@@ -3,12 +3,35 @@ import { fetcher } from "../../../utils/swr";
 import { Spinner, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 import useSWR from "swr";
-
+import NavBar from '../../../components/NavBar/NavBar';
 import ViewProject from "../../../components/ViewProject/ViewProject";
-import NavBar from "../../../components/NavBar/NavBar";
+import type { ProjectRewards } from "../../../types/project";
+import type { Project } from "../../../types/project";
 
 import styles from "./projectId.module.scss";
-import { Project } from "../../../types/project";
+
+type Projects = {
+  id: string;
+  name: string;
+  shortDescription: string;
+  images: string[];
+  currentFunding: number;
+  targetFunding: number;
+  postcode: number;
+  categories: string[];
+  createdAt: number;
+  completedAt: number;
+  aboutBusiness: string;
+  aboutOwner: string;
+  businessPlan: string;
+  rewards: Array<ProjectRewards>;
+  active: boolean;
+  owner: {
+    id: string;
+    name: string;
+    image: string;
+  };
+};
 
 export default function ProjectView() {
   const router = useRouter();
@@ -64,6 +87,7 @@ export default function ProjectView() {
         name={data.name}
         shortDescription={data.shortDescription}
         images={data.images}
+        owner={data.owner}
         currentFunding={data.currentFunding}
         targetFunding={data.targetFunding}
         locality={data.locality ?? undefined}
@@ -76,7 +100,6 @@ export default function ProjectView() {
         businessPlan={data.businessPlan}
         rewards={data.rewards}
         active={data.active}
-        owner={data.owner}
       />
     </>
   );
