@@ -35,7 +35,12 @@ export default function ProfileView() {
     } else {
       return (
         <div>
-          <ViewProfile name={data.name} bio={data.bio} image={data.image} />
+          <ViewProfile
+            name={data.name}
+            bio={data.bio}
+            image={data.image}
+            projects={data.projects}
+          />
         </div>
       );
     }
