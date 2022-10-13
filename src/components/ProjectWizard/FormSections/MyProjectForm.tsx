@@ -163,7 +163,7 @@ export default function MyProjectForm(props: Props) {
               : ""
           }
           onChange={() => {}}
-          onClick={onLocationOpen}
+          onFocus={onLocationOpen}
           isInvalid={!!errors?.location}
         />
       </FormControl>
