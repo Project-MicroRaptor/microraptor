@@ -1,6 +1,7 @@
 import type { ProjectDetails } from "../types/createForm";
 import type { ProjectRewards } from "../types/project";
 import type { ProfileSetting } from "../types/settings";
+import type { AccountSetting } from "../types/account";
 
 export async function createProject(
   projectDetails: ProjectDetails,
@@ -37,6 +38,23 @@ export async function updateProfileSetting(setting: ProfileSetting) {
 
 export async function getProfileSetting() {
   return fetch("/api/profile", {
+    method: "GET"
+  }).then((res) => {
+    return res.json();
+  });
+}
+
+export async function updateAccountSetting(setting: AccountSetting) {
+  return fetch("/api/account", {
+    method: "POST",
+    body: JSON.stringify(setting)
+  }).then((res) => {
+    return res.json();
+  })
+}
+
+export async function getAccountSetting() {
+  return fetch("/api/account", {
     method: "GET"
   }).then((res) => {
     return res.json();
