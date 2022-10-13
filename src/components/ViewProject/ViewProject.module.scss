@@ -57,6 +57,23 @@
     width: 300px;
   }
 
+  .projectOwner {
+    margin-bottom: 30px;
+
+    &:hover {
+      color: var(--chakra-colors-brand-primary);
+      cursor: pointer;
+    }
+
+    .ownerName {
+      position: relative;
+      font-size: 20px;
+      font-weight: 500;
+      top: 7px;
+      left: 10px;
+    }
+  }
+
   .fundingText {
     p {
       width: 100%;
@@ -163,6 +180,11 @@
     .progressBar {
       margin: auto;
     }
+
+    .projectOwner {
+      position: relative;
+      right: 16px;
+    }
   }
 
   .buttons {
@@ -207,6 +229,11 @@
     .progressContainer {
       margin-left: 20px;
       text-align: center;
+
+      .projectOwner {
+        position: relative;
+        right: 5px;
+      }
     }
   }
 
