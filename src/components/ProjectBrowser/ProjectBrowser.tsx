@@ -6,6 +6,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/swr";
 import { SearchType } from "../../types/search";
+import type { Location } from "../../types/location";
 
 import styles from "./ProjectBrowser.module.scss";
 
@@ -23,17 +24,31 @@ export default function ProjectBrowser() {
   const [categoryState, setCategory] = useState<string | null>(null);
   const [distanceState, setDistance] = useState<number | null>(null);
   const [searchState, setSearch] = useState<string | null>(null);
+  const [locationState, setLocation] = useState<Location | null>(null);
 
   // API Route -- Retrieve Projects
-  var queryString = "/api/projects?";
-  if (searchState) queryString += new URLSearchParams({ name: searchState });
+  let queryString = "/api/projects?";
+  let searchParams = {};
+  if (searchState) searchParams = { ...searchParams, name: searchState };
   if (categoryState != null) {
     var categoryKey = Object.keys(ProjectCategories).find(
       (key) => ProjectCategories[key as keyof ProjectCategory] == categoryState
     );
     if (categoryKey != null)
-      queryString += new URLSearchParams({ category: categoryKey });
+      searchParams = {
+        ...searchParams,
+        category: categoryKey
+      };
   }
+  if (locationState && distanceState) {
+    searchParams = {
+      ...searchParams,
+      latitude: locationState.latitude.toString(),
+      longitude: locationState.longitude.toString(),
+      radius: distanceState.toString()
+    };
+  }
+  queryString += new URLSearchParams(searchParams);
 
   var { data, error } = useSWR<Projects>(queryString, fetcher);
 
@@ -110,6 +125,8 @@ export default function ProjectBrowser() {
         setDistance={(distance) => setDistance(distance)}
         searchState={searchState}
         setSearch={(search) => setSearch(search)}
+        locationState={locationState}
+        setLocation={(location) => setLocation(location)}
       />
       {displayProjects()}
     </div>

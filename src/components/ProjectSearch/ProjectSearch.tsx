@@ -6,15 +6,17 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem
+  MenuItem,
+  useDisclosure
 } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
 import { ProjectCategories } from "../../types/categories";
 import { RadiusDistances } from "../../types/radiusDistances";
 import { SearchType } from "../../types/search";
 import React, { useRef } from "react";
-
+import { Location } from "../../types/location";
 import styles from "./ProjectSearch.module.scss";
+import LocationModal from "../LocationModal/LocationModal";
 
 type ProjectSearchProps = {
   selectionState: SearchType;
@@ -25,10 +27,18 @@ type ProjectSearchProps = {
   setDistance: (distance: number | null) => void;
   searchState: string | null;
   setSearch: (search: string | null) => void;
+  locationState: Location | null;
+  setLocation: (location: Location | null) => void;
 };
 
 export default function ProjectSearch(props: ProjectSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const {
+    isOpen: isLocationOpen,
+    onOpen: onLocationOpen,
+    onClose: onLocationClose
+  } = useDisclosure();
 
   function onFeaturedClick() {
     props.setSelection(SearchType.Featured);
@@ -42,6 +52,19 @@ export default function ProjectSearch(props: ProjectSearchProps) {
     props.setCategory(category);
     props.setSearch(null);
     if (inputRef.current != null) inputRef.current.value = "";
+  }
+
+  function onLocationSelect(location: Location | null) {
+    props.setLocation(location);
+
+    if (location == null) {
+      props.setDistance(null);
+      return;
+    }
+
+    if (!props.distanceState) {
+      props.setDistance(RadiusDistances["< 5km"]);
+    }
   }
 
   function performSearch() {
@@ -113,11 +136,29 @@ export default function ProjectSearch(props: ProjectSearchProps) {
         </MenuList>
       </Menu>
 
-      <HStack className={styles.areaContainer}>
-        <Button variant="outline" disabled _focus={{ boxShadow: "none" }}>
-          All Locations
-        </Button>
+      <HStack>
+        <Menu>
+          <MenuButton
+            {...(props.selectionState == SearchType.Category
+              ? {}
+              : { variant: "outline" })}
+            as={Button}
+            _focus={{ boxShadow: "none" }}
+            onClick={onLocationOpen}
+          >
+            {props.locationState == null
+              ? "All Locations"
+              : props.locationState.locality}
+          </MenuButton>
+        </Menu>
+        <LocationModal
+          isOpen={isLocationOpen}
+          onClose={onLocationClose}
+          selectLocation={(location) => onLocationSelect(location)}
+        />
+      </HStack>
 
+      <HStack>
         <Menu>
           <MenuButton
             variant="outline"
