@@ -7,6 +7,7 @@ export function projectDataToFormData(data: Project): CreateFormData {
     shortDescription,
     targetFunding,
     completedAt,
+    locality,
     postcode,
     categories,
     aboutBusiness,
@@ -45,12 +46,21 @@ export function projectDataToFormData(data: Project): CreateFormData {
     };
   });
 
+  const location = {
+    id: 0,
+    locality,
+    postcode: Number(postcode),
+    state: "",
+    latitude: 0,
+    longitude: 0
+  };
+
   return {
     name,
     shortDescription,
     targetFunding,
     completedAt: new Date(completedAt),
-    postcode: postcode.toString(),
+    location,
     categories: formCategories,
     aboutBusiness,
     aboutOwner,
@@ -92,7 +102,8 @@ export function formDataToProjectInfo(formData: CreateFormData): {
     name: formData.name,
     completedAt: formData.completedAt?.toISOString(),
     targetFunding: Number(formData.targetFunding),
-    postcode: Number(formData.postcode),
+    locality: formData.location?.locality,
+    postcode: formData.location?.postcode,
     shortDescription: formData.shortDescription,
     categories,
     ...(formData?.aboutBusiness && { aboutBusiness: formData.aboutBusiness }),
