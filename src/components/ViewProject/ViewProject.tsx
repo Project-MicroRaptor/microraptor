@@ -206,8 +206,9 @@ export default function ViewProject(props: ProjectInfo) {
           borderRadius={4}
           fontSize={16}
           as={Link}
-          href={`/project/fund/${props.id}`}
+          href={loggedInNotOwner && !preview && `/project/fund/${props.id}`}
           className={styles.fundLink}
+          disabled={!loggedInNotOwner || preview}
         >
           Fund this Project
         </Button>

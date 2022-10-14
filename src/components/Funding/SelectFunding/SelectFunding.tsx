@@ -10,7 +10,6 @@ import {
   Text,
   Input
 } from "@chakra-ui/react";
-import { useState } from "react";
 import NumberFormat from "react-number-format";
 import styles from "./SelectFunding.module.scss";
 
