@@ -308,7 +308,7 @@ export default function ProjectForm(props: Props) {
               onClick={() => {
                 if (projectId) {
                   deactivateProject(projectId).then((res) => {
-                    if ((res.status = "success")) {
+                    if (res.status == "success") {
                       Router.push("/");
                     }
                   });
