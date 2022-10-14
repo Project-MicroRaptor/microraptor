@@ -50,7 +50,8 @@ export default function PreviewForm(props: Props) {
       currentFunding={0}
       owner={owner ?? undefined}
       targetFunding={formData?.targetFunding}
-      postcode={formData?.postcode ? Number(formData?.postcode) : undefined}
+      locality={formData?.location?.locality ?? undefined}
+      postcode={formData?.location?.postcode}
       categories={categories}
       completedAt={Number(formData?.completedAt ?? new Date())}
       aboutBusiness={formData?.aboutBusiness}

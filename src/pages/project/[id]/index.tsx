@@ -90,6 +90,7 @@ export default function ProjectView() {
         owner={data.owner}
         currentFunding={data.currentFunding}
         targetFunding={data.targetFunding}
+        locality={data.locality ?? undefined}
         postcode={data.postcode}
         categories={data.categories}
         createdAt={data.createdAt}

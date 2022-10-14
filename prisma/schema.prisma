@@ -62,6 +62,7 @@ model Project {
   targetFunding    Float
   currentFunding   Float           @default(0)
   postcode         Int
+  locality         String?
   shortDescription String
   aboutBusiness    String?
   aboutOwner       String?
@@ -91,13 +92,13 @@ model VerificationToken {
 }
 
 model Location {
-	id Int @id
-	postcode Int
-	locality String	
-	state String	
-	longitude Float	
-	latitude Float
-}	
+  id        Int    @id
+  postcode  Int
+  locality  String
+  state     String
+  longitude Float
+  latitude  Float
+}
 
 model MessageGroup {
   id        String    @id @default(cuid())
