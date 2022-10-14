@@ -24,6 +24,7 @@ export default async function handler(
           currentFunding: true,
           targetFunding: true,
           postcode: true,
+          locality: true,
           categories: true,
           createdAt: true,
           completedAt: true,
