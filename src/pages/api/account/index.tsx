@@ -24,7 +24,6 @@ export default async function handler(
         },
         select: {
           name: true,
-          email: true,
         }
       });
 
@@ -36,7 +35,6 @@ export default async function handler(
     } else if (req.method === "POST") {
       const body = JSON.parse(req.body);
       const name = body.name;
-      const email = body.email;
 
       const user = await prisma.user.update({
         where: {
@@ -44,7 +42,6 @@ export default async function handler(
         },
         data: {
           name,
-          email,
         }
       });
 

@@ -15,7 +15,6 @@ export default async function handler(
       select: {
         id: true,
         name: true,
-        email: true,
       }
     });
     res.json(user);

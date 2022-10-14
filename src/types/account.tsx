@@ -1,5 +1,4 @@
 export type AccountSetting = {
   id?: string,
-  name?: string,
-  email?: string
+  name?: string
 }

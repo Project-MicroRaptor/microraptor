@@ -6,28 +6,23 @@ import { getAccountSetting, updateAccountSetting } from "../../db/dbUtils";
 
 export interface AccountInfo {
   name?: string;
-  email?: string;
   setName: (name: string) => void;
-  setEmail: (email: string) => void;
   isNameChange: boolean;
-  isEmailChange: boolean;
   setNameChange: (changed: boolean) => void;
-  setEmailChange: (changed: boolean) => void;
 }
 export default function AccountSettings(props: AccountInfo) {
   const { data: session } = useSession();
-  const { name, setName, isNameChange, setNameChange, email, setEmail, isEmailChange, setEmailChange } = props;
+  const { name, setName, isNameChange, setNameChange } = props;
   const toast = useToast();
 
   useEffect(() => {
     (async () => {
-      if (name && email) return;
+      if (name) return;
 
       const response = await getAccountSetting();
 
-      if (response?.data?.name || response?.data?.email) {
+      if (response?.data?.name) {
         setName(response.data.name);
-        setEmail(response.data.email);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,15 +37,10 @@ export default function AccountSettings(props: AccountInfo) {
     setNameChange(true);
   };
 
-  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event?.target?.value);
-    setEmailChange(true);
-  }
-
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
-    const response = await updateAccountSetting({ name: props.name, email: props.email });
+    const response = await updateAccountSetting({ name: props.name });
     let toastInfo: UseToastOptions;
 
     if (response?.status === "success") {
@@ -72,7 +62,6 @@ export default function AccountSettings(props: AccountInfo) {
     }
 
     setNameChange(false);
-    setEmailChange(false);
 
     toast(toastInfo);
   };
@@ -104,8 +93,6 @@ export default function AccountSettings(props: AccountInfo) {
               <Input
                 className={styles.inputBox}
                 type="text"
-                value={props.email}
-                onChange={onChangeEmail}
                 placeholder="Email"
                 variant="settings"
               />
@@ -141,7 +128,7 @@ export default function AccountSettings(props: AccountInfo) {
                 Edit
               </Button>
             </div>
-            {(isEmailChange || isNameChange) && (
+            {isNameChange && (
               <div className={styles.saveBox}>
                 <Button className={styles.saveButton} onClick={handleSubmit}>Save</Button>
               </div>
