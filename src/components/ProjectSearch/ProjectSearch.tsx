@@ -56,6 +56,15 @@ export default function ProjectSearch(props: ProjectSearchProps) {
 
   function onLocationSelect(location: Location | null) {
     props.setLocation(location);
+
+    if (location == null) {
+      props.setDistance(null);
+      return;
+    }
+
+    if (!props.distanceState) {
+      props.setDistance(RadiusDistances["< 5km"]);
+    }
   }
 
   function performSearch() {
