@@ -64,7 +64,7 @@ export default function ViewProject(props: ProjectInfo) {
     owner = {
       id: "",
       name: "None",
-      image: "",
+      image: ""
     },
     currentFunding = 0,
     targetFunding = 0,
@@ -230,10 +230,8 @@ export default function ViewProject(props: ProjectInfo) {
           borderRadius={4}
           fontSize={16}
           as={Link}
-          href={`/project/fund/${props.id}`}
           className={styles.fundLink}
           href={loggedInNotOwner && !preview && `/project/fund/${props.id}`}
-          className={styles.fundLink}
           disabled={!loggedInNotOwner || preview}
         >
           Fund this Project
