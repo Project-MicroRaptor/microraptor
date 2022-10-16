@@ -14,21 +14,21 @@ import {
   Progress,
   Textarea,
   useDisclosure,
-  useToast
+  useToast,
+  Avatar
 } from "@chakra-ui/react";
+import React from "react";
+import router from "next/router";
 import { AiOutlineTag } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { Button } from "@chakra-ui/react";
-import React from "react";
-
-import { ProjectCategories } from "../../types/categories";
 import type { ProjectCategory } from "../../types/categories";
-
-import styles from "./ViewProject.module.scss";
+import { ProjectCategories } from "../../types/categories";
 import { ProjectRewards } from "../../types/project";
 import { createMessageGroup } from "../../db/dbUtils";
-import router from "next/router";
 import { useSession } from "next-auth/react";
+
+import styles from "./ViewProject.module.scss";
 
 export interface ProjectInfo {
   id?: string;
@@ -42,6 +42,7 @@ export interface ProjectInfo {
   };
   currentFunding?: number;
   targetFunding?: number;
+  locality?: string;
   postcode?: number;
   categories?: string[];
   createdAt?: number;
@@ -60,10 +61,15 @@ export default function ViewProject(props: ProjectInfo) {
     name = "Missing",
     shortDescription = "No Description",
     images = [],
-    owner,
+    owner = {
+      id: "",
+      name: "None",
+      image: "",
+    },
     currentFunding = 0,
     targetFunding = 0,
-    postcode = "None",
+    locality = "UNKNOWN",
+    postcode,
     categories = [],
     completedAt = new Date().toISOString(),
     aboutBusiness,
@@ -74,6 +80,11 @@ export default function ViewProject(props: ProjectInfo) {
     preview = false
   } = props;
   const backers = 0;
+
+  let locationString = locality;
+  if (postcode) {
+    locationString += `, ${postcode}`;
+  }
 
   const { data: session } = useSession();
 
@@ -160,11 +171,24 @@ export default function ViewProject(props: ProjectInfo) {
             <AiOutlineTag className={styles.categoriesIcon} />
             <span className={styles.content}>{categoryStrings.join(", ")}</span>
             <HiLocationMarker className={styles.locationIcon} />
-            <span className={styles.content}>{postcode}</span>
+            <span className={styles.content}>{locationString}</span>
           </div>
         </div>
 
         <div className={styles.progressContainer}>
+          {owner.id && (
+            <div className={styles.projectOwner}>
+              <a href={owner.id ? `/profile/${owner.id}` : ""}>
+                <Avatar
+                  className={styles.ownerImage}
+                  src={owner.image}
+                  size="md"
+                  border="2px solid grey"
+                />
+                <span className={styles.ownerName}>{owner.name}</span>
+              </a>
+            </div>
+          )}
           <Progress
             value={(currentFunding / targetFunding) * 100}
             size="sm"
@@ -208,6 +232,9 @@ export default function ViewProject(props: ProjectInfo) {
           as={Link}
           href={`/project/fund/${props.id}`}
           className={styles.fundLink}
+          href={loggedInNotOwner && !preview && `/project/fund/${props.id}`}
+          className={styles.fundLink}
+          disabled={!loggedInNotOwner || preview}
         >
           Fund this Project
         </Button>

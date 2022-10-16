@@ -37,8 +37,8 @@ export function validateMyProjectForm(formData: any): ErrorPageObject {
     errors.completedAt = true;
     page = 0;
   }
-  if (!formData?.postcode) {
-    errors.postcode = true;
+  if (!formData?.location) {
+    errors.location = true;
     page = 0;
   }
   if (

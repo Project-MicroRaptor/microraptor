@@ -48,7 +48,7 @@ describe("ViewProject", () => {
     // Setup mocks for navigator.clipboard
     Object.assign(navigator, {
       clipboard: {
-        writeText: () => {}
+        writeText: () => { }
       }
     });
     jest.spyOn(navigator.clipboard, "writeText");

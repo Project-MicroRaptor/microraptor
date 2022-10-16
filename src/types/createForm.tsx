@@ -1,5 +1,4 @@
-import { StringDecoder } from "string_decoder";
-import { ProjectCategory } from "./categories";
+import type { Location } from "./location";
 import type { ProjectRewards } from "./project";
 
 export type CreateFormData = {
@@ -7,7 +6,7 @@ export type CreateFormData = {
   shortDescription?: string;
   targetFunding?: number;
   completedAt?: Date;
-  postcode?: string;
+  location?: Location;
   categories?: {
     [key: string]: boolean;
   };

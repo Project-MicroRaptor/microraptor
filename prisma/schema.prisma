@@ -63,6 +63,7 @@ model Project {
   targetFunding    Float
   currentFunding   Float           @default(0)
   postcode         Int
+  locality         String?
   shortDescription String
   aboutBusiness    String?
   aboutOwner       String?
