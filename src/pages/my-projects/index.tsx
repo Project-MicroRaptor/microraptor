@@ -47,7 +47,7 @@ const MyProjects: AuthNextPage = (props) => {
           <ProjectsSlider projects={fundedProjects} />
         ) : (
           <h2 className={styles.noProj}>
-            You haven't funded any projects yet, why not check some out{" "}
+            You haven&apos;t funded any projects yet, why not check some out{" "}
             <Link href="/">
               <a className={styles.link}>here!</a>
             </Link>
