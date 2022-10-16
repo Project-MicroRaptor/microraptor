@@ -2,16 +2,17 @@
   max-width: 1200px;
   margin: auto;
   padding-top: 30px;
+  padding-bottom: 30px;
 
   .heading {
     font-size: 2em;
   }
 
-  .createProject {
+  .link {
     color: var(--chakra-colors-brand-primary);
   }
 
-  .createProject:hover {
+  .link:hover {
     text-decoration: underline;
   }
 }

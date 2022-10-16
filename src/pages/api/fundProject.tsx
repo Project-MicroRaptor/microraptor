@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const body = JSON.parse(req.body);
-  console.log(body);
+
   // Update Current Funding
   const project = await prisma.project.update({
     where: {
