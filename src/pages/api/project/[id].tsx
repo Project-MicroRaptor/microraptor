@@ -19,11 +19,13 @@ export default async function handler(
         select: {
           id: true,
           name: true,
+          ownerId: true,
           shortDescription: true,
           images: true,
           currentFunding: true,
           targetFunding: true,
           postcode: true,
+          locality: true,
           categories: true,
           createdAt: true,
           completedAt: true,

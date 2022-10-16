@@ -1,0 +1,54 @@
+.pageTitle {
+  padding: 30px;
+  padding-top: 60px;
+}
+
+.content {
+  padding: 20px;
+
+  .project {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+
+    .thumbnailContainer {
+      width: 200px;
+      height: 120px;
+      contain: content;
+      border-radius: 10px;
+      margin-right: 20px;
+
+      .thumbnail {
+        min-height: 100%;
+        min-width: 100%;
+      }
+    }
+  }
+
+  .divider {
+    height: 1px;
+    background: black;
+  }
+
+  .reward {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .contribution {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 20px;
+
+    .total {
+      color: var(--chakra-colors-brand-primary);
+    }
+  }
+}
+
+.navigation {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}

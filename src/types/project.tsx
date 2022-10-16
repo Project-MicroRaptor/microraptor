@@ -13,6 +13,7 @@ export type Project = {
   images: string[];
   currentFunding: number;
   targetFunding: number;
+  locality: string;
   postcode: number;
   categories: string[];
   createdAt: number;

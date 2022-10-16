@@ -3,6 +3,7 @@ import {
   Center,
   FormControl,
   Heading,
+  Link,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -38,6 +39,7 @@ export interface ProjectInfo {
   owner?: User;
   currentFunding?: number;
   targetFunding?: number;
+  locality?: string;
   postcode?: number;
   categories?: string[];
   createdAt?: number;
@@ -63,7 +65,8 @@ export default function ViewProject(props: ProjectInfo) {
     },
     currentFunding = 0,
     targetFunding = 0,
-    postcode = "None",
+    locality = "UNKNOWN",
+    postcode,
     categories = [],
     completedAt = new Date().toISOString(),
     aboutBusiness,
@@ -74,6 +77,11 @@ export default function ViewProject(props: ProjectInfo) {
     preview = false
   } = props;
   const backers = 0;
+
+  let locationString = locality;
+  if (postcode) {
+    locationString += `, ${postcode}`;
+  }
 
   const { data: session } = useSession();
 
@@ -160,7 +168,7 @@ export default function ViewProject(props: ProjectInfo) {
             <AiOutlineTag className={styles.categoriesIcon} />
             <span className={styles.content}>{categoryStrings.join(", ")}</span>
             <HiLocationMarker className={styles.locationIcon} />
-            <span className={styles.content}>{postcode}</span>
+            <span className={styles.content}>{locationString}</span>
           </div>
         </div>
 
@@ -214,7 +222,15 @@ export default function ViewProject(props: ProjectInfo) {
         >
           Share
         </Button>
-        <Button width="270px" borderRadius={4} fontSize={16} disabled>
+        <Button
+          width="270px"
+          borderRadius={4}
+          fontSize={16}
+          as={Link}
+          href={loggedInNotOwner && !preview && `/project/fund/${props.id}`}
+          className={styles.fundLink}
+          disabled={!loggedInNotOwner || preview}
+        >
           Fund this Project
         </Button>
         <Button
