@@ -83,9 +83,6 @@ export default function AccountSettings(props: AccountInfo) {
                 placeholder="Name"
                 variant="settings"
               />
-              <Button className={styles.inputButton} variant="settings">
-                Edit
-              </Button>
             </div>
             <hr />
             <div className={styles.accBox}>
@@ -96,9 +93,6 @@ export default function AccountSettings(props: AccountInfo) {
                 placeholder="Email"
                 variant="settings"
               />
-              <Button className={styles.inputButton} variant="settings">
-                Edit
-              </Button>
             </div>
             <hr />
             <div className={styles.accBox}>
@@ -111,9 +105,6 @@ export default function AccountSettings(props: AccountInfo) {
                 placeholder="********"
                 variant="settings"
               />
-              <Button className={styles.inputButton} variant="settings">
-                Edit
-              </Button>
             </div>
             <hr />
             <div className={styles.accBox}>
@@ -124,9 +115,6 @@ export default function AccountSettings(props: AccountInfo) {
                 placeholder="Address"
                 variant="settings"
               />
-              <Button className={styles.inputButton} variant="settings">
-                Edit
-              </Button>
             </div>
             {isNameChange && (
               <div className={styles.saveBox}>
