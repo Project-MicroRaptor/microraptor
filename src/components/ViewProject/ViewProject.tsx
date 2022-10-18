@@ -27,6 +27,7 @@ import { ProjectCategories } from "../../types/categories";
 import { ProjectRewards } from "../../types/project";
 import { createMessageGroup } from "../../db/dbUtils";
 import { useSession } from "next-auth/react";
+import { User } from "../../types/user";
 
 import styles from "./ViewProject.module.scss";
 
@@ -35,11 +36,7 @@ export interface ProjectInfo {
   name?: string;
   shortDescription?: string;
   images?: string[];
-  owner?: {
-    id: string;
-    name: string;
-    image: string;
-  };
+  owner?: User;
   currentFunding?: number;
   targetFunding?: number;
   locality?: string;
