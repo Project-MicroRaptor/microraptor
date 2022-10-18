@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export type ProjectRewards = {
   name?: string;
   description?: string;
@@ -21,9 +23,5 @@ export type Project = {
   businessPlan: string;
   rewards: Array<ProjectRewards>;
   active: boolean;
-  owner: {
-    id: string;
-    name: string;
-    image: string;
-  };
+  owner: User;
 };
