@@ -1,0 +1,39 @@
+.container {
+  margin-top: 5px;
+  border-radius: 25px;
+  background-color: lightgray;
+  border: transparent solid 5px;
+}
+
+.avatar {
+  margin: 3px;
+}
+
+.chatinfo {
+  font-size: 1.5em;
+  overflow: hidden;
+  padding-right: 5px;
+}
+
+.proj {
+  padding-top: 35px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.msg {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.container:hover {
+  background-color: #c9c9c9;
+}

@@ -3,6 +3,7 @@ import {
   Center,
   FormControl,
   Heading,
+  Link,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -26,6 +27,7 @@ import { ProjectCategories } from "../../types/categories";
 import { ProjectRewards } from "../../types/project";
 import { createMessageGroup } from "../../db/dbUtils";
 import { useSession } from "next-auth/react";
+import { User } from "../../types/user";
 
 import styles from "./ViewProject.module.scss";
 
@@ -34,13 +36,10 @@ export interface ProjectInfo {
   name?: string;
   shortDescription?: string;
   images?: string[];
-  owner?: {
-    id: string;
-    name: string;
-    image: string;
-  };
+  owner?: User;
   currentFunding?: number;
   targetFunding?: number;
+  locality?: string;
   postcode?: number;
   categories?: string[];
   createdAt?: number;
@@ -66,7 +65,8 @@ export default function ViewProject(props: ProjectInfo) {
     },
     currentFunding = 0,
     targetFunding = 0,
-    postcode = "None",
+    locality = "UNKNOWN",
+    postcode,
     categories = [],
     completedAt = new Date().toISOString(),
     aboutBusiness,
@@ -77,6 +77,11 @@ export default function ViewProject(props: ProjectInfo) {
     preview = false
   } = props;
   const backers = 0;
+
+  let locationString = locality;
+  if (postcode) {
+    locationString += `, ${postcode}`;
+  }
 
   const { data: session } = useSession();
 
@@ -163,7 +168,7 @@ export default function ViewProject(props: ProjectInfo) {
             <AiOutlineTag className={styles.categoriesIcon} />
             <span className={styles.content}>{categoryStrings.join(", ")}</span>
             <HiLocationMarker className={styles.locationIcon} />
-            <span className={styles.content}>{postcode}</span>
+            <span className={styles.content}>{locationString}</span>
           </div>
         </div>
 
@@ -217,7 +222,15 @@ export default function ViewProject(props: ProjectInfo) {
         >
           Share
         </Button>
-        <Button width="270px" borderRadius={4} fontSize={16} disabled>
+        <Button
+          width="270px"
+          borderRadius={4}
+          fontSize={16}
+          as={Link}
+          href={loggedInNotOwner && !preview && `/project/fund/${props.id}`}
+          className={styles.fundLink}
+          disabled={!loggedInNotOwner || preview}
+        >
           Fund this Project
         </Button>
         <Button

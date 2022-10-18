@@ -15,7 +15,14 @@ describe("MyProjectForm", () => {
       shortDescription: "shortDescriptionData",
       targetFunding: 100000,
       completedAt: new Date(2022, 1, 1),
-      postcode: "3000"
+      location: {
+        id: 1,
+        locality: "Melbourne",
+        state: "VIC",
+        postcode: 3000,
+        longitude: 0,
+        latitude: 0
+      }
     };
 
     const projectForm = render(
@@ -26,6 +33,6 @@ describe("MyProjectForm", () => {
     expect(projectForm.getByDisplayValue("shortDescriptionData")).toBeTruthy();
     expect(projectForm.getByDisplayValue("100,000")).toBeTruthy();
     expect(projectForm.getByDisplayValue("01/02/2022")).toBeTruthy();
-    expect(projectForm.getByDisplayValue("3000")).toBeTruthy();
+    expect(projectForm.getByDisplayValue("Melbourne, 3000")).toBeTruthy();
   });
 });
