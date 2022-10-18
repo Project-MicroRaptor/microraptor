@@ -3,6 +3,7 @@ import {
   Center,
   FormControl,
   Heading,
+  Link,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -27,6 +28,7 @@ import { ProjectRewards } from "../../types/project";
 import { createMessageGroup } from "../../db/dbUtils";
 import { useSession } from "next-auth/react";
 import ImageSlider from "./ImageSlider"
+import { User } from "../../types/user";
 
 import styles from "./ViewProject.module.scss";
 
@@ -35,11 +37,7 @@ export interface ProjectInfo {
   name?: string;
   shortDescription?: string;
   images?: Array<string>;
-  owner?: {
-    id: string;
-    name: string;
-    image: string;
-  };
+  owner?: User;
   currentFunding?: number;
   targetFunding?: number;
   locality?: string;
@@ -231,7 +229,15 @@ export default function ViewProject(props: ProjectInfo) {
         >
           Share
         </Button>
-        <Button width="270px" borderRadius={4} fontSize={16} disabled>
+        <Button
+          width="270px"
+          borderRadius={4}
+          fontSize={16}
+          as={Link}
+          href={loggedInNotOwner && !preview && `/project/fund/${props.id}`}
+          className={styles.fundLink}
+          disabled={!loggedInNotOwner || preview}
+        >
           Fund this Project
         </Button>
         <Button

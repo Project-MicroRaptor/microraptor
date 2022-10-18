@@ -121,6 +121,10 @@
   margin-top: 50px;
   display: flex;
   justify-content: center;
+
+  .fundLink:hover {
+    text-decoration: none;
+  }
 }
 
 .leftNav {

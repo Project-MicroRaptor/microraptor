@@ -1,0 +1,40 @@
+.pageTitle {
+  padding: 30px;
+  padding-top: 60px;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  padding: 20px;
+
+  > * {
+    margin: auto;
+  }
+
+  .rewards {
+    width: 700px;
+
+    .reward {
+      border-width: 1px;
+      border-color: black;
+      border-radius: 20px;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+
+    .navigation {
+      justify-content: space-between;
+
+      .back:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .disclaimer {
+    width: 300px;
+    text-align: center;
+    padding: 20px;
+  }
+}

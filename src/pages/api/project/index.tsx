@@ -34,27 +34,23 @@ export default async function handler(
         ...projectDetails,
         owner: {
           connect: {
-            id: session.user.id,
-          },
-        },
-      },
+            id: session.user.id
+          }
+        }
+      }
     });
 
     const rewardDetails = body.rewardDetails;
     if (rewardDetails && Array.isArray(rewardDetails)) {
-      rewardDetails.forEach(async (reward) => {
-        await prisma.projectReward.create({
-          data: {
+      await prisma.projectReward.createMany({
+        data: [
+          ...rewardDetails.map((reward) => ({
             name: reward.name,
             description: reward.description,
             cost: reward.cost,
-            project: {
-              connect: {
-                id: project.id,
-              },
-            },
-          },
-        });
+            projectID: project.id
+          }))
+        ]
       });
     }
 
