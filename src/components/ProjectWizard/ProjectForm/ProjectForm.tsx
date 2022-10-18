@@ -7,7 +7,19 @@ import {
 } from "react-icons/bs";
 import Router from "next/router";
 import { useState } from "react";
-import { Button } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure
+} from "@chakra-ui/react";
 
 import TabSwitcher from "../TabSwitcher/TabSwitcher";
 import MyProjectForm from "../FormSections/MyProjectForm";
@@ -15,7 +27,11 @@ import DetailsForm from "../FormSections/DetailsForm";
 import PhotosForm from "../FormSections/PhotosForm";
 import RewardsForm from "../FormSections/RewardsForm";
 import PreviewForm from "../FormSections/PreviewForm";
-import { createProject, updateProject } from "../../../db/dbUtils";
+import {
+  createProject,
+  deactivateProject,
+  updateProject
+} from "../../../db/dbUtils";
 import {
   validateMyProjectForm,
   validatePhotosForm,
@@ -29,17 +45,32 @@ import { formDataToProjectInfo } from "../../../utils/project";
 
 type Props = {
   projectId?: string;
+  projectName?: string;
+  projectActive?: boolean;
   initialFormData?: CreateFormData;
   editMode?: boolean;
 };
 
 export default function ProjectForm(props: Props) {
-  const { projectId, initialFormData = {}, editMode = false } = props;
+  const {
+    projectId,
+    projectName,
+    projectActive = true,
+    initialFormData = {},
+    editMode = false
+  } = props;
 
   const [selectedTab, setSelectedTab] = useState(0);
   const [formData, setFormData] = useState<CreateFormData>(initialFormData);
   const [errorData, setErrorData] = useState<FormErrors>({});
   const [sendingData, setSendingData] = useState<boolean>(false);
+  const [deactivateInput, setDeactivateInput] = useState<string>("");
+
+  const {
+    isOpen: isDeactivateOpen,
+    onOpen: onDeactivateOpen,
+    onClose: onDeactivateClose
+  } = useDisclosure();
 
   const onChangeTab = (tab: number) => {
     setSelectedTab(tab);
@@ -191,6 +222,13 @@ export default function ProjectForm(props: Props) {
 
   return (
     <>
+      {editMode && projectActive && (
+        <div className={styles.deactivate}>
+          <Button variant="deactivate" onClick={onDeactivateOpen}>
+            Deactivate Project
+          </Button>
+        </div>
+      )}
       <div className={styles.center}>
         <div className={styles.switcher}>
           <TabSwitcher
@@ -233,6 +271,55 @@ export default function ProjectForm(props: Props) {
           )}
         </div>
       </div>
+      <Modal
+        isOpen={isDeactivateOpen}
+        onClose={() => {
+          setDeactivateInput("");
+          onDeactivateClose();
+        }}
+        size="xl"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Deactivate Project</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Container mb={3}>
+              Are you sure you would like to deactivate this project?
+              <br />
+              <br />
+              Doing so will remove the project from all public pages, and the
+              project will no longer be able to recieve funding. Any users who
+              have funded the project will not be charged.
+              <br />
+              <br />
+              If you would like to do so, please enter the following into the
+              text box below: <b>{projectName}</b>
+            </Container>
+            <Input
+              onChange={(event) => setDeactivateInput(event.target.value)}
+              value={deactivateInput}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              variant="deactivate"
+              disabled={deactivateInput !== projectName}
+              onClick={() => {
+                if (projectId) {
+                  deactivateProject(projectId).then((res) => {
+                    if (res.status == "success") {
+                      Router.push("/");
+                    }
+                  });
+                }
+              }}
+            >
+              Confirm
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

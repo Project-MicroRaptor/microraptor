@@ -6,9 +6,18 @@ const ButtonStyles = {
       _hover: {
         bg: "brand.hover",
         _disabled: {
-          bg: "brand.primary",
-        },
-      },
+          bg: "brand.primary"
+        }
+      }
+    },
+    deactivate: {
+      color: "var(--chakra-colors-red-600)",
+      border: "1px solid var(--chakra-colors-red-500)",
+      bg: "white",
+      _hover: {
+        bg: "var(--chakra-colors-red-600)",
+        color: "white"
+      }
     },
     settings: {
       width: "20%",
@@ -16,21 +25,21 @@ const ButtonStyles = {
       color: "brand.primary",
       _hover: {
         bg: "brand.primary",
-        color: "white",
-      },
+        color: "white"
+      }
     },
     settingsMenu: {
       bg: "white",
       color: "black",
       _hover: {
         bg: "brand.primary",
-        color: "white",
-      },
-    },
+        color: "white"
+      }
+    }
   },
   defaultProps: {
-    variant: "base",
-  },
+    variant: "base"
+  }
 };
 
 export default ButtonStyles;

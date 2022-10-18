@@ -26,6 +26,14 @@ export async function updateProject(
   });
 }
 
+export async function deactivateProject(id: string) {
+  return fetch(`/api/project/${id}`, {
+    method: "DELETE"
+  }).then((res) => {
+    return res.json();
+  });
+}
+
 export async function updateProfileSetting(setting: ProfileSetting) {
   return fetch("/api/profile", {
     method: "POST",
