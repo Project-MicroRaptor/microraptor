@@ -114,6 +114,33 @@ export default async function handler(
     }
   }
 
+  // DELETE API
+  else if (req.method == "DELETE") {
+    if (id && typeof id == "string") {
+      const project = await prisma.project.update({
+        where: {
+          id
+        },
+        data: {
+          active: false
+        }
+      });
+
+      if (project?.id) {
+        res.status(200).json({ status: "success" });
+        return;
+      } else {
+        res
+          .status(500)
+          .json({ status: "failed", description: "Internal Server Error" });
+        return;
+      }
+    }
+
+    res.status(400);
+    return;
+  }
+
   // API method invalid
   else {
     res.status(405);

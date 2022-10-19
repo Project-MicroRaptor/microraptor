@@ -10,12 +10,13 @@ export default function ProjectCardEdit(props: ProjectProps) {
       <ProjectCard
         id={props.id}
         name={props.name}
+        active={props.active}
         shortDescription={props.shortDescription}
         image={props.image}
         currentFunding={props.currentFunding}
         targetFunding={props.targetFunding}
       />
-      <Link href={`/project/${props.id}/edit`}>
+      <Link href={`/project/${props.id}/edit`} className={styles.editLink}>
         <Button className={styles.button}>Edit</Button>
       </Link>
     </div>
