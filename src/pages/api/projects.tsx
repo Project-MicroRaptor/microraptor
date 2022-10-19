@@ -104,6 +104,7 @@ export default async function handler(
     select: {
       id: true,
       name: true,
+      active: true,
       shortDescription: true,
       images: true,
       currentFunding: true,

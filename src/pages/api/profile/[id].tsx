@@ -22,9 +22,13 @@ export default async function handler(
             id: true,
             name: true,
             shortDescription: true,
+            active: true,
             images: true,
             currentFunding: true,
             targetFunding: true
+          },
+          orderBy: {
+            completedAt: "asc"
           }
         }
       }

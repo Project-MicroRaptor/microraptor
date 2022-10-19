@@ -1,5 +1,5 @@
 import styles from "./ProjectCard.module.scss";
-import { Progress } from "@chakra-ui/react";
+import { Badge, Progress } from "@chakra-ui/react";
 import { ProjectProps } from "../../types/projectCardProps";
 
 export default function ProjectCard(props: ProjectProps) {
@@ -10,7 +10,19 @@ export default function ProjectCard(props: ProjectProps) {
       </div>
 
       <div className={styles.infoContainer}>
-        <h2>{props.name}</h2>
+        <h2>
+          <span className={styles.heading}>{props.name}</span>
+          {!props.active && (
+            <Badge
+              className={styles.inactiveBanner}
+              colorScheme="red"
+              variant="solid"
+              fontSize="md"
+            >
+              Inactive
+            </Badge>
+          )}
+        </h2>
         <p>{props.shortDescription}</p>
       </div>
 
