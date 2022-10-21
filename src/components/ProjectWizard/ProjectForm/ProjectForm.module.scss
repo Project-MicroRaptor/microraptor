@@ -16,8 +16,17 @@
   margin: 50px 0;
 }
 
+.deactivate {
+  display: flow-root;
+
+  button {
+    float: right;
+    margin: 5px;
+  }
+}
+
 @media only screen and (max-width: 700px) {
-  .container {
+  .center {
     width: 95%;
   }
 }
