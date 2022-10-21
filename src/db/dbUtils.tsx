@@ -66,19 +66,13 @@ export async function createMessageGroup(
   });
 }
 
-export async function createPayment(paymentInformation: Payment) {
+export async function createPayment(
+  paymentInformation: Payment,
+  currentFunding: number
+) {
   return fetch("/api/payment", {
     method: "POST",
-    body: JSON.stringify(paymentInformation)
-  }).then((res) => {
-    return res.json();
-  });
-}
-
-export async function updateProjectFunding(id: string, currentFunding: number) {
-  return fetch("/api/fundProject", {
-    method: "POST",
-    body: JSON.stringify({ id, currentFunding })
+    body: JSON.stringify({ paymentInformation, currentFunding })
   }).then((res) => {
     return res.json();
   });
