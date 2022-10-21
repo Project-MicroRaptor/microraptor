@@ -28,10 +28,14 @@
     h2 {
       font-size: large;
       padding-top: 10px;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
       font-weight: bold;
+      display: flex;
+
+      .heading {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
     }
 
     p {
@@ -51,5 +55,10 @@
       font-size: x-small;
       text-align: center;
     }
+  }
+
+  .inactiveBanner {
+    display: inline;
+    margin-left: 5px;
   }
 }

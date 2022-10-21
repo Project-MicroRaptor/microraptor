@@ -27,6 +27,7 @@ export default function ProjectsSlider(props: Props) {
           <ProjectCardEdit
             id={project.id}
             name={project.name}
+            active={project.active}
             shortDescription={project.shortDescription}
             image={project.images[0]}
             currentFunding={project.currentFunding}
@@ -36,6 +37,7 @@ export default function ProjectsSlider(props: Props) {
           <ProjectCard
             id={project.id}
             name={project.name}
+            active={project.active}
             shortDescription={project.shortDescription}
             image={project.images[0]}
             currentFunding={project.currentFunding}

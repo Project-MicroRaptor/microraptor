@@ -86,7 +86,13 @@ const EditProject: AuthNextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <ProjectForm projectId={id} initialFormData={initialFormData} editMode />
+      <ProjectForm
+        projectId={id}
+        projectName={data.name}
+        projectActive={data.active}
+        initialFormData={initialFormData}
+        editMode
+      />
     </>
   );
 };
