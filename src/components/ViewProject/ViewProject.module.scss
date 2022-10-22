@@ -1,12 +1,45 @@
 .projectImage {
   border-radius: 10px;
   margin-top: 40px;
+  width: 410px;
   display: block;
   contain: content;
 
   img {
     min-width: 100%;
     min-height: 100%;
+  }
+}
+
+.slideStyles {
+  border-radius: 10px;
+  margin-top: 40px;
+  display: block;
+  contain: content;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.sliderStyles {
+  height: 100%;
+  position: relative;
+}
+
+.leftArrow,
+.rightArrow {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 40px;
+  color: #868686;
+  z-index: 1;
+  cursor: pointer;
+
+  &:hover {
+    color: #696969;
   }
 }
 
@@ -156,14 +189,39 @@
   flex-direction: column;
 }
 
+@media only screen and (min-width: 350px) and (max-width: 839px) {
+  .slideStyles {
+    width: 296px !important;
+    height: 277px !important;
+    min-width: 0;
+    margin: 40px auto;
+  }
+
+  .leftArrow {
+    left: 7px !important;
+  }
+
+  .rightArrow {
+    right: 7px !important;
+  }
+}
+
 @media only screen and (max-width: 840px) {
   .projectContainer {
     text-align: center;
   }
 
-  .projectImage {
+  .slideStyles {
     width: 355px;
-    max-height: 340px;
+    height: 335px;
+  }
+
+  .leftArrow {
+    left: -32px;
+  }
+
+  .rightArrow {
+    right: -35px;
   }
 
   .categoriesItem {
@@ -225,9 +283,17 @@
       max-width: 430px;
     }
 
-    .projectImage {
+    .slideStyles {
       width: 410px;
-      max-height: 355px;
+      height: 335px;
+    }
+
+    .leftArrow {
+      left: -35px;
+    }
+
+    .rightArrow {
+      right: -35px;
     }
 
     .progressContainer {

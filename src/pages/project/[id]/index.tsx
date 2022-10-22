@@ -14,7 +14,7 @@ type Projects = {
   id: string;
   name: string;
   shortDescription: string;
-  images: string[];
+  images: Array<string>;
   currentFunding: number;
   targetFunding: number;
   postcode: number;
