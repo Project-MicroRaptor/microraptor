@@ -49,6 +49,7 @@ model User {
   bio           String?
   messageGroups MessageGroup[]
   messages      Message[]
+  payments      Payment[]
 }
 
 model Project {
@@ -72,15 +73,28 @@ model Project {
   attachments      String[]
   rewards          ProjectReward[]
   messageGroups    MessageGroup[]
+  payments         Payment[]
 }
 
 model ProjectReward {
-  id          String  @id @default(cuid())
-  project     Project @relation(fields: [projectID], references: [id])
+  id          String    @id @default(cuid())
+  project     Project   @relation(fields: [projectID], references: [id])
   projectID   String
   name        String
   description String
   cost        Float
+  payments    Payment[]
+}
+
+model Payment {
+  id        String         @id @default(cuid())
+  project   Project        @relation(fields: [projectID], references: [id])
+  projectID String
+  user      User           @relation(fields: [userID], references: [id])
+  userID    String
+  reward    ProjectReward? @relation(fields: [rewardID], references: [id])
+  rewardID  String?
+  amount    Float
 }
 
 model VerificationToken {
