@@ -17,7 +17,6 @@ import {
 } from "@chakra-ui/react";
 import type { Payment } from "../../../types/payment";
 import { createPayment } from "../../../db/dbUtils";
-import { updateProjectFunding } from "../../../db/dbUtils";
 import { useSession } from "next-auth/react";
 
 import styles from "./OrderSummary.module.scss";
@@ -99,13 +98,7 @@ export default function OrderSummary(props: OrderSummaryProps) {
     };
 
     // Create Payment Record
-    await createPayment(payment);
-
-    // Update Project "currentFunding" Field.
-    await updateProjectFunding(
-      props.projectID,
-      props.currentFunding + props.contribution
-    );
+    await createPayment(payment, props.currentFunding);
 
     // Continue to Summary Page.
     props.setPage(3);
