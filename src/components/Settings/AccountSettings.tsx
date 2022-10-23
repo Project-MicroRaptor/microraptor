@@ -62,8 +62,8 @@ export default function AccountSettings(props: AccountInfo) {
     }
 
     setNameChange(false);
-
     toast(toastInfo);
+    window.setTimeout(function () { location.reload() }, 1000)
   };
 
   return (
