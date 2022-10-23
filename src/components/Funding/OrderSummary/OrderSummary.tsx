@@ -5,19 +5,33 @@ import {
   Heading,
   HStack,
   Image,
-  Text
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure
 } from "@chakra-ui/react";
+import type { Payment } from "../../../types/payment";
+import { createPayment } from "../../../db/dbUtils";
+import { useSession } from "next-auth/react";
 
 import styles from "./OrderSummary.module.scss";
 
 type OrderSummaryProps = {
+  projectID: string;
   name: string;
   images: string[];
   rewards: {
+    id: string;
     name: string;
     cost: number;
     description: string;
   }[];
+  currentFunding: number;
   reward: string;
   contribution: number | undefined;
   page: number;
@@ -25,6 +39,9 @@ type OrderSummaryProps = {
 };
 
 export default function OrderSummary(props: OrderSummaryProps) {
+  const { data: session } = useSession();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   function DisplayReward() {
     // rewardIndex for accessing correct reward in array.
     const rewardIndex = parseInt(props.reward);
@@ -62,6 +79,29 @@ export default function OrderSummary(props: OrderSummaryProps) {
         )}
       </Text>
     );
+  }
+
+  async function onContributeClick() {
+    if (!session || !props.contribution) {
+      return;
+    }
+
+    // Create Payment Object
+    let payment: Payment = {
+      projectID: props.projectID,
+      userID: session.user.id,
+      rewardID:
+        props.reward != "-1"
+          ? props.rewards[parseInt(props.reward)].id
+          : undefined,
+      amount: props.contribution
+    };
+
+    // Create Payment Record
+    await createPayment(payment, props.currentFunding);
+
+    // Continue to Summary Page.
+    props.setPage(3);
   }
 
   return (
@@ -109,8 +149,32 @@ export default function OrderSummary(props: OrderSummaryProps) {
       </div>
       <div className={styles.navigation}>
         <Button onClick={() => props.setPage(1)}>Back</Button>
-        <Button onClick={() => props.setPage(3)}>Contribute</Button>
+        <Button onClick={onOpen}>Contribute</Button>
       </div>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent className={styles.confirmationModal}>
+          <ModalHeader>Continue?</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            By selecting continue, you are committing yourself to contribute the
+            full amount of $
+            {props.contribution != undefined
+              ? props.contribution.toLocaleString(undefined, {
+                  minimumFractionDigits: 2
+                })
+              : 0}
+            . Would you still like to continue?
+          </ModalBody>
+
+          <ModalFooter>
+            <Button variant="solid" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button onClick={() => onContributeClick()}>Continue</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

@@ -4,8 +4,10 @@ export type FundingProps = {
   images: string[];
   ownerId: string;
   rewards: {
+    id: string;
     name: string;
     cost: number;
     description: string;
   }[];
+  currentFunding: number;
 };

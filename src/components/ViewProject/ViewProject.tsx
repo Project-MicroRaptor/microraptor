@@ -27,6 +27,7 @@ import { ProjectCategories } from "../../types/categories";
 import { ProjectRewards } from "../../types/project";
 import { createMessageGroup } from "../../db/dbUtils";
 import { useSession } from "next-auth/react";
+import ImageSlider from "./ImageSlider"
 import { User } from "../../types/user";
 
 import styles from "./ViewProject.module.scss";
@@ -35,7 +36,7 @@ export interface ProjectInfo {
   id?: string;
   name?: string;
   shortDescription?: string;
-  images?: string[];
+  images?: Array<string>;
   owner?: User;
   currentFunding?: number;
   targetFunding?: number;
@@ -61,7 +62,7 @@ export default function ViewProject(props: ProjectInfo) {
     owner = {
       id: "",
       name: "None",
-      image: "",
+      image: ""
     },
     currentFunding = 0,
     targetFunding = 0,
@@ -161,9 +162,15 @@ export default function ViewProject(props: ProjectInfo) {
 
       <div className={styles.productWrapper}>
         <div className={styles.gridLeft}>
-          <div className={styles.projectImage}>
-            <img src={images?.length ? images[0] : "/default.png"} alt={name} />
-          </div>
+          {images.length ? (
+            <div className={styles.imageCarousel}>
+              <ImageSlider images={images} />
+            </div>
+          ) : (
+            <div className={styles.projectImage}>
+              <img src="/default.png" alt={name} />
+            </div>
+          )}
           <div className={styles.categoriesItem}>
             <AiOutlineTag className={styles.categoriesIcon} />
             <span className={styles.content}>{categoryStrings.join(", ")}</span>
@@ -227,8 +234,8 @@ export default function ViewProject(props: ProjectInfo) {
           borderRadius={4}
           fontSize={16}
           as={Link}
-          href={loggedInNotOwner && !preview && `/project/fund/${props.id}`}
           className={styles.fundLink}
+          href={loggedInNotOwner && !preview && `/project/fund/${props.id}`}
           disabled={!loggedInNotOwner || preview}
         >
           Fund this Project

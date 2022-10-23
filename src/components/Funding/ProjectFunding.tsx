@@ -40,9 +40,11 @@ export default function ProjectFunding(props: FundingProps) {
       case pages.OrderSummary:
         return (
           <OrderSummary
+            projectID={props.id}
             name={props.name}
             images={props.images}
             rewards={props.rewards}
+            currentFunding={props.currentFunding}
             reward={reward}
             contribution={contribution}
             page={page}
@@ -52,6 +54,7 @@ export default function ProjectFunding(props: FundingProps) {
       case pages.PaymentDetails:
         return (
           <PaymentDetails
+            id={props.id}
             name={props.name}
             page={page}
             setPage={(page) => setPage(page)}

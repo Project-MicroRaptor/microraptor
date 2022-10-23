@@ -16,4 +16,10 @@
 .navigation {
   padding-left: 40px;
   padding-right: 40px;
+  display: flex;
+  justify-content: flex-end;
+
+  .exit:hover {
+    text-decoration: none;
+  }
 }

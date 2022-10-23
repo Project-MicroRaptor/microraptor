@@ -1,7 +1,8 @@
-import { Button, Center, Heading, Text, Badge } from "@chakra-ui/react";
+import { Button, Center, Heading, Text, Badge, Link } from "@chakra-ui/react";
 import styles from "./PaymentDetails.module.scss";
 
 type PaymentDetailsProps = {
+  id: string;
   name: string;
   page: number;
   setPage: (page: number) => void;
@@ -46,7 +47,9 @@ export default function PaymentDetails(props: PaymentDetailsProps) {
         </Button>
       </div>
       <div className={styles.navigation}>
-        <Button onClick={() => props.setPage(2)}>Back</Button>
+        <Button className={styles.exit} as={Link} href={`/project/${props.id}`}>
+          Exit
+        </Button>
       </div>
     </>
   );
