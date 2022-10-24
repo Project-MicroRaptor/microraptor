@@ -11,7 +11,9 @@ type Props = {
 export default function PagePicker(props: Props) {
   const { pageName } = props;
   const [bio, setBio] = useState("");
+  const [name, setName] = useState("");
   const [isBioChange, setBioChange] = useState(false);
+  const [isNameChange, setNameChange] = useState(false);
 
   switch (pageName) {
     case Pages.ProfileSettings:
@@ -35,7 +37,12 @@ export default function PagePicker(props: Props) {
     default:
       return (
         <div>
-          <AccountSettings />
+          <AccountSettings
+            name={name}
+            setName={setName}
+            isNameChange={isNameChange}
+            setNameChange={setNameChange}
+          />
         </div>
       );
   }

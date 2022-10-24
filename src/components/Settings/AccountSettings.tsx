@@ -1,7 +1,71 @@
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input, useToast, UseToastOptions } from "@chakra-ui/react";
 import styles from "./SettingsTabs.module.scss";
+import { useSession } from 'next-auth/react';
+import { useEffect } from "react";
+import { getAccountSetting, updateAccountSetting } from "../../db/dbUtils";
 
-export default function AccountSettings() {
+export interface AccountInfo {
+  name?: string;
+  setName: (name: string) => void;
+  isNameChange: boolean;
+  setNameChange: (changed: boolean) => void;
+}
+export default function AccountSettings(props: AccountInfo) {
+  const { data: session } = useSession();
+  const { name, setName, isNameChange, setNameChange } = props;
+  const toast = useToast();
+
+  useEffect(() => {
+    (async () => {
+      if (name) return;
+
+      const response = await getAccountSetting();
+
+      if (response?.data?.name) {
+        setName(response.data.name);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!session) {
+    return null;
+  }
+
+  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event?.target?.value);
+    setNameChange(true);
+  };
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+
+    const response = await updateAccountSetting({ name: props.name });
+    let toastInfo: UseToastOptions;
+
+    if (response?.status === "success") {
+      toastInfo = {
+        title: "Account Setting",
+        description: response.description,
+        status: "success",
+        duration: 4000,
+        isClosable: true
+      };
+    } else {
+      toastInfo = {
+        title: "Account Setting",
+        description: response.description,
+        status: "error",
+        duration: 4000,
+        isClosable: true
+      };
+    }
+
+    setNameChange(false);
+    toast(toastInfo);
+    window.setTimeout(function () { location.reload() }, 1000)
+  };
+
   return (
     <div className={styles.containerTitle}>
       <h1 className={styles.accountTitle}>Account Settings</h1>
@@ -14,12 +78,11 @@ export default function AccountSettings() {
               <Input
                 className={styles.inputBox}
                 type="text"
+                value={props.name}
+                onChange={onChangeName}
                 placeholder="Name"
                 variant="settings"
               />
-              <Button className={styles.inputButton} variant="settings">
-                Edit
-              </Button>
             </div>
             <hr />
             <div className={styles.accBox}>
@@ -30,9 +93,6 @@ export default function AccountSettings() {
                 placeholder="Email"
                 variant="settings"
               />
-              <Button className={styles.inputButton} variant="settings">
-                Edit
-              </Button>
             </div>
             <hr />
             <div className={styles.accBox}>
@@ -45,9 +105,6 @@ export default function AccountSettings() {
                 placeholder="********"
                 variant="settings"
               />
-              <Button className={styles.inputButton} variant="settings">
-                Edit
-              </Button>
             </div>
             <hr />
             <div className={styles.accBox}>
@@ -58,13 +115,12 @@ export default function AccountSettings() {
                 placeholder="Address"
                 variant="settings"
               />
-              <Button className={styles.inputButton} variant="settings">
-                Edit
-              </Button>
             </div>
-            <div className={styles.saveBox}>
-              <Button className={styles.saveButton}>Save</Button>
-            </div>
+            {isNameChange && (
+              <div className={styles.saveBox}>
+                <Button className={styles.saveButton} onClick={handleSubmit}>Save</Button>
+              </div>
+            )}
           </FormControl>
         </div>
       </div>
