@@ -11,7 +11,14 @@ import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
 import Link from "next/link";
 
 const MyProjects: AuthNextPage = (props) => {
-  const { data, error } = useSWR<ProjectCards>("/api/my-projects", fetcher);
+  // Projects the user owns.
+  const { data: yourProjects, error } = useSWR<ProjectCards>(
+    "/api/my-projects",
+    fetcher
+  );
+
+  // Projects the user contributed to.
+  const { data: fundedProjects } = useSWR("/api/funded-projects", fetcher);
 
   return (
     <>
@@ -23,13 +30,26 @@ const MyProjects: AuthNextPage = (props) => {
       <NavBar />
       <div className={styles.container}>
         <h1 className={styles.heading}>My Projects</h1>
-        {data && data.length > 0 ? (
-          <ProjectsSlider editable projects={data} />
+        {yourProjects && yourProjects.length > 0 ? (
+          <ProjectsSlider editable projects={yourProjects} />
         ) : (
           <h2 className={styles.noProj}>
             You have no projects, you can create one{" "}
             <Link href="/create-project">
-              <a className={styles.createProject}>here!</a>
+              <a className={styles.link}>here!</a>
+            </Link>
+          </h2>
+        )}
+      </div>
+      <div className={styles.container}>
+        <h1 className={styles.heading}>Contributed Projects</h1>
+        {fundedProjects && fundedProjects.length > 0 ? (
+          <ProjectsSlider projects={fundedProjects} />
+        ) : (
+          <h2 className={styles.noProj}>
+            You haven&apos;t funded any projects yet, why not check some out{" "}
+            <Link href="/">
+              <a className={styles.link}>here!</a>
             </Link>
           </h2>
         )}
